@@ -1,10 +1,9 @@
-package  pb.prev.rhback.model;
+package pb.prev.rhback.model;
 
 import javax.persistence.*;
 import java.util.*;
 
 import com.fasterxml.jackson.annotation.*;
-
 
 @Entity
 @Table(name = "dados_profissionais")
@@ -12,11 +11,11 @@ public class DadosProfissionais {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-	private long id;
+    private long id;
 
     private String cargo;
     private String escolaridade;
-    
+
     @JsonFormat(pattern = "dd/MM/yyyy")
     private Date data_admissao;
     @JsonFormat(pattern = "dd/MM/yyyy")
@@ -24,32 +23,45 @@ public class DadosProfissionais {
     private String qualificacao_profissional;
     private String funcao;
 
+    /*
+     * @OneToOne
+     * 
+     * @MapsId
+     * 
+     * @JoinColumn(name = "id")
+     * 
+     * @JsonBackReference
+     * private DadosPessoais dadosPessoais;
+     */
+    /*
+     * @OneToOne
+     * 
+     * @JoinColumn(updatable=false)
+     * private DadosPessoais dadosPessoais;
+     */
 
-
- 
-/*     @OneToOne
-    @MapsId
-    @JoinColumn(name = "id")
-    @JsonBackReference
-    private DadosPessoais dadosPessoais; */
-  /*   @OneToOne 
-    @JoinColumn(updatable=false)
-    private DadosPessoais dadosPessoais; */
-
-    /* @OneToOne(cascade = CascadeType.ALL)
-    @MapsId
-    @JoinColumn(name = "id")
-    @JsonBackReference
-    private DadosPessoais dadosPessoais; */
+    /*
+     * @OneToOne(cascade = CascadeType.ALL)
+     * 
+     * @MapsId
+     * 
+     * @JoinColumn(name = "id")
+     * 
+     * @JsonBackReference
+     * private DadosPessoais dadosPessoais;
+     */
 
     @OneToOne(cascade = CascadeType.MERGE)
-    @JoinColumn(name="dadosPessoaisId", referencedColumnName = "id")
+    @JoinColumn(name = "dadosPessoaisId", referencedColumnName = "id")
     private DadosPessoais dadosPessoais;
 
+    @ManyToOne(cascade = CascadeType.MERGE)
+    @JoinColumn(name = "idSetor")
+    private Setores setores;
 
     @ManyToOne(cascade = CascadeType.MERGE)
-	@JoinColumn(name = "idSetor")
-	private Setores setores;
+    @JoinColumn(name = "idVinculo")
+    private Vinculos vinculos;
 
     public long getId() {
         return this.id;
@@ -115,7 +127,25 @@ public class DadosProfissionais {
         this.dadosPessoais = dadosPessoais;
     }
 
-    public DadosProfissionais(String cargo, String escolaridade, Date data_admissao, Date data_exoneracao, String qualificacao_profissional, String funcao, DadosPessoais dadosPessoais, Setores setores) {
+    public Vinculos getVinculos() {
+        return this.vinculos;
+    }
+
+    public void setVinculos(Vinculos vinculos) {
+        this.vinculos = vinculos;
+    }
+
+    public Setores getSetores() {
+        return this.setores;
+    }
+
+    public void setSetores(Setores setores) {
+        this.setores = setores;
+    }
+
+    public DadosProfissionais(String cargo, String escolaridade, Date data_admissao, Date data_exoneracao,
+            String qualificacao_profissional, String funcao, DadosPessoais dadosPessoais, Setores setores,
+            Vinculos vinculos) {
         this.cargo = cargo;
         this.escolaridade = escolaridade;
         this.data_admissao = data_admissao;
@@ -124,16 +154,8 @@ public class DadosProfissionais {
         this.funcao = funcao;
         this.dadosPessoais = dadosPessoais;
         this.setores = setores;
+        this.vinculos = vinculos;
     }
-
-
-       public Setores getSetores() {
-            return this.setores;
-        }
-
-        public void setSetores(Setores setores) {
-            this.setores = setores;
-        }
 
     public DadosProfissionais() {
     }
