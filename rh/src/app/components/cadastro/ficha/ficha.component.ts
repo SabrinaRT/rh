@@ -1,13 +1,20 @@
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { DatePipe, formatDate } from '@angular/common';
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { MatStepperIntl } from '@angular/material/stepper';
 import {
   DadosEstadoCivil,
   DadosPessoais,
   Dados,
   Dependentes,
+  Setores,
+  DadosProfissionais,
 } from 'src/app/siscrh';
 import { SiscrhService } from 'src/app/siscrh.service';
 
@@ -26,8 +33,10 @@ export class FichaComponent implements OnInit {
   firthFormGroup: FormGroup;
 
   dadosPessoais: DadosPessoais = new DadosPessoais();
+  dadosProfissionais: DadosProfissionais = new DadosProfissionais();
   dadosEstadoCivil: DadosEstadoCivil = new DadosEstadoCivil();
   dependentes: Dependentes = new Dependentes();
+  setores: Setores[];
 
   Dependentes: Dependentes[];
   DadosPessoais: DadosPessoais[];
@@ -48,8 +57,12 @@ export class FichaComponent implements OnInit {
     this.secondFormGroup = this._formBuilder.group({
       secondCtrl: ['', Validators.required],
     });
+
+    this._formBuilder.group({
+      secondCtrl: [''],
+    });
     this.thirdFormGroup = this._formBuilder.group({
-      thirdCtrl: ['', Validators.required],
+      thirdCtrl: [''],
     });
 
     this.fourthFormGroup = this._formBuilder.group({
@@ -59,36 +72,47 @@ export class FichaComponent implements OnInit {
       firthCtrl: ['', Validators.required],
     });
 
+    this._formBuilder.group({
+      sub_products: [
+        {
+          lesson: '1',
+        },
+      ],
+    });
+
+    this.siscrhService.getSetoresList().subscribe((data: any) => {
+      this.setores = data;
+    });
+
     /*   console.log(this.dadosPessoais.dependentes) */
   }
 
   /* DNDP = Data de Nascimento Dados Pessoais */
-  @ViewChild('DNDP', { static: false }) DNDP: ElementRef;
-
-    /* CPFDP = CPF Dados Pessoais */
-  @ViewChild('CPFDP', { static: false }) CPFDP: ElementRef;
+  @ViewChild('DNDP', { static: true }) DNDP: ElementRef;
+  /* CPFDP = CPF Dados Pessoais */
+  @ViewChild('CPFDP', { static: true }) CPFDP: ElementRef;
 
   /* DNES = Data de Nascimento Estado Civil */
-  @ViewChild('DNES', { static: false }) DNES: ElementRef;
-
+  @ViewChild('DNES') DNES: ElementRef;
   /* CPFES = CPF Estado Civil*/
-  @ViewChild('CPFES', { static: false }) CPFES: ElementRef;
+  @ViewChild('CPFES') CPFES: ElementRef;
 
   /* DND = Data de Nascimento Dependentes */
-  @ViewChild('DND', { static: false }) DND: ElementRef;
-
+  @ViewChild('DND', { static: true }) DND: ElementRef;
   /* CPFD = CPF Dependentes*/
-  @ViewChild('CPFD', { static: false }) CPFD: ElementRef;
+  @ViewChild('CPFD', { static: true }) CPFD: ElementRef;
 
   /* DE = Data Exoneracao Dados Profissionais */
-  @ViewChild('DE', { static: false }) DE: ElementRef;
-
+  @ViewChild('DE', { static: true }) DE: ElementRef;
   /* DA = Data Exoneracao Dados Profissionais */
-  @ViewChild('DA', { static: false }) DA: ElementRef;
+  @ViewChild('DA', { static: true }) DA: ElementRef;
 
-  IDColab: number;
+ 
   Usuario: any;
   Email: any;
+  IDEstado: any;
+  IDColab: number;
+
   gerarMensagemFinal() {
     let NomeEsplitado = this.dadosPessoais.nome_completo.split(' ');
     let UltimoNome = NomeEsplitado[NomeEsplitado.length - 1];
@@ -98,11 +122,14 @@ export class FichaComponent implements OnInit {
     this.Usuario = this.Usuario.toLowerCase();
     this.Email = this.Email.toLowerCase();
   }
+
   salvarDadosPessoais() {
+    this.dadosPessoais.id =  this.IDColab
     this.dadosPessoais.nome_completo =
       this.dadosPessoais.nome_completo.toUpperCase();
-  this.dadosPessoais.cpf =  this.CPFDP.nativeElement.value;
+    this.dadosPessoais.cpf = this.CPFDP.nativeElement.value;
     this.dadosPessoais.data_nascimento = this.DNDP.nativeElement.value;
+
     this.siscrhService
       .createColaborador(this.dadosPessoais)
       .subscribe((data: any) => {
@@ -111,18 +138,26 @@ export class FichaComponent implements OnInit {
       });
   }
 
-  IDEstado: any;
-  salvarEstadoCivil() {
-    this.dadosEstadoCivil.cpf_conjuge = this.CPFES.nativeElement.value;
-    this.dadosEstadoCivil.id = this.IDEstado;
-    this.dadosEstadoCivil.data_nascimento_conjuge =
-      this.DNES.nativeElement.value;
 
+
+  salvarEstadoCivil() {
+    this.dadosEstadoCivil.id = this.IDEstado;
+    if (this.dadosEstadoCivil.cpf_conjuge != null) {
+      this.dadosEstadoCivil.cpf_conjuge = this.CPFES.nativeElement.value;
+   
+    }
+
+    if (this.dadosEstadoCivil.data_nascimento_conjuge != null) {
+      this.dadosEstadoCivil.data_nascimento_conjuge =
+        this.DNES.nativeElement.value;
+    }
+
+    if (this.dadosEstadoCivil.nome_completo_conjuge != null) {
       this.dadosEstadoCivil.nome_completo_conjuge =
-      this.dadosEstadoCivil.nome_completo_conjuge.toUpperCase();
+        this.dadosEstadoCivil.nome_completo_conjuge.toUpperCase();
+    }
+
     this.dadosEstadoCivil.dadosPessoais = { id: this.IDColab };
-    this.dadosEstadoCivil.nome_completo_conjuge =
-      this.dadosEstadoCivil.nome_completo_conjuge.toUpperCase();
     this.siscrhService
       .createEstadoCivil(this.dadosEstadoCivil)
       .subscribe((data: any) => {
@@ -148,7 +183,7 @@ export class FichaComponent implements OnInit {
       .createDependentes(this.dependentes)
       .subscribe((data: any) => {
         console.log(data);
-        this.pegarDados();
+        /*  this.pegarDados(); */
       });
   }
 
@@ -159,6 +194,18 @@ export class FichaComponent implements OnInit {
         this.DadosPessoais = data;
         this.DependentesLista = Array.of(this.DadosPessoais);
         console.log(this.DadosPessoais);
+      });
+  }
+
+  setor: any;
+  salvarDadosProfissionais() {
+    this.dadosProfissionais.setores = { id: this.setor };
+    this.dadosProfissionais.dadosPessoais = { id: this.IDColab };
+
+    this.siscrhService
+      .createDadosProfissionais(this.dadosProfissionais)
+      .subscribe((data: any) => {
+        console.log(data);
       });
   }
 }

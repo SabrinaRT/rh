@@ -11,6 +11,7 @@ import com.fasterxml.jackson.annotation.*;
 public class DadosProfissionais {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 
     private String cargo;
@@ -22,6 +23,8 @@ public class DadosProfissionais {
     private Date data_exoneracao;
     private String qualificacao_profissional;
     private String funcao;
+
+
 
  
 /*     @OneToOne
@@ -40,8 +43,13 @@ public class DadosProfissionais {
     private DadosPessoais dadosPessoais; */
 
     @OneToOne(cascade = CascadeType.MERGE)
-@JoinColumn(name="dadosPessoaisId", referencedColumnName = "id")
-private DadosPessoais dadosPessoais;
+    @JoinColumn(name="dadosPessoaisId", referencedColumnName = "id")
+    private DadosPessoais dadosPessoais;
+
+
+    @ManyToOne(cascade = CascadeType.MERGE)
+	@JoinColumn(name = "idSetor")
+	private Setores setores;
 
     public long getId() {
         return this.id;
@@ -107,7 +115,7 @@ private DadosPessoais dadosPessoais;
         this.dadosPessoais = dadosPessoais;
     }
 
-    public DadosProfissionais(String cargo, String escolaridade, Date data_admissao, Date data_exoneracao, String qualificacao_profissional, String funcao, DadosPessoais dadosPessoais) {
+    public DadosProfissionais(String cargo, String escolaridade, Date data_admissao, Date data_exoneracao, String qualificacao_profissional, String funcao, DadosPessoais dadosPessoais, Setores setores) {
         this.cargo = cargo;
         this.escolaridade = escolaridade;
         this.data_admissao = data_admissao;
@@ -115,7 +123,17 @@ private DadosPessoais dadosPessoais;
         this.qualificacao_profissional = qualificacao_profissional;
         this.funcao = funcao;
         this.dadosPessoais = dadosPessoais;
+        this.setores = setores;
     }
+
+
+       public Setores getSetores() {
+            return this.setores;
+        }
+
+        public void setSetores(Setores setores) {
+            this.setores = setores;
+        }
 
     public DadosProfissionais() {
     }

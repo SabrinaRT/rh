@@ -96,6 +96,11 @@ export class DadosPessoais {
       ] */
 }
 
+export class Setores{
+  id:any;
+  setor:any
+}
+
 export class DadosEstadoCivil {
   id: any;
   estado_civil: any;
@@ -108,6 +113,7 @@ export class DadosEstadoCivil {
   dadosPessoais: {
     id: any;
   };
+
 }
 
 export class DadosProfissionais {
@@ -118,6 +124,12 @@ export class DadosProfissionais {
   data_exoneracao: any;
   qualificacao_profissiona: any;
   funcao: any;
+  dadosPessoais: {
+    id: any;
+  };
+  setores:{
+    id:any;
+  }
 }
 
 export class DadosBancarios {

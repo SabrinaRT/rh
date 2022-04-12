@@ -26,6 +26,7 @@ import { FichaComponent } from './components/cadastro/ficha/ficha.component';
 import {MatTableModule} from '@angular/material/table';
 import {MatIconModule} from '@angular/material/icon';
 import { NgxMaskModule } from 'ngx-mask';
+import { MatNativeDateModule } from '@angular/material/core';
 @NgModule({
   declarations: [
     AppComponent,
@@ -58,9 +59,10 @@ import { NgxMaskModule } from 'ngx-mask';
     NgxAwesomePopupModule.forRoot(), // Essential, mandatory main module.
     DialogConfigModule.forRoot(), // Needed for instantiating dynamic components.
     ConfirmBoxConfigModule.forRoot(), // Needed for instantiating confirm boxes.
-    ToastNotificationConfigModule.forRoot() // Needed for instantiating toast notifications.
+    ToastNotificationConfigModule.forRoot(), // Needed for instantiating toast notifications.
 
-
+  
+    MatNativeDateModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

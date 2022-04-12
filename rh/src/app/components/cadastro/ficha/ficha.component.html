@@ -10,7 +10,7 @@
       <!-- DADOS PESSOAIS -->
       <mat-step [stepControl]="firstFormGroup">
         <br />
-        <button (click)="gerarMensagemFinal()"> teste </button>
+        <button (click)="gerarMensagemFinal()">teste</button>
         <form class="form-height" [formGroup]="firstFormGroup">
           <ng-template matStepLabel>Dados Pessoais</ng-template>
           <div class="container px-4">
@@ -351,8 +351,8 @@
                       <mat-form-field appearance="outline" class="col-12">
                         <mat-label>Estado Civil</mat-label>
                         <mat-select
-                          [(ngModel)]="dadosEstadoCivil.estado_civil"
                           [ngModelOptions]="{ standalone: true }"
+                          [(ngModel)]="dadosEstadoCivil.estado_civil"
                         >
                           <mat-option
                             *ngFor="
@@ -404,13 +404,7 @@
                     <div class="col-2">
                       <mat-form-field appearance="outline" class="col-12">
                         <mat-label>CPF</mat-label>
-                        <input
-                        matInput
-                        required
-                        mask="CPF_CNPJ"
-                        #CPFES
-                          formControlName="secondCtrl"
-                        />
+                        <input matInput required mask="CPF_CNPJ" #CPFES />
                       </mat-form-field>
                     </div>
                     <div class="col-2">
@@ -427,7 +421,7 @@
                         <mat-label>Identidade</mat-label>
                         <input
                           matInput
-                          formControlName="secondCtrl"
+                          [ngModelOptions]="{ standalone: true }"
                           [(ngModel)]="dadosEstadoCivil.identidade_conjuge"
                         />
                       </mat-form-field>
@@ -453,7 +447,7 @@
                         <mat-label>Profissão / Atividade</mat-label>
                         <input
                           matInput
-                          formControlName="secondCtrl"
+                          [ngModelOptions]="{ standalone: true }"
                           [(ngModel)]="dadosEstadoCivil.profissao_atividade"
                         />
                       </mat-form-field>
@@ -485,18 +479,12 @@
                       >
                         Continuar
                       </button>
-                      <!--  <button mat-button (click)="teste2()">Next2</button> -->
                     </div>
                   </div>
                 </mat-card>
               </div>
             </div>
           </div>
-
-          <!--  <mat-form-field appearance="outline">
-            <mat-label>Nome Completo</mat-label>
-            <input matInput formControlName="secondCtrl" />
-          </mat-form-field> -->
         </form>
       </mat-step>
 
@@ -525,12 +513,10 @@
                       <mat-form-field appearance="outline" class="col-12">
                         <mat-label>CPF</mat-label>
                         <input
-                        matInput
-                        required
-                        mask="CPF_CNPJ"
-                        #CPFD
+                          matInput
+                          mask="CPF_CNPJ"
+                          #CPFD
                           formControlName="thirdCtrl"
-                          
                         />
                       </mat-form-field>
                     </div>
@@ -626,22 +612,15 @@
                         color="primary"
                         class="col-12"
                         matStepperNext
-                        (click)="salvarEstadoCivil()"
                       >
                         Continuar
                       </button>
-                      <!--  <button mat-button (click)="teste2()">Next2</button> -->
                     </div>
                   </div>
                 </mat-card>
               </div>
             </div>
           </div>
-
-          <!--  <mat-form-field appearance="outline">
-            <mat-label>Nome Completo</mat-label>
-            <input matInput formControlName="secondCtrl" />
-          </mat-form-field> -->
         </form>
       </mat-step>
 
@@ -658,8 +637,16 @@
                     <div class="col-4">
                       <mat-form-field appearance="outline" class="col-12">
                         <mat-label>Setor</mat-label>
-                        <mat-select>
-                          <mat-option> Setores </mat-option>
+                        <mat-select
+                          [(ngModel)]="setor"
+                          [ngModelOptions]="{ standalone: true }"
+                        >
+                          <mat-option
+                            *ngFor="let setores of setores"
+                            [value]="setores.id"
+                          >
+                            {{ setores.setor }}
+                          </mat-option>
                         </mat-select>
                       </mat-form-field>
                     </div>
@@ -739,7 +726,7 @@
                             <th>Observação</th>
                           </tr>
                         </thead>
-                        <tbody >
+                        <tbody>
                           <!-- <tr >
                            
                             <td>
@@ -761,7 +748,6 @@
                               </button>
                             </td>
                           </tr> -->
-                      
                         </tbody>
                       </table>
                     </div>
@@ -769,7 +755,8 @@
                 </mat-card>
               </div>
             </div>
-          </div><br>
+          </div>
+          <br />
           <div class="container px-4">
             <div class="row gx-5">
               <div class="col">
@@ -787,7 +774,7 @@
                         color="primary"
                         class="col-12"
                         matStepperNext
-                        (click)="salvarEstadoCivil()"
+                        (click)="salvarDadosProfissionais()"
                       >
                         Continuar
                       </button>
@@ -860,7 +847,6 @@
                         color="primary"
                         class="col-12"
                         matStepperNext
-                        (click)="salvarEstadoCivil()"
                       >
                         Continuar
                       </button>
@@ -877,10 +863,10 @@
         <ng-template matStepLabel>Finalizado</ng-template>
         <p>Todas as etapas de cadastrados foram concluídas com sucesso!</p>
         <p>Sugestão:</p>
-        <p>Nome Completo: {{dadosPessoais.nome_completo}}</p>
-        <p>CPF: {{dadosPessoais.cpf}}</p>
-        <p>E-Mail: {{Email}}</p>
-        <p>Usuário: {{Usuario}}</p>
+        <p>Nome Completo: {{ dadosPessoais.nome_completo }}</p>
+        <p>CPF: {{ dadosPessoais.cpf }}</p>
+        <p>E-Mail: {{ Email }}</p>
+        <p>Usuário: {{ Usuario }}</p>
         <div>
           <button mat-button matStepperPrevious>Back</button>
           <button mat-button (click)="stepper.reset()">Reset</button>

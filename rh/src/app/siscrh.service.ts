@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { DadosBancarios, DadosPessoais, DadosProfissionais, DadosEstadoCivil, Dependentes } from './siscrh';
+import { DadosBancarios, DadosPessoais, DadosProfissionais, DadosEstadoCivil, Dependentes, Setores } from './siscrh';
 
 @Injectable({
   providedIn: 'root',
@@ -89,6 +89,21 @@ url:any = "http://localhost:8080/api"
       this.url + `/v3/dados/${id}`
     );
   }
+
+  getSetoresList(): Observable<Setores[]> {
+    return this.httpClient.get<Setores[]>(
+      this.url + `/v10/dados`
+    );
+  }
+  getSetoresById(id: number): Observable<Setores> {
+    return this.httpClient.get<Setores>(
+      this.url + `/v10/dados/${id}`
+    );
+  }
+
+
+
+
 
 
 
