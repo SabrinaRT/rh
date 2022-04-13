@@ -51,6 +51,11 @@ export class FichaUpdateComponent implements OnInit {
 
   dados: Dados = new Dados();
 
+  datemask = [/\d/, /\d/, '/', /\d/, /\d/, '/', /\d/, /\d/, /\d/, /\d/];
+  cpfmask = [/\d/, /\d/,/\d/ ,'.', /\d/, /\d/,/\d/ ,'.',/\d/, /\d/,/\d/ ,'-', /\d/, /\d/];
+  telefonemask = ['(',/\d/, /\d/, ')', " ",  /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
+celularmask =['(',/\d/, /\d/, ')', /\d/, " ",  /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
+
   constructor(
     private _formBuilder: FormBuilder,
     private siscrhService: SiscrhService,
@@ -128,15 +133,7 @@ export class FichaUpdateComponent implements OnInit {
 
   salvarDadosPessoais() {
     this.dadosPessoais.id = this.IDColab;
-    if(this.dadosPessoais.data_nascimento !=null){
-      this.dadosPessoais.data_nascimento =
-      this.dadosPessoais.data_nascimento.slice(0, 2) +
-      '/' +
-      this.dadosPessoais.data_nascimento.slice(2, 4) +
-      '/' +
-      this.dadosPessoais.data_nascimento.slice(4, 8);
-    }
-   
+
 
     this.siscrhService
       .createColaborador(this.dadosPessoais)
@@ -148,14 +145,7 @@ export class FichaUpdateComponent implements OnInit {
 
   salvarEstadoCivil() {
     this.dadosEstadoCivil.id = this.IDEstado;
-    if(this.dadosEstadoCivil.data_nascimento_conjuge !=null){
-    this.dadosEstadoCivil.data_nascimento_conjuge =
-      this.dadosEstadoCivil.data_nascimento_conjuge.slice(0, 2) +
-      '/' +
-      this.dadosEstadoCivil.data_nascimento_conjuge.slice(2, 4) +
-      '/' +
-      this.dadosEstadoCivil.data_nascimento_conjuge.slice(4, 8);
-    }
+
     this.dadosEstadoCivil.dadosPessoais = { id: this.IDColab };
     this.siscrhService
       .createEstadoCivil(this.dadosEstadoCivil)
@@ -174,14 +164,7 @@ export class FichaUpdateComponent implements OnInit {
 
   salvarDependente() {
     this.dependentes.dadosPessoais = { id: this.IDColab };
-    if(this.dependentes.data_nascimento_dependente !=null){
-    this.dependentes.data_nascimento_dependente =
-      this.dependentes.data_nascimento_dependente.slice(0, 2) +
-      '/' +
-      this.dependentes.data_nascimento_dependente.slice(2, 4) +
-      '/' +
-      this.dependentes.data_nascimento_dependente.slice(4, 8);
-    }
+
     this.siscrhService
       .createDependentes(this.dependentes)
       .subscribe((data: any) => {

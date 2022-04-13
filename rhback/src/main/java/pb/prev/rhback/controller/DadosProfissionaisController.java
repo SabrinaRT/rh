@@ -20,7 +20,7 @@ public class DadosProfissionaisController {
 	@Autowired
 	private DadosProfissionaisRepository dadosProfissionaisRepository;
     
-
+ 
 	@GetMapping("/dados")
 	public List<DadosProfissionais> getAllDadosProfissionais() {
 		return dadosProfissionaisRepository.findAll();

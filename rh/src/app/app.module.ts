@@ -28,6 +28,7 @@ import {MatIconModule} from '@angular/material/icon';
 import { NgxMaskModule } from 'ngx-mask';
 import { MatNativeDateModule } from '@angular/material/core';
 import { FichaUpdateComponent } from './components/update/ficha-update/ficha-update.component';
+import { TextMaskModule } from 'angular2-text-mask';
 @NgModule({
   declarations: [
     AppComponent,
@@ -56,7 +57,7 @@ import { FichaUpdateComponent } from './components/update/ficha-update/ficha-upd
     ReactiveFormsModule,
     FormsModule,
     MatIconModule,
-    
+    TextMaskModule,
     NgxMaskModule.forRoot(),
     NgxAwesomePopupModule.forRoot(), // Essential, mandatory main module.
     DialogConfigModule.forRoot(), // Needed for instantiating dynamic components.

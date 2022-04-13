@@ -36,7 +36,7 @@
                           <input
                             matInput
                             required
-                            mask="CPF_CNPJ"
+                            [textMask]="{mask: cpfmask}" 
                             [(ngModel)]="dadosPessoais.cpf"
                             formControlName="cpf"
                             
@@ -47,7 +47,7 @@
                       <div class="col-6">
                         <mat-form-field appearance="outline" class="col-12">
                           <mat-label>Data de Nascimento</mat-label>
-                          <input matInput mask="00/00/0000"   [(ngModel)]="dadosPessoais.data_nascimento" [ngModelOptions]="{ standalone: true }" />
+                          <input matInput  [textMask]="{mask: datemask}"   [(ngModel)]="dadosPessoais.data_nascimento" [ngModelOptions]="{ standalone: true }" />
                         </mat-form-field>
                       </div>
                       <div class="col-6">
@@ -150,7 +150,7 @@
                           <mat-label>Telefone</mat-label>
                           <input
                             matInput
-                            mask="(00) 0000-0000"
+                            [textMask]="{mask: telefonemask}" 
                             [(ngModel)]="dadosPessoais.telefone"
                             [ngModelOptions]="{ standalone: true }"
                           />
@@ -161,7 +161,7 @@
                           <mat-label>Celular</mat-label>
                           <input
                             matInput
-                            mask="(00) 0 0000-0000"
+                            [textMask]="{mask: celularmask}" 
                             [(ngModel)]="dadosPessoais.celular"
                             [ngModelOptions]="{ standalone: true }"
                           />
@@ -405,14 +405,14 @@
                       <div class="col-2">
                         <mat-form-field appearance="outline" class="col-12">
                           <mat-label>CPF</mat-label>
-                          <input matInput  mask="CPF_CNPJ" [(ngModel)]="dadosEstadoCivil.cpf_conjuge"  [ngModelOptions]="{ standalone: true }" />
+                          <input matInput  [textMask]="{mask: cpfmask}" [(ngModel)]="dadosEstadoCivil.cpf_conjuge"  [ngModelOptions]="{ standalone: true }" />
                          
                         </mat-form-field>
                       </div>
                       <div class="col-2">
                         <mat-form-field appearance="outline" class="col-12">
                           <mat-label>Data de Nascimento</mat-label>
-                          <input matInput  mask="00/00/0000" [(ngModel)]="dadosEstadoCivil.data_nascimento_conjuge" [ngModelOptions]="{ standalone: true }"  />
+                          <input matInput  [textMask]="{mask: datemask}" [(ngModel)]="dadosEstadoCivil.data_nascimento_conjuge" [ngModelOptions]="{ standalone: true }"  />
                         </mat-form-field>
                       </div>
                     </div>
@@ -516,7 +516,7 @@
                           <mat-label>CPF</mat-label>
                           <input
                             matInput
-                            mask="CPF_CNPJ"
+                            [textMask]="{mask: cpfmask}"
                             [(ngModel)]="dependentes.cpf_dependente" 
                             formControlName="thirdCtrl"
                           />
@@ -526,7 +526,7 @@
                       <div class="col-2">
                         <mat-form-field appearance="outline" class="col-12">
                           <mat-label>Data de Nascimento</mat-label>
-                          <input matInput  [(ngModel)]="dependentes.data_nascimento_dependente" [ngModelOptions]="{ standalone: true }" mask="00/00/0000" />
+                          <input matInput [textMask]="{mask: datemask}"  [(ngModel)]="dependentes.data_nascimento_dependente" [ngModelOptions]="{ standalone: true }"/>
                         </mat-form-field>
                       </div>
   
@@ -566,7 +566,7 @@
                           <tbody *ngFor="let item of DependentesLista">
                             <tr *ngFor="let item2 of item.dependentes">
                               <td>{{ item2.nome_completo_dependente }}</td>
-                              <td mask="CPF_CNPJ">{{ item2.cpf_dependente }} </td>
+                              <td>{{ item2.cpf_dependente }}</td>
                               <td>{{ item2.data_nascimento_dependente }}</td>
                               <td>
                                 <button
@@ -699,13 +699,13 @@
                       <div class="col-4">
                         <mat-form-field appearance="outline" class="col-12">
                           <mat-label>Data de Admissão</mat-label>
-                          <input matInput />
+                          <input matInput [textMask]="{mask: datemask}" />
                         </mat-form-field>
                       </div>
                       <div class="col-4">
                         <mat-form-field appearance="outline" class="col-12">
                           <mat-label>Data de Exoneração</mat-label>
-                          <input matInput />
+                          <input matInput [textMask]="{mask: datemask}" />
                         </mat-form-field>
                       </div>
                     </div>

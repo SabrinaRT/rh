@@ -21,9 +21,9 @@ public class Matriculas {
 
 
 
-    public Matriculas(String matricula, DadosProfissionais dadosProfissionais) {
+    public Matriculas(String matricula) {
         this.matricula = matricula;
-        this.dadosProfissionais = dadosProfissionais;
+    
     }
 
 
@@ -43,6 +43,7 @@ public class Matriculas {
         this.matricula = matricula;
     }
 
+
     public DadosProfissionais getDadosProfissionais() {
         return this.dadosProfissionais;
     }
@@ -51,6 +52,11 @@ public class Matriculas {
         this.dadosProfissionais = dadosProfissionais;
     }
 
+    public Matriculas(String matricula, DadosProfissionais dadosProfissionais) {
+        this.matricula = matricula;
+        this.dadosProfissionais = dadosProfissionais;
+    }
+    
 
     
 }
