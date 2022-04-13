@@ -101,6 +101,12 @@ export class Setores{
   setor:any
 }
 
+export class Vinculos{
+  id:any;
+  vinculo:any
+}
+
+
 export class DadosEstadoCivil {
   id: any;
   estado_civil: any;
@@ -128,6 +134,9 @@ export class DadosProfissionais {
     id: any;
   };
   setores:{
+    id:any;
+  }
+  vinculos:{
     id:any;
   }
 }

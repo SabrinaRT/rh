@@ -32,20 +32,19 @@ public class DadosEstadoCivilController {
 		return estadoCivilRepository.save(estadoCivil);
 	}
 
-	@GetMapping("/dados/{id}")
+	/* @GetMapping("/dados/{id}")
 	public ResponseEntity<DadosEstadoCivil> getAllEstadoCivil(@PathVariable Long id) {
 		DadosEstadoCivil estadoCivil = estadoCivilRepository.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("EstadoCivil not exist with id: " + id));
-
 		return ResponseEntity.ok(estadoCivil);
-	}
+	} */
 
-/* 	@GetMapping("/dados1/{cpf}")
-	public ResponseEntity<DadosEstadoCivil> getAllEstadoCivil2(@PathVariable Long cpf) {
-		DadosEstadoCivil estadoCivil = estadoCivilRepository.getDadosPessoaisByIdColaborador (cpf);
-		return ResponseEntity.ok(estadoCivil);
+	@GetMapping("/dados/{id}")
+	public ResponseEntity<DadosEstadoCivil> getEstadoCivilByForeignKey(@PathVariable Long id) {
+		DadosEstadoCivil estadoCivil = estadoCivilRepository.findByDadosPessoais_Id(id);
+		return ResponseEntity.ok(estadoCivil); 
 	}
- */
+ 
 
 	
 

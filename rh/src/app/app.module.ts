@@ -27,10 +27,12 @@ import {MatTableModule} from '@angular/material/table';
 import {MatIconModule} from '@angular/material/icon';
 import { NgxMaskModule } from 'ngx-mask';
 import { MatNativeDateModule } from '@angular/material/core';
+import { FichaUpdateComponent } from './components/update/ficha-update/ficha-update.component';
 @NgModule({
   declarations: [
     AppComponent,
     FichaComponent,
+    FichaUpdateComponent,
 
 
   ],

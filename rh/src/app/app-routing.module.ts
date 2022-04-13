@@ -1,9 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { FichaComponent } from './components/cadastro/ficha/ficha.component';
+import { FichaUpdateComponent } from './components/update/ficha-update/ficha-update.component';
 
 
 const routes: Routes = [
+  {path:"update/:id", component: FichaUpdateComponent},
   {path:"", component: FichaComponent}
 ];
 

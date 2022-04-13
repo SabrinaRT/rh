@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { DadosBancarios, DadosPessoais, DadosProfissionais, DadosEstadoCivil, Dependentes, Setores } from './siscrh';
+import { DadosBancarios, DadosPessoais, DadosProfissionais, DadosEstadoCivil, Dependentes, Setores, Vinculos } from './siscrh';
 
 @Injectable({
   providedIn: 'root',
@@ -44,7 +44,7 @@ url:any = "http://localhost:8080/api"
     );
   }
 
-  getEstadoCivilById(id: number): Observable<DadosEstadoCivil> {
+  getEstadoCivilByForeignKey(id: number): Observable<DadosEstadoCivil> {
     return this.httpClient.get<DadosEstadoCivil>(
       this.url + `/v2/dados/${id}`
     );
@@ -58,7 +58,7 @@ url:any = "http://localhost:8080/api"
     );
   }
 
-  getDadosProfissionaisById(id: number): Observable<DadosProfissionais> {
+  getDadosProfissionaisByForeignKey(id: number): Observable<DadosProfissionais> {
     return this.httpClient.get<DadosProfissionais>(
       this.url + `/v6/dados/${id}`
     );
@@ -71,7 +71,7 @@ url:any = "http://localhost:8080/api"
     );
   }
 
-  getDadosBancariosById(id: number): Observable<DadosBancarios> {
+  getDadosBancariosByForeignKey(id: number): Observable<DadosBancarios> {
     return this.httpClient.get<DadosBancarios>(
       this.url + `/v4/dados/${id}`
     );
@@ -84,7 +84,7 @@ url:any = "http://localhost:8080/api"
     );
   }
 
-  getDependentesById(id: number): Observable<Dependentes> {
+  getDependentesByForeignKey(id: number): Observable<Dependentes> {
     return this.httpClient.get<Dependentes>(
       this.url + `/v3/dados/${id}`
     );
@@ -95,11 +95,23 @@ url:any = "http://localhost:8080/api"
       this.url + `/v10/dados`
     );
   }
-  getSetoresById(id: number): Observable<Setores> {
+  getSetoresByForeignKey(id: number): Observable<Setores> {
     return this.httpClient.get<Setores>(
       this.url + `/v10/dados/${id}`
     );
   }
+
+  getVinculosList(): Observable<Vinculos[]> {
+    return this.httpClient.get<Vinculos[]>(
+      this.url + `/v11/dados`
+    );
+  }
+  getVinculosByForeignKey(id: number): Observable<Vinculos> {
+    return this.httpClient.get<Vinculos>(
+      this.url + `/v11/dados/${id}`
+    );
+  }
+
 
 
 

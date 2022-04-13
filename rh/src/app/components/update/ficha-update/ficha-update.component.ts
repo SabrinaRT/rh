@@ -1,5 +1,6 @@
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { DatePipe, formatDate } from '@angular/common';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import {
   FormBuilder,
@@ -8,6 +9,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { MatStepperIntl } from '@angular/material/stepper';
+import { ActivatedRoute, Route, Router } from '@angular/router';
 import {
   DadosEstadoCivil,
   DadosPessoais,
@@ -21,11 +23,11 @@ import {
 import { SiscrhService } from 'src/app/siscrh.service';
 
 @Component({
-  selector: 'app-ficha',
-  templateUrl: './ficha.component.html',
-  styleUrls: ['./ficha.component.css'],
+  selector: 'app-ficha-update',
+  templateUrl: './ficha-update.component.html',
+  styleUrls: ['./ficha-update.component.css'],
 })
-export class FichaComponent implements OnInit {
+export class FichaUpdateComponent implements OnInit {
   displayedColumns = ['Nome', 'CPF', 'DataNascimento'];
 
   firstFormGroup: FormGroup;
@@ -51,8 +53,12 @@ export class FichaComponent implements OnInit {
 
   constructor(
     private _formBuilder: FormBuilder,
-    private siscrhService: SiscrhService
-  ) {}
+    private siscrhService: SiscrhService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {
+    this.IDColab = this.route.snapshot.params['id'];
+  }
   DependentesLista: any;
   ngOnInit() {
     this.firstFormGroup = this._formBuilder.group({
@@ -77,14 +83,6 @@ export class FichaComponent implements OnInit {
       firthCtrl: ['', Validators.required],
     });
 
-    this._formBuilder.group({
-      sub_products: [
-        {
-          lesson: '1',
-        },
-      ],
-    });
-
     this.siscrhService.getSetoresList().subscribe((data: any) => {
       this.setores = data;
     });
@@ -93,7 +91,22 @@ export class FichaComponent implements OnInit {
       this.vinculos = data;
     });
 
-    /*   console.log(this.dadosPessoais.dependentes) */
+    this.siscrhService
+      .getColaboradorById(this.IDColab)
+      .subscribe((data: any) => {
+        this.dadosPessoais = data;
+        console.log(data);
+      });
+
+    this.siscrhService
+      .getEstadoCivilByForeignKey(this.IDColab)
+      .subscribe((data: any) => {
+        this.dadosEstadoCivil = data;
+        this.IDEstado = data.id;
+
+        console.log(data);
+      });
+      this.pegarDados();
   }
 
   Usuario: any;
@@ -116,13 +129,15 @@ export class FichaComponent implements OnInit {
   salvarDadosPessoais() {
     this.dadosPessoais.id = this.IDColab;
     if(this.dadosPessoais.data_nascimento !=null){
-    this.dadosPessoais.data_nascimento =
+      this.dadosPessoais.data_nascimento =
       this.dadosPessoais.data_nascimento.slice(0, 2) +
       '/' +
       this.dadosPessoais.data_nascimento.slice(2, 4) +
       '/' +
       this.dadosPessoais.data_nascimento.slice(4, 8);
     }
+   
+
     this.siscrhService
       .createColaborador(this.dadosPessoais)
       .subscribe((data: any) => {
@@ -135,12 +150,12 @@ export class FichaComponent implements OnInit {
     this.dadosEstadoCivil.id = this.IDEstado;
     if(this.dadosEstadoCivil.data_nascimento_conjuge !=null){
     this.dadosEstadoCivil.data_nascimento_conjuge =
-    this.dadosEstadoCivil.data_nascimento_conjuge.slice(0, 2) +
-    '/' +
-    this.dadosEstadoCivil.data_nascimento_conjuge.slice(2, 4) +
-    '/' +
-    this.dadosEstadoCivil.data_nascimento_conjuge.slice(4, 8);
-  }
+      this.dadosEstadoCivil.data_nascimento_conjuge.slice(0, 2) +
+      '/' +
+      this.dadosEstadoCivil.data_nascimento_conjuge.slice(2, 4) +
+      '/' +
+      this.dadosEstadoCivil.data_nascimento_conjuge.slice(4, 8);
+    }
     this.dadosEstadoCivil.dadosPessoais = { id: this.IDColab };
     this.siscrhService
       .createEstadoCivil(this.dadosEstadoCivil)
@@ -161,12 +176,12 @@ export class FichaComponent implements OnInit {
     this.dependentes.dadosPessoais = { id: this.IDColab };
     if(this.dependentes.data_nascimento_dependente !=null){
     this.dependentes.data_nascimento_dependente =
-    this.dependentes.data_nascimento_dependente.slice(0, 2) +
-    '/' +
-    this.dependentes.data_nascimento_dependente.slice(2, 4) +
-    '/' +
-    this.dependentes.data_nascimento_dependente.slice(4, 8);
-  }
+      this.dependentes.data_nascimento_dependente.slice(0, 2) +
+      '/' +
+      this.dependentes.data_nascimento_dependente.slice(2, 4) +
+      '/' +
+      this.dependentes.data_nascimento_dependente.slice(4, 8);
+    }
     this.siscrhService
       .createDependentes(this.dependentes)
       .subscribe((data: any) => {

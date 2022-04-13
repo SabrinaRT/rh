@@ -16,7 +16,7 @@ public class DadosBancarios {
     private String conta_corrente;
 
 
-@OneToOne(cascade = CascadeType.MERGE)
+@OneToOne(cascade = CascadeType.DETACH)
 @JoinColumn(name="dadosPessoaisId", referencedColumnName = "id")
 private DadosPessoais dadosPessoais;
 

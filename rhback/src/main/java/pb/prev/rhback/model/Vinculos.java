@@ -10,11 +10,11 @@ public class Vinculos {
     private Long id;
 
     private String vinculo;
-
-
+ 
+ 
     public Vinculos() {
     }
-
+  
     public String getVinculo() {
         return this.vinculo;
     }

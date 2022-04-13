@@ -51,18 +51,22 @@ public class DadosProfissionais {
      * private DadosPessoais dadosPessoais;
      */
 
-    @OneToOne(cascade = CascadeType.MERGE)
+    @OneToOne(cascade = CascadeType.DETACH)
     @JoinColumn(name = "dadosPessoaisId", referencedColumnName = "id")
     private DadosPessoais dadosPessoais;
 
-    @ManyToOne(cascade = CascadeType.MERGE)
+    @ManyToOne(cascade = CascadeType.DETACH)
     @JoinColumn(name = "idSetor")
     private Setores setores;
 
-    @ManyToOne(cascade = CascadeType.MERGE)
+    @ManyToOne(cascade = CascadeType.DETACH)
     @JoinColumn(name = "idVinculo")
     private Vinculos vinculos;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "matriculas")
+    @JsonManagedReference
+    private Set<Matriculas> matriculas = new HashSet<Matriculas>();
+ 
     public long getId() {
         return this.id;
     }
@@ -143,9 +147,18 @@ public class DadosProfissionais {
         this.setores = setores;
     }
 
-    public DadosProfissionais(String cargo, String escolaridade, Date data_admissao, Date data_exoneracao,
-            String qualificacao_profissional, String funcao, DadosPessoais dadosPessoais, Setores setores,
-            Vinculos vinculos) {
+
+    public Set<Matriculas> getMatriculas() {
+        return this.matriculas;
+    }
+
+    public void setMatriculas(Set<Matriculas> matriculas) {
+        this.matriculas = matriculas;
+    }
+
+    
+
+    public DadosProfissionais(String cargo, String escolaridade, Date data_admissao, Date data_exoneracao, String qualificacao_profissional, String funcao, DadosPessoais dadosPessoais, Setores setores, Vinculos vinculos, Set<Matriculas> matriculas) {
         this.cargo = cargo;
         this.escolaridade = escolaridade;
         this.data_admissao = data_admissao;
@@ -155,7 +168,10 @@ public class DadosProfissionais {
         this.dadosPessoais = dadosPessoais;
         this.setores = setores;
         this.vinculos = vinculos;
+        this.matriculas = matriculas;
     }
+
+    
 
     public DadosProfissionais() {
     }

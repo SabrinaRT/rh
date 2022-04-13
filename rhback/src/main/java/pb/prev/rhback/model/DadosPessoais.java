@@ -26,7 +26,7 @@ public class DadosPessoais {
     private String uf_naturalidade;
 	private String nacionalidade;
     private String titulo_eleitor;
-
+ 
     @JsonFormat(pattern = "dd/MM/yyyy")
     private Date data_nascimento;
     private String pis_pasep;
@@ -34,7 +34,7 @@ public class DadosPessoais {
     private String telefone;
     private String celular;
     private String email;
-
+ 
     private String endereco;
     private String cep;
     private String numero;

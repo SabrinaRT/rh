@@ -1,5 +1,5 @@
 <mat-toolbar color="primary">
-  <span>My Application</span>
+  <span>SISCOGEP Update</span>
 </mat-toolbar>
 <mat-drawer-container class="example-container">
   <mat-drawer mode="side" opened style="background-color: aqua"
@@ -37,8 +37,9 @@
                           matInput
                           required
                           mask="CPF_CNPJ"
-                          #CPFDP
+                          [(ngModel)]="dadosPessoais.cpf"
                           formControlName="cpf"
+                          
                         />
                       </mat-form-field>
                     </div>
@@ -46,7 +47,7 @@
                     <div class="col-6">
                       <mat-form-field appearance="outline" class="col-12">
                         <mat-label>Data de Nascimento</mat-label>
-                        <input #DNDP matInput mask="00/00/0000" />
+                        <input matInput mask="00/00/0000"   [(ngModel)]="dadosPessoais.data_nascimento" [ngModelOptions]="{ standalone: true }" />
                       </mat-form-field>
                     </div>
                     <div class="col-6">
@@ -404,13 +405,14 @@
                     <div class="col-2">
                       <mat-form-field appearance="outline" class="col-12">
                         <mat-label>CPF</mat-label>
-                        <input matInput required mask="CPF_CNPJ" #CPFES />
+                        <input matInput  mask="CPF_CNPJ" [(ngModel)]="dadosEstadoCivil.cpf_conjuge"  [ngModelOptions]="{ standalone: true }" />
+                       
                       </mat-form-field>
                     </div>
                     <div class="col-2">
                       <mat-form-field appearance="outline" class="col-12">
                         <mat-label>Data de Nascimento</mat-label>
-                        <input matInput #DNES mask="00/00/0000" />
+                        <input matInput  mask="00/00/0000" [(ngModel)]="dadosEstadoCivil.data_nascimento_conjuge" [ngModelOptions]="{ standalone: true }"  />
                       </mat-form-field>
                     </div>
                   </div>
@@ -515,7 +517,7 @@
                         <input
                           matInput
                           mask="CPF_CNPJ"
-                          #CPFD
+                          [(ngModel)]="dependentes.cpf_dependente" 
                           formControlName="thirdCtrl"
                         />
                       </mat-form-field>
@@ -524,7 +526,7 @@
                     <div class="col-2">
                       <mat-form-field appearance="outline" class="col-12">
                         <mat-label>Data de Nascimento</mat-label>
-                        <input matInput #DND mask="00/00/0000" />
+                        <input matInput  [(ngModel)]="dependentes.data_nascimento_dependente" [ngModelOptions]="{ standalone: true }" mask="00/00/0000" />
                       </mat-form-field>
                     </div>
 
@@ -654,8 +656,9 @@
                     <div class="col-4">
                       <mat-form-field appearance="outline" class="col-12">
                         <mat-label>Vínculo</mat-label>
-                        <mat-select>
-                          <mat-option> Vínculos </mat-option>
+                        <mat-select [(ngModel)]="vinculo" [ngModelOptions]="{ standalone: true }">
+                          <mat-option  *ngFor="let vinculos of vinculos"
+                          [value]="vinculos.id"> {{vinculos.vinculo}} </mat-option>
                         </mat-select>
                       </mat-form-field>
                     </div>

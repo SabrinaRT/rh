@@ -7,7 +7,7 @@ import  pb.prev.rhback.model.DadosEstadoCivil;
 
 @Repository
 public interface DadosEstadoCivilRepository  extends JpaRepository<DadosEstadoCivil, Long> {
-    
+    DadosEstadoCivil findByDadosPessoais_Id(Long id);
 
     
 }

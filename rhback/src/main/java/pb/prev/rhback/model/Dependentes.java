@@ -19,12 +19,12 @@ public class Dependentes {
     @JsonFormat(pattern = "dd/MM/yyyy")
     private Date data_nascimento_dependente;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
 	@JoinColumn(name = "id_colaborador")
     @JsonBackReference
 	private DadosPessoais dadosPessoais;
 
-    
+     
 
 
     public Dependentes() {

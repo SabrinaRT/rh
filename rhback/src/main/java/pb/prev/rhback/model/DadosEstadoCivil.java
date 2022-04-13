@@ -26,8 +26,8 @@ public class DadosEstadoCivil {
     private String profissao_atividade;
     private String estado_civil;
 
-    @OneToOne(cascade = CascadeType.MERGE)
-    @JoinColumn(name="dadosPessoaisId", referencedColumnName = "id", unique = true)
+    @OneToOne(cascade = CascadeType.DETACH)
+    @JoinColumn(name="dadosPessoaisId" )
     private DadosPessoais dadosPessoais;
 
     public long getId() {
