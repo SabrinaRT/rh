@@ -60,7 +60,6 @@ celularmask =['(',/\d/, /\d/, ')', /\d/, " ",  /\d/, /\d/, /\d/, /\d/, '-', /\d/
     private _formBuilder: FormBuilder,
     private siscrhService: SiscrhService,
     private route: ActivatedRoute,
-    private router: Router
   ) {
     this.IDColab = this.route.snapshot.params['id'];
   }
@@ -145,6 +144,15 @@ celularmask =['(',/\d/, /\d/, ')', /\d/, " ",  /\d/, /\d/, /\d/, /\d/, '-', /\d/
 
   salvarEstadoCivil() {
     this.dadosEstadoCivil.id = this.IDEstado;
+
+    if(this.dadosEstadoCivil.estado_civil = "Solteiro(a)"){
+      this.dadosEstadoCivil.cpf_conjuge = null
+      this.dadosEstadoCivil.nome_completo_conjuge = null
+      this.dadosEstadoCivil.data_nascimento_conjuge = null
+      this.dadosEstadoCivil.identidade_conjuge = null
+      this.dadosEstadoCivil.profissao_atividade = null
+      this.dadosEstadoCivil.uf_identidade_conjuge = null
+    }
 
     this.dadosEstadoCivil.dadosPessoais = { id: this.IDColab };
     this.siscrhService
