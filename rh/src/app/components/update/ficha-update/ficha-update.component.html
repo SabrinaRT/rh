@@ -571,14 +571,15 @@
                   <div class="row">
                     <div class="col-1"></div>
                     <div class="col-10">
+                      <mat-slide-toggle [(ngModel)]="EditarApagarDep" [ngModelOptions]="{ standalone: true }" >Editar/Deletar</mat-slide-toggle>
                       <table class="styled-table">
                         <thead>
                           <tr>
                             <th>Nome Completo</th>
                             <th>CPF</th>
                             <th>Data de Nascimento</th>
-                            <th>Editar</th>
-                            <th>Deletar</th>
+                            <th *ngIf="EditarApagarDep == true">Editar</th>
+                            <th *ngIf="EditarApagarDep == true">Deletar</th>
                           </tr>
                         </thead>
                         <tbody *ngFor="let item of DadosAtualizados">
@@ -586,7 +587,7 @@
                             <td>{{ item2.nome_completo_dependente }}</td>
                             <td>{{ item2.cpf_dependente }}</td>
                             <td>{{ item2.data_nascimento_dependente }}</td>
-                            <td>
+                            <td *ngIf="EditarApagarDep == true">
                               <button
                                 mat-raised-button
                                 color="primary"
@@ -595,7 +596,7 @@
                                 <mat-icon>edit</mat-icon>
                               </button>
                             </td>
-                            <td>
+                            <td *ngIf="EditarApagarDep == true">
                               <button
                                 mat-raised-button
                                 color="warn"
@@ -810,22 +811,23 @@
               <div class="col">
                 <mat-card class="p-3 box-shadow">
                   <div class="row">
-                    <div class="col-1"></div>
+                    <div class="col-1"> </div>
                     <div class="col-10">
+                      <mat-slide-toggle [(ngModel)]="EditarApagarMat" [ngModelOptions]="{ standalone: true }" >Editar/Deletar</mat-slide-toggle>
                       <table class="styled-table">
                         <thead>
                           <tr>
                             <th>Matrícula</th>
                             <th>Observação</th>
-                            <th>Editar</th>
-                            <th>Deletar</th>
+                            <th *ngIf="EditarApagarMat == true">Editar</th>
+                            <th *ngIf="EditarApagarMat == true">Deletar</th>
                           </tr>
                         </thead>
                         <tbody *ngFor="let item of DadosAtualizados">
                           <tr *ngFor="let item2 of item.matriculas">
                            <td>{{item2.matricula}}</td>
                            <td>{{item2.observacao}}</td>
-                            <td>
+                            <td *ngIf="EditarApagarMat == true">
                               <button
                                 mat-raised-button
                                 color="primary"
@@ -834,7 +836,7 @@
                                 <mat-icon>edit</mat-icon>
                               </button>
                             </td>
-                            <td>
+                            <td *ngIf="EditarApagarMat == true">
                               <button
                                 mat-raised-button
                                 color="warn"

@@ -108,7 +108,8 @@ export class FichaComponent implements OnInit {
   IDColab: number;
   IDProfi: number;
   IDBanco: number;
-
+  EditarApagarDep = false;
+  EditarApagarMat = false;
   gerarMensagemFinal() {
     let NomeEsplitado = this.dadosPessoais.nome_completo.split(' ');
     let UltimoNome = NomeEsplitado[NomeEsplitado.length - 1];

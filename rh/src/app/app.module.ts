@@ -15,7 +15,7 @@ import { HttpClientModule } from '@angular/common/http';
 import {MatButtonModule} from '@angular/material/button';
 import {MatSelectModule} from '@angular/material/select';
 import {MatCardModule} from '@angular/material/card';
-
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {
   NgxAwesomePopupModule,
   DialogConfigModule,
@@ -45,6 +45,7 @@ import { TabelaColaboradoresComponent } from './components/home/tabela-colaborad
     MatInputModule,
     MatTableModule,
     BrowserModule,
+    MatSlideToggleModule,
     MatCardModule,
     HttpClientModule,
     MatButtonModule,

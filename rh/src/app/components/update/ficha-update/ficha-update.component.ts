@@ -227,6 +227,8 @@ export class FichaUpdateComponent implements OnInit {
       });
   }
 
+  EditarApagarDep = false;
+  EditarApagarMat = false;
   setor: any;
   vinculo: any;
   salvarDadosProfissionais() {
