@@ -1,3 +1,5 @@
+
+{{DadosAtualizados | json}}
 <table class="styled-table">
     <thead>
       <tr>
@@ -7,27 +9,15 @@
         <th>Acesso Rede Interna</th>
       </tr>
     </thead>
-    <tbody>
-      <!-- <tr >
+    <tbody >
+      <tr *ngFor="let item of DadosAtualizados">
        
-        <td>
-          <button
-            mat-raised-button
-            color="primary"
-            
-          >
-            <mat-icon>edit</mat-icon>
-          </button>
-        </td>
-        <td>
-          <button
-            mat-raised-button
-            color="warn"
-            
-          >
-            <mat-icon>delete</mat-icon>
-          </button>
-        </td>
-      </tr> -->
+      <td>
+        {{item.nome_completo}}
+      </td>
+      <td></td>
+      <td></td>       
+      <td></td> 
+      </tr>
     </tbody>
   </table>

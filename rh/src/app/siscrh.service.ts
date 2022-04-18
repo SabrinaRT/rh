@@ -125,7 +125,11 @@ url:any = "http://localhost:8080/api"
     );
   }
 
-
+  getDadosProfissionaisList(): Observable<DadosProfissionais[]> {
+    return this.httpClient.get<DadosProfissionais[]>(
+      this.url + `/v6/dados`
+    );
+  }
 
 
 

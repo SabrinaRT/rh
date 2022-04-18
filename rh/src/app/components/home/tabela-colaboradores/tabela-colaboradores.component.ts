@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { DadosPessoais, DadosProfissionais } from 'src/app/siscrh';
+import { SiscrhService } from 'src/app/siscrh.service';
 
 @Component({
   selector: 'app-tabela-colaboradores',
@@ -7,9 +9,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TabelaColaboradoresComponent implements OnInit {
 
-  constructor() { }
-
+  constructor(private siscrhService: SiscrhService) { }
+  DadosAtualizados:DadosPessoais[];
+  DadosProfissionais:DadosProfissionais[];
   ngOnInit(): void {
+    this.siscrhService.getColaboradorList().subscribe((data:any)=>
+    {
+      this.DadosAtualizados =data
+      console.log(data)
+    }
+    //  JUNTAR OS DOIS DADOS EM UM ARRAY
+   
+    
+    )
+    this.siscrhService.getColaboradorList().subscribe((data:any)=>{
+      this.DadosProfissionais = data
+    } 
+    ) 
   }
 
 }

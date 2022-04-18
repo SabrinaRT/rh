@@ -184,7 +184,7 @@ export class FichaComponent implements OnInit {
       .getColaboradorById(this.IDColab)
       .subscribe((data: any) => {
         this.DadosPessoais = data;
-        this.DadosAtualizados = Array.of(this.DadosPessoais);
+        this.DadosAtualizados = Array.of(data);
         console.log(this.DadosPessoais);
       });
   }
