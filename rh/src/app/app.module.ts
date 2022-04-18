@@ -29,11 +29,13 @@ import { NgxMaskModule } from 'ngx-mask';
 import { MatNativeDateModule } from '@angular/material/core';
 import { FichaUpdateComponent } from './components/update/ficha-update/ficha-update.component';
 import { TextMaskModule } from 'angular2-text-mask';
+import { TabelaColaboradoresComponent } from './components/home/tabela-colaboradores/tabela-colaboradores.component';
 @NgModule({
   declarations: [
     AppComponent,
     FichaComponent,
     FichaUpdateComponent,
+    TabelaColaboradoresComponent,
 
 
   ],

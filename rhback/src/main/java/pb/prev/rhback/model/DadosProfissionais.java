@@ -63,8 +63,9 @@ public class DadosProfissionais {
     @JoinColumn(name = "idVinculo")
     private Vinculos vinculos;
 
-    
-  
+    public DadosProfissionais() {
+    }
+
     public long getId() {
         return this.id;
     }
@@ -129,14 +130,6 @@ public class DadosProfissionais {
         this.dadosPessoais = dadosPessoais;
     }
 
-    public Vinculos getVinculos() {
-        return this.vinculos;
-    }
-
-    public void setVinculos(Vinculos vinculos) {
-        this.vinculos = vinculos;
-    }
-
     public Setores getSetores() {
         return this.setores;
     }
@@ -145,9 +138,13 @@ public class DadosProfissionais {
         this.setores = setores;
     }
 
+    public Vinculos getVinculos() {
+        return this.vinculos;
+    }
 
-    
-    
+    public void setVinculos(Vinculos vinculos) {
+        this.vinculos = vinculos;
+    }
 
     public DadosProfissionais(String cargo, String escolaridade, Date data_admissao, Date data_exoneracao, String qualificacao_profissional, String funcao, DadosPessoais dadosPessoais, Setores setores, Vinculos vinculos) {
         this.cargo = cargo;
@@ -159,12 +156,6 @@ public class DadosProfissionais {
         this.dadosPessoais = dadosPessoais;
         this.setores = setores;
         this.vinculos = vinculos;
-        
-    }
-
-    
-
-    public DadosProfissionais() {
     }
 
 }

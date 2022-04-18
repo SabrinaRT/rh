@@ -563,7 +563,7 @@
                             <th>Deletar</th>
                           </tr>
                         </thead>
-                        <tbody *ngFor="let item of DependentesLista">
+                        <tbody *ngFor="let item of DadosAtualizados">
                           <tr *ngFor="let item2 of item.dependentes">
                             <td>{{ item2.nome_completo_dependente }}</td>
                             <td>{{ item2.cpf_dependente }}</td>
@@ -668,13 +668,13 @@
                     <div class="col-4">
                       <mat-form-field appearance="outline" class="col-12">
                         <mat-label>Cargo</mat-label>
-                        <input matInput />
+                        <input matInput [(ngModel)]="dadosProfissionais.cargo" [ngModelOptions]="{ standalone: true }" />
                       </mat-form-field>
                     </div>
                     <div class="col-4">
                       <mat-form-field appearance="outline" class="col-12">
                         <mat-label>Função</mat-label>
-                        <input matInput />
+                        <input matInput [(ngModel)]="dadosProfissionais.funcao" [ngModelOptions]="{ standalone: true }" />
                       </mat-form-field>
                     </div>
                   </div>
@@ -683,13 +683,13 @@
                     <div class="col-4">
                       <mat-form-field appearance="outline" class="col-12">
                         <mat-label>Qualificação Profissional</mat-label>
-                        <input matInput />
+                        <input matInput [(ngModel)]="dadosProfissionais.qualificacao_profissional" [ngModelOptions]="{ standalone: true }" />
                       </mat-form-field>
                     </div>
                     <div class="col-4">
                       <mat-form-field appearance="outline" class="col-12">
                         <mat-label>Escolaridade</mat-label>
-                        <input matInput />
+                        <input matInput [(ngModel)]="dadosProfissionais.escolaridade" [ngModelOptions]="{ standalone: true }" />
                       </mat-form-field>
                     </div>
                   </div>
@@ -699,16 +699,52 @@
                     <div class="col-4">
                       <mat-form-field appearance="outline" class="col-12">
                         <mat-label>Data de Admissão</mat-label>
-                        <input matInput [textMask]="{mask: datemask}" />
+                        <input matInput [textMask]="{mask: datemask}" [(ngModel)]="dadosProfissionais.data_admissao" [ngModelOptions]="{ standalone: true }" />
                       </mat-form-field>
                     </div>
                     <div class="col-4">
                       <mat-form-field appearance="outline" class="col-12">
                         <mat-label>Data de Exoneração</mat-label>
-                        <input matInput [textMask]="{mask: datemask}" />
+                        <input matInput [textMask]="{mask: datemask}" [(ngModel)]="dadosProfissionais.data_exoneracao" [ngModelOptions]="{ standalone: true }" />
                       </mat-form-field>
                     </div>
                   </div>
+                </mat-card>
+              </div>
+            </div>
+          </div>
+          <br />
+          <div class="container px-4">
+            <div class="row gx-5">
+              <div class="col">
+                <mat-card class="p-3 box-shadow">
+                  <div class="row">
+                    <div class="col-1"></div>
+                    <div class="col-3">
+                      <mat-form-field appearance="outline" class="col-12">
+                        <mat-label>Matrícula</mat-label>
+                        <input matInput  [(ngModel)]="matriculas.matricula" [ngModelOptions]="{ standalone: true }" />
+                      </mat-form-field>
+                    </div>
+                    <div class="col-3">
+                      <mat-form-field appearance="outline" class="col-12">
+                        <mat-label>Observação</mat-label>
+                        <input matInput  [(ngModel)]="matriculas.observacao" [ngModelOptions]="{ standalone: true }" />
+                      </mat-form-field>
+                    </div>
+                    <div class="col-4">
+                      <button
+                      mat-raised-button
+                      color="primary"
+                      (click)="salvarMatricula()"
+                    >
+                      Adicionar
+                    </button>
+                    </div>
+                      
+                   
+                  </div>
+                  
                 </mat-card>
               </div>
             </div>
@@ -725,13 +761,15 @@
                         <thead>
                           <tr>
                             <th>Matrícula</th>
-                            <th>Orgão</th>
                             <th>Observação</th>
+                            <th>Editar</th>
+                            <th>Deletar</th>
                           </tr>
                         </thead>
-                        <tbody>
-                          <!-- <tr >
-                           
+                        <tbody *ngFor="let item of DadosAtualizados">
+                          <tr *ngFor="let item2 of item.matriculas">
+                           <td>{{item2.matricula}}</td>
+                           <td>{{item2.observacao}}</td>
                             <td>
                               <button
                                 mat-raised-button
@@ -750,7 +788,7 @@
                                 <mat-icon>delete</mat-icon>
                               </button>
                             </td>
-                          </tr> -->
+                          </tr>
                         </tbody>
                       </table>
                     </div>
@@ -803,13 +841,13 @@
                     <div class="col-4">
                       <mat-form-field appearance="outline" class="col-12">
                         <mat-label>Banco</mat-label>
-                        <input matInput />
+                        <input matInput [(ngModel)]="dadosBancarios.banco" [ngModelOptions]="{ standalone: true }"/>
                       </mat-form-field>
                     </div>
                     <div class="col-4">
                       <mat-form-field appearance="outline" class="col-12">
                         <mat-label>Conta Corrente</mat-label>
-                        <input matInput />
+                        <input matInput [(ngModel)]="dadosBancarios.conta_corrente" [ngModelOptions]="{ standalone: true }"/>
                       </mat-form-field>
                     </div>
                   </div>
@@ -818,13 +856,13 @@
                     <div class="col-4">
                       <mat-form-field appearance="outline" class="col-12">
                         <mat-label>Código</mat-label>
-                        <input matInput />
+                        <input matInput [(ngModel)]="dadosBancarios.codigo" [ngModelOptions]="{ standalone: true }" />
                       </mat-form-field>
                     </div>
                     <div class="col-4">
                       <mat-form-field appearance="outline" class="col-12">
                         <mat-label>Agência</mat-label>
-                        <input matInput />
+                        <input matInput [(ngModel)]="dadosBancarios.agencia" [ngModelOptions]="{ standalone: true }" />
                       </mat-form-field>
                     </div>
                   </div>
@@ -850,6 +888,7 @@
                         color="primary"
                         class="col-12"
                         matStepperNext
+                        (click)="salvarDadosBancarios()"
                       >
                         Continuar
                       </button>

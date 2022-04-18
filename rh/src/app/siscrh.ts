@@ -63,12 +63,22 @@ export class DadosPessoais {
   complemento: any;
   nome_mae: any;
   nome_pai: any;
-  dependentes:[{
-    id: any;
-    nome_completo_dependente: any;
-    cpf_dependente: any;
-    data_nascimento_dependente: any;
-  }]
+  dependentes: [
+    {
+      id: any;
+      nome_completo_dependente: any;
+      cpf_dependente: any;
+      data_nascimento_dependente: any;
+    }
+  ];
+
+  matriculas:[
+    {
+      id:any;
+      matricula:any;
+      observacao:any;
+    }
+  ]
 
   /*   dadosBancarios: {
           id:  any,
@@ -96,16 +106,15 @@ export class DadosPessoais {
       ] */
 }
 
-export class Setores{
-  id:any;
-  setor:any
+export class Setores {
+  id: any;
+  setor: any;
 }
 
-export class Vinculos{
-  id:any;
-  vinculo:any
+export class Vinculos {
+  id: any;
+  vinculo: any;
 }
-
 
 export class DadosEstadoCivil {
   id: any;
@@ -119,7 +128,6 @@ export class DadosEstadoCivil {
   dadosPessoais: {
     id: any;
   };
-
 }
 
 export class DadosProfissionais {
@@ -128,17 +136,17 @@ export class DadosProfissionais {
   escolaridade: any;
   data_admissao: any;
   data_exoneracao: any;
-  qualificacao_profissiona: any;
+  qualificacao_profissional: any;
   funcao: any;
   dadosPessoais: {
     id: any;
   };
-  setores:{
-    id:any;
-  }
-  vinculos:{
-    id:any;
-  }
+  setores: {
+    id: any;
+  };
+  vinculos: {
+    id: any;
+  };
 }
 
 export class DadosBancarios {
@@ -147,6 +155,18 @@ export class DadosBancarios {
   codigo: any;
   agencia: any;
   conta_corrente: any;
+  dadosPessoais: {
+    id: any;
+  };
+}
+
+export class Matriculas {
+  id: any;
+  matricula: any;
+  observacao:any;
+  dadosPessoais: {
+    id: any;
+  };
 }
 
 export class Dependentes {

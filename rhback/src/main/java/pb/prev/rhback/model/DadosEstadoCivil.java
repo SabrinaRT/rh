@@ -29,7 +29,7 @@ public class DadosEstadoCivil {
     @OneToOne(cascade = CascadeType.DETACH)
     @JoinColumn(name="dadosPessoaisId" )
     private DadosPessoais dadosPessoais;
-
+   
     public long getId() {
         return this.id;
     }

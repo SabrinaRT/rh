@@ -13,17 +13,26 @@ public class Matriculas {
     private Long id;
 
     private String matricula;
+    private String observacao;
 
-    
-    @ManyToOne(cascade = CascadeType.DETACH)
+     
+  /*   @ManyToOne(cascade = CascadeType.DETACH)
     @JoinColumn(name = "idDadosProfissionais")
-    private DadosProfissionais dadosProfissionais;
+    private DadosProfissionais dadosProfissionais; */
 
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
+	@JoinColumn(name = "idDadosPessoais")
+    @JsonBackReference
+	private DadosPessoais dadosPessoais;
 
+    public Matriculas() {
+    }
+  
 
-    public Matriculas(String matricula) {
+    public Matriculas(String matricula, String observacao, DadosPessoais dadosPessoais) {
         this.matricula = matricula;
-    
+        this.observacao = observacao;
+        this.dadosPessoais = dadosPessoais;
     }
 
 
@@ -43,20 +52,22 @@ public class Matriculas {
         this.matricula = matricula;
     }
 
-
-    public DadosProfissionais getDadosProfissionais() {
-        return this.dadosProfissionais;
+    public String getObservacao() {
+        return this.observacao;
     }
 
-    public void setDadosProfissionais(DadosProfissionais dadosProfissionais) {
-        this.dadosProfissionais = dadosProfissionais;
+    public void setObservacao(String observacao) {
+        this.observacao = observacao;
     }
 
-    public Matriculas(String matricula, DadosProfissionais dadosProfissionais) {
-        this.matricula = matricula;
-        this.dadosProfissionais = dadosProfissionais;
+    public DadosPessoais getDadosPessoais() {
+        return this.dadosPessoais;
     }
-    
 
-    
+    public void setDadosPessoais(DadosPessoais dadosPessoais) {
+        this.dadosPessoais = dadosPessoais;
+    }
+
+  
+   
 }

@@ -18,30 +18,32 @@ import  pb.prev.rhback.repository.MatriculasRepository;
 public class MatriculasController {
 
 	@Autowired
-	private MatriculasRepository setoresRepository;
+	private MatriculasRepository matriculasRepository;
     
 
 	@GetMapping("/dados")
 	public List<Matriculas> getAllMatriculas() {
-		return setoresRepository.findAll();
+		return matriculasRepository.findAll();
 	}
 
 	@PostMapping("/dados")
-	public Matriculas createMatriculas(@RequestBody Matriculas setores) {
-		return setoresRepository.save(setores);
+	public Matriculas createMatriculas(@RequestBody Matriculas matriculas) {
+		return matriculasRepository.save(matriculas);
 	}
 
 	@GetMapping("/dados/{id}")
 	public ResponseEntity<Matriculas> getAllMatriculas(@PathVariable Long id) {
-		Matriculas setores = setoresRepository.findById(id)
+		Matriculas matriculas = matriculasRepository.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("Matriculas not exist with id: " + id));
 
-		return ResponseEntity.ok(setores);
+		return ResponseEntity.ok(matriculas);
 	}
 
 	@DeleteMapping("/dados/{id}")  
 	private void deleteBook(@PathVariable("id") Long id)   
 	{  
-		setoresRepository.deleteById(id);
+		matriculasRepository.deleteById(id);
 	} 
+
+	
 }

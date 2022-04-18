@@ -17,6 +17,7 @@ import {
   DadosProfissionais,
   DadosBancarios,
   Vinculos,
+  Matriculas,
 } from 'src/app/siscrh';
 import { SiscrhService } from 'src/app/siscrh.service';
 
@@ -39,6 +40,7 @@ export class FichaComponent implements OnInit {
   dadosEstadoCivil: DadosEstadoCivil = new DadosEstadoCivil();
   dependentes: Dependentes = new Dependentes();
   dadosBancarios: DadosBancarios = new DadosBancarios();
+  matriculas:Matriculas = new Matriculas();
 
   setores: Setores[];
   vinculos: Vinculos[];
@@ -53,7 +55,8 @@ export class FichaComponent implements OnInit {
     private _formBuilder: FormBuilder,
     private siscrhService: SiscrhService
   ) {}
-  DependentesLista: any;
+  DadosAtualizados: any;
+  MatriculasLista:any
   ngOnInit() {
     this.firstFormGroup = this._formBuilder.group({
       nomeCompleto: ['', Validators.required],
@@ -165,15 +168,26 @@ export class FichaComponent implements OnInit {
       });
   }
 
+  salvarMatricula() {
+    this.matriculas.dadosPessoais = { id: this.IDColab };
+
+    this.siscrhService.createMatricula(this.matriculas)
+      .subscribe((data: any) => {
+        console.log(data);
+         this.pegarDados();
+      });
+  }
+
   pegarDados() {
     this.siscrhService
       .getColaboradorById(this.IDColab)
       .subscribe((data: any) => {
         this.DadosPessoais = data;
-        this.DependentesLista = Array.of(this.DadosPessoais);
+        this.DadosAtualizados = Array.of(this.DadosPessoais);
         console.log(this.DadosPessoais);
       });
   }
+
 
   setor: any;
   vinculo: any;
@@ -190,13 +204,15 @@ export class FichaComponent implements OnInit {
         console.log(data);
       });
   }
-
+ 
   salvarDadosBancarios() {
     this.dadosBancarios.id = this.IDBanco;
+    this.dadosBancarios.dadosPessoais = { id: this.IDColab };
     this.siscrhService
       .createDadosBancarios(this.dadosBancarios)
       .subscribe((data: any) => {
-        this.dadosBancarios = data.id;
+        this.IDBanco = data.id;
+        console.log(data);
       });
   }
 }

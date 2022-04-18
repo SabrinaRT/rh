@@ -19,6 +19,7 @@ import {
   DadosProfissionais,
   DadosBancarios,
   Vinculos,
+  Matriculas,
 } from 'src/app/siscrh';
 import { SiscrhService } from 'src/app/siscrh.service';
 
@@ -41,7 +42,7 @@ export class FichaUpdateComponent implements OnInit {
   dadosEstadoCivil: DadosEstadoCivil = new DadosEstadoCivil();
   dependentes: Dependentes = new Dependentes();
   dadosBancarios: DadosBancarios = new DadosBancarios();
-
+  matriculas:Matriculas = new Matriculas();
   setores: Setores[];
   vinculos: Vinculos[];
 
@@ -54,16 +55,16 @@ export class FichaUpdateComponent implements OnInit {
   datemask = [/\d/, /\d/, '/', /\d/, /\d/, '/', /\d/, /\d/, /\d/, /\d/];
   cpfmask = [/\d/, /\d/,/\d/ ,'.', /\d/, /\d/,/\d/ ,'.',/\d/, /\d/,/\d/ ,'-', /\d/, /\d/];
   telefonemask = ['(',/\d/, /\d/, ')', " ",  /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
-celularmask =['(',/\d/, /\d/, ')', /\d/, " ",  /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
+  celularmask =['(',/\d/, /\d/, ')', /\d/, " ",  /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
 
   constructor(
     private _formBuilder: FormBuilder,
     private siscrhService: SiscrhService,
-    private route: ActivatedRoute,
+    private route: ActivatedRoute
   ) {
     this.IDColab = this.route.snapshot.params['id'];
   }
-  DependentesLista: any;
+  DadosAtualizados: any;
   ngOnInit() {
     this.firstFormGroup = this._formBuilder.group({
       nomeCompleto: ['', Validators.required],
@@ -98,19 +99,46 @@ celularmask =['(',/\d/, /\d/, ')', /\d/, " ",  /\d/, /\d/, /\d/, /\d/, '-', /\d/
     this.siscrhService
       .getColaboradorById(this.IDColab)
       .subscribe((data: any) => {
-        this.dadosPessoais = data;
-        console.log(data);
+        if (data != null) {
+          this.dadosPessoais = data;
+          console.log(data);
+        }
+      });
+
+    this.siscrhService
+      .getDadosBancariosByForeignKey(this.IDColab)
+      .subscribe((data: any) => {
+        if (data != null) {
+          this.dadosBancarios = data;
+          this.IDBanco = data.id;
+          console.log(data);
+        }
       });
 
     this.siscrhService
       .getEstadoCivilByForeignKey(this.IDColab)
       .subscribe((data: any) => {
-        this.dadosEstadoCivil = data;
-        this.IDEstado = data.id;
+        if (data != null) {
+          this.dadosEstadoCivil = data;
+          this.IDEstado = data.id;
 
-        console.log(data);
+          console.log(data);
+        }
       });
-      this.pegarDados();
+
+    this.siscrhService
+      .getDadosProfissionaisByForeignKey(this.IDColab)
+      .subscribe((data: any) => {
+        console.log(data);
+        if (data != null) {
+          this.dadosProfissionais = data;
+          this.IDProfi = data.id;
+          this.setor = this.dadosProfissionais.setores.id;
+          this.vinculo = this.dadosProfissionais.vinculos.id;
+        }
+      });
+
+    this.pegarDados();
   }
 
   Usuario: any;
@@ -133,7 +161,6 @@ celularmask =['(',/\d/, /\d/, ')', /\d/, " ",  /\d/, /\d/, /\d/, /\d/, '-', /\d/
   salvarDadosPessoais() {
     this.dadosPessoais.id = this.IDColab;
 
-
     this.siscrhService
       .createColaborador(this.dadosPessoais)
       .subscribe((data: any) => {
@@ -145,13 +172,13 @@ celularmask =['(',/\d/, /\d/, ')', /\d/, " ",  /\d/, /\d/, /\d/, /\d/, '-', /\d/
   salvarEstadoCivil() {
     this.dadosEstadoCivil.id = this.IDEstado;
 
-    if(this.dadosEstadoCivil.estado_civil = "Solteiro(a)"){
-      this.dadosEstadoCivil.cpf_conjuge = null
-      this.dadosEstadoCivil.nome_completo_conjuge = null
-      this.dadosEstadoCivil.data_nascimento_conjuge = null
-      this.dadosEstadoCivil.identidade_conjuge = null
-      this.dadosEstadoCivil.profissao_atividade = null
-      this.dadosEstadoCivil.uf_identidade_conjuge = null
+    if ((this.dadosEstadoCivil.estado_civil = 'Solteiro(a)')) {
+      this.dadosEstadoCivil.cpf_conjuge = null;
+      this.dadosEstadoCivil.nome_completo_conjuge = null;
+      this.dadosEstadoCivil.data_nascimento_conjuge = null;
+      this.dadosEstadoCivil.identidade_conjuge = null;
+      this.dadosEstadoCivil.profissao_atividade = null;
+      this.dadosEstadoCivil.uf_identidade_conjuge = null;
     }
 
     this.dadosEstadoCivil.dadosPessoais = { id: this.IDColab };
@@ -177,6 +204,15 @@ celularmask =['(',/\d/, /\d/, ')', /\d/, " ",  /\d/, /\d/, /\d/, /\d/, '-', /\d/
       .createDependentes(this.dependentes)
       .subscribe((data: any) => {
         console.log(data);
+        this.pegarDados();
+      });
+  }
+  salvarMatricula() {
+    this.matriculas.dadosPessoais = { id: this.IDColab };
+
+    this.siscrhService.createMatricula(this.matriculas)
+      .subscribe((data: any) => {
+        console.log(data);
          this.pegarDados();
       });
   }
@@ -186,8 +222,8 @@ celularmask =['(',/\d/, /\d/, ')', /\d/, " ",  /\d/, /\d/, /\d/, /\d/, '-', /\d/
       .getColaboradorById(this.IDColab)
       .subscribe((data: any) => {
         this.DadosPessoais = data;
-        this.DependentesLista = Array.of(this.DadosPessoais);
-        console.log(this.DadosPessoais);
+        this.DadosAtualizados = Array.of(data);
+        console.log(this.DadosAtualizados);
       });
   }
 
@@ -209,10 +245,12 @@ celularmask =['(',/\d/, /\d/, ')', /\d/, " ",  /\d/, /\d/, /\d/, /\d/, '-', /\d/
 
   salvarDadosBancarios() {
     this.dadosBancarios.id = this.IDBanco;
+    this.dadosBancarios.dadosPessoais = { id: this.IDColab };
     this.siscrhService
       .createDadosBancarios(this.dadosBancarios)
       .subscribe((data: any) => {
-        this.dadosBancarios = data.id;
+        this.IDBanco = data.id;
+        console.log(data);
       });
   }
 }

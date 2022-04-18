@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { DadosBancarios, DadosPessoais, DadosProfissionais, DadosEstadoCivil, Dependentes, Setores, Vinculos } from './siscrh';
+import { DadosBancarios, DadosPessoais, DadosProfissionais, DadosEstadoCivil, Dependentes, Setores, Vinculos, Matriculas } from './siscrh';
 
 @Injectable({
   providedIn: 'root',
@@ -113,7 +113,17 @@ url:any = "http://localhost:8080/api"
   }
 
 
-
+  createMatricula(colaborador: Matriculas): Observable<Object> {
+    return this.httpClient.post(
+      this.url + `/v12/dados`,
+      colaborador
+    );
+  }
+  getMatriculasByForeignKey(id: number): Observable<Dependentes> {
+    return this.httpClient.get<Dependentes>(
+      this.url + `/v12/dados/${id}`
+    );
+  }
 
 
 

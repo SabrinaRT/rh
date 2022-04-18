@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.*;
 public class DadosBancarios {
 
     @Id  
+    @GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
     private String banco;
     private String codigo;

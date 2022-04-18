@@ -31,12 +31,18 @@ public class DadosProfissionaisController {
 		return dadosProfissionaisRepository.save(dadosProfissionais);
 	}
 
-	@GetMapping("/dados/{id}")
+	/* @GetMapping("/dados/{id}")
 	public ResponseEntity<DadosProfissionais> getAllDadosProfissionais(@PathVariable Long id) {
 		DadosProfissionais dadosProfissionais = dadosProfissionaisRepository.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("DadosProfissionais not exist with id: " + id));
 
 		return ResponseEntity.ok(dadosProfissionais);
+	} */
+
+	@GetMapping("/dados/{id}")
+	public ResponseEntity<DadosProfissionais> getDadosProfissionaisByForeignKey(@PathVariable Long id) {
+		DadosProfissionais dadosProfissionais = dadosProfissionaisRepository.findByDadosPessoais_Id(id);
+		return ResponseEntity.ok(dadosProfissionais); 
 	}
 
 	@DeleteMapping("/dados/{id}")  

@@ -29,12 +29,18 @@ public class DadosBancariosController {
 		return dadosBancariosRepository.save(dadosBancarios);
 	}
 
-	@GetMapping("/dados/{id}")
+	/* @GetMapping("/dados/{id}")
 	public ResponseEntity<DadosBancarios> getAllDadosBancarios(@PathVariable Long id) {
 		DadosBancarios dadosBancarios = dadosBancariosRepository.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("DadosBancarios not exist with id: " + id));
 
 		return ResponseEntity.ok(dadosBancarios);
+	} */
+
+	@GetMapping("/dados/{id}")
+	public ResponseEntity<DadosBancarios> getDadosBancariosByForeignKey(@PathVariable Long id) {
+		DadosBancarios dadosBancarios = dadosBancariosRepository.findByDadosPessoais_Id(id);
+		return ResponseEntity.ok(dadosBancarios); 
 	}
 
 /* 	@GetMapping("/dados1/{cpf}")

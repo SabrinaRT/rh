@@ -50,6 +50,10 @@ public class DadosPessoais {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "dadosPessoais")
     @JsonManagedReference
     private Set<Dependentes> dependentes = new HashSet<Dependentes>();
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "dadosPessoais")
+    @JsonManagedReference
+    private Set<Matriculas> matriculas = new HashSet<Matriculas>();
    
 
     public DadosPessoais() {

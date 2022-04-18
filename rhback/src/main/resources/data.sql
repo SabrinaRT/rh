@@ -34,3 +34,5 @@ INSERT IGNORE INTO `vinculos`(`id`, `vinculo`) VALUES
 (6,'Membro Titular'),
 (7,'Membro Suplente')
 ;
+
+

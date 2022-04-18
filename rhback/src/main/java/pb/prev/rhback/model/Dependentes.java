@@ -20,7 +20,7 @@ public class Dependentes {
     private Date data_nascimento_dependente;
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
-	@JoinColumn(name = "id_colaborador")
+	@JoinColumn(name = "dadosPessoaisId")
     @JsonBackReference
 	private DadosPessoais dadosPessoais;
 
