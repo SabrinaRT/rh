@@ -1,27 +1,32 @@
-{{ DadosPessoais | json }}
-<table class="styled-table">
+
+
+
+
+<table class="styled-table"  matSort (matSortChange)="sortData($event)" >
   <thead>
-    <tr>
-      <th>Colaboradores</th>
-      <th>Setor</th>
-      <th>Situação</th>
-      <th>Acesso Rede Interna</th>
+    <tr> 
+      <th mat-sort-header="nome">Colaboradores</th>
+      <th mat-sort-header="setor">Setor</th>
+      <th mat-sort-header="situacao">Situação</th>
+      <th mat-sort-header="acessoRede">Acesso à Rede Corporativa</th>
     </tr>
   </thead>
-  <tbody>
-    <tr *ngFor="let item of array">
-      <td *ngFor="let item2 of item.nome">
-        {{ item2.nome_completo }}
+  <tbody >
+    <tr  *ngFor="let item of array">
+    
+      <td   *ngFor="let item2 of item.nome" (click)="editContact(item2.id)">
+       {{ item2.nome_completo }}
       </td>
       <td *ngFor="let item2 of item.setor">{{ item2.setor }}</td>
-      <td *ngFor="let item2 of item.situacao">
-        <span *ngIf="item2.status == true">ATIVO</span>
-        <span *ngIf="item2.status == false">DESATIVO</span>
+      <td *ngFor="let item2 of item.situacao" >
+        <mat-icon *ngIf="item2.acessoRede == true" style="color: green;"> check_circle</mat-icon>
+        <mat-icon *ngIf="item2.acessoRede == false" style="color: red;">cancel</mat-icon>
       </td>
       <td *ngFor="let item2 of item.situacao">
-        <span *ngIf="item2.acessoRede == true">SIM</span>
-        <span *ngIf="item2.acessoRede == false">NÃO</span>
+        <mat-icon *ngIf="item2.acessoRede == true" style="color: green;"> check_circle</mat-icon>
+        <mat-icon *ngIf="item2.acessoRede == false" style="color: red;">cancel</mat-icon>
       </td>
+
     </tr>
   </tbody>
 </table>

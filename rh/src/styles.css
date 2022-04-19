@@ -23,16 +23,17 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .styled-table td {
     padding: 12px 15px;
 }
+tr:hover {background-color: #f3f3f3; color:#3F51B5}
 .styled-table tbody tr {
     border-bottom: 1px solid #dddddd;
 }
 
-.styled-table tbody tr:nth-of-type(even) {
+/* .styled-table tbody tr:nth-of-type(even) {
     background-color: #f3f3f3;
-}
+} */
 
 .styled-table tbody tr:last-of-type {
-    border-bottom: 2px solid #3F51B5;
+    border-bottom: 1px solid #3F51B5;
 }
 
 .styled-table tbody tr.active-row {
