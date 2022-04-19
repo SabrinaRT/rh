@@ -7,7 +7,8 @@ import { FichaUpdateComponent } from './components/update/ficha-update/ficha-upd
 
 const routes: Routes = [
   {path:"update/:id", component: FichaUpdateComponent},
-  {path:"", component:  TabelaColaboradoresComponent}
+  {path:"", component:  TabelaColaboradoresComponent},
+  {path:"add", component:  FichaComponent}
 ];
 
 @NgModule({

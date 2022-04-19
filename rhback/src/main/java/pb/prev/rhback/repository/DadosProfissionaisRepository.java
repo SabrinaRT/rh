@@ -7,4 +7,6 @@ import  pb.prev.rhback.model.DadosProfissionais;
 @Repository
 public interface DadosProfissionaisRepository extends JpaRepository <DadosProfissionais, Long> {
     DadosProfissionais findByDadosPessoais_Id(Long id);
+
+   
 }

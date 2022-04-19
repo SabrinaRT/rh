@@ -57,14 +57,36 @@ public class DadosProfissionais {
 
     @ManyToOne(cascade = CascadeType.DETACH)
     @JoinColumn(name = "idSetor")
-    private Setores setores;
+    private Setores setores; 
 
     @ManyToOne(cascade = CascadeType.DETACH)
     @JoinColumn(name = "idVinculo")
     private Vinculos vinculos;
 
+    @OneToOne(mappedBy = "dadosProfissionais")
+    @JsonManagedReference
+    private SituacaoColaborador situacaoColaborador;
+
+    
+
+
     public DadosProfissionais() {
     }
+
+
+    public DadosProfissionais(String cargo, String escolaridade, Date data_admissao, Date data_exoneracao, String qualificacao_profissional, String funcao, DadosPessoais dadosPessoais, Setores setores, Vinculos vinculos, SituacaoColaborador situacaoColaborador) {
+        this.cargo = cargo;
+        this.escolaridade = escolaridade;
+        this.data_admissao = data_admissao;
+        this.data_exoneracao = data_exoneracao;
+        this.qualificacao_profissional = qualificacao_profissional;
+        this.funcao = funcao;
+        this.dadosPessoais = dadosPessoais;
+        this.setores = setores;
+        this.vinculos = vinculos;
+        this.situacaoColaborador = situacaoColaborador;
+    }
+    
 
     public long getId() {
         return this.id;
@@ -146,16 +168,14 @@ public class DadosProfissionais {
         this.vinculos = vinculos;
     }
 
-    public DadosProfissionais(String cargo, String escolaridade, Date data_admissao, Date data_exoneracao, String qualificacao_profissional, String funcao, DadosPessoais dadosPessoais, Setores setores, Vinculos vinculos) {
-        this.cargo = cargo;
-        this.escolaridade = escolaridade;
-        this.data_admissao = data_admissao;
-        this.data_exoneracao = data_exoneracao;
-        this.qualificacao_profissional = qualificacao_profissional;
-        this.funcao = funcao;
-        this.dadosPessoais = dadosPessoais;
-        this.setores = setores;
-        this.vinculos = vinculos;
+    public SituacaoColaborador getSituacaoColaborador() {
+        return this.situacaoColaborador;
     }
+
+    public void setSituacaoColaborador(SituacaoColaborador situacaoColaborador) {
+        this.situacaoColaborador = situacaoColaborador;
+    }
+
+  
 
 }

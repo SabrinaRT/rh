@@ -1,23 +1,27 @@
-
-{{DadosAtualizados | json}}
+{{ DadosPessoais | json }}
 <table class="styled-table">
-    <thead>
-      <tr>
-        <th>Colaboradores</th>
-        <th>Setor</th>
-        <th>Situação</th>
-        <th>Acesso Rede Interna</th>
-      </tr>
-    </thead>
-    <tbody >
-      <tr *ngFor="let item of DadosAtualizados">
-       
-      <td>
-        {{item.nome_completo}}
+  <thead>
+    <tr>
+      <th>Colaboradores</th>
+      <th>Setor</th>
+      <th>Situação</th>
+      <th>Acesso Rede Interna</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of array">
+      <td *ngFor="let item2 of item.nome">
+        {{ item2.nome_completo }}
       </td>
-      <td></td>
-      <td></td>       
-      <td></td> 
-      </tr>
-    </tbody>
-  </table>
+      <td *ngFor="let item2 of item.setor">{{ item2.setor }}</td>
+      <td *ngFor="let item2 of item.situacao">
+        <span *ngIf="item2.status == true">ATIVO</span>
+        <span *ngIf="item2.status == false">DESATIVO</span>
+      </td>
+      <td *ngFor="let item2 of item.situacao">
+        <span *ngIf="item2.acessoRede == true">SIM</span>
+        <span *ngIf="item2.acessoRede == false">NÃO</span>
+      </td>
+    </tr>
+  </tbody>
+</table>

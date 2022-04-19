@@ -8,6 +8,8 @@ import  pb.prev.rhback.model.DadosPessoais;
 @Repository
 public interface DadosPessoaisRepository extends JpaRepository<DadosPessoais, Long> {
     DadosPessoais findByCpf(String cpf);
+
+    
    
    
 }
