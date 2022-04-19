@@ -21,7 +21,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatNativeDateModule } from '@angular/material/core';
 import { FichaUpdateComponent } from './components/update/ficha-update/ficha-update.component';
 import { TextMaskModule } from 'angular2-text-mask';
-import { TabelaColaboradoresComponent } from './components/home/tabela-colaboradores/tabela-colaboradores.component';
+import { DialogOverviewExampleDialog, TabelaColaboradoresComponent } from './components/home/tabela-colaboradores/tabela-colaboradores.component';
 
 import {MatDialogModule} from '@angular/material/dialog';
 @NgModule({
@@ -30,8 +30,12 @@ import {MatDialogModule} from '@angular/material/dialog';
     FichaComponent,
     FichaUpdateComponent,
     TabelaColaboradoresComponent,
+    DialogOverviewExampleDialog
   ],
   imports: [
+    BrowserModule, 
+    FormsModule, 
+    MatFormFieldModule,
     MatDialogModule,
     MatSortModule,
     MatButtonModule,

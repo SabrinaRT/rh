@@ -1,32 +1,30 @@
-
-
-
-
-<table class="styled-table"  matSort (matSortChange)="sortData($event)" >
+<table class="styled-table" matSort (matSortChange)="sortData($event)">
   <thead>
-    <tr> 
+    <tr>
       <th mat-sort-header="nome">Colaboradores</th>
       <th mat-sort-header="setor">Setor</th>
       <th mat-sort-header="situacao">Situação</th>
       <th mat-sort-header="acessoRede">Acesso à Rede Corporativa</th>
+      <th>Serviços</th>
     </tr>
   </thead>
-  <tbody >
-    <tr  *ngFor="let item of array">
-    
-      <td   *ngFor="let item2 of item.nome" (click)="editContact(item2.id)">
-       {{ item2.nome_completo }}
+  <tbody>
+    <tr *ngFor="let item of array; let i = index" (click)="openDialog(i)">
+      <td >
+        {{ item.nome }}
       </td>
-      <td *ngFor="let item2 of item.setor">{{ item2.setor }}</td>
-      <td *ngFor="let item2 of item.situacao" >
-        <mat-icon *ngIf="item2.acessoRede == true" style="color: green;"> check_circle</mat-icon>
-        <mat-icon *ngIf="item2.acessoRede == false" style="color: red;">cancel</mat-icon>
+      <td  >{{ item.setor }}</td>
+      <td *ngFor="let item2 of item.situacao"  >
+        <mat-icon *ngIf="item2.acessoRede == true" style="color: green">check_circle</mat-icon>
+        <mat-icon *ngIf="item2.acessoRede == false" style="color: red">cancel</mat-icon >
+      </td>
+      <td *ngFor="let item2 of item.situacao"  >
+        <mat-icon *ngIf="item2.acessoRede == true" style="color: green">check_circle</mat-icon>
+        <mat-icon *ngIf="item2.acessoRede == false" style="color: red">cancel</mat-icon>
       </td>
       <td *ngFor="let item2 of item.situacao">
-        <mat-icon *ngIf="item2.acessoRede == true" style="color: green;"> check_circle</mat-icon>
-        <mat-icon *ngIf="item2.acessoRede == false" style="color: red;">cancel</mat-icon>
+        <button mat-raised-button color="primary"  ><mat-icon  >edit</mat-icon></button>
       </td>
-
     </tr>
   </tbody>
 </table>
