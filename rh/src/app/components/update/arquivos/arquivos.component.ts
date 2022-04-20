@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./arquivos.component.css']
 })
 export class ArquivosComponent implements OnInit {
-
+  panelOpenState = true;
   constructor() { }
 
   ngOnInit(): void {

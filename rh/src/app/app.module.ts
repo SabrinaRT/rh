@@ -28,6 +28,7 @@ import { PainelComponent } from './components/update/painel/painel.component';
 import { ArquivosComponent } from './components/update/arquivos/arquivos.component';
 import { ConfigPerfilComponent } from './components/update/config-perfil/config-perfil.component';
 import {MatGridListModule} from '@angular/material/grid-list';
+import {MatExpansionModule} from '@angular/material/expansion'
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,6 +40,7 @@ import {MatGridListModule} from '@angular/material/grid-list';
     ConfigPerfilComponent
   ],
   imports: [
+    MatExpansionModule,
     MatGridListModule,
     MatTabsModule,
     BrowserModule, 
