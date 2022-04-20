@@ -1,11 +1,4 @@
-<mat-toolbar color="primary">
-  <span>SISCOGEP Update</span>
-</mat-toolbar>
-<mat-drawer-container class="example-container">
-  <mat-drawer mode="side" opened style="background-color: aqua"
-    >Drawer content</mat-drawer
-  >
-  <mat-drawer-content>
+
     <mat-stepper class="demo-stepper" #stepper class="stepper-height">
       <!-- DADOS PESSOAIS -->
       <mat-step [stepControl]="firstFormGroup">
@@ -327,12 +320,12 @@
                     <div class="col-2">
                       <button
                         mat-raised-button
-                        color="primary"
+                        color="success"
                         class="col-12"
                         matStepperNext
                         (click)="salvarDadosPessoais()"
                       >
-                        Continuar
+                        Salvar
                       </button>
                     </div>
                   </div>
@@ -487,12 +480,12 @@
                     <div class="col-2">
                       <button
                         mat-raised-button
-                        color="primary"
+                        color="success"
                         class="col-12"
                         matStepperNext
                         (click)="salvarEstadoCivil()"
                       >
-                        Continuar
+                        Salvar
                       </button>
                     </div>
                   </div>
@@ -630,11 +623,11 @@
                     <div class="col-2">
                       <button
                         mat-raised-button
-                        color="primary"
+                        color="success"
                         class="col-12"
                         matStepperNext
                       >
-                        Continuar
+                        Salvar
                       </button>
                     </div>
                   </div>
@@ -870,12 +863,12 @@
                     <div class="col-2">
                       <button
                         mat-raised-button
-                        color="primary"
+                        color="success"
                         class="col-12"
                         matStepperNext
                         (click)="salvarDadosProfissionais()"
                       >
-                        Continuar
+                        Salvar
                       </button>
                     </div>
                   </div>
@@ -959,12 +952,12 @@
                     <div class="col-2">
                       <button
                         mat-raised-button
-                        color="primary"
+                        color="success"
                         class="col-12"
                         matStepperNext
                         (click)="salvarDadosBancarios()"
                       >
-                        Continuar
+                        Salvar
                       </button>
                     </div>
                   </div>
@@ -989,5 +982,4 @@
         </div>
       </mat-step>
     </mat-stepper>
-  </mat-drawer-content>
-</mat-drawer-container>
+

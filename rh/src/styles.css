@@ -56,3 +56,75 @@ tr:hover {background-color: #f3f3f3; color:#3F51B5}
 .input-upper{
     text-transform: uppercase;
 }
+
+
+
+
+.mat-button.mat-files,
+.mat-stroked-button.mat-files {
+    color: #0074CC;
+}
+.mat-button.mat-files:hover,
+.mat-stroked-button.mat-files:hover {
+  background-color: #f0fff3;
+}
+
+.mat-raised-button.mat-files,
+.mat-flat-button.mat-files,
+.mat-fab.mat-files,
+.mat-mini-fab.mat-files {
+  color: #f0fff3;
+  background-color: #0074CC;
+}
+
+.mat-icon-button.mat-files {
+  color:#0074CC;
+}
+
+.box-shadow{
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+}
+
+.mat-button.mat-edit,
+.mat-stroked-button.mat-edit {
+    color: #0ca6ac;
+}
+.mat-button.mat-edit:hover,
+.mat-stroked-button.mat-edit:hover {
+  background-color: #f0fff3;
+}
+
+.mat-raised-button.mat-edit,
+.mat-flat-button.mat-edit,
+.mat-fab.mat-edit,
+.mat-mini-fab.mat-edit {
+  color: #f0fff3;
+  background-color: #0EB6BB;
+}
+
+.mat-icon-button.mat-edit {
+  color:#0EB6BB;
+}
+
+
+
+.mat-button.mat-success,
+.mat-stroked-button.mat-success {
+    color: #0dbb6a;
+}
+.mat-button.mat-success:hover,
+.mat-stroked-button.mat-success:hover {
+  background-color: #f0fff3;
+}
+
+.mat-raised-button.mat-success,
+.mat-flat-button.mat-success,
+.mat-fab.mat-success,
+.mat-mini-fab.mat-success {
+  color: #f0fff3;
+  background-color: #0dbb6a;
+}
+
+.mat-icon-button.mat-success {
+  color:#0dbb6a;
+}

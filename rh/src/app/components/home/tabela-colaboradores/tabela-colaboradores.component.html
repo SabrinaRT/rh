@@ -9,11 +9,13 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let item of array; let i = index" (click)="openDialog(i)">
+    <tr *ngFor="let item of array; let i = index;" >
       <td >
-        {{ item.nome }}
+     
+        {{ item.nome }}<br>
+      
       </td>
-      <td  >{{ item.setor }}</td>
+      <td  >  {{ item.setor }}</td>
       <td *ngFor="let item2 of item.situacao"  >
         <mat-icon *ngIf="item2.acessoRede == true" style="color: green">check_circle</mat-icon>
         <mat-icon *ngIf="item2.acessoRede == false" style="color: red">cancel</mat-icon >
@@ -22,9 +24,7 @@
         <mat-icon *ngIf="item2.acessoRede == true" style="color: green">check_circle</mat-icon>
         <mat-icon *ngIf="item2.acessoRede == false" style="color: red">cancel</mat-icon>
       </td>
-      <td *ngFor="let item2 of item.situacao">
-        <button mat-raised-button color="primary"  ><mat-icon  >edit</mat-icon></button>
-      </td>
+     <td> <button mat-raised-button color="files" [routerLink]="['painel', item.id]"><mat-icon>edit</mat-icon></button></td>
     </tr>
   </tbody>
 </table>

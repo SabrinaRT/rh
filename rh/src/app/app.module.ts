@@ -21,18 +21,26 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatNativeDateModule } from '@angular/material/core';
 import { FichaUpdateComponent } from './components/update/ficha-update/ficha-update.component';
 import { TextMaskModule } from 'angular2-text-mask';
-import { DialogOverviewExampleDialog, TabelaColaboradoresComponent } from './components/home/tabela-colaboradores/tabela-colaboradores.component';
-
+import { TabelaColaboradoresComponent } from './components/home/tabela-colaboradores/tabela-colaboradores.component';
+import {MatTabsModule} from '@angular/material/tabs';
 import {MatDialogModule} from '@angular/material/dialog';
+import { PainelComponent } from './components/update/painel/painel.component';
+import { ArquivosComponent } from './components/update/arquivos/arquivos.component';
+import { ConfigPerfilComponent } from './components/update/config-perfil/config-perfil.component';
+import {MatGridListModule} from '@angular/material/grid-list';
 @NgModule({
   declarations: [
     AppComponent,
     FichaComponent,
     FichaUpdateComponent,
     TabelaColaboradoresComponent,
-    DialogOverviewExampleDialog
+    PainelComponent,
+    ArquivosComponent,
+    ConfigPerfilComponent
   ],
   imports: [
+    MatGridListModule,
+    MatTabsModule,
     BrowserModule, 
     FormsModule, 
     MatFormFieldModule,
