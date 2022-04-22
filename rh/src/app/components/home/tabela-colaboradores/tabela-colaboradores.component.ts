@@ -26,8 +26,8 @@ export class TabelaColaboradoresComponent implements OnInit {
   ngOnInit(): void {
     this.siscrhService.getDadosProfissionaisList().subscribe((data: any) => {
       for (let i in data) {
-
-        console.log(data[i].dadosPessoais.situacaoColaborador)
+/* 
+        console.log(data[i].dadosPessoais.situacaoColaborador) */
        
         if( data[i].setores != null){
           this.array.push({
@@ -51,7 +51,7 @@ export class TabelaColaboradoresComponent implements OnInit {
         }
 
         
-      console.log(this.array);
+    /*   console.log(this.array); */
     });
   }
   sortData(sort: Sort) {
@@ -78,7 +78,7 @@ export class TabelaColaboradoresComponent implements OnInit {
     });
   }
   editContact(id: number) {
-    console.log(id);
+    /* console.log(id); */
   }
 }
 function compare(a: number | string, b: number | string, isAsc: boolean) {

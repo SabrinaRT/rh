@@ -28,7 +28,8 @@ import { PainelComponent } from './components/update/painel/painel.component';
 import { ArquivosComponent } from './components/update/arquivos/arquivos.component';
 import { ConfigPerfilComponent } from './components/update/config-perfil/config-perfil.component';
 import {MatGridListModule} from '@angular/material/grid-list';
-import {MatExpansionModule} from '@angular/material/expansion'
+import {MatExpansionModule} from '@angular/material/expansion';
+import { AniversariosComponent } from './components/home/aniversarios/aniversarios.component'
 @NgModule({
   declarations: [
     AppComponent,
@@ -37,7 +38,8 @@ import {MatExpansionModule} from '@angular/material/expansion'
     TabelaColaboradoresComponent,
     PainelComponent,
     ArquivosComponent,
-    ConfigPerfilComponent
+    ConfigPerfilComponent,
+    AniversariosComponent
   ],
   imports: [
     MatExpansionModule,

@@ -79,7 +79,7 @@ public class DadosProfissionais {
         this.dadosPessoais = dadosPessoais;
         this.setores = setores;
         this.vinculos = vinculos;
-    }
+    } 
 
 
     public DadosProfissionais() {

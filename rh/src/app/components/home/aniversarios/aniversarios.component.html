@@ -1,0 +1,22 @@
+<table class="styled-table">
+  <thead>
+    <tr>
+      <th>Aniversariantes Mês de Julho</th>
+      <th>Data</th>
+      <th>Setor</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of array; let i = index">
+      <td>
+        <mat-card-subtitle>{{ item.nome }}</mat-card-subtitle>
+      </td>
+      <td>
+        <mat-card-subtitle>{{ item.data }}</mat-card-subtitle>
+      </td>
+      <td>
+        <mat-card-subtitle>{{ item.setor }}</mat-card-subtitle>
+      </td>
+    </tr>
+  </tbody>
+</table>
