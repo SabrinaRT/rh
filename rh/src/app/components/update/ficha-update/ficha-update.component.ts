@@ -101,7 +101,7 @@ export class FichaUpdateComponent implements OnInit {
       .subscribe((data: any) => {
         if (data != null) {
           this.dadosPessoais = data;
-          console.log(data);
+          
         }
       });
 
@@ -111,7 +111,7 @@ export class FichaUpdateComponent implements OnInit {
         if (data != null) {
           this.dadosBancarios = data;
           this.IDBanco = data.id;
-          console.log(data);
+          
         }
       });
 
@@ -122,19 +122,27 @@ export class FichaUpdateComponent implements OnInit {
           this.dadosEstadoCivil = data;
           this.IDEstado = data.id;
 
-          console.log(data);
+          
         }
       });
 
     this.siscrhService
       .getDadosProfissionaisByForeignKey(this.IDColab)
       .subscribe((data: any) => {
-        console.log(data);
+        
         if (data != null) {
           this.dadosProfissionais = data;
           this.IDProfi = data.id;
-          this.setor = this.dadosProfissionais.setores.id;
-          this.vinculo = this.dadosProfissionais.vinculos.id;
+
+          if( this.dadosProfissionais.setores != null){
+            this.setor = this.dadosProfissionais.setores.id;
+          }
+      
+          if(this.dadosProfissionais.vinculos != null){
+            this.vinculo = this.dadosProfissionais.vinculos.id;
+          }
+         /*  this.setor = this.dadosProfissionais.setores.id;
+          this.vinculo = this.dadosProfissionais.vinculos.id; */
         }
       });
 
@@ -164,7 +172,7 @@ export class FichaUpdateComponent implements OnInit {
     this.siscrhService
       .createColaborador(this.dadosPessoais)
       .subscribe((data: any) => {
-        console.log(data);
+        
         this.IDColab = data.id;
       });
   }
@@ -185,7 +193,7 @@ export class FichaUpdateComponent implements OnInit {
     this.siscrhService
       .createEstadoCivil(this.dadosEstadoCivil)
       .subscribe((data: any) => {
-        console.log(data);
+        
         this.IDEstado = data.id;
       });
   }
@@ -203,7 +211,7 @@ export class FichaUpdateComponent implements OnInit {
     this.siscrhService
       .createDependentes(this.dependentes)
       .subscribe((data: any) => {
-        console.log(data);
+        
         this.pegarDados();
       });
   }
@@ -212,7 +220,7 @@ export class FichaUpdateComponent implements OnInit {
 
     this.siscrhService.createMatricula(this.matriculas)
       .subscribe((data: any) => {
-        console.log(data);
+        
          this.pegarDados();
       });
   }
@@ -223,7 +231,7 @@ export class FichaUpdateComponent implements OnInit {
       .subscribe((data: any) => {
         this.DadosPessoais = data;
         this.DadosAtualizados = Array.of(data);
-        console.log(this.DadosAtualizados);
+        /* console.log(this.DadosAtualizados); */
       });
   }
 
@@ -233,6 +241,7 @@ export class FichaUpdateComponent implements OnInit {
   vinculo: any;
   salvarDadosProfissionais() {
     this.dadosProfissionais.id = this.IDProfi;
+    
     this.dadosProfissionais.setores = { id: this.setor };
     this.dadosProfissionais.vinculos = { id: this.vinculo };
     this.dadosProfissionais.dadosPessoais = { id: this.IDColab };
@@ -241,7 +250,7 @@ export class FichaUpdateComponent implements OnInit {
       .createDadosProfissionais(this.dadosProfissionais)
       .subscribe((data: any) => {
         this.IDProfi = data.id;
-        console.log(data);
+        
       });
   }
 
@@ -252,7 +261,7 @@ export class FichaUpdateComponent implements OnInit {
       .createDadosBancarios(this.dadosBancarios)
       .subscribe((data: any) => {
         this.IDBanco = data.id;
-        console.log(data);
+        
       });
   }
 }

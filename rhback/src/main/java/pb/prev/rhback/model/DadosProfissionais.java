@@ -22,6 +22,8 @@ public class DadosProfissionais {
     private Date data_exoneracao;
     private String qualificacao_profissional;
     private String funcao;
+    private String email_institucional;
+    
 
     /*
      * @OneToOne
@@ -63,30 +65,35 @@ public class DadosProfissionais {
     @JoinColumn(name = "idVinculo")
     private Vinculos vinculos;
 
-    @OneToOne(mappedBy = "dadosProfissionais")
-    @JsonManagedReference
-    private SituacaoColaborador situacaoColaborador;
-
-    
 
 
-    public DadosProfissionais() {
-    }
 
-
-    public DadosProfissionais(String cargo, String escolaridade, Date data_admissao, Date data_exoneracao, String qualificacao_profissional, String funcao, DadosPessoais dadosPessoais, Setores setores, Vinculos vinculos, SituacaoColaborador situacaoColaborador) {
+    public DadosProfissionais(String cargo, String escolaridade, Date data_admissao, Date data_exoneracao, String qualificacao_profissional, String funcao, String email_institucional, DadosPessoais dadosPessoais, Setores setores, Vinculos vinculos) {
         this.cargo = cargo;
         this.escolaridade = escolaridade;
         this.data_admissao = data_admissao;
         this.data_exoneracao = data_exoneracao;
         this.qualificacao_profissional = qualificacao_profissional;
         this.funcao = funcao;
+        this.email_institucional = email_institucional;
         this.dadosPessoais = dadosPessoais;
         this.setores = setores;
         this.vinculos = vinculos;
-        this.situacaoColaborador = situacaoColaborador;
     }
-    
+
+
+    public DadosProfissionais() {
+    }
+
+    public String getEmail_institucional() {
+        return this.email_institucional;
+    }
+
+    public void setEmail_institucional(String email_institucional) {
+        this.email_institucional = email_institucional;
+    }
+   
+  
 
     public long getId() {
         return this.id;
@@ -168,13 +175,6 @@ public class DadosProfissionais {
         this.vinculos = vinculos;
     }
 
-    public SituacaoColaborador getSituacaoColaborador() {
-        return this.situacaoColaborador;
-    }
-
-    public void setSituacaoColaborador(SituacaoColaborador situacaoColaborador) {
-        this.situacaoColaborador = situacaoColaborador;
-    }
 
   
 

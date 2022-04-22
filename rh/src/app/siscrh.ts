@@ -72,38 +72,20 @@ export class DadosPessoais {
     }
   ];
 
-  matriculas:[
+  matriculas: [
     {
-      id:any;
-      matricula:any;
-      observacao:any;
+      id: any;
+      matricula: any;
+      observacao: any;
     }
-  ]
+  ];
 
-  /*   dadosBancarios: {
-          id:  any,
-          banco:   any,
-          codigo:   any,
-          agencia:  any,
-          conta_corrente:   any
-      }
-      dadosProfissionais: {
-          id:   any,
-          cargo:   any,
-          escolaridade:   any,
-          data_admissao:  any,
-          data_exoneracao:   any,
-          qualificacao_profissional:   any,
-          funcao:   any
-      }
-      dependentes: [
-          {
-              id:   any,
-              nome_completo_dependente:  any,
-              cpf_dependente:   any,
-              data_nascimento_dependente:   any
-          }
-      ] */
+  situacaoColaborador:{
+    acessoRede:any;
+    status:any;
+  }
+
+ 
 }
 
 export class Setores {
@@ -137,6 +119,7 @@ export class DadosProfissionais {
   data_admissao: any;
   data_exoneracao: any;
   qualificacao_profissional: any;
+  email_institucional:any;
   funcao: any;
   dadosPessoais: {
     id: any;
@@ -149,6 +132,16 @@ export class DadosProfissionais {
   };
 }
 
+
+export class SituacaoColaborador{
+  id:any
+  acessoRede: boolean; 
+  status: boolean;
+  dadosPessoais:{
+    id:any;
+  }
+
+}
 export class DadosBancarios {
   id: any;
   banco: any;
@@ -163,7 +156,7 @@ export class DadosBancarios {
 export class Matriculas {
   id: any;
   matricula: any;
-  observacao:any;
+  observacao: any;
   dadosPessoais: {
     id: any;
   };

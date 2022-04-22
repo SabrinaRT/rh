@@ -5,22 +5,30 @@ import java.util.*;
 import com.fasterxml.jackson.annotation.*;
 @Entity
 public class SituacaoColaborador {
-
+   
     @Id
     @GeneratedValue(strategy =GenerationType.AUTO)
     private Long id;
-
+ 
     private boolean status;
     private boolean acessoRede;
 
     @OneToOne(cascade = CascadeType.DETACH)
-    @JoinColumn(name = "dadosProfissionaisId", referencedColumnName = "id")
+    @JoinColumn(name = "dadosPessoaisId", referencedColumnName = "id")
     @JsonBackReference
-    private DadosProfissionais dadosProfissionais;
+    private DadosPessoais dadosPessoais;
 
 
     public SituacaoColaborador() {
     }
+ 
+
+    public SituacaoColaborador(boolean status, boolean acessoRede, DadosPessoais dadosPessoais) {
+        this.status = status;
+        this.acessoRede = acessoRede;
+        this.dadosPessoais = dadosPessoais;
+    }
+   
 
     public Long getId() {
         return this.id;
@@ -54,18 +62,12 @@ public class SituacaoColaborador {
         this.acessoRede = acessoRede;
     }
 
-    public DadosProfissionais getDadosProfissionais() {
-        return this.dadosProfissionais;
+    public DadosPessoais getDadosPessoais() {
+        return this.dadosPessoais;
     }
 
-    public void setDadosProfissionais(DadosProfissionais dadosProfissionais) {
-        this.dadosProfissionais = dadosProfissionais;
-    }
-
-    public SituacaoColaborador(boolean status, boolean acessoRede, DadosProfissionais dadosProfissionais) {
-        this.status = status;
-        this.acessoRede = acessoRede;
-        this.dadosProfissionais = dadosProfissionais;
+    public void setDadosPessoais(DadosPessoais dadosPessoais) {
+        this.dadosPessoais = dadosPessoais;
     }
     
 }

@@ -636,8 +636,8 @@
               <div class="col">
                 <mat-card class="p-3 box-shadow">
                   <div class="row">
-                    <div class="col-2"></div>
-                    <div class="col-4">
+                    <div class="col-1"></div>
+                    <div class="col-3">
                       <mat-form-field appearance="outline" class="col-12">
                         <mat-label>Setor</mat-label>
                         <mat-select
@@ -654,7 +654,7 @@
                       </mat-form-field>
                     </div>
 
-                    <div class="col-4">
+                    <div class="col-3">
                       <mat-form-field appearance="outline" class="col-12">
                         <mat-label>Vínculo</mat-label>
                         <mat-select [(ngModel)]="vinculo" [ngModelOptions]="{ standalone: true }">
@@ -663,47 +663,51 @@
                         </mat-select>
                       </mat-form-field>
                     </div>
+                    <div class="col-3">
+                      <mat-form-field appearance="outline" class="col-12">
+                        <mat-label>E-Mail Institucional</mat-label>
+                        <input matInput [(ngModel)]="dadosProfissionais.email_institucional" [ngModelOptions]="{ standalone: true }" />
+                      </mat-form-field>
+                    </div>
                   </div>
                   <div class="row">
-                    <div class="col-2"></div>
-                    <div class="col-4">
+                    <div class="col-1"></div>
+                    <div class="col-3">
                       <mat-form-field appearance="outline" class="col-12">
                         <mat-label>Cargo</mat-label>
                         <input matInput [(ngModel)]="dadosProfissionais.cargo" [ngModelOptions]="{ standalone: true }" />
                       </mat-form-field>
                     </div>
-                    <div class="col-4">
+                    <div class="col-3">
                       <mat-form-field appearance="outline" class="col-12">
                         <mat-label>Função</mat-label>
                         <input matInput [(ngModel)]="dadosProfissionais.funcao" [ngModelOptions]="{ standalone: true }" />
                       </mat-form-field>
                     </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-2"></div>
-                    <div class="col-4">
+                    <div class="col-3">
                       <mat-form-field appearance="outline" class="col-12">
                         <mat-label>Qualificação Profissional</mat-label>
                         <input matInput [(ngModel)]="dadosProfissionais.qualificacao_profissional" [ngModelOptions]="{ standalone: true }" />
                       </mat-form-field>
                     </div>
-                    <div class="col-4">
+                  </div>
+                  <div class="row">
+                    <div class="col-1"></div>
+                    <div class="col-3">
                       <mat-form-field appearance="outline" class="col-12">
                         <mat-label>Escolaridade</mat-label>
                         <input matInput [(ngModel)]="dadosProfissionais.escolaridade" [ngModelOptions]="{ standalone: true }" />
                       </mat-form-field>
                     </div>
-                  </div>
-
-                  <div class="row">
-                    <div class="col-2"></div>
-                    <div class="col-4">
+                 
+                    
+                    <div class="col-3">
                       <mat-form-field appearance="outline" class="col-12">
                         <mat-label>Data de Admissão</mat-label>
                         <input matInput [textMask]="{mask: datemask}" [(ngModel)]="dadosProfissionais.data_admissao" [ngModelOptions]="{ standalone: true }" />
                       </mat-form-field>
                     </div>
-                    <div class="col-4">
+                    <div class="col-3">
                       <mat-form-field appearance="outline" class="col-12">
                         <mat-label>Data de Exoneração</mat-label>
                         <input matInput [textMask]="{mask: datemask}" [(ngModel)]="dadosProfissionais.data_exoneracao" [ngModelOptions]="{ standalone: true }" />

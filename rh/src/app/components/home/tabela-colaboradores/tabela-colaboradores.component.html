@@ -17,8 +17,8 @@
       </td>
       <td  >  {{ item.setor }}</td>
       <td *ngFor="let item2 of item.situacao"  >
-        <mat-icon *ngIf="item2.acessoRede == true" style="color: green">check_circle</mat-icon>
-        <mat-icon *ngIf="item2.acessoRede == false" style="color: red">cancel</mat-icon >
+        <mat-icon *ngIf="item2.status == true" style="color: green">check_circle</mat-icon>
+        <mat-icon *ngIf="item2.status == false" style="color: red">cancel</mat-icon >
       </td>
       <td *ngFor="let item2 of item.situacao"  >
         <mat-icon *ngIf="item2.acessoRede == true" style="color: green">check_circle</mat-icon>

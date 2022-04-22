@@ -16,14 +16,10 @@ public class DadosBancarios {
     private String agencia;
     private String conta_corrente;
 
-
-@OneToOne(cascade = CascadeType.DETACH)
-@JoinColumn(name="dadosPessoaisId", referencedColumnName = "id")
-private DadosPessoais dadosPessoais;
-
-    
-
- 
+    @OneToOne(cascade = CascadeType.DETACH)
+    @JoinColumn(name="dadosPessoaisId", referencedColumnName = "id")
+    private DadosPessoais dadosPessoais;
+   
     public DadosBancarios() {
     }
 

@@ -14,7 +14,7 @@ public class Matriculas {
 
     private String matricula;
     private String observacao;
-
+    
      
   /*   @ManyToOne(cascade = CascadeType.DETACH)
     @JoinColumn(name = "idDadosProfissionais")

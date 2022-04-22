@@ -54,19 +54,16 @@ public class DadosPessoais {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "dadosPessoais")
     @JsonManagedReference
     private Set<Matriculas> matriculas = new HashSet<Matriculas>();
+
+    @OneToOne(mappedBy = "dadosPessoais")
+    @JsonManagedReference
+    private SituacaoColaborador situacaoColaborador;
    
 
     public DadosPessoais() {
     }
 
  
-    public String getCpf() {
-        return this.cpf;
-    }
-
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
-    }
 
     public long getId() {
         return this.id;
@@ -74,6 +71,14 @@ public class DadosPessoais {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public String getCpf() {
+        return this.cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
     }
 
     public String getNome_completo() {
@@ -243,31 +248,7 @@ public class DadosPessoais {
     public void setNome_pai(String nome_pai) {
         this.nome_pai = nome_pai;
     }
-/* 
-    public DadosEstadoCivil getDadosEstadoCivil() {
-        return this.dadosEstadoCivil;
-    }
 
-    public void setDadosEstadoCivil(DadosEstadoCivil dadosEstadoCivil) {
-        this.dadosEstadoCivil = dadosEstadoCivil;
-    } */
-
- /*    public DadosProfissionais getDadosProfissionais() {
-        return this.dadosProfissionais;
-    }
-
-    public void setDadosProfissionais(DadosProfissionais dadosProfissionais) {
-        this.dadosProfissionais = dadosProfissionais;
-    }
-
-    public DadosBancarios getDadosBancarios() {
-        return this.dadosBancarios;
-    }
-
-    public void setDadosBancarios(DadosBancarios dadosBancarios) {
-        this.dadosBancarios = dadosBancarios;
-    }
- */
     public Set<Dependentes> getDependentes() {
         return this.dependentes;
     }
@@ -276,7 +257,23 @@ public class DadosPessoais {
         this.dependentes = dependentes;
     }
 
-    public DadosPessoais(String cpf, String nome_completo, String identidade, String uf_identidade, String naturalidade, String uf_naturalidade, String nacionalidade, String titulo_eleitor, Date data_nascimento, String pis_pasep, String telefone, String celular, String email, String endereco, String cep, String numero, String bairro, String cidade, String uf_cidade, String complemento, String nome_mae, String nome_pai, Set<Dependentes> dependentes) {
+    public Set<Matriculas> getMatriculas() {
+        return this.matriculas;
+    }
+
+    public void setMatriculas(Set<Matriculas> matriculas) {
+        this.matriculas = matriculas;
+    }
+
+    public SituacaoColaborador getSituacaoColaborador() {
+        return this.situacaoColaborador;
+    }
+
+    public void setSituacaoColaborador(SituacaoColaborador situacaoColaborador) {
+        this.situacaoColaborador = situacaoColaborador;
+    }
+
+    public DadosPessoais(String cpf, String nome_completo, String identidade, String uf_identidade, String naturalidade, String uf_naturalidade, String nacionalidade, String titulo_eleitor, Date data_nascimento, String pis_pasep, String telefone, String celular, String email, String endereco, String cep, String numero, String bairro, String cidade, String uf_cidade, String complemento, String nome_mae, String nome_pai, Set<Dependentes> dependentes, Set<Matriculas> matriculas, SituacaoColaborador situacaoColaborador) {
         this.cpf = cpf;
         this.nome_completo = nome_completo;
         this.identidade = identidade;
@@ -284,7 +281,7 @@ public class DadosPessoais {
         this.naturalidade = naturalidade;
         this.uf_naturalidade = uf_naturalidade;
         this.nacionalidade = nacionalidade;
-        this.titulo_eleitor = titulo_eleitor; 
+        this.titulo_eleitor = titulo_eleitor;
         this.data_nascimento = data_nascimento;
         this.pis_pasep = pis_pasep;
         this.telefone = telefone;
@@ -299,10 +296,10 @@ public class DadosPessoais {
         this.complemento = complemento;
         this.nome_mae = nome_mae;
         this.nome_pai = nome_pai;
-        /* this.dadosEstadoCivil = dadosEstadoCivil; */
-/*         this.dadosProfissionais = dadosProfissionais;
-        this.dadosBancarios = dadosBancarios; */
         this.dependentes = dependentes;
+        this.matriculas = matriculas;
+        this.situacaoColaborador = situacaoColaborador;
     }
+  
 
 }

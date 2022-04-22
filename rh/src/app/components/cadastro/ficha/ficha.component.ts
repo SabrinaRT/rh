@@ -18,6 +18,7 @@ import {
   DadosBancarios,
   Vinculos,
   Matriculas,
+  SituacaoColaborador,
 } from 'src/app/siscrh';
 import { SiscrhService } from 'src/app/siscrh.service';
 
@@ -40,7 +41,8 @@ export class FichaComponent implements OnInit {
   dadosEstadoCivil: DadosEstadoCivil = new DadosEstadoCivil();
   dependentes: Dependentes = new Dependentes();
   dadosBancarios: DadosBancarios = new DadosBancarios();
-  matriculas:Matriculas = new Matriculas();
+  matriculas: Matriculas = new Matriculas();
+  situacaoColaborador: SituacaoColaborador = new SituacaoColaborador();
 
   setores: Setores[];
   vinculos: Vinculos[];
@@ -56,7 +58,7 @@ export class FichaComponent implements OnInit {
     private siscrhService: SiscrhService
   ) {}
   DadosAtualizados: any;
-  MatriculasLista:any
+  MatriculasLista: any;
   ngOnInit() {
     this.firstFormGroup = this._formBuilder.group({
       nomeCompleto: ['', Validators.required],
@@ -96,12 +98,10 @@ export class FichaComponent implements OnInit {
       this.vinculos = data;
     });
   }
-  
   datemask = [/\d/, /\d/, '/', /\d/, /\d/, '/', /\d/, /\d/, /\d/, /\d/];
   cpfmask = [/\d/, /\d/,/\d/ ,'.', /\d/, /\d/,/\d/ ,'.',/\d/, /\d/,/\d/ ,'-', /\d/, /\d/];
   telefonemask = ['(',/\d/, /\d/, ')', " ",  /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
   celularmask =['(',/\d/, /\d/, ')', /\d/, " ",  /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
-
   Usuario: any;
   Email: any;
   IDEstado: number;
@@ -128,21 +128,44 @@ export class FichaComponent implements OnInit {
       .subscribe((data: any) => {
         console.log(data);
         this.IDColab = data.id;
+
+            this.situacaoColaborador.acessoRede = false;
+            this.situacaoColaborador.status =false;
+            this.situacaoColaborador.dadosPessoais = {id: data.id}
+            this.siscrhService.createSituacaoColaborador(this.situacaoColaborador).subscribe((data:any)=>{
+              console.log(data)
+            })
+
+        /* encontrar outra solucao */
+        /* this.dadosProfissionais.setores = { id: 1 };
+        this.dadosProfissionais.vinculos = { id: 1 }; */
+        this.dadosProfissionais.dadosPessoais = { id: this.IDColab };
+     /*    this.dadosProfissionais.situacaoColaborador = {acessoRede:false, status:false} */
+
+        
+        this.siscrhService
+          .createDadosProfissionais(this.dadosProfissionais)
+          .subscribe((data: any) => {
+            this.IDProfi = data.id;
+            
+            console.log(data);
+          });
       });
   }
 
   salvarEstadoCivil() {
     this.dadosEstadoCivil.id = this.IDEstado;
-    if(this.dadosEstadoCivil.estado_civil = "Solteiro(a)"){
-      this.dadosEstadoCivil.cpf_conjuge = null
-      this.dadosEstadoCivil.nome_completo_conjuge = null
-      this.dadosEstadoCivil.data_nascimento_conjuge = null
-      this.dadosEstadoCivil.identidade_conjuge = null
-      this.dadosEstadoCivil.profissao_atividade = null
-      this.dadosEstadoCivil.uf_identidade_conjuge = null
+    if ((this.dadosEstadoCivil.estado_civil = 'Solteiro(a)')) {
+      this.dadosEstadoCivil.cpf_conjuge = null;
+      this.dadosEstadoCivil.nome_completo_conjuge = null;
+      this.dadosEstadoCivil.data_nascimento_conjuge = null;
+      this.dadosEstadoCivil.identidade_conjuge = null;
+      this.dadosEstadoCivil.profissao_atividade = null;
+      this.dadosEstadoCivil.uf_identidade_conjuge = null;
     }
 
     this.dadosEstadoCivil.dadosPessoais = { id: this.IDColab };
+    
     this.siscrhService
       .createEstadoCivil(this.dadosEstadoCivil)
       .subscribe((data: any) => {
@@ -165,17 +188,18 @@ export class FichaComponent implements OnInit {
       .createDependentes(this.dependentes)
       .subscribe((data: any) => {
         console.log(data);
-         this.pegarDados();
+        this.pegarDados();
       });
   }
 
   salvarMatricula() {
     this.matriculas.dadosPessoais = { id: this.IDColab };
 
-    this.siscrhService.createMatricula(this.matriculas)
+    this.siscrhService
+      .createMatricula(this.matriculas)
       .subscribe((data: any) => {
         console.log(data);
-         this.pegarDados();
+        this.pegarDados();
       });
   }
 
@@ -189,13 +213,20 @@ export class FichaComponent implements OnInit {
       });
   }
 
-
   setor: any;
   vinculo: any;
   salvarDadosProfissionais() {
     this.dadosProfissionais.id = this.IDProfi;
-    this.dadosProfissionais.setores = { id: this.setor };
-    this.dadosProfissionais.vinculos = { id: this.vinculo };
+
+    if(this.setor != undefined){
+      this.dadosProfissionais.setores = {id:this.setor };
+    }
+
+    if(this.vinculo != undefined){
+      this.dadosProfissionais.vinculos = {id:this.vinculo};
+    }
+   
+    /* this.dadosProfissionais.vinculos = { id: this.vinculo }; */
     this.dadosProfissionais.dadosPessoais = { id: this.IDColab };
 
     this.siscrhService
@@ -205,7 +236,7 @@ export class FichaComponent implements OnInit {
         console.log(data);
       });
   }
- 
+
   salvarDadosBancarios() {
     this.dadosBancarios.id = this.IDBanco;
     this.dadosBancarios.dadosPessoais = { id: this.IDColab };
