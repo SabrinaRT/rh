@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { DadosBancarios, DadosPessoais, DadosProfissionais, DadosEstadoCivil, Dependentes, Setores, Vinculos, Matriculas, SituacaoColaborador } from './siscrh';
+import { DadosBancarios, DadosPessoais, DadosProfissionais, DadosEstadoCivil, Dependentes, Setores, Vinculos, Matriculas, SituacaoColaborador, Documentos, DocumentosColaboradores } from './siscrh';
 
 @Injectable({
   providedIn: 'root',
@@ -136,6 +136,19 @@ url:any = "http://localhost:8080/api"
   createSituacaoColaborador(colaborador: SituacaoColaborador): Observable<Object> {
     return this.httpClient.post(
       this.url + `/v20/dados`,
+      colaborador
+    );
+  }
+
+  createDocumento(colaborador: Documentos): Observable<Object> {
+    return this.httpClient.post(
+      this.url + `/v26/dados`,
+      colaborador
+    );
+  }
+  createDocumentosColaborador(colaborador: DocumentosColaboradores): Observable<Object> {
+    return this.httpClient.post(
+      this.url + `/v27/dados`,
       colaborador
     );
   }

@@ -133,6 +133,18 @@ export class DadosProfissionais {
 }
 
 
+export class DocumentosColaboradores{
+  id:any;
+  nome_documento_upload:any;
+  status:any;
+  dados_pessoais:any;
+  documento_id:any;
+
+}
+export class Documentos{
+  id:any;
+  nome_documento:any;
+}
 export class SituacaoColaborador{
   id:any
   acessoRede: boolean; 

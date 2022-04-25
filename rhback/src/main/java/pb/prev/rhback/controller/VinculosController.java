@@ -18,30 +18,30 @@ import  pb.prev.rhback.repository.VinculosRepository;
 public class VinculosController {
 
 	@Autowired
-	private VinculosRepository setoresRepository;
+	private VinculosRepository vinculosRepository;
     
 
 	@GetMapping("/dados")
 	public List<Vinculos> getAllVinculos() {
-		return setoresRepository.findAll();
+		return vinculosRepository.findAll();
 	}
 
 	@PostMapping("/dados")
-	public Vinculos createVinculos(@RequestBody Vinculos setores) {
-		return setoresRepository.save(setores);
+	public Vinculos createVinculos(@RequestBody Vinculos vinculos) {
+		return vinculosRepository.save(vinculos);
 	}
 
 	@GetMapping("/dados/{id}")
 	public ResponseEntity<Vinculos> getAllVinculos(@PathVariable Long id) {
-		Vinculos setores = setoresRepository.findById(id)
+		Vinculos vinculos = vinculosRepository.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("Vinculos not exist with id: " + id));
 
-		return ResponseEntity.ok(setores);
+		return ResponseEntity.ok(vinculos);
 	}
 
 	@DeleteMapping("/dados/{id}")  
 	private void deleteBook(@PathVariable("id") Long id)   
 	{  
-		setoresRepository.deleteById(id);
+		vinculosRepository.deleteById(id);
 	} 
 }
