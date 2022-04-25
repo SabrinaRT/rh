@@ -4,7 +4,7 @@
       <div class="col-3"  >
        <div>
             <mat-card >
-                <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+                <img mat-card-image src="https://media.istockphoto.com/vectors/user-icon-flat-isolated-on-white-background-user-symbol-vector-vector-id1300845620?k=20&m=1300845620&s=612x612&w=0&h=f4XTZDAv7NPuZbG0habSpU0sNgECM0X7nbKzTUta3n8=" alt="Photo of a Shiba Inu">
                 <mat-card-content>
                    <!--  <mat-card-title>{{dadosPessoais.nome_completo}}</mat-card-title>
                     <mat-card-subtitle>{{vinculo}} <br> {{setor}}</mat-card-subtitle> -->
@@ -40,6 +40,8 @@
           >
             Salvar
           </button>
+         
+          
               </mat-card>
               
        </div>
@@ -55,7 +57,14 @@
             <mat-card-subtitle>E-Mail Institucional: {{dadosProfissionais.email_institucional}} </mat-card-subtitle>
             <mat-card-subtitle>Data de Admissão: {{dadosProfissionais.data_admissao}}  </mat-card-subtitle> 
             <mat-card-subtitle>Data de Exoneração: {{dadosProfissionais.data_exoneracao}} </mat-card-subtitle>
-            <br>
+            
+            <button
+            mat-raised-button
+            color="edit"
+            class="col-12"
+          >
+            Baixar Perfil em PDF
+          </button>
             </mat-card>
             
           

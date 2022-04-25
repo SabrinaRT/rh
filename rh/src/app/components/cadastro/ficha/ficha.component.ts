@@ -120,8 +120,10 @@ export class FichaComponent implements OnInit {
     this.Email = this.Email.toLowerCase();
   }
 
+  IDSitu:any
   salvarDadosPessoais() {
     this.dadosPessoais.id = this.IDColab;
+    console.log(this.dadosPessoais.data_nascimento)
 
     this.siscrhService
       .createColaborador(this.dadosPessoais)
@@ -131,18 +133,21 @@ export class FichaComponent implements OnInit {
 
             this.situacaoColaborador.acessoRede = false;
             this.situacaoColaborador.status =false;
-            this.situacaoColaborador.dadosPessoais = {id: data.id}
+            this.situacaoColaborador.dadosPessoais = {id: this.IDColab}
+            this.situacaoColaborador.id = this.IDSitu 
             this.siscrhService.createSituacaoColaborador(this.situacaoColaborador).subscribe((data:any)=>{
+              this.IDSitu = data.id
               console.log(data)
             })
 
         /* encontrar outra solucao */
         /* this.dadosProfissionais.setores = { id: 1 };
         this.dadosProfissionais.vinculos = { id: 1 }; */
-        this.dadosProfissionais.dadosPessoais = { id: this.IDColab };
+        
      /*    this.dadosProfissionais.situacaoColaborador = {acessoRede:false, status:false} */
 
-        
+     this.dadosProfissionais.dadosPessoais = { id: this.IDColab };
+     this.dadosProfissionais.id = this.IDProfi
         this.siscrhService
           .createDadosProfissionais(this.dadosProfissionais)
           .subscribe((data: any) => {

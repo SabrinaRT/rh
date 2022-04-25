@@ -29,7 +29,8 @@ import { ArquivosComponent } from './components/update/arquivos/arquivos.compone
 import { ConfigPerfilComponent } from './components/update/config-perfil/config-perfil.component';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatExpansionModule} from '@angular/material/expansion';
-import { AniversariosComponent } from './components/home/aniversarios/aniversarios.component'
+import { AniversariosComponent } from './components/home/aniversarios/aniversarios.component';
+import { GerarPdfPerfilComponent } from './components/home/gerar-pdf-perfil/gerar-pdf-perfil.component'
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,7 +40,8 @@ import { AniversariosComponent } from './components/home/aniversarios/aniversari
     PainelComponent,
     ArquivosComponent,
     ConfigPerfilComponent,
-    AniversariosComponent
+    AniversariosComponent,
+    GerarPdfPerfilComponent
   ],
   imports: [
     MatExpansionModule,
