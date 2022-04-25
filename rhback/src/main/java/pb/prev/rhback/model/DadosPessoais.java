@@ -58,11 +58,22 @@ public class DadosPessoais {
     @OneToOne(mappedBy = "dadosPessoais")
     @JsonManagedReference
     private SituacaoColaborador situacaoColaborador;
-   
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "dadosPessoais")
+    @JsonManagedReference
+    public Set<DocumentosColaboradores> documentosColaboradores = new HashSet<DocumentosColaboradores>();
 
     public DadosPessoais() {
     }
 
+
+    public Set<DocumentosColaboradores> getDocumentosColaboradores() {
+        return this.documentosColaboradores;
+    }
+
+    public void setDocumentosColaboradores(Set<DocumentosColaboradores> documentosColaboradores) {
+        this.documentosColaboradores = documentosColaboradores;
+    }
  
 
     public long getId() {
@@ -273,7 +284,8 @@ public class DadosPessoais {
         this.situacaoColaborador = situacaoColaborador;
     }
 
-    public DadosPessoais(String cpf, String nome_completo, String identidade, String uf_identidade, String naturalidade, String uf_naturalidade, String nacionalidade, String titulo_eleitor, Date data_nascimento, String pis_pasep, String telefone, String celular, String email, String endereco, String cep, String numero, String bairro, String cidade, String uf_cidade, String complemento, String nome_mae, String nome_pai, Set<Dependentes> dependentes, Set<Matriculas> matriculas, SituacaoColaborador situacaoColaborador) {
+
+    public DadosPessoais(String cpf, String nome_completo, String identidade, String uf_identidade, String naturalidade, String uf_naturalidade, String nacionalidade, String titulo_eleitor, Date data_nascimento, String pis_pasep, String telefone, String celular, String email, String endereco, String cep, String numero, String bairro, String cidade, String uf_cidade, String complemento, String nome_mae, String nome_pai, Set<Dependentes> dependentes, Set<Matriculas> matriculas, SituacaoColaborador situacaoColaborador, Set<DocumentosColaboradores> documentosColaboradores) {
         this.cpf = cpf;
         this.nome_completo = nome_completo;
         this.identidade = identidade;
@@ -299,7 +311,8 @@ public class DadosPessoais {
         this.dependentes = dependentes;
         this.matriculas = matriculas;
         this.situacaoColaborador = situacaoColaborador;
+        this.documentosColaboradores = documentosColaboradores;
     }
-  
+   
 
 }

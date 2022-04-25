@@ -34,5 +34,15 @@ INSERT IGNORE INTO `vinculos`(`id`, `vinculo`) VALUES
 (6,'Membro Titular'),
 (7,'Membro Suplente')
 ;
-
+INSERT IGNORE INTO `documentos`(`id`, `nome_documento`) VALUES
+  (1,"Identidade"),
+  (2,"CPF"),
+  (3,"Comprovante de Residência"),
+  (4,"Declaração de Instituição de Ensino Superior (Histórico Escolar, Declaração de Matricula, Certificado de Conclusão do Curso)"),
+  (5,"Carteira de trabalho"),
+  (6,"Título de Eleitor"),
+  (7,"Contrato"),
+  (8,"Certidão de Nascimento"),
+  (9,"Certidão de Casamento")
+ ;
 

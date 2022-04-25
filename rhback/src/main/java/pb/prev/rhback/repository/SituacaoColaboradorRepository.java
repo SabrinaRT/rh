@@ -10,4 +10,4 @@ import pb.prev.rhback.model.SituacaoColaborador;
 public interface SituacaoColaboradorRepository extends JpaRepository<SituacaoColaborador, Long>{
  /*    SituacaoColaborador findByDadosPessoais_Id(Long id); */
 }
- 
+  
