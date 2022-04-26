@@ -19,6 +19,8 @@ import {
   Vinculos,
   Matriculas,
   SituacaoColaborador,
+  Documentos,
+  DocumentosColaboradores,
 } from 'src/app/siscrh';
 import { SiscrhService } from 'src/app/siscrh.service';
 
@@ -29,7 +31,7 @@ import { SiscrhService } from 'src/app/siscrh.service';
 })
 export class FichaComponent implements OnInit {
   displayedColumns = ['Nome', 'CPF', 'DataNascimento'];
-
+  panelOpenState = true;
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
   thirdFormGroup: FormGroup;
@@ -44,12 +46,15 @@ export class FichaComponent implements OnInit {
   matriculas: Matriculas = new Matriculas();
   situacaoColaborador: SituacaoColaborador = new SituacaoColaborador();
 
+  documentos: DocumentosColaboradores = new DocumentosColaboradores();
+
   setores: Setores[];
   vinculos: Vinculos[];
 
   Dependentes: Dependentes[];
   DadosPessoais: DadosPessoais[];
   DadosEstadoCivil: DadosEstadoCivil[];
+  TiposDocumentos: Documentos[];
 
   dados: Dados = new Dados();
 
@@ -97,11 +102,64 @@ export class FichaComponent implements OnInit {
     this.siscrhService.getVinculosList().subscribe((data: any) => {
       this.vinculos = data;
     });
+
+    this.siscrhService.getDocumentosList().subscribe((data: any) => {
+      this.TiposDocumentos = data;
+
+     
+      console.log(this.TiposDocumentos);
+    });
   }
   datemask = [/\d/, /\d/, '/', /\d/, /\d/, '/', /\d/, /\d/, /\d/, /\d/];
-  cpfmask = [/\d/, /\d/,/\d/ ,'.', /\d/, /\d/,/\d/ ,'.',/\d/, /\d/,/\d/ ,'-', /\d/, /\d/];
-  telefonemask = ['(',/\d/, /\d/, ')', " ",  /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
-  celularmask =['(',/\d/, /\d/, ')', /\d/, " ",  /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
+  cpfmask = [
+    /\d/,
+    /\d/,
+    /\d/,
+    '.',
+    /\d/,
+    /\d/,
+    /\d/,
+    '.',
+    /\d/,
+    /\d/,
+    /\d/,
+    '-',
+    /\d/,
+    /\d/,
+  ];
+  telefonemask = [
+    '(',
+    /\d/,
+    /\d/,
+    ')',
+    ' ',
+    /\d/,
+    /\d/,
+    /\d/,
+    /\d/,
+    '-',
+    /\d/,
+    /\d/,
+    /\d/,
+    /\d/,
+  ];
+  celularmask = [
+    '(',
+    /\d/,
+    /\d/,
+    ')',
+    /\d/,
+    ' ',
+    /\d/,
+    /\d/,
+    /\d/,
+    /\d/,
+    '-',
+    /\d/,
+    /\d/,
+    /\d/,
+    /\d/,
+  ];
   Usuario: any;
   Email: any;
   IDEstado: number;
@@ -118,44 +176,107 @@ export class FichaComponent implements OnInit {
     this.Email = PrimeiroNome + '.' + UltimoNome + '@pbprev.pb.gov.br';
     this.Usuario = this.Usuario.toLowerCase();
     this.Email = this.Email.toLowerCase();
+    this.resgatarDocumentos();
   }
 
-  IDSitu:any
+  teste:any= [];
+  teste2:any =[];
+  resgatarDocumentos() {
+    this.teste = [];
+    this.teste2 = [];
+    this.siscrhService
+      .getColaboradorById(this.IDColab)
+      .subscribe((data: any) => {
+        this.dadosPessoais = data;
+        this.dadosPessoais.documentosColaboradores.sort((a, b) => a.id - b.id)
+        for (let i in this.dadosPessoais.documentosColaboradores) {
+
+          if(this.dadosPessoais.documentosColaboradores[i].tipo !=1){
+            this.teste.push({
+              id: this.dadosPessoais.documentosColaboradores[i].id,
+              status: this.dadosPessoais.documentosColaboradores[i].status,
+              nome_documento_upload:this.dadosPessoais.documentosColaboradores[i].nome_documento_upload,
+              tipo: this.TiposDocumentos.find(b=>b.id == this.dadosPessoais.documentosColaboradores[i].tipo)?.tipo,
+              tipo_id: this.dadosPessoais.documentosColaboradores[i].tipo
+            });
+          }else{
+            this.teste2.push({
+              id: this.dadosPessoais.documentosColaboradores[i].id,
+              nome:this.dadosPessoais.documentosColaboradores[i].nome,
+              status: this.dadosPessoais.documentosColaboradores[i].status,
+              nome_documento_upload:this.dadosPessoais.documentosColaboradores[i].nome_documento_upload,
+              tipo: this.dadosPessoais.documentosColaboradores[i].nome,
+              tipo_id: this.dadosPessoais.documentosColaboradores[i].tipo
+            });
+          }
+          
+      
+        }
+
+        console.log(this.teste2);
+      });
+  }
+
+  IDSitu: any;
   salvarDadosPessoais() {
     this.dadosPessoais.id = this.IDColab;
-    console.log(this.dadosPessoais.data_nascimento)
+
+    console.log(this.dadosPessoais.data_nascimento);
 
     this.siscrhService
       .createColaborador(this.dadosPessoais)
       .subscribe((data: any) => {
-        console.log(data);
+       /*  console.log(data); */
         this.IDColab = data.id;
 
-            this.situacaoColaborador.acessoRede = false;
-            this.situacaoColaborador.status =false;
-            this.situacaoColaborador.dadosPessoais = {id: this.IDColab}
-            this.situacaoColaborador.id = this.IDSitu 
-            this.siscrhService.createSituacaoColaborador(this.situacaoColaborador).subscribe((data:any)=>{
-              this.IDSitu = data.id
-              console.log(data)
-            })
+        this.situacaoColaborador.acessoRede = false;
+        this.situacaoColaborador.status = false;
+        this.situacaoColaborador.dadosPessoais = { id: this.IDColab };
+        this.situacaoColaborador.id = this.IDSitu;
+        this.siscrhService
+          .createSituacaoColaborador(this.situacaoColaborador)
+          .subscribe((data: any) => {
+            this.IDSitu = data.id;
+           /*  console.log(data); */
+          });
 
-        /* encontrar outra solucao */
-        /* this.dadosProfissionais.setores = { id: 1 };
-        this.dadosProfissionais.vinculos = { id: 1 }; */
-        
-     /*    this.dadosProfissionais.situacaoColaborador = {acessoRede:false, status:false} */
+        for (let i in this.TiposDocumentos) {
+          if(this.TiposDocumentos[i].id != 1){
+          this.documentos.tipo = this.TiposDocumentos[i].id;
+          this.documentos.status = false;
+          this.documentos.dadosPessoais = { id: this.IDColab };
+          this.siscrhService
+            .createDocumentosColaborador(this.documentos)
+            .subscribe((data: any) => {
+              console.log(data);
+            });
+          }
+          
+        }
 
-     this.dadosProfissionais.dadosPessoais = { id: this.IDColab };
-     this.dadosProfissionais.id = this.IDProfi
+        this.dadosProfissionais.dadosPessoais = { id: this.IDColab };
+        this.dadosProfissionais.id = this.IDProfi;
         this.siscrhService
           .createDadosProfissionais(this.dadosProfissionais)
           .subscribe((data: any) => {
             this.IDProfi = data.id;
-            
-            console.log(data);
+
+           /*  console.log(data); */
           });
       });
+  }
+
+  upload(tipo_id:any, id:any){
+          this.documentos.id = id
+          this.documentos.tipo = tipo_id;
+          this.documentos.status = true;
+          this.documentos.dadosPessoais = { id: this.IDColab };
+          this.siscrhService
+            .createDocumentosColaborador(this.documentos)
+            .subscribe((data: any) => {
+              console.log(data);
+              this.resgatarDocumentos()
+            });
   }
 
   salvarEstadoCivil() {
@@ -170,11 +291,11 @@ export class FichaComponent implements OnInit {
     }
 
     this.dadosEstadoCivil.dadosPessoais = { id: this.IDColab };
-    
+
     this.siscrhService
       .createEstadoCivil(this.dadosEstadoCivil)
       .subscribe((data: any) => {
-        console.log(data);
+        /* console.log(data); */
         this.IDEstado = data.id;
       });
   }
@@ -192,7 +313,7 @@ export class FichaComponent implements OnInit {
     this.siscrhService
       .createDependentes(this.dependentes)
       .subscribe((data: any) => {
-        console.log(data);
+        /* console.log(data); */
         this.pegarDados();
       });
   }
@@ -203,7 +324,7 @@ export class FichaComponent implements OnInit {
     this.siscrhService
       .createMatricula(this.matriculas)
       .subscribe((data: any) => {
-        console.log(data);
+        /* console.log(data); */
         this.pegarDados();
       });
   }
@@ -214,7 +335,7 @@ export class FichaComponent implements OnInit {
       .subscribe((data: any) => {
         this.DadosPessoais = data;
         this.DadosAtualizados = Array.of(data);
-        console.log(this.DadosPessoais);
+       /*  console.log(this.DadosPessoais); */
       });
   }
 
@@ -223,14 +344,14 @@ export class FichaComponent implements OnInit {
   salvarDadosProfissionais() {
     this.dadosProfissionais.id = this.IDProfi;
 
-    if(this.setor != undefined){
-      this.dadosProfissionais.setores = {id:this.setor };
+    if (this.setor != undefined) {
+      this.dadosProfissionais.setores = { id: this.setor };
     }
 
-    if(this.vinculo != undefined){
-      this.dadosProfissionais.vinculos = {id:this.vinculo};
+    if (this.vinculo != undefined) {
+      this.dadosProfissionais.vinculos = { id: this.vinculo };
     }
-   
+
     /* this.dadosProfissionais.vinculos = { id: this.vinculo }; */
     this.dadosProfissionais.dadosPessoais = { id: this.IDColab };
 
@@ -238,7 +359,7 @@ export class FichaComponent implements OnInit {
       .createDadosProfissionais(this.dadosProfissionais)
       .subscribe((data: any) => {
         this.IDProfi = data.id;
-        console.log(data);
+      /*   console.log(data); */
       });
   }
 
@@ -249,7 +370,7 @@ export class FichaComponent implements OnInit {
       .createDadosBancarios(this.dadosBancarios)
       .subscribe((data: any) => {
         this.IDBanco = data.id;
-        console.log(data);
+       /*  console.log(data); */
       });
   }
 }

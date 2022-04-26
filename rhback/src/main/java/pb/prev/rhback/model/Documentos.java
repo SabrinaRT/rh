@@ -14,14 +14,9 @@ public class Documentos {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private String nome_documento;
+    private String tipo;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "documentos")
-    @JsonManagedReference
-    private Set<DocumentosColaboradores> documentosColaboradores  = new HashSet<DocumentosColaboradores>();
-
-
-    public Long getId() {
+      public Long getId() {
         return this.id;
     }
 
@@ -29,29 +24,20 @@ public class Documentos {
         this.id = id;
     }
 
-    public String getNome_documento() {
-        return this.nome_documento;
+    public String getTipo() {
+        return this.tipo;
     }
 
-    public void setNome_documento(String nome_documento) {
-        this.nome_documento = nome_documento;
-    }
-
-    public Set<DocumentosColaboradores> getDocumentosColaboradores() {
-        return this.documentosColaboradores;
-    }
-
-    public void setDocumentosColaboradores(Set<DocumentosColaboradores> documentosColaboradores) {
-        this.documentosColaboradores = documentosColaboradores;
-    }
-
-    public Documentos(String nome_documento, Set<DocumentosColaboradores> documentosColaboradores) {
-        this.nome_documento = nome_documento;
-        this.documentosColaboradores = documentosColaboradores;
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
  
+    public Documentos(String tipo) {
+        this.tipo = tipo;
+    }
+    
 
     public Documentos() {
     }
-    
+
 }

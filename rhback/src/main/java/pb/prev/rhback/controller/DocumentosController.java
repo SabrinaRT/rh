@@ -30,7 +30,7 @@ public class  DocumentosController {
 	public Documentos createDocumentos(@RequestBody Documentos documentos) {
 		return documentosRepository.save(documentos);
 	}
-
+  
 	@GetMapping("/dados/{id}")
 	public ResponseEntity<Documentos> getAllDocumentos(@PathVariable Long id) {
 		Documentos documentos = documentosRepository.findById(id)

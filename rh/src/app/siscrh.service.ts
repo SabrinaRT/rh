@@ -140,18 +140,35 @@ url:any = "http://localhost:8080/api"
     );
   }
 
+
+
   createDocumento(colaborador: Documentos): Observable<Object> {
     return this.httpClient.post(
       this.url + `/v26/dados`,
       colaborador
     );
   }
+
+  getDocumentosList(): Observable<Documentos[]> {
+    return this.httpClient.get<Documentos[]>(
+      this.url + `/v26/dados`
+    );
+  }
+
+  getDocumentosColaboradoresList(): Observable<DocumentosColaboradores[]> {
+    return this.httpClient.get<DocumentosColaboradores[]>(
+      this.url + `/v27/dados`
+    );
+  }
+
   createDocumentosColaborador(colaborador: DocumentosColaboradores): Observable<Object> {
     return this.httpClient.post(
       this.url + `/v27/dados`,
       colaborador
     );
   }
+
+  
 
 
 

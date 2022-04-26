@@ -921,6 +921,71 @@
           <button mat-button (click)="stepper.reset()">Reset</button>
         </div>
       </mat-step>
+
+      <mat-step>
+        <ng-template matStepLabel>Arquivos</ng-template>
+        <div class="container">
+          <br>
+          <div class="row"  >
+      {{teste}}
+            <div class="col-12">
+                <mat-card>
+                  <mat-accordion>
+                      <mat-expansion-panel [expanded]="true">
+                        <mat-expansion-panel-header >
+                          <mat-panel-title>
+                            Documentos Obrigatórios
+                          </mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <table class="styled-table" >
+                          
+                          <tbody>
+                              <tr  *ngFor="let i of teste">
+                                  <td>{{i.tipo}}</td>
+                                   <td *ngIf="i.status == true"> <mat-icon style="color: green">check_circle</mat-icon></td>
+                                   <td *ngIf="i.status == false"> <mat-icon style="color: red">cancel</mat-icon></td>
+                                  <td><button mat-raised-button color="primary" (click)="upload(i.tipo_id, i.id)"><mat-icon>upload</mat-icon></button></td>
+                              </tr>
+                           
+                          </tbody>
+                        </table>
+                      </mat-expansion-panel>
+                      <mat-expansion-panel (opened)="panelOpenState = true"
+                                           (closed)="panelOpenState = false">
+                        <mat-expansion-panel-header>
+                          <mat-panel-title>
+                              Documentos Adicionais
+                          </mat-panel-title>
+      
+                        </mat-expansion-panel-header>
+                        <table class="styled-table" >
+                          
+                          <tbody>
+                            <tr  *ngFor="let i of teste2">
+                                <td>{{i.nome}}</td>
+                                 <td *ngIf="i.status == true"> <mat-icon style="color: green">check_circle</mat-icon></td>
+                                 <td *ngIf="i.status == false"> <mat-icon style="color: red">cancel</mat-icon></td>
+                                <td><button mat-raised-button color="primary"><mat-icon>upload</mat-icon></button></td>
+                            </tr>
+                         
+                        </tbody>
+                        </table>
+                      </mat-expansion-panel>
+                    </mat-accordion>
+                 
+          
+                  </mat-card>
+                  
+                
+          </div>
+          </div>
+          <br>
+        </div>
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button (click)="stepper.reset()">Reset</button>
+        </div>
+      </mat-step>
     </mat-stepper>
   </mat-drawer-content>
 </mat-drawer-container>

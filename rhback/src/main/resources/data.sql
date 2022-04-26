@@ -22,7 +22,7 @@ INSERT IGNORE INTO `setores`(`id`, `setor`) VALUES
 (21,'PBprev Patos'),
 (22,'PBprev Guarabira'),
 (23,'DR Serviços'),
-(24,'CONAD'),
+(24,'CONAD'), 
 (25,'CONFIS')
 ;
 INSERT IGNORE INTO `vinculos`(`id`, `vinculo`) VALUES 
@@ -34,15 +34,17 @@ INSERT IGNORE INTO `vinculos`(`id`, `vinculo`) VALUES
 (6,'Membro Titular'),
 (7,'Membro Suplente')
 ;
-INSERT IGNORE INTO `documentos`(`id`, `nome_documento`) VALUES
-  (1,"Identidade"),
-  (2,"CPF"),
-  (3,"Comprovante de Residência"),
-  (4,"Declaração de Instituição de Ensino Superior (Histórico Escolar, Declaração de Matricula, Certificado de Conclusão do Curso)"),
-  (5,"Carteira de trabalho"),
-  (6,"Título de Eleitor"),
-  (7,"Contrato"),
-  (8,"Certidão de Nascimento"),
-  (9,"Certidão de Casamento")
+INSERT IGNORE INTO `documentos`(`id`, `tipo`) VALUES
+  (1,"Opcional"),
+  (2,"Identidade"),
+  (3,"CPF"),
+  (4,"Comprovante de Residência"),
+  (5,"Declaração de Instituição de Ensino Superior (Histórico Escolar, Declaração de Matricula, Certificado de Conclusão do Curso)"),
+  (6,"Carteira de trabalho"),
+  (7,"Título de Eleitor"),
+  (8,"Contrato"),
+  (9,"Certidão de Nascimento"),
+  (7,"Certidão de Casamento")
+  
  ;
 

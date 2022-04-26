@@ -13,23 +13,32 @@ public class DocumentosColaboradores {
     @Id
     @GeneratedValue(strategy  = GenerationType.AUTO)
     private Long id;
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
+    
+    @ManyToOne/* (fetch = FetchType.EAGER, cascade = CascadeType.DETACH) */
 	@JoinColumn(name = "dadosPessoaisId")
     @JsonBackReference
-    public DadosPessoais dadosPessoais;
+    private DadosPessoais dadosPessoais;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
-	@JoinColumn(name = "documentos_id")
-    @JsonBackReference
-    public Documentos documentos;
+    private String nome;
+    private int tipo;
 
     private Boolean status;
     private String nome_documento_upload;
     
 
+    public DocumentosColaboradores() {
+    }
 
-    
 
+
+    public DocumentosColaboradores(DadosPessoais dadosPessoais, String nome, int tipo, Boolean status, String nome_documento_upload) {
+        this.dadosPessoais = dadosPessoais;
+        this.nome = nome;
+        this.tipo = tipo;
+        this.status = status;
+        this.nome_documento_upload = nome_documento_upload;
+    }
+   
 
     public Long getId() {
         return this.id;
@@ -37,14 +46,6 @@ public class DocumentosColaboradores {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getNome_documento_upload() {
-        return this.nome_documento_upload;
-    }
-
-    public void setNome_documento_upload(String nome_documento_upload) {
-        this.nome_documento_upload = nome_documento_upload;
     }
 
     public DadosPessoais getDadosPessoais() {
@@ -55,14 +56,21 @@ public class DocumentosColaboradores {
         this.dadosPessoais = dadosPessoais;
     }
 
-    public Documentos getDocumentos() {
-        return this.documentos;
+    public String getNome() {
+        return this.nome;
     }
 
-    public void setDocumentos(Documentos documentos) {
-        this.documentos = documentos;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
+    public int getTipo() {
+        return this.tipo;
+    }
+
+    public void setTipo(int tipo) {
+        this.tipo = tipo;
+    }
 
     public Boolean isStatus() {
         return this.status;
@@ -76,15 +84,12 @@ public class DocumentosColaboradores {
         this.status = status;
     }
 
-    public DocumentosColaboradores(DadosPessoais dadosPessoais, Documentos documentos, Boolean status, String nome_documento_upload) {
-        this.dadosPessoais = dadosPessoais;
-        this.documentos = documentos;
-        this.status = status;
-        this.nome_documento_upload = nome_documento_upload;
+    public String getNome_documento_upload() {
+        return this.nome_documento_upload;
     }
-    
 
-    public DocumentosColaboradores() {
+    public void setNome_documento_upload(String nome_documento_upload) {
+        this.nome_documento_upload = nome_documento_upload;
     }
 
 

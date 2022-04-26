@@ -7,6 +7,6 @@ import pb.prev.rhback.model.Matriculas;
  
 @Repository
 public interface MatriculasRepository extends JpaRepository<Matriculas, Long>{
-
-    
+ 
+     
 }

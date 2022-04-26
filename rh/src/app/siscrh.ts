@@ -63,6 +63,15 @@ export class DadosPessoais {
   complemento: any;
   nome_mae: any;
   nome_pai: any;
+  documentosColaboradores: [
+    {
+      id: any;
+      nome:any;
+      nome_documento_upload: any;
+      status: any;
+      tipo: any;
+    }
+  ];
   dependentes: [
     {
       id: any;
@@ -80,12 +89,10 @@ export class DadosPessoais {
     }
   ];
 
-  situacaoColaborador:{
-    acessoRede:any;
-    status:any;
-  }
-
- 
+  situacaoColaborador: {
+    acessoRede: any;
+    status: any;
+  };
 }
 
 export class Setores {
@@ -119,7 +126,7 @@ export class DadosProfissionais {
   data_admissao: any;
   data_exoneracao: any;
   qualificacao_profissional: any;
-  email_institucional:any;
+  email_institucional: any;
   funcao: any;
   dadosPessoais: {
     id: any;
@@ -132,27 +139,27 @@ export class DadosProfissionais {
   };
 }
 
-
-export class DocumentosColaboradores{
-  id:any;
-  nome_documento_upload:any;
-  status:any;
-  dados_pessoais:any;
-  documento_id:any;
-
+export class DocumentosColaboradores {
+  id: any;
+  nome:any;
+  nome_documento_upload: any;
+  status: any;
+  dadosPessoais: {
+    id: any;
+  };
+  tipo: any;
 }
-export class Documentos{
-  id:any;
-  nome_documento:any;
+export class Documentos {
+  id: any;
+  tipo: any;
 }
-export class SituacaoColaborador{
-  id:any
-  acessoRede: boolean; 
+export class SituacaoColaborador {
+  id: any;
+  acessoRede: boolean;
   status: boolean;
-  dadosPessoais:{
-    id:any;
-  }
-
+  dadosPessoais: {
+    id: any;
+  };
 }
 export class DadosBancarios {
   id: any;
