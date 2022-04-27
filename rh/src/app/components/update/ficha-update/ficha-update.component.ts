@@ -20,6 +20,7 @@ import {
   DadosBancarios,
   Vinculos,
   Matriculas,
+  Documentos,
 } from 'src/app/siscrh';
 import { SiscrhService } from 'src/app/siscrh.service';
 
@@ -148,6 +149,7 @@ export class FichaUpdateComponent implements OnInit {
 
     this.pegarDados();
   }
+
 
   Usuario: any;
   Email: any;

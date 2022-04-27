@@ -55,6 +55,7 @@ export class FichaComponent implements OnInit {
   DadosPessoais: DadosPessoais[];
   DadosEstadoCivil: DadosEstadoCivil[];
   TiposDocumentos: Documentos[];
+  
 
   dados: Dados = new Dados();
 
@@ -105,9 +106,6 @@ export class FichaComponent implements OnInit {
 
     this.siscrhService.getDocumentosList().subscribe((data: any) => {
       this.TiposDocumentos = data;
-
-     
-      console.log(this.TiposDocumentos);
     });
   }
   datemask = [/\d/, /\d/, '/', /\d/, /\d/, '/', /\d/, /\d/, /\d/, /\d/];
