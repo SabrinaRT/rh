@@ -1,0 +1,22 @@
+table {
+    width: 100%;
+  }
+  
+  
+  tbody {
+    display: block; 
+    max-height: 200px;
+    overflow-y: scroll;
+  }
+  
+  th, td {
+    width: 22.5%;
+    /* text-align: center; */
+  
+  }
+  
+  tr {
+    display: table; 
+    width: 100%;
+    box-sizing: border-box; 
+  }

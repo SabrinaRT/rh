@@ -6,6 +6,8 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 
 
+
+
 .styled-table {
     border-collapse: collapse;
     margin: 25px 0;
@@ -17,7 +19,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .styled-table thead tr {
     background-color: #3F51B5;
     color: #ffffff;
-    text-align: left;
+    /* text-align: left; */
 }
 .styled-table th,
 .styled-table td {

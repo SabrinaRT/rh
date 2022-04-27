@@ -1,3 +1,26 @@
 .box-shadow{
     box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
 }
+
+
+table {
+    width: 100%;
+  }
+  
+  
+  tbody {
+    display: block; 
+    max-height: 200px;
+    overflow-y: scroll;
+  }
+  
+  th, td {
+    width: 25%;
+  
+  }
+  
+  tr {
+    display: table; 
+    width: 100%;
+    box-sizing: border-box; 
+  }

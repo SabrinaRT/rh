@@ -551,44 +551,40 @@
               <div class="col">
                 <mat-card class="p-3 box-shadow">
                   <div class="row">
-                    <div class="col-1"></div>
-                    <div class="col-10">
+                    <!-- <div class="col-1"></div> -->
+                    <div class="col-12">
                       <mat-slide-toggle [(ngModel)]="EditarApagarDep" [ngModelOptions]="{ standalone: true }" >Editar/Deletar</mat-slide-toggle>
-                      <table class="styled-table">
+                      <table class="styled-table" style="table-layout:fixed;">
                         <thead>
                           <tr>
-                            <th>Nome Completo</th>
-                            <th>CPF</th>
-                            <th>Data de Nascimento</th>
-                            <th *ngIf="EditarApagarDep == true">Editar</th>
-                            <th *ngIf="EditarApagarDep == true">Deletar</th>
+                            <th >Nome Completo</th>
+                            <th >CPF</th>
+                            <th >Data de Nascimento</th>
+                            <th *ngIf="EditarApagarDep == true"> Edição</th>
                           </tr>
                         </thead>
                         <tbody *ngFor="let item of DadosAtualizados">
                           <tr *ngFor="let item2 of item.dependentes">
-                            <td>{{ item2.nome_completo_dependente }}</td>
-                            <td>{{ item2.cpf_dependente }}</td>
-                            <td>{{ item2.data_nascimento_dependente }}</td>
+                            <td >{{ item2.nome_completo_dependente }}</td>
+                            <td  >{{ item2.cpf_dependente }}</td>
+                            <td  > {{ item2.data_nascimento_dependente }}</td>
                             <td *ngIf="EditarApagarDep == true">
                               <button
                                 mat-raised-button
                                 color="primary"
+                                style="margin-right: 10px;"
                                 (click)="editarDependente(item2.id)"
                               >
                                 <mat-icon>edit</mat-icon>
                               </button>
-                            </td>
-                            <td *ngIf="EditarApagarDep == true">
                               <button
-                                mat-raised-button
-                                color="warn"
-                                (click)="editarDependente(item2.id)"
-                              >
-                                <mat-icon>delete</mat-icon>
-                              </button>
-                            </td>
+                              mat-raised-button
+                              color="warn"
+                              (click)="editarDependente(item2.id)"
+                            >
+                              <mat-icon>delete</mat-icon>
+                            </button>
                           </tr>
-                          <!-- and so on... -->
                         </tbody>
                       </table>
                     </div>
@@ -767,10 +763,9 @@
                       <table class="styled-table">
                         <thead>
                           <tr>
-                            <th>Matrícula</th>
-                            <th>Observação</th>
-                            <th *ngIf="EditarApagarMat == true">Editar</th>
-                            <th *ngIf="EditarApagarMat == true">Deletar</th>
+                            <th >Matrícula</th>
+                            <th >Observação</th>
+                            <th *ngIf="EditarApagarMat == true"   >Edição</th>
                           </tr>
                         </thead>
                         <tbody *ngFor="let item of DadosAtualizados">
@@ -781,20 +776,21 @@
                               <button
                                 mat-raised-button
                                 color="primary"
+                                style="margin-right: 10px;"
                                 
                               >
                                 <mat-icon>edit</mat-icon>
                               </button>
-                            </td>
-                            <td *ngIf="EditarApagarMat == true">
                               <button
-                                mat-raised-button
-                                color="warn"
-                                
-                              >
-                                <mat-icon>delete</mat-icon>
-                              </button>
+                              mat-raised-button
+                              color="warn"
+                              
+                            >
+                              <mat-icon>delete</mat-icon>
+                            </button>
+                             
                             </td>
+                            
                           </tr>
                         </tbody>
                       </table>
@@ -927,7 +923,6 @@
         <div class="container">
           <br>
           <div class="row"  >
-      {{teste}}
             <div class="col-12">
                 <mat-card>
                   <mat-accordion>

@@ -30,7 +30,12 @@ import { ConfigPerfilComponent } from './components/update/config-perfil/config-
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatExpansionModule} from '@angular/material/expansion';
 import { AniversariosComponent } from './components/home/aniversarios/aniversarios.component';
-import { GerarPdfPerfilComponent } from './components/home/gerar-pdf-perfil/gerar-pdf-perfil.component'
+import { GerarPdfPerfilComponent } from './components/home/gerar-pdf-perfil/gerar-pdf-perfil.component';
+import { PainelConfigComponent } from './components/config/painel-config/painel-config.component';
+import { ArquivosConfigComponent } from './components/config/arquivos-config/arquivos-config.component';
+import { VinculosComponent } from './components/config/vinculos/vinculos.component';
+import { SetoresComponent } from './components/config/setores/setores.component'
+import {ScrollingModule} from '@angular/cdk/scrolling';
 @NgModule({
   declarations: [
     AppComponent,
@@ -41,9 +46,14 @@ import { GerarPdfPerfilComponent } from './components/home/gerar-pdf-perfil/gera
     ArquivosComponent,
     ConfigPerfilComponent,
     AniversariosComponent,
-    GerarPdfPerfilComponent
+    GerarPdfPerfilComponent,
+    PainelConfigComponent,
+    ArquivosConfigComponent,
+    VinculosComponent,
+    SetoresComponent
   ],
   imports: [
+    ScrollingModule,
     MatExpansionModule,
     MatGridListModule,
     MatTabsModule,
