@@ -2,19 +2,16 @@
   <span>SISCOGEP Update</span>
 </mat-toolbar>
 <mat-drawer-container class="example-container">
-  <!--   <mat-drawer mode="side" opened style="background-color: aqua; width: 200px">
-    
-  </mat-drawer> -->
+ 
   <mat-drawer-content>
-    
     <mat-tab-group>
-      <mat-tab label="Edição de Perfil">
-        <app-ficha-update></app-ficha-update>
-      </mat-tab>
       <mat-tab label="Visão Geral">
         <app-config-perfil></app-config-perfil>
       </mat-tab>
-    
+      <mat-tab label="Edição de Perfil">
+        <app-ficha-update></app-ficha-update>
+      </mat-tab>
       <mat-tab label="Arquivos"> <app-arquivos></app-arquivos></mat-tab>
-    </mat-tab-group> </mat-drawer-content
-></mat-drawer-container>
+    </mat-tab-group> 
+    </mat-drawer-content>
+  </mat-drawer-container>

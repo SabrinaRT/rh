@@ -8,11 +8,14 @@ table {
   }
   
   
-  tbody {
+  .tbody-max {
     display: block; 
     max-height: 200px;
     overflow-y: scroll;
   }
+
+  
+  
   
   th, td {
     width: 25%;

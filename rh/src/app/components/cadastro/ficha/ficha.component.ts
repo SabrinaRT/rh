@@ -176,7 +176,7 @@ export class FichaComponent implements OnInit {
     this.Email = PrimeiroNome + '.' + UltimoNome + '@pbprev.pb.gov.br';
     this.Usuario = this.Usuario.toLowerCase();
     this.Email = this.Email.toLowerCase();
-    this.resgatarDocumentos();
+   
   }
 
   teste:any= [];
@@ -263,6 +263,8 @@ export class FichaComponent implements OnInit {
 
            /*  console.log(data); */
           });
+          this.resgatarDocumentos();
+          this.gerarMensagemFinal();
       });
   }
 

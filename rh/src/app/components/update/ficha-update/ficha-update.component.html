@@ -932,18 +932,6 @@
         </form>
       </mat-step>
 
-      <mat-step>
-        <ng-template matStepLabel>Finalizado</ng-template>
-        <p>Todas as etapas de cadastrados foram concluídas com sucesso!</p>
-        <p>Sugestão:</p>
-        <p>Nome Completo: {{ dadosPessoais.nome_completo }}</p>
-        <p>CPF: {{ dadosPessoais.cpf }}</p>
-        <p>E-Mail: {{ Email }}</p>
-        <p>Usuário: {{ Usuario }}</p>
-        <div>
-          <button mat-button matStepperPrevious>Back</button>
-          <button mat-button (click)="stepper.reset()">Reset</button>
-        </div>
-      </mat-step>
+ 
     </mat-stepper>
 

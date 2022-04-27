@@ -10,7 +10,10 @@
                     <mat-card-subtitle>{{vinculo}} <br> {{setor}}</mat-card-subtitle> -->
                   
                     <mat-form-field appearance="outline"  style="width: 100%;font-size: 12px;">
-                        <mat-label>Status</mat-label>
+                        <mat-label>
+                          <mat-icon  *ngIf="status == true"  style="color: green;">check_circle</mat-icon>
+                          <mat-icon *ngIf="status == false" style="color: red;">cancel</mat-icon>
+                          Status</mat-label>
                         <mat-select matNativeControl  [(ngModel)]="status">
                           <mat-option [value]="true" >
                             Ativo
@@ -21,10 +24,15 @@
                         </mat-select>
                       </mat-form-field>
                       <mat-form-field appearance="outline"  style="width: 100%;font-size: 12px;">
-                        <mat-label>Acesso à Rede Corporativa</mat-label>
+                       
+                        <mat-label> 
+                          <mat-icon  *ngIf="acessoRede == true"  style="color: green;">check_circle</mat-icon>
+                          <mat-icon *ngIf="acessoRede == false" style="color: red;">cancel</mat-icon>
+                          Acesso à Rede Corporativa</mat-label>
                         <mat-select matNativeControl [(ngModel)]="acessoRede"  >
                           <mat-option [value]="true"  >
                             Ativo
+                            
                           </mat-option>
                           <mat-option [value]="false">
                             Desativo
