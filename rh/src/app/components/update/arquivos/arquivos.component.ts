@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DadosPessoais, Documentos, DocumentosColaboradores } from 'src/app/siscrh';
 import { SiscrhService } from 'src/app/siscrh.service';
@@ -9,6 +9,9 @@ import { SiscrhService } from 'src/app/siscrh.service';
   styleUrls: ['./arquivos.component.css'],
 })
 export class ArquivosComponent implements OnInit {
+
+  @ViewChild('fileInput') fileInput: ElementRef;
+  
   panelOpenState = true;
   constructor(private siscrhService: SiscrhService, private route:ActivatedRoute) {
     this.IDColab = this.route.snapshot.params['id'];
@@ -23,6 +26,32 @@ export class ArquivosComponent implements OnInit {
     this.resgatarDocumentos();
   }
 
+  fileAttr = 'Escolhe o Arquivo';
+  uploadFileEvt(imgFile: any) {
+    if (imgFile.target.files && imgFile.target.files[0]) {
+      this.fileAttr = '';
+      Array.from(imgFile.target.files).forEach((file: any) => {
+        this.fileAttr += file.name;
+      });
+      let reader = new FileReader();
+      console.log(reader )
+      reader.onload = (e: any) => {
+        let image = new Image();
+        image.src = e.target.result;
+        image.onload = (rs) => {
+          let imgBase64Path = e.target.result;
+          
+        };
+      };
+      reader.readAsDataURL(imgFile.target.files[0]);
+      this.fileInput.nativeElement.value = '';
+      console.log(this.fileAttr)
+    } else {
+      this.fileAttr = 'Escolhe o Arquivo';
+    }
+  }
+
+
   TiposDocumentos: Documentos[];
   
   dadosPessoais: DadosPessoais = new DadosPessoais();
@@ -30,17 +59,17 @@ export class ArquivosComponent implements OnInit {
   IDColab: any;
   teste: any = [];
   teste2: any = [];
-
-  upload(tipo_id:any, id:any){
+  
+  upload(tipo_id:any, id:any, status:any){
     this.documentos.id = id
     this.documentos.tipo = tipo_id;
-    this.documentos.status = true;
+    this.documentos.status =  !status;
     this.documentos.dadosPessoais = { id: this.IDColab };
     this.siscrhService
       .createDocumentosColaborador(this.documentos)
       .subscribe((data: any) => {
-        console.log(data);
-        this.resgatarDocumentos()
+        /* console.log(data); */
+        this.resgatarDocumentos();
       });
 }
 

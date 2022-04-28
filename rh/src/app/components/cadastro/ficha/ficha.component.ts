@@ -266,18 +266,18 @@ export class FichaComponent implements OnInit {
       });
   }
 
-  upload(tipo_id:any, id:any){
-          this.documentos.id = id
-          this.documentos.tipo = tipo_id;
-          this.documentos.status = true;
-          this.documentos.dadosPessoais = { id: this.IDColab };
-          this.siscrhService
-            .createDocumentosColaborador(this.documentos)
-            .subscribe((data: any) => {
-              console.log(data);
-              this.resgatarDocumentos()
-            });
-  }
+  upload(tipo_id:any, id:any, status:any){
+    this.documentos.id = id
+    this.documentos.tipo = tipo_id;
+    this.documentos.status =  !status;
+    this.documentos.dadosPessoais = { id: this.IDColab };
+    this.siscrhService
+      .createDocumentosColaborador(this.documentos)
+      .subscribe((data: any) => {
+        /* console.log(data); */
+        this.resgatarDocumentos();
+      });
+}
 
   salvarEstadoCivil() {
     this.dadosEstadoCivil.id = this.IDEstado;

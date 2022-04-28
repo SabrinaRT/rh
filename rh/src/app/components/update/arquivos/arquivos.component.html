@@ -1,77 +1,102 @@
 <div class="container">
-  <br>
-  <div class="row"  >
+  <br />
+  <div class="row">
     <div class="col-12">
-        <mat-card>
-          <mat-accordion>
-              <mat-expansion-panel [expanded]="true">
-                <mat-expansion-panel-header >
-                  <mat-panel-title>
-                    Documentos Obrigatórios
-                  </mat-panel-title>
-                </mat-expansion-panel-header>
-                <table class="styled-table" >
-                  
-                  <tbody >
-                      <tr  *ngFor="let i of teste" >
-                          <td style="width: 70%;">{{i.tipo}}</td>
-                           <td style="width: 15%;" *ngIf="i.status == true"> <mat-icon style="color: green">check_circle</mat-icon></td>
-                           <td style="width: 15%;" *ngIf="i.status == false"> <mat-icon style="color: red">cancel</mat-icon></td>
-                          <td><button mat-raised-button color="primary" (click)="upload(i.tipo_id, i.id)"><mat-icon>upload</mat-icon></button></td>
-                      </tr>
-                   
-                  </tbody>
-                </table>
-              </mat-expansion-panel>
-              <mat-expansion-panel (opened)="panelOpenState = true"
-                                   (closed)="panelOpenState = false">
-                <mat-expansion-panel-header>
-                  <mat-panel-title>
-                      Documentos Adicionais
-                  </mat-panel-title>
+      <mat-card>
+        <mat-accordion>
+          <mat-expansion-panel [expanded]="true">
+            <mat-expansion-panel-header>
+              <mat-panel-title> Documentos Obrigatórios </mat-panel-title>
+            </mat-expansion-panel-header>
+            <table class="styled-table">
+              <tbody>
+                <tr *ngFor="let i of teste">
+                  <td style="width: 70%">{{ i.tipo }}</td>
+                  <td style="width: 15%" *ngIf="i.status == true">
+                    <mat-icon style="color: green">check_circle</mat-icon>
+                  </td>
+                  <td style="width: 15%" *ngIf="i.status == false">
+                    <mat-icon style="color: red">cancel</mat-icon>
+                  </td>
+                  <td *ngIf="i.status == true">
+                    <button
+                      mat-raised-button
+                      color="warn"
+                      (click)="upload(i.tipo_id, i.id, i.status)"
+                    >
+                      <mat-icon>delete</mat-icon>
+                    </button>
+                  </td>
+                  <td *ngIf="i.status == false">
+                    <button
+                      mat-raised-button
+                      color="primary"
+                      (click)="upload(i.tipo_id, i.id, i.status)"
+                    >
+                      <mat-icon>upload</mat-icon>
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </mat-expansion-panel>
+          <mat-expansion-panel
+            (opened)="panelOpenState = true"
+            (closed)="panelOpenState = false"
+          >
+            <mat-expansion-panel-header>
+              <mat-panel-title> Documentos Adicionais </mat-panel-title>
+            </mat-expansion-panel-header>
+            <mat-form-field>
+              <mat-toolbar>
+                <input matInput [(ngModel)]="fileAttr" readonly name="name" />
+                <button mat-flat-button color="primary">Pesquisar</button>
+              </mat-toolbar>
+              <input
+                type="file"
+                #fileInput
+                id="uploadFile"
+                (change)="uploadFileEvt($event)"
+                name="uploadFile"
+                accept="*"
+              />
+            </mat-form-field>
+            <table class="styled-table">
+              <tbody style="min-height: 500px; max-height: 600px">
+                <tr *ngFor="let i of teste2">
+                  <td style="width: 70%">{{ i.nome }}</td>
+                  <td style="width: 15%" *ngIf="i.status == true">
+                    <mat-icon style="color: green">check_circle</mat-icon>
+                  </td>
+                  <td style="width: 15%" *ngIf="i.status == false">
+                    <mat-icon style="color: red">cancel</mat-icon>
+                  </td>
 
-                </mat-expansion-panel-header>
-
-
-                <table class="styled-table"  >
-                  
-                  <tbody style="min-height: 500px; max-height:600px" >
-                    <tr  *ngFor="let i of teste2">
-                        <td  style="width: 70%;">{{i.nome}}</td>
-                         <td style="width: 15%;" *ngIf="i.status == true"> <mat-icon style="color: green">check_circle</mat-icon></td>
-                         <td style="width: 15%;" *ngIf="i.status == false"> <mat-icon style="color: red">cancel</mat-icon></td>
-                       
-                          <td *ngIf="i.status == true">
-                            <button
-                              mat-raised-button
-                              color="warn"
-                              (click)="upload(i.tipo_id, i.id)"
-                            >
-                              <mat-icon>delete</mat-icon>
-                            </button>
-                          </td>
-                          <td *ngIf="i.status == false">
-                            <button
-                              mat-raised-button
-                              color="primary"
-                              (click)="upload(i.tipo_id, i.id)"
-                            >
-                              <mat-icon>upload</mat-icon>
-                            </button>
-                          </td>
-                        
-                    </tr>
-                 
-                </tbody>
-                </table>
-              </mat-expansion-panel>
-            </mat-accordion>
-         
-  
-          </mat-card>
-          
-        
+                  <td *ngIf="i.status == true">
+                    <button
+                      mat-raised-button
+                      color="warn"
+                      (click)="upload(i.tipo_id, i.id, i.status)"
+                    >
+                      <mat-icon>delete</mat-icon>
+                    </button>
+                  </td>
+                  <td *ngIf="i.status == false">
+                    <button
+                      mat-raised-button
+                      color="primary"
+                      (click)="upload(i.tipo_id, i.id, i.status)"
+                    >
+                      <mat-icon>upload</mat-icon>
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </mat-expansion-panel>
+        </mat-accordion>
+      </mat-card>
+    </div>
   </div>
-  </div>
-  <br>
+  <br />
 </div>

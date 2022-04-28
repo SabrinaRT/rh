@@ -1031,7 +1031,7 @@
                             <button
                               mat-raised-button
                               color="warn"
-                              (click)="upload(i.tipo_id, i.id)"
+                              (click)="upload(i.tipo_id, i.id, i.status)"
                             >
                               <mat-icon>delete</mat-icon>
                             </button>
@@ -1040,7 +1040,7 @@
                             <button
                               mat-raised-button
                               color="primary"
-                              (click)="upload(i.tipo_id, i.id)"
+                              (click)="upload(i.tipo_id, i.id, i.status)"
                             >
                               <mat-icon>upload</mat-icon>
                             </button>
@@ -1056,7 +1056,7 @@
                     <mat-expansion-panel-header>
                       <mat-panel-title> Documentos Adicionais </mat-panel-title>
                     </mat-expansion-panel-header>
-
+                    
                     <table class="styled-table">
                       <tbody style="min-height: 500px; max-height: 600px">
                         <tr *ngFor="let i of teste2">
