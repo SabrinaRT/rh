@@ -34,7 +34,6 @@ export class ArquivosComponent implements OnInit {
         this.fileAttr += file.name;
       });
       let reader = new FileReader();
-      console.log(reader )
       reader.onload = (e: any) => {
         let image = new Image();
         image.src = e.target.result;

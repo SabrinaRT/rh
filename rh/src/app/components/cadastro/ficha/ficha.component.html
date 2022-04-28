@@ -1,10 +1,14 @@
 <mat-toolbar color="primary">
-  <span>SISCOGEP Update</span>
+  
+  <button mat-raised-button color="accent"  [routerLink]="['']">
+    <mat-icon>arrow_back</mat-icon>
+  </button>
+  <span class="example-spacer"></span>
+  <span>SISCOGEP Add</span>
 </mat-toolbar>
 <mat-drawer-container class="example-container">
-  <mat-drawer mode="side" opened style="background-color: aqua"
-    >Drawer content</mat-drawer
-  >
+ 
+
   <mat-drawer-content>
     <mat-stepper class="demo-stepper" #stepper class="stepper-height">
       <!-- DADOS PESSOAIS -->
