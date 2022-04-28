@@ -3,7 +3,7 @@
   <button mat-raised-button color="accent"  [routerLink]="['']">
     <mat-icon>arrow_back</mat-icon>
   </button>
-  <button mat-raised-button (click)="showSuccess()">teste</button>
+
   <span class="example-spacer"></span>
   <span>SISCOGEP Add</span>
 </mat-toolbar>
@@ -11,7 +11,7 @@
  
 
   <mat-drawer-content>
-    <mat-stepper class="demo-stepper" #stepper class="stepper-height">
+    <mat-stepper class="demo-stepper stepper-height" #stepper linear >
       <!-- DADOS PESSOAIS -->
       <mat-step [stepControl]="firstFormGroup">
         <br />
@@ -404,7 +404,7 @@
                         <mat-label>Nome Completo</mat-label>
                         <input
                           matInput
-                          formControlName="secondCtrl"
+                          [ngModelOptions]="{ standalone: true }"
                           [(ngModel)]="dadosEstadoCivil.nome_completo_conjuge"
                           class="input-upper"
                         />
@@ -522,7 +522,7 @@
                         <mat-label>Nome Completo</mat-label>
                         <input
                           matInput
-                          formControlName="thirdCtrl"
+                          [ngModelOptions]="{ standalone: true }"
                           [(ngModel)]="dependentes.nome_completo_dependente"
                           class="input-upper"
                         />
@@ -535,7 +535,7 @@
                           matInput
                           [textMask]="{ mask: cpfmask }"
                           [(ngModel)]="dependentes.cpf_dependente"
-                          formControlName="thirdCtrl"
+                          [ngModelOptions]="{ standalone: true }"
                         />
                       </mat-form-field>
                     </div>

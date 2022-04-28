@@ -46,19 +46,16 @@ export class FichaComponent implements OnInit {
   dadosBancarios: DadosBancarios = new DadosBancarios();
   matriculas: Matriculas = new Matriculas();
   situacaoColaborador: SituacaoColaborador = new SituacaoColaborador();
-
+  dados: Dados = new Dados();
   documentos: DocumentosColaboradores = new DocumentosColaboradores();
 
   setores: Setores[];
   vinculos: Vinculos[];
-
   Dependentes: Dependentes[];
   DadosPessoais: DadosPessoais[];
   DadosEstadoCivil: DadosEstadoCivil[];
   TiposDocumentos: Documentos[];
-  
 
-  dados: Dados = new Dados();
 
   constructor(
     private _formBuilder: FormBuilder,
@@ -66,7 +63,6 @@ export class FichaComponent implements OnInit {
     private toastr: ToastrService
   ) {}
 
-  
   DadosAtualizados: any;
   MatriculasLista: any;
   ngOnInit() {
@@ -75,21 +71,19 @@ export class FichaComponent implements OnInit {
       cpf: ['', Validators.required],
     });
     this.secondFormGroup = this._formBuilder.group({
-      secondCtrl: ['', Validators.required],
+     /*  secondCtrl: ['', Validators.required], */
     });
 
-    this._formBuilder.group({
-      secondCtrl: [''],
-    });
+   
     this.thirdFormGroup = this._formBuilder.group({
-      thirdCtrl: [''],
+     /*  thirdCtrl: [''], */
     });
 
     this.fourthFormGroup = this._formBuilder.group({
-      fourthCtrl: ['', Validators.required],
+     /*  fourthCtrl: ['', Validators.required], */
     });
     this.firthFormGroup = this._formBuilder.group({
-      firthCtrl: ['', Validators.required],
+    /*   firthCtrl: ['', Validators.required], */
     });
 
     this._formBuilder.group({
@@ -100,26 +94,35 @@ export class FichaComponent implements OnInit {
       ],
     });
 
-    this.siscrhService.getSetoresList().subscribe((data: any) => {
-      this.setores = data;
-    },error => {
-      console.log('error', error);
+    this.siscrhService.getSetoresList().subscribe(
+      (data: any) => {
+        this.setores = data;
+      },
+      (error) => {
+        console.log('error', error);
         this.showWarn();
-    });
+      }
+    );
 
-    this.siscrhService.getVinculosList().subscribe((data: any) => {
-      this.vinculos = data;
-    },error => {
-      console.log('error', error);
+    this.siscrhService.getVinculosList().subscribe(
+      (data: any) => {
+        this.vinculos = data;
+      },
+      (error) => {
+        console.log('error', error);
         this.showWarn();
-    });
+      }
+    );
 
-    this.siscrhService.getDocumentosList().subscribe((data: any) => {
-      this.TiposDocumentos = data;
-    },error => {
-      console.log('error', error);
+    this.siscrhService.getDocumentosList().subscribe(
+      (data: any) => {
+        this.TiposDocumentos = data;
+      },
+      (error) => {
+        console.log('error', error);
         this.showWarn();
-    });
+      }
+    );
   }
   datemask = [/\d/, /\d/, '/', /\d/, /\d/, '/', /\d/, /\d/, /\d/, /\d/];
   cpfmask = [
@@ -187,47 +190,50 @@ export class FichaComponent implements OnInit {
     this.Email = PrimeiroNome + '.' + UltimoNome + '@pbprev.pb.gov.br';
     this.Usuario = this.Usuario.toLowerCase();
     this.Email = this.Email.toLowerCase();
-   
   }
 
-  teste:any= [];
-  teste2:any =[];
+  teste: any = [];
+  teste2: any = [];
   resgatarDocumentos() {
     this.teste = [];
     this.teste2 = [];
-    this.siscrhService
-      .getColaboradorById(this.IDColab)
-      .subscribe((data: any) => {
+    this.siscrhService.getColaboradorById(this.IDColab).subscribe(
+      (data: any) => {
         this.dadosPessoais = data;
-        this.dadosPessoais.documentosColaboradores.sort((a, b) => a.id - b.id)
+        this.dadosPessoais.documentosColaboradores.sort((a, b) => a.id - b.id);
         for (let i in this.dadosPessoais.documentosColaboradores) {
-
-          if(this.dadosPessoais.documentosColaboradores[i].tipo !=1){
+          if (this.dadosPessoais.documentosColaboradores[i].tipo != 1) {
             this.teste.push({
               id: this.dadosPessoais.documentosColaboradores[i].id,
               status: this.dadosPessoais.documentosColaboradores[i].status,
-              nome_documento_upload:this.dadosPessoais.documentosColaboradores[i].nome_documento_upload,
-              tipo: this.TiposDocumentos.find(b=>b.id == this.dadosPessoais.documentosColaboradores[i].tipo)?.tipo,
-              tipo_id: this.dadosPessoais.documentosColaboradores[i].tipo
+              nome_documento_upload:
+                this.dadosPessoais.documentosColaboradores[i]
+                  .nome_documento_upload,
+              tipo: this.TiposDocumentos.find(
+                (b) =>
+                  b.id == this.dadosPessoais.documentosColaboradores[i].tipo
+              )?.tipo,
+              tipo_id: this.dadosPessoais.documentosColaboradores[i].tipo,
             });
-          }else{
+          } else {
             this.teste2.push({
               id: this.dadosPessoais.documentosColaboradores[i].id,
-              nome:this.dadosPessoais.documentosColaboradores[i].nome,
+              nome: this.dadosPessoais.documentosColaboradores[i].nome,
               status: this.dadosPessoais.documentosColaboradores[i].status,
-              nome_documento_upload:this.dadosPessoais.documentosColaboradores[i].nome_documento_upload,
+              nome_documento_upload:
+                this.dadosPessoais.documentosColaboradores[i]
+                  .nome_documento_upload,
               tipo: this.dadosPessoais.documentosColaboradores[i].nome,
-              tipo_id: this.dadosPessoais.documentosColaboradores[i].tipo
+              tipo_id: this.dadosPessoais.documentosColaboradores[i].tipo,
             });
           }
-          
-      
         }
-
-      },error => {
+      },
+      (error) => {
         console.log('error', error);
-          this.showWarn();
-      });
+        this.showWarn();
+      }
+    );
   }
 
   IDSitu: any;
@@ -236,9 +242,8 @@ export class FichaComponent implements OnInit {
 
     console.log(this.dadosPessoais.data_nascimento);
 
-    this.siscrhService
-      .createColaborador(this.dadosPessoais)
-      .subscribe((data: any) => {
+    this.siscrhService.createColaborador(this.dadosPessoais).subscribe(
+      (data: any) => {
         this.IDColab = data.id;
 
         this.situacaoColaborador.acessoRede = false;
@@ -247,71 +252,83 @@ export class FichaComponent implements OnInit {
         this.situacaoColaborador.id = this.IDSitu;
         this.siscrhService
           .createSituacaoColaborador(this.situacaoColaborador)
-          .subscribe((data: any) => {
-            this.IDSitu = data.id;
-          },error => {
-            console.log('error', error);
+          .subscribe(
+            (data: any) => {
+              this.IDSitu = data.id;
+            },
+            (error) => {
+              console.log('error', error);
               this.showWarn();
-          });
+            }
+          );
 
         for (let i in this.TiposDocumentos) {
-          if(this.TiposDocumentos[i].id != 1){
-          this.documentos.tipo = this.TiposDocumentos[i].id;
-          this.documentos.status = false;
-          this.documentos.dadosPessoais = { id: this.IDColab };
-          this.siscrhService
-            .createDocumentosColaborador(this.documentos)
-            .subscribe((data: any) => {
-            },error => {
-              console.log('error', error);
-                this.showWarn();
-            });
+          if (this.TiposDocumentos[i].id != 1) {
+            this.documentos.tipo = this.TiposDocumentos[i].id;
+            this.documentos.status = false;
+            this.documentos.dadosPessoais = { id: this.IDColab };
+            this.siscrhService
+              .createDocumentosColaborador(this.documentos)
+              .subscribe(
+                (data: any) => {},
+                (error) => {
+                  console.log('error', error);
+                  this.showWarn();
+                }
+              );
           }
-          
         }
 
         this.dadosProfissionais.dadosPessoais = { id: this.IDColab };
         this.dadosProfissionais.id = this.IDProfi;
         this.siscrhService
           .createDadosProfissionais(this.dadosProfissionais)
-          .subscribe((data: any) => {
-            this.IDProfi = data.id;
-          },error => {
-            console.log('error', error);
+          .subscribe(
+            (data: any) => {
+              this.IDProfi = data.id;
+            },
+            (error) => {
+              console.log('error', error);
               this.showWarn();
-          });
-          this.resgatarDocumentos();
-          this.gerarMensagemFinal();
-          this.showSuccess();
-      },error => {
+            }
+          );
+        this.resgatarDocumentos();
+        this.gerarMensagemFinal();
+        this.showSuccess();
+      },
+      (error) => {
         console.log('error', error);
-         this.showWarn();
-      });
+        this.showWarn();
+      }
+    );
   }
 
   showSuccess() {
-    this.toastr.success("Dados foram cadastrados com sucesso no sistema!", 'Dados Registrados');
-
+    this.toastr.success(
+      'Dados foram cadastrados com sucesso no sistema!',
+      'Dados Registrados'
+    );
   }
   showWarn() {
-    this.toastr.error("Dados não foram cadastrados no sistema! ", 'Erro!');
+    this.toastr.error('Dados não foram cadastrados no sistema! ', 'Erro!');
   }
 
-  upload(tipo_id:any, id:any, status:any){
-    this.documentos.id = id
+  upload(tipo_id: any, id: any, status: any) {
+    this.documentos.id = id;
     this.documentos.tipo = tipo_id;
-    this.documentos.status =  !status;
+    this.documentos.status = !status;
     this.documentos.dadosPessoais = { id: this.IDColab };
-    this.siscrhService
-      .createDocumentosColaborador(this.documentos)
-      .subscribe((data: any) => {
+    this.siscrhService.createDocumentosColaborador(this.documentos).subscribe(
+      (data: any) => {
         /* console.log(data); */
         this.resgatarDocumentos();
-      },error => {
+      },
+      (error) => {
         console.log('error', error);
-          this.showWarn();
-      });
-}
+        this.showWarn();
+      }
+    );
+  }
 
   salvarEstadoCivil() {
     this.dadosEstadoCivil.id = this.IDEstado;
@@ -326,15 +343,17 @@ export class FichaComponent implements OnInit {
 
     this.dadosEstadoCivil.dadosPessoais = { id: this.IDColab };
 
-    this.siscrhService
-      .createEstadoCivil(this.dadosEstadoCivil)
-      .subscribe((data: any) => {
+    this.siscrhService.createEstadoCivil(this.dadosEstadoCivil).subscribe(
+      (data: any) => {
         /* console.log(data); */
         this.IDEstado = data.id;
-      },error => {
+        this.showSuccess();
+      },
+      (error) => {
         console.log('error', error);
-          this.showWarn();
-      });
+        this.showWarn();
+      }
+    );
   }
   editarDependente(idDependente: any) {
     console.log(idDependente);
@@ -347,42 +366,47 @@ export class FichaComponent implements OnInit {
   salvarDependente() {
     this.dependentes.dadosPessoais = { id: this.IDColab };
 
-    this.siscrhService
-      .createDependentes(this.dependentes)
-      .subscribe((data: any) => {
+    this.siscrhService.createDependentes(this.dependentes).subscribe(
+      (data: any) => {
         /* console.log(data); */
         this.pegarDados();
-      },error => {
+        this.showSuccess();
+      },
+      (error) => {
         console.log('error', error);
-          this.showWarn();
-      });
+        this.showWarn();
+      }
+    );
   }
 
   salvarMatricula() {
     this.matriculas.dadosPessoais = { id: this.IDColab };
 
-    this.siscrhService
-      .createMatricula(this.matriculas)
-      .subscribe((data: any) => {
+    this.siscrhService.createMatricula(this.matriculas).subscribe(
+      (data: any) => {
         /* console.log(data); */
         this.pegarDados();
-      },error => {
+        this.showSuccess();
+      },
+      (error) => {
         console.log('error', error);
-          this.showWarn();
-      });
+        this.showWarn();
+      }
+    );
   }
 
   pegarDados() {
-    this.siscrhService
-      .getColaboradorById(this.IDColab)
-      .subscribe((data: any) => {
+    this.siscrhService.getColaboradorById(this.IDColab).subscribe(
+      (data: any) => {
         this.DadosPessoais = data;
         this.DadosAtualizados = Array.of(data);
-       /*  console.log(this.DadosPessoais); */
-      },error => {
+        /*  console.log(this.DadosPessoais); */
+      },
+      (error) => {
         console.log('error', error);
-          this.showWarn();
-      });
+        this.showWarn();
+      }
+    );
   }
 
   setor: any;
@@ -403,26 +427,32 @@ export class FichaComponent implements OnInit {
 
     this.siscrhService
       .createDadosProfissionais(this.dadosProfissionais)
-      .subscribe((data: any) => {
-        this.IDProfi = data.id;
-      /*   console.log(data); */
-      },error => {
-        console.log('error', error);
+      .subscribe(
+        (data: any) => {
+          this.IDProfi = data.id;
+          /*   console.log(data); */
+          this.showSuccess();
+        },
+        (error) => {
+          console.log('error', error);
           this.showWarn();
-      });
+        }
+      );
   }
 
   salvarDadosBancarios() {
     this.dadosBancarios.id = this.IDBanco;
     this.dadosBancarios.dadosPessoais = { id: this.IDColab };
-    this.siscrhService
-      .createDadosBancarios(this.dadosBancarios)
-      .subscribe((data: any) => {
+    this.siscrhService.createDadosBancarios(this.dadosBancarios).subscribe(
+      (data: any) => {
         this.IDBanco = data.id;
-       /*  console.log(data); */
-      },error => {
+        /*  console.log(data); */
+        this.showSuccess();
+      },
+      (error) => {
         console.log('error', error);
-          this.showWarn();
-      });
+        this.showWarn();
+      }
+    );
   }
 }
