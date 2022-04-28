@@ -8,6 +8,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { MatStepperIntl } from '@angular/material/stepper';
+import { ToastrService } from 'ngx-toastr';
 import {
   DadosEstadoCivil,
   DadosPessoais,
@@ -61,8 +62,11 @@ export class FichaComponent implements OnInit {
 
   constructor(
     private _formBuilder: FormBuilder,
-    private siscrhService: SiscrhService
+    private siscrhService: SiscrhService,
+    private toastr: ToastrService
   ) {}
+
+  
   DadosAtualizados: any;
   MatriculasLista: any;
   ngOnInit() {
@@ -98,14 +102,23 @@ export class FichaComponent implements OnInit {
 
     this.siscrhService.getSetoresList().subscribe((data: any) => {
       this.setores = data;
+    },error => {
+      console.log('error', error);
+        this.showWarn();
     });
 
     this.siscrhService.getVinculosList().subscribe((data: any) => {
       this.vinculos = data;
+    },error => {
+      console.log('error', error);
+        this.showWarn();
     });
 
     this.siscrhService.getDocumentosList().subscribe((data: any) => {
       this.TiposDocumentos = data;
+    },error => {
+      console.log('error', error);
+        this.showWarn();
     });
   }
   datemask = [/\d/, /\d/, '/', /\d/, /\d/, '/', /\d/, /\d/, /\d/, /\d/];
@@ -211,7 +224,9 @@ export class FichaComponent implements OnInit {
       
         }
 
-        console.log(this.teste2);
+      },error => {
+        console.log('error', error);
+          this.showWarn();
       });
   }
 
@@ -224,7 +239,6 @@ export class FichaComponent implements OnInit {
     this.siscrhService
       .createColaborador(this.dadosPessoais)
       .subscribe((data: any) => {
-       /*  console.log(data); */
         this.IDColab = data.id;
 
         this.situacaoColaborador.acessoRede = false;
@@ -235,7 +249,9 @@ export class FichaComponent implements OnInit {
           .createSituacaoColaborador(this.situacaoColaborador)
           .subscribe((data: any) => {
             this.IDSitu = data.id;
-           /*  console.log(data); */
+          },error => {
+            console.log('error', error);
+              this.showWarn();
           });
 
         for (let i in this.TiposDocumentos) {
@@ -246,7 +262,9 @@ export class FichaComponent implements OnInit {
           this.siscrhService
             .createDocumentosColaborador(this.documentos)
             .subscribe((data: any) => {
-              console.log(data);
+            },error => {
+              console.log('error', error);
+                this.showWarn();
             });
           }
           
@@ -258,12 +276,25 @@ export class FichaComponent implements OnInit {
           .createDadosProfissionais(this.dadosProfissionais)
           .subscribe((data: any) => {
             this.IDProfi = data.id;
-
-           /*  console.log(data); */
+          },error => {
+            console.log('error', error);
+              this.showWarn();
           });
           this.resgatarDocumentos();
           this.gerarMensagemFinal();
+          this.showSuccess();
+      },error => {
+        console.log('error', error);
+         this.showWarn();
       });
+  }
+
+  showSuccess() {
+    this.toastr.success("Dados foram cadastrados com sucesso no sistema!", 'Dados Registrados');
+
+  }
+  showWarn() {
+    this.toastr.error("Dados não foram cadastrados no sistema! ", 'Erro!');
   }
 
   upload(tipo_id:any, id:any, status:any){
@@ -276,6 +307,9 @@ export class FichaComponent implements OnInit {
       .subscribe((data: any) => {
         /* console.log(data); */
         this.resgatarDocumentos();
+      },error => {
+        console.log('error', error);
+          this.showWarn();
       });
 }
 
@@ -297,6 +331,9 @@ export class FichaComponent implements OnInit {
       .subscribe((data: any) => {
         /* console.log(data); */
         this.IDEstado = data.id;
+      },error => {
+        console.log('error', error);
+          this.showWarn();
       });
   }
   editarDependente(idDependente: any) {
@@ -315,6 +352,9 @@ export class FichaComponent implements OnInit {
       .subscribe((data: any) => {
         /* console.log(data); */
         this.pegarDados();
+      },error => {
+        console.log('error', error);
+          this.showWarn();
       });
   }
 
@@ -326,6 +366,9 @@ export class FichaComponent implements OnInit {
       .subscribe((data: any) => {
         /* console.log(data); */
         this.pegarDados();
+      },error => {
+        console.log('error', error);
+          this.showWarn();
       });
   }
 
@@ -336,6 +379,9 @@ export class FichaComponent implements OnInit {
         this.DadosPessoais = data;
         this.DadosAtualizados = Array.of(data);
        /*  console.log(this.DadosPessoais); */
+      },error => {
+        console.log('error', error);
+          this.showWarn();
       });
   }
 
@@ -360,6 +406,9 @@ export class FichaComponent implements OnInit {
       .subscribe((data: any) => {
         this.IDProfi = data.id;
       /*   console.log(data); */
+      },error => {
+        console.log('error', error);
+          this.showWarn();
       });
   }
 
@@ -371,6 +420,9 @@ export class FichaComponent implements OnInit {
       .subscribe((data: any) => {
         this.IDBanco = data.id;
        /*  console.log(data); */
+      },error => {
+        console.log('error', error);
+          this.showWarn();
       });
   }
 }

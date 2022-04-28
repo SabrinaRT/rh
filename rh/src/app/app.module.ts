@@ -36,6 +36,7 @@ import { ArquivosConfigComponent } from './components/config/arquivos-config/arq
 import { VinculosComponent } from './components/config/vinculos/vinculos.component';
 import { SetoresComponent } from './components/config/setores/setores.component'
 import {ScrollingModule} from '@angular/cdk/scrolling';
+import { ToastrModule } from 'ngx-toastr';
 @NgModule({
   declarations: [
     AppComponent,
@@ -54,6 +55,8 @@ import {ScrollingModule} from '@angular/cdk/scrolling';
   ],
   imports: [
     ScrollingModule,
+    BrowserAnimationsModule, // required animations module
+    ToastrModule.forRoot(), // ToastrModule added
     MatExpansionModule,
     MatGridListModule,
     MatTabsModule,

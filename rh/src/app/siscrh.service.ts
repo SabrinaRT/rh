@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
 import { DadosBancarios, DadosPessoais, DadosProfissionais, DadosEstadoCivil, Dependentes, Setores, Vinculos, Matriculas, SituacaoColaborador, Documentos, DocumentosColaboradores } from './siscrh';
 
@@ -8,7 +9,12 @@ import { DadosBancarios, DadosPessoais, DadosProfissionais, DadosEstadoCivil, De
   providedIn: 'root',
 })
 export class SiscrhService {
-  constructor(private httpClient: HttpClient) {}
+  constructor(private httpClient: HttpClient, private toastr: ToastrService
+    ) {}
+  
+    showWarn() {
+      this.toastr.error("Dados não foram cadastrados no sistema!", 'Erro!');
+    }
 
 /*   url:any = "http://10.83.1.2:8080/gprevback/api" */
 url:any = "http://localhost:8080/api"
@@ -16,6 +22,7 @@ url:any = "http://localhost:8080/api"
     return this.httpClient.get<DadosPessoais[]>(
       this.url + `/v1/dados`
     );
+    
   }
 
   createColaborador(colaborador: DadosPessoais): Observable<Object> {

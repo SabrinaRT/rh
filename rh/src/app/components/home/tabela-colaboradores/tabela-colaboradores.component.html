@@ -1,3 +1,13 @@
+<mat-toolbar color="primary">
+  <button mat-raised-button color="accent"  [routerLink]="['config']">
+    <mat-icon>settings</mat-icon>
+  </button>
+
+  <span class="example-spacer"></span>
+  <span>SISCOGEP Add</span>
+</mat-toolbar>
+
+
 <table class="styled-table" matSort (matSortChange)="sortData($event)">
   <thead>
     <tr >
