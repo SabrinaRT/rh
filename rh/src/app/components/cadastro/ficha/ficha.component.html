@@ -574,7 +574,7 @@
                           style="color: green"
                           >check_circle</mat-icon
                         >
-                        <mat-icon
+                        <mat-icon 
                           *ngIf="CPFValidoDep == false"
                           style="color: red"
                           >cancel</mat-icon
@@ -609,6 +609,7 @@
                         color="primary"
                         class="col-12"
                         (click)="salvarDependente()"
+                        [disabled]="botaoValidoDep"
                       >
                         Adicionar
                       </button>

@@ -62,27 +62,23 @@ export class FichaComponent implements OnInit {
   DadosAtualizados: any;
   MatriculasLista: any;
 
-
   constructor(
     private _formBuilder: FormBuilder,
     private siscrhService: SiscrhService,
     private toastr: ToastrService
-  ) {
-  }
+  ) {}
 
   CPFValidoColab(searchValue: string): void {
     const num = searchValue;
-    
   }
-  botaoValido:any
-  botaoValidoCon:any
+  botaoValido: any;
+  botaoValidoCon: any;
   CPFValidoConjuge: any;
-  botaoValidoDep:any
+  botaoValidoDep: any;
   CPFValidoDep: any;
-  ValidandoCPF(searchValue: string, tipo:string): void {
+  ValidandoCPF(searchValue: string, tipo: string): void {
     const num = searchValue;
-    if(tipo == "con"){
-     
+    if (tipo == 'con') {
       if (cpf.isValid(num) == true) {
         this.CPFValidoConjuge = true;
         this.botaoValidoCon = false;
@@ -92,7 +88,7 @@ export class FichaComponent implements OnInit {
       }
     }
 
-    if(tipo == "dep"){
+    if (tipo == 'dep') {
       if (cpf.isValid(num) == true) {
         this.CPFValidoDep = true;
         this.botaoValidoDep = false;
@@ -102,7 +98,7 @@ export class FichaComponent implements OnInit {
       }
     }
 
-    if(tipo== "colab"){
+    if (tipo == 'colab') {
       if (cpf.isValid(num) == true) {
         this.CPFValido = true;
         this.siscrhService
@@ -110,7 +106,7 @@ export class FichaComponent implements OnInit {
           .subscribe((b) => {
             if (b == null) {
               this.EncontraCPF = true;
-              this.botaoValido = false
+              this.botaoValido = false;
             } else {
               this.EncontraCPF = false;
               this.botaoValido = true;
@@ -120,9 +116,7 @@ export class FichaComponent implements OnInit {
         this.CPFValido = false;
         this.botaoValido = true;
       }
-
     }
-    
   }
 
   ngOnInit() {
@@ -130,16 +124,12 @@ export class FichaComponent implements OnInit {
       nomeCompleto: ['', Validators.required],
       cpf: ['', Validators.required],
     });
-    this.secondFormGroup = this._formBuilder.group({
-    });
+    this.secondFormGroup = this._formBuilder.group({});
 
-    this.thirdFormGroup = this._formBuilder.group({
-    });
+    this.thirdFormGroup = this._formBuilder.group({});
 
-    this.fourthFormGroup = this._formBuilder.group({
-    });
-    this.firthFormGroup = this._formBuilder.group({
-    });
+    this.fourthFormGroup = this._formBuilder.group({});
+    this.firthFormGroup = this._formBuilder.group({});
 
     this._formBuilder.group({
       sub_products: [
@@ -194,7 +184,7 @@ export class FichaComponent implements OnInit {
     /\d/,
     '-',
     /\d/,
-    /\d/
+    /\d/,
   ];
   telefonemask = [
     '(',
@@ -416,7 +406,7 @@ export class FichaComponent implements OnInit {
 
   salvarEstadoCivil() {
     this.dadosEstadoCivil.id = this.IDEstado;
-    if ((this.dadosEstadoCivil.estado_civil = 'Solteiro(a)')) {
+    if (this.dadosEstadoCivil.estado_civil == 'Solteiro(a)') {
       this.dadosEstadoCivil.cpf_conjuge = null;
       this.dadosEstadoCivil.nome_completo_conjuge = null;
       this.dadosEstadoCivil.data_nascimento_conjuge = null;
@@ -424,9 +414,7 @@ export class FichaComponent implements OnInit {
       this.dadosEstadoCivil.profissao_atividade = null;
       this.dadosEstadoCivil.uf_identidade_conjuge = null;
     }
-
     this.dadosEstadoCivil.dadosPessoais = { id: this.IDColab };
-
     if (
       this.dadosEstadoCivil.nome_completo_conjuge != null ||
       this.dadosEstadoCivil.nome_completo_conjuge != undefined
@@ -437,7 +425,6 @@ export class FichaComponent implements OnInit {
 
     this.siscrhService.createEstadoCivil(this.dadosEstadoCivil).subscribe(
       (data: any) => {
-        /* console.log(data); */
         this.IDEstado = data.id;
         this.showSuccess();
       },
@@ -457,10 +444,8 @@ export class FichaComponent implements OnInit {
 
   salvarDependente() {
     this.dependentes.dadosPessoais = { id: this.IDColab };
-
     this.siscrhService.createDependentes(this.dependentes).subscribe(
       (data: any) => {
-        /* console.log(data); */
         this.pegarDados();
         this.showSuccess();
       },
@@ -473,10 +458,8 @@ export class FichaComponent implements OnInit {
 
   salvarMatricula() {
     this.matriculas.dadosPessoais = { id: this.IDColab };
-
     this.siscrhService.createMatricula(this.matriculas).subscribe(
       (data: any) => {
-        /* console.log(data); */
         this.pegarDados();
         this.showSuccess();
       },
@@ -492,7 +475,6 @@ export class FichaComponent implements OnInit {
       (data: any) => {
         this.DadosPessoais = data;
         this.DadosAtualizados = Array.of(data);
-        /*  console.log(this.DadosPessoais); */
       },
       (error) => {
         console.log('error', error);
@@ -521,7 +503,6 @@ export class FichaComponent implements OnInit {
       .subscribe(
         (data: any) => {
           this.IDProfi = data.id;
-          /*   console.log(data); */
           this.showSuccess();
           this.gerarMensagemFinal();
         },
@@ -538,7 +519,6 @@ export class FichaComponent implements OnInit {
     this.siscrhService.createDadosBancarios(this.dadosBancarios).subscribe(
       (data: any) => {
         this.IDBanco = data.id;
-        /*  console.log(data); */
         this.showSuccess();
       },
       (error) => {
