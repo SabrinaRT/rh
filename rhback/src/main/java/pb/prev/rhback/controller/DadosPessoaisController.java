@@ -40,7 +40,7 @@ public class DadosPessoaisController {
 
 		return ResponseEntity.ok(processo);
 	}
-
+ 
 	@GetMapping("/dados1/{cpf}")
 	public ResponseEntity<DadosPessoais> getAllDadosPessoais(@PathVariable String cpf) {
 		DadosPessoais processo = processoRepository.findByCpf(cpf);
