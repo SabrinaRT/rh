@@ -192,22 +192,30 @@ export class FichaComponent implements OnInit {
     this.Email = PrimeiroNome + '.' + UltimoNome + '@pbprev.pb.gov.br';
     this.Usuario = this.Usuario.toLowerCase();
     this.Email = this.Email.toLowerCase();
-    
-    this.mensagemFinal = "Nome Completo: "+this.dadosPessoais.nome_completo + " \nCPF: "+ this.dadosPessoais.cpf
+    let setorDefinido
+    for(let index in this.setores){
+      if(this.setores[index].id == this.setor){
+        setorDefinido = this.setores[index].setor 
+        console.log(setorDefinido)
+      }
+    }
+    this.mensagemFinal = "Por gentileza, criar um E-Mail institucional para: \nNome Completo: "+this.dadosPessoais.nome_completo + " \nCPF: "+ this.dadosPessoais.cpf+ " \nSetor: "+ setorDefinido
+
+   
   }
 
-  teste: any = [];
-  teste2: any = [];
+  DocumentosObrigatorios: any = [];
+  DocumentosOpcionais: any = [];
   resgatarDocumentos() {
-    this.teste = [];
-    this.teste2 = [];
+    this.DocumentosObrigatorios = [];
+    this.DocumentosOpcionais = [];
     this.siscrhService.getColaboradorById(this.IDColab).subscribe(
       (data: any) => {
         this.dadosPessoais = data;
         this.dadosPessoais.documentosColaboradores.sort((a, b) => a.id - b.id);
         for (let i in this.dadosPessoais.documentosColaboradores) {
           if (this.dadosPessoais.documentosColaboradores[i].tipo != 1) {
-            this.teste.push({
+            this.DocumentosObrigatorios.push({
               id: this.dadosPessoais.documentosColaboradores[i].id,
               status: this.dadosPessoais.documentosColaboradores[i].status,
               nome_documento_upload:
@@ -220,7 +228,7 @@ export class FichaComponent implements OnInit {
               tipo_id: this.dadosPessoais.documentosColaboradores[i].tipo,
             });
           } else {
-            this.teste2.push({
+            this.DocumentosOpcionais.push({
               id: this.dadosPessoais.documentosColaboradores[i].id,
               nome: this.dadosPessoais.documentosColaboradores[i].nome,
               status: this.dadosPessoais.documentosColaboradores[i].status,
@@ -243,8 +251,14 @@ export class FichaComponent implements OnInit {
   IDSitu: any;
   salvarDadosPessoais() {
     this.dadosPessoais.id = this.IDColab;
+    this.dadosPessoais.nome_completo = this.dadosPessoais.nome_completo.toUpperCase()
+    if(this.dadosPessoais.nome_mae != null || this.dadosPessoais.nome_mae != undefined){
+      this.dadosPessoais.nome_mae = this.dadosPessoais.nome_mae.toUpperCase()
+    }
 
-    console.log(this.dadosPessoais.data_nascimento);
+    if(this.dadosPessoais.nome_pai != null  || this.dadosPessoais.nome_pai != undefined){
+      this.dadosPessoais.nome_pai = this.dadosPessoais.nome_pai.toUpperCase()
+    }
 
     this.siscrhService.createColaborador(this.dadosPessoais).subscribe(
       (data: any) => {
@@ -347,6 +361,11 @@ export class FichaComponent implements OnInit {
 
     this.dadosEstadoCivil.dadosPessoais = { id: this.IDColab };
 
+    if(this.dadosEstadoCivil.nome_completo_conjuge != null || this.dadosEstadoCivil.nome_completo_conjuge != undefined){
+      this.dadosEstadoCivil.nome_completo_conjuge = this.dadosEstadoCivil.nome_completo_conjuge.toUpperCase()
+    }
+    
+
     this.siscrhService.createEstadoCivil(this.dadosEstadoCivil).subscribe(
       (data: any) => {
         /* console.log(data); */
@@ -426,7 +445,6 @@ export class FichaComponent implements OnInit {
       this.dadosProfissionais.vinculos = { id: this.vinculo };
     }
 
-    /* this.dadosProfissionais.vinculos = { id: this.vinculo }; */
     this.dadosProfissionais.dadosPessoais = { id: this.IDColab };
 
     this.siscrhService
@@ -436,6 +454,7 @@ export class FichaComponent implements OnInit {
           this.IDProfi = data.id;
           /*   console.log(data); */
           this.showSuccess();
+          this.gerarMensagemFinal();
         },
         (error) => {
           console.log('error', error);
@@ -452,6 +471,7 @@ export class FichaComponent implements OnInit {
         this.IDBanco = data.id;
         /*  console.log(data); */
         this.showSuccess();
+   
       },
       (error) => {
         console.log('error', error);

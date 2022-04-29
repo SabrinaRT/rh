@@ -1003,20 +1003,18 @@
                 <mat-card-title>Todas as etapas do cadastro foram concluídas com sucesso!</mat-card-title><br>
                 <mat-card-subtitle>Nome Completo: {{ dadosPessoais.nome_completo }}</mat-card-subtitle>
                 <mat-card-subtitle>CPF: {{ dadosPessoais.cpf }}</mat-card-subtitle>
-                <mat-card-subtitle *ngFor="">Setor: {{setor}}</mat-card-subtitle>
-                <mat-card-subtitle>Matrícula: </mat-card-subtitle>
-                <mat-card-subtitle   *ngFor="let item of DadosAtualizados" >
-                  
-                
-                  <span *ngFor="let item2 of item.matriculas">
-                    <span>{{ item2.matricula }}</span></span>
+                <mat-card-subtitle>Setor:   <span  *ngFor="let setores of setores"><span *ngIf="setor == setores.id">{{setores.setor}}</span></span></mat-card-subtitle>
+              
+                <mat-card-subtitle>Matrícula:
+                  <span   *ngFor="let item of DadosAtualizados" >
+                    <span *ngFor="let item2 of item.matriculas">
+                      <span>{{ item2.matricula }}</span></span>
+                    </span>  
                 </mat-card-subtitle>
 
-                 <!--  <input type="submit" value="Go to Google" /> -->
-                  <mat-card-subtitle *ngIf="dadosProfissionais.email_institucional == null || dadosProfissionais.email_institucional == ''"> <a href="https://suporte.codata.pb.gov.br/suporte/default/suporte" target="_blank"> <button mat-raised-button color="accent"  [cdkCopyToClipboard]="mensagemFinal">Fazer Solicitação de um E-Mail Institucional na Codata</button> </a> </mat-card-subtitle>
+                  <mat-card-subtitle *ngIf="dadosProfissionais.email_institucional == null || dadosProfissionais.email_institucional == ''"> <a href="https://suporte.codata.pb.gov.br/suporte/default/suporte" target="_blank"> <button class="col-12" mat-raised-button color="accent"  [cdkCopyToClipboard]="mensagemFinal">Copiar as Informações e Fazer Solicitação de um E-Mail Institucional na Codata</button> </a> </mat-card-subtitle>
              
-               
-
+                
               </mat-card>
             </div>
           </div>
@@ -1041,7 +1039,7 @@
                     </mat-expansion-panel-header>
                     <table class="styled-table">
                       <tbody>
-                        <tr *ngFor="let i of teste">
+                        <tr *ngFor="let i of DocumentosObrigatorios">
                           <td style="width: 70%">{{ i.tipo }}</td>
                           <td style="width: 15%" *ngIf="i.status == true">
                             <mat-icon style="color: green"
@@ -1083,7 +1081,7 @@
                     
                     <table class="styled-table">
                       <tbody style="min-height: 500px; max-height: 600px">
-                        <tr *ngFor="let i of teste2">
+                        <tr *ngFor="let i of DocumentosOpcionais">
                           <td style="width: 70%">{{ i.nome }}</td>
                           <td style="width: 15%" *ngIf="i.status == true">
                             <mat-icon style="color: green"
