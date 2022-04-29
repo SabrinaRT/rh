@@ -38,7 +38,7 @@ url:any = "http://localhost:8080/api"
     );
   }
 
-  getColaboradorByName(cpf: String): Observable<DadosPessoais> {
+  getColaboradorByCPF(cpf: String): Observable<DadosPessoais> {
     return this.httpClient.get<DadosPessoais>(
       this.url + `/v1/dados1/${cpf}`
     );

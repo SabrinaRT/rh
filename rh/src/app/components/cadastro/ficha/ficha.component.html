@@ -1,6 +1,5 @@
 <mat-toolbar color="primary">
-  
-  <button mat-raised-button color="accent"  [routerLink]="['']">
+  <button mat-raised-button color="accent" [routerLink]="['']">
     <mat-icon>arrow_back</mat-icon>
   </button>
 
@@ -8,10 +7,9 @@
   <span>SISCOGEP Add</span>
 </mat-toolbar>
 <mat-drawer-container class="example-container">
- 
-
   <mat-drawer-content>
-    <mat-stepper class="demo-stepper stepper-height" #stepper  ><!-- linear -->
+    <mat-stepper class="demo-stepper stepper-height" #stepper
+      ><!-- linear -->
       <!-- DADOS PESSOAIS -->
       <mat-step [stepControl]="firstFormGroup">
         <br />
@@ -36,13 +34,36 @@
                     </div>
                     <div class="col-6">
                       <mat-form-field appearance="outline" class="col-12">
-                        <mat-label>CPF</mat-label>
+                        <mat-label
+                          >CPF
+                          <mat-icon
+                            *ngIf="CPFValido == true"
+                            style="color: green"
+                            >check_circle</mat-icon
+                          >
+                          <mat-icon
+                            *ngIf="CPFValido == false"
+                            style="color: red"
+                            >cancel</mat-icon
+                          >
+                          <mat-icon
+                            *ngIf="EncontraCPF == true"
+                            style="color: green"
+                            >check_circle</mat-icon
+                          >
+                          <mat-icon
+                            *ngIf="EncontraCPF == false"
+                            style="color: red"
+                            >cancel</mat-icon
+                          >
+                        </mat-label>
                         <input
                           matInput
                           required
                           [textMask]="{ mask: cpfmask }"
                           [(ngModel)]="dadosPessoais.cpf"
                           formControlName="cpf"
+                          (input)="ValidandoCPF(dadosPessoais.cpf, 'colab')"
                         />
                       </mat-form-field>
                     </div>
@@ -335,6 +356,7 @@
                         class="col-12"
                         matStepperNext
                         (click)="salvarDadosPessoais()"
+                        [disabled]="botaoValido"
                       >
                         Continuar
                       </button>
@@ -412,12 +434,26 @@
                     </div>
                     <div class="col-2">
                       <mat-form-field appearance="outline" class="col-12">
-                        <mat-label>CPF</mat-label>
+                        <mat-label
+                        >CPF
+                        <mat-icon
+                          *ngIf="CPFValidoConjuge == true"
+                          style="color: green"
+                          >check_circle</mat-icon
+                        >
+                        <mat-icon
+                          *ngIf="CPFValidoConjuge == false"
+                          style="color: red"
+                          >cancel</mat-icon
+                        >
+                      
+                      </mat-label>
                         <input
                           matInput
                           [textMask]="{ mask: cpfmask }"
                           [(ngModel)]="dadosEstadoCivil.cpf_conjuge"
                           [ngModelOptions]="{ standalone: true }"
+                          (input)="ValidandoCPF(dadosEstadoCivil.cpf_conjuge, 'con')"
                         />
                       </mat-form-field>
                     </div>
@@ -495,6 +531,7 @@
                         class="col-12"
                         matStepperNext
                         (click)="salvarEstadoCivil()"
+                        [disabled]="botaoValidoCon"
                       >
                         Continuar
                       </button>
@@ -530,12 +567,26 @@
                     </div>
                     <div class="col-2">
                       <mat-form-field appearance="outline" class="col-12">
-                        <mat-label>CPF</mat-label>
+                        <mat-label
+                        >CPF
+                        <mat-icon
+                          *ngIf="CPFValidoDep == true"
+                          style="color: green"
+                          >check_circle</mat-icon
+                        >
+                        <mat-icon
+                          *ngIf="CPFValidoDep == false"
+                          style="color: red"
+                          >cancel</mat-icon
+                        >
+                      
+                      </mat-label>
                         <input
                           matInput
                           [textMask]="{ mask: cpfmask }"
                           [(ngModel)]="dependentes.cpf_dependente"
                           [ngModelOptions]="{ standalone: true }"
+                          (input)="ValidandoCPF(dependentes.cpf_dependente, 'dep')"
                         />
                       </mat-form-field>
                     </div>
@@ -1000,27 +1051,60 @@
           <div class="row">
             <div class="col-12">
               <mat-card>
-                <mat-card-title>Todas as etapas do cadastro foram concluídas com sucesso!</mat-card-title><br>
-                <mat-card-subtitle>Nome Completo: {{ dadosPessoais.nome_completo }}</mat-card-subtitle>
-                <mat-card-subtitle>CPF: {{ dadosPessoais.cpf }}</mat-card-subtitle>
-                <mat-card-subtitle>Setor:   <span  *ngFor="let setores of setores"><span *ngIf="setor == setores.id">{{setores.setor}}</span></span></mat-card-subtitle>
-              
-                <mat-card-subtitle>Matrícula:
-                  <span   *ngFor="let item of DadosAtualizados" >
+                <mat-card-title
+                  >Todas as etapas do cadastro foram concluídas com
+                  sucesso!</mat-card-title
+                ><br />
+                <mat-card-subtitle
+                  >Nome Completo:
+                  {{ dadosPessoais.nome_completo }}</mat-card-subtitle
+                >
+                <mat-card-subtitle
+                  >CPF: {{ dadosPessoais.cpf }}</mat-card-subtitle
+                >
+                <mat-card-subtitle
+                  >Setor:
+                  <span *ngFor="let setores of setores"
+                    ><span *ngIf="setor == setores.id">{{
+                      setores.setor
+                    }}</span></span
+                  ></mat-card-subtitle
+                >
+
+                <mat-card-subtitle
+                  >Matrícula:
+                  <span *ngFor="let item of DadosAtualizados">
                     <span *ngFor="let item2 of item.matriculas">
-                      <span>{{ item2.matricula }}</span></span>
-                    </span>  
+                      <span>{{ item2.matricula }}</span></span
+                    >
+                  </span>
                 </mat-card-subtitle>
 
-                  <mat-card-subtitle *ngIf="dadosProfissionais.email_institucional == null || dadosProfissionais.email_institucional == ''"> <a href="https://suporte.codata.pb.gov.br/suporte/default/suporte" target="_blank"> <button class="col-12" mat-raised-button color="accent"  [cdkCopyToClipboard]="mensagemFinal">Copiar as Informações e Fazer Solicitação de um E-Mail Institucional na Codata</button> </a> </mat-card-subtitle>
-             
-                
+                <mat-card-subtitle
+                  *ngIf="
+                    dadosProfissionais.email_institucional == null ||
+                    dadosProfissionais.email_institucional == ''
+                  "
+                >
+                  <a
+                    href="https://suporte.codata.pb.gov.br/suporte/default/suporte"
+                    target="_blank"
+                  >
+                    <button
+                      class="col-12"
+                      mat-raised-button
+                      color="accent"
+                      [cdkCopyToClipboard]="mensagemFinal"
+                    >
+                      Copiar as Informações e Fazer Solicitação de um E-Mail
+                      Institucional na Codata
+                    </button>
+                  </a>
+                </mat-card-subtitle>
               </mat-card>
             </div>
           </div>
         </div>
-       
-       
       </mat-step>
 
       <mat-step>
@@ -1078,7 +1162,7 @@
                     <mat-expansion-panel-header>
                       <mat-panel-title> Documentos Adicionais </mat-panel-title>
                     </mat-expansion-panel-header>
-                    
+
                     <table class="styled-table">
                       <tbody style="min-height: 500px; max-height: 600px">
                         <tr *ngFor="let i of DocumentosOpcionais">

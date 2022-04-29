@@ -24,6 +24,7 @@ import {
   DocumentosColaboradores,
 } from 'src/app/siscrh';
 import { SiscrhService } from 'src/app/siscrh.service';
+import { cpf } from 'cpf-cnpj-validator';
 
 @Component({
   selector: 'app-ficha',
@@ -56,34 +57,88 @@ export class FichaComponent implements OnInit {
   DadosEstadoCivil: DadosEstadoCivil[];
   TiposDocumentos: Documentos[];
 
+  CPFValido: any;
+  EncontraCPF: any;
+  DadosAtualizados: any;
+  MatriculasLista: any;
+
 
   constructor(
     private _formBuilder: FormBuilder,
     private siscrhService: SiscrhService,
     private toastr: ToastrService
-  ) {}
+  ) {
+  }
 
-  DadosAtualizados: any;
-  MatriculasLista: any;
+  CPFValidoColab(searchValue: string): void {
+    const num = searchValue;
+    
+  }
+  botaoValido:any
+  botaoValidoCon:any
+  CPFValidoConjuge: any;
+  botaoValidoDep:any
+  CPFValidoDep: any;
+  ValidandoCPF(searchValue: string, tipo:string): void {
+    const num = searchValue;
+    if(tipo == "con"){
+     
+      if (cpf.isValid(num) == true) {
+        this.CPFValidoConjuge = true;
+        this.botaoValidoCon = false;
+      } else {
+        this.CPFValidoConjuge = false;
+        this.botaoValidoCon = true;
+      }
+    }
+
+    if(tipo == "dep"){
+      if (cpf.isValid(num) == true) {
+        this.CPFValidoDep = true;
+        this.botaoValidoDep = false;
+      } else {
+        this.CPFValidoDep = false;
+        this.botaoValidoDep = true;
+      }
+    }
+
+    if(tipo== "colab"){
+      if (cpf.isValid(num) == true) {
+        this.CPFValido = true;
+        this.siscrhService
+          .getColaboradorByCPF(this.dadosPessoais.cpf)
+          .subscribe((b) => {
+            if (b == null) {
+              this.EncontraCPF = true;
+              this.botaoValido = false
+            } else {
+              this.EncontraCPF = false;
+              this.botaoValido = true;
+            }
+          });
+      } else {
+        this.CPFValido = false;
+        this.botaoValido = true;
+      }
+
+    }
+    
+  }
+
   ngOnInit() {
     this.firstFormGroup = this._formBuilder.group({
       nomeCompleto: ['', Validators.required],
       cpf: ['', Validators.required],
     });
     this.secondFormGroup = this._formBuilder.group({
-     /*  secondCtrl: ['', Validators.required], */
     });
 
-   
     this.thirdFormGroup = this._formBuilder.group({
-     /*  thirdCtrl: [''], */
     });
 
     this.fourthFormGroup = this._formBuilder.group({
-     /*  fourthCtrl: ['', Validators.required], */
     });
     this.firthFormGroup = this._formBuilder.group({
-    /*   firthCtrl: ['', Validators.required], */
     });
 
     this._formBuilder.group({
@@ -139,7 +194,7 @@ export class FichaComponent implements OnInit {
     /\d/,
     '-',
     /\d/,
-    /\d/,
+    /\d/
   ];
   telefonemask = [
     '(',
@@ -183,7 +238,7 @@ export class FichaComponent implements OnInit {
   EditarApagarDep = false;
   EditarApagarMat = false;
 
-  mensagemFinal :any
+  mensagemFinal: any;
   gerarMensagemFinal() {
     let NomeEsplitado = this.dadosPessoais.nome_completo.split(' ');
     let UltimoNome = NomeEsplitado[NomeEsplitado.length - 1];
@@ -192,16 +247,20 @@ export class FichaComponent implements OnInit {
     this.Email = PrimeiroNome + '.' + UltimoNome + '@pbprev.pb.gov.br';
     this.Usuario = this.Usuario.toLowerCase();
     this.Email = this.Email.toLowerCase();
-    let setorDefinido
-    for(let index in this.setores){
-      if(this.setores[index].id == this.setor){
-        setorDefinido = this.setores[index].setor 
-        console.log(setorDefinido)
+    let setorDefinido;
+    for (let index in this.setores) {
+      if (this.setores[index].id == this.setor) {
+        setorDefinido = this.setores[index].setor;
+        console.log(setorDefinido);
       }
     }
-    this.mensagemFinal = "Por gentileza, criar um E-Mail institucional para: \nNome Completo: "+this.dadosPessoais.nome_completo + " \nCPF: "+ this.dadosPessoais.cpf+ " \nSetor: "+ setorDefinido
-
-   
+    this.mensagemFinal =
+      'Por gentileza, criar um E-Mail institucional para: \nNome Completo: ' +
+      this.dadosPessoais.nome_completo +
+      ' \nCPF: ' +
+      this.dadosPessoais.cpf +
+      ' \nSetor: ' +
+      setorDefinido;
   }
 
   DocumentosObrigatorios: any = [];
@@ -251,13 +310,20 @@ export class FichaComponent implements OnInit {
   IDSitu: any;
   salvarDadosPessoais() {
     this.dadosPessoais.id = this.IDColab;
-    this.dadosPessoais.nome_completo = this.dadosPessoais.nome_completo.toUpperCase()
-    if(this.dadosPessoais.nome_mae != null || this.dadosPessoais.nome_mae != undefined){
-      this.dadosPessoais.nome_mae = this.dadosPessoais.nome_mae.toUpperCase()
+    this.dadosPessoais.nome_completo =
+      this.dadosPessoais.nome_completo.toUpperCase();
+    if (
+      this.dadosPessoais.nome_mae != null ||
+      this.dadosPessoais.nome_mae != undefined
+    ) {
+      this.dadosPessoais.nome_mae = this.dadosPessoais.nome_mae.toUpperCase();
     }
 
-    if(this.dadosPessoais.nome_pai != null  || this.dadosPessoais.nome_pai != undefined){
-      this.dadosPessoais.nome_pai = this.dadosPessoais.nome_pai.toUpperCase()
+    if (
+      this.dadosPessoais.nome_pai != null ||
+      this.dadosPessoais.nome_pai != undefined
+    ) {
+      this.dadosPessoais.nome_pai = this.dadosPessoais.nome_pai.toUpperCase();
     }
 
     this.siscrhService.createColaborador(this.dadosPessoais).subscribe(
@@ -361,10 +427,13 @@ export class FichaComponent implements OnInit {
 
     this.dadosEstadoCivil.dadosPessoais = { id: this.IDColab };
 
-    if(this.dadosEstadoCivil.nome_completo_conjuge != null || this.dadosEstadoCivil.nome_completo_conjuge != undefined){
-      this.dadosEstadoCivil.nome_completo_conjuge = this.dadosEstadoCivil.nome_completo_conjuge.toUpperCase()
+    if (
+      this.dadosEstadoCivil.nome_completo_conjuge != null ||
+      this.dadosEstadoCivil.nome_completo_conjuge != undefined
+    ) {
+      this.dadosEstadoCivil.nome_completo_conjuge =
+        this.dadosEstadoCivil.nome_completo_conjuge.toUpperCase();
     }
-    
 
     this.siscrhService.createEstadoCivil(this.dadosEstadoCivil).subscribe(
       (data: any) => {
@@ -471,7 +540,6 @@ export class FichaComponent implements OnInit {
         this.IDBanco = data.id;
         /*  console.log(data); */
         this.showSuccess();
-   
       },
       (error) => {
         console.log('error', error);
