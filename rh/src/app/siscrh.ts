@@ -189,4 +189,17 @@ export class Dependentes {
   dadosPessoais: {
     id: any;
   };
+  
+}
+export class CEP{
+  cep: any;
+  logradouro:any;
+  complemento:any;
+  bairro: any;
+  localidade: any;
+  uf:any;
+  ibge: any;
+  gia: any;
+  ddd: any;
+  siafi: any;
 }

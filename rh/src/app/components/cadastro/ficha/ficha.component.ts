@@ -22,6 +22,7 @@ import {
   SituacaoColaborador,
   Documentos,
   DocumentosColaboradores,
+  CEP,
 } from 'src/app/siscrh';
 import { SiscrhService } from 'src/app/siscrh.service';
 import { cpf } from 'cpf-cnpj-validator';
@@ -49,7 +50,7 @@ export class FichaComponent implements OnInit {
   situacaoColaborador: SituacaoColaborador = new SituacaoColaborador();
   dados: Dados = new Dados();
   documentos: DocumentosColaboradores = new DocumentosColaboradores();
-
+  cep:CEP = new CEP();
   setores: Setores[];
   vinculos: Vinculos[];
   Dependentes: Dependentes[];
@@ -68,9 +69,22 @@ export class FichaComponent implements OnInit {
     private toastr: ToastrService
   ) {}
 
-  CPFValidoColab(searchValue: string): void {
-    const num = searchValue;
+  validandoCEP(searchValue: string): void {
+    if(searchValue.length == 8 || searchValue.length == 9){
+      const num = searchValue;
+      this.siscrhService.getCEP(num).subscribe((data:any)=>{
+        this.cep =data 
+        this.dadosPessoais.cep = this.cep.cep
+        this.dadosPessoais.endereco = this.cep.logradouro;
+        this.dadosPessoais.bairro = this.cep.bairro
+        this.dadosPessoais.cidade = this.cep.localidade
+        this.dadosPessoais.uf_cidade = this.cep.uf
+  
+      })
+    }
+   
   }
+
   botaoValido: any;
   botaoValidoCon: any;
   CPFValidoConjuge: any;
@@ -168,6 +182,7 @@ export class FichaComponent implements OnInit {
         this.showWarn();
       }
     );
+   
   }
   datemask = [/\d/, /\d/, '/', /\d/, /\d/, '/', /\d/, /\d/, /\d/, /\d/];
   cpfmask = [

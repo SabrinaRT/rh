@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
-import { DadosBancarios, DadosPessoais, DadosProfissionais, DadosEstadoCivil, Dependentes, Setores, Vinculos, Matriculas, SituacaoColaborador, Documentos, DocumentosColaboradores } from './siscrh';
+import { DadosBancarios, DadosPessoais, DadosProfissionais, DadosEstadoCivil, Dependentes, Setores, Vinculos, Matriculas, SituacaoColaborador, Documentos, DocumentosColaboradores, CEP } from './siscrh';
 
 @Injectable({
   providedIn: 'root',
@@ -11,11 +11,12 @@ import { DadosBancarios, DadosPessoais, DadosProfissionais, DadosEstadoCivil, De
 export class SiscrhService {
   constructor(private httpClient: HttpClient, private toastr: ToastrService
     ) {}
-  
-    showWarn() {
-      this.toastr.error("Dados não foram cadastrados no sistema!", 'Erro!');
-    }
 
+    getCEP(cep: String): Observable<CEP> {
+      return this.httpClient.get<CEP>(
+        `https://viacep.com.br/ws/${cep}/json`
+      );
+    }
 /*   url:any = "http://10.83.1.2:8080/gprevback/api" */
 url:any = "http://localhost:8080/api"
   getColaboradorList(): Observable<DadosPessoais[]> {
@@ -175,7 +176,7 @@ url:any = "http://localhost:8080/api"
     );
   }
 
-  
+ 
 
 
 
