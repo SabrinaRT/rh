@@ -11,7 +11,7 @@
  
 
   <mat-drawer-content>
-    <mat-stepper class="demo-stepper stepper-height" #stepper linear >
+    <mat-stepper class="demo-stepper stepper-height" #stepper  ><!-- linear -->
       <!-- DADOS PESSOAIS -->
       <mat-step [stepControl]="firstFormGroup">
         <br />
@@ -993,17 +993,36 @@
       </mat-step>
 
       <mat-step>
-        <ng-template matStepLabel>Finalizado</ng-template>
-        <p>Todas as etapas de cadastrados foram concluídas com sucesso!</p>
-        <p>Sugestão:</p>
-        <p>Nome Completo: {{ dadosPessoais.nome_completo }}</p>
-        <p>CPF: {{ dadosPessoais.cpf }}</p>
-        <p>E-Mail: {{ Email }}</p>
-        <p>Usuário: {{ Usuario }}</p>
-        <div>
-          <button mat-button matStepperPrevious>Back</button>
-          <button mat-button (click)="stepper.reset()">Reset</button>
+        <ng-template matStepLabel>Finalização</ng-template>
+
+        <div class="container">
+          <br />
+          <div class="row">
+            <div class="col-12">
+              <mat-card>
+                <mat-card-title>Todas as etapas do cadastro foram concluídas com sucesso!</mat-card-title><br>
+                <mat-card-subtitle>Nome Completo: {{ dadosPessoais.nome_completo }}</mat-card-subtitle>
+                <mat-card-subtitle>CPF: {{ dadosPessoais.cpf }}</mat-card-subtitle>
+                <mat-card-subtitle *ngFor="">Setor: {{setor}}</mat-card-subtitle>
+                <mat-card-subtitle>Matrícula: </mat-card-subtitle>
+                <mat-card-subtitle   *ngFor="let item of DadosAtualizados" >
+                  
+                
+                  <span *ngFor="let item2 of item.matriculas">
+                    <span>{{ item2.matricula }}</span></span>
+                </mat-card-subtitle>
+
+                 <!--  <input type="submit" value="Go to Google" /> -->
+                  <mat-card-subtitle *ngIf="dadosProfissionais.email_institucional == null || dadosProfissionais.email_institucional == ''"> <a href="https://suporte.codata.pb.gov.br/suporte/default/suporte" target="_blank"> <button mat-raised-button color="accent"  [cdkCopyToClipboard]="mensagemFinal">Fazer Solicitação de um E-Mail Institucional na Codata</button> </a> </mat-card-subtitle>
+             
+               
+
+              </mat-card>
+            </div>
+          </div>
         </div>
+       
+       
       </mat-step>
 
       <mat-step>

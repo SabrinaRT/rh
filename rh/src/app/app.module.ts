@@ -37,6 +37,7 @@ import { VinculosComponent } from './components/config/vinculos/vinculos.compone
 import { SetoresComponent } from './components/config/setores/setores.component'
 import {ScrollingModule} from '@angular/cdk/scrolling';
 import { ToastrModule } from 'ngx-toastr';
+import {ClipboardModule} from '@angular/cdk/clipboard';
 @NgModule({
   declarations: [
     AppComponent,
@@ -69,6 +70,7 @@ import { ToastrModule } from 'ngx-toastr';
     MatFormFieldModule,
     MatInputModule,
     MatTableModule,
+    ClipboardModule,
     BrowserModule,
     MatSlideToggleModule,
     MatCardModule,

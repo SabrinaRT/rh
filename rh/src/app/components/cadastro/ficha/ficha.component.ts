@@ -182,6 +182,8 @@ export class FichaComponent implements OnInit {
   IDBanco: number;
   EditarApagarDep = false;
   EditarApagarMat = false;
+
+  mensagemFinal :any
   gerarMensagemFinal() {
     let NomeEsplitado = this.dadosPessoais.nome_completo.split(' ');
     let UltimoNome = NomeEsplitado[NomeEsplitado.length - 1];
@@ -190,6 +192,8 @@ export class FichaComponent implements OnInit {
     this.Email = PrimeiroNome + '.' + UltimoNome + '@pbprev.pb.gov.br';
     this.Usuario = this.Usuario.toLowerCase();
     this.Email = this.Email.toLowerCase();
+    
+    this.mensagemFinal = "Nome Completo: "+this.dadosPessoais.nome_completo + " \nCPF: "+ this.dadosPessoais.cpf
   }
 
   teste: any = [];
