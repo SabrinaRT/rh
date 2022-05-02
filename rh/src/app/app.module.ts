@@ -38,6 +38,7 @@ import { SetoresComponent } from './components/config/setores/setores.component'
 import {ScrollingModule} from '@angular/cdk/scrolling';
 import { ToastrModule } from 'ngx-toastr';
 import {ClipboardModule} from '@angular/cdk/clipboard';
+import {MatRadioModule} from '@angular/material/radio';
 @NgModule({
   declarations: [
     AppComponent,
@@ -56,6 +57,7 @@ import {ClipboardModule} from '@angular/cdk/clipboard';
   ],
   imports: [
     ScrollingModule,
+    MatRadioModule,
     BrowserAnimationsModule, // required animations module
     ToastrModule.forRoot(), // ToastrModule added
     MatExpansionModule,

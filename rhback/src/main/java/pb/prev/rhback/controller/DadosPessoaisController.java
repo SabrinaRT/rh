@@ -7,12 +7,12 @@ import org.apache.tomcat.util.http.parser.MediaType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
+ 
 import  pb.prev.rhback.exception.ResourceNotFoundException;
 
 import  pb.prev.rhback.model.DadosPessoais;
 import  pb.prev.rhback.repository.DadosPessoaisRepository;
-
+     
 @CrossOrigin(origins = "http://localhost:4200")
 
 @RestController

@@ -139,3 +139,16 @@ tr:hover {background-color: #f3f3f3; color:#3F51B5}
 .mat-icon-button.mat-success {
   color:#0dbb6a;
 }
+
+.mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle{
+  border-color:#0dbb6a;
+}
+
+.mat-radio-button.mat-accent .mat-radio-inner-circle{
+  color:#0dbb6a;
+  background-color:#0dbb6a;
+}
+
+.mat-radio-button.mat-accent .mat-radio-ripple .mat-ripple-element {
+    background-color:rgb(255, 37, 37,.26)
+}

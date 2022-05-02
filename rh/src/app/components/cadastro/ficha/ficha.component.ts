@@ -73,8 +73,9 @@ export class FichaComponent implements OnInit {
   
   acessoRede: any;
   status:any
-  salvarStatus(event:any){
-    console.log(event)
+  status2:any
+  status3:any;
+  salvarStatus(){
     this.situacaoColaborador.id = this.IDSitu;
     this.situacaoColaborador.acessoRede = false
     this.situacaoColaborador.status = this.status

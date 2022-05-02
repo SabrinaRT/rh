@@ -1048,120 +1048,6 @@
       </mat-step>
 
       <mat-step>
-        <ng-template matStepLabel>Finalização</ng-template>
-
-        <div class="container">
-          <div class="row">
-            <div class="col-12">
-              <mat-card>
-                <mat-card-title
-                  >Todas as etapas do cadastro foram concluídas com
-                  sucesso!</mat-card-title
-                ></mat-card>
-            </div>
-          </div>
-          <br>
-          <div class="row">
-          <div class="col-6">
-            <mat-card>
-              <mat-card-subtitle>
-                Em que situação se encontra o(a) colaborador(a)?
-              </mat-card-subtitle>
-                  <div class="col-4">
-                  <mat-form-field appearance="outline"  style="width: 100%;font-size: 12px;">
-                    <mat-label>
-                      <mat-icon  *ngIf="status == true"  style="color: green;">check_circle</mat-icon>
-                      <mat-icon *ngIf="status == false" style="color: red;">cancel</mat-icon>
-                      Status</mat-label>
-                    <mat-select matNativeControl  [(ngModel)]="status"  (selectionChange)="salvarStatus($event)">
-                      <mat-option [value]="true" >
-                        Ativo
-                      </mat-option>
-                      <mat-option [value]="false">
-                        Desativo
-                      </mat-option>
-                    </mat-select>
-                  </mat-form-field>
-                  </div>
-                  <mat-card-subtitle>
-                   O(A) colaborador(a) deve usar à rede corporativa?
-                  </mat-card-subtitle>
-                      <div class="col-4">
-                      <mat-form-field appearance="outline"  style="width: 100%;font-size: 12px;">
-                        <mat-label>
-                          <mat-icon  *ngIf="status == true"  style="color: green;">check_circle</mat-icon>
-                          <mat-icon *ngIf="status == false" style="color: red;">cancel</mat-icon>
-                          Status</mat-label>
-                        <mat-select matNativeControl  [(ngModel)]="status"  (selectionChange)="salvarStatus($event)">
-                          <mat-option [value]="true" >
-                            Ativo
-                          </mat-option>
-                          <mat-option [value]="false">
-                            Desativo
-                          </mat-option>
-                        </mat-select>
-                      </mat-form-field>
-                      </div>
-                 
-            </mat-card>
-        </div>
-         
-            <div class="col-6">
-            <mat-card>
-                  <mat-card-subtitle
-                    >Nome Completo:
-                    {{ dadosPessoais.nome_completo }}</mat-card-subtitle
-                  >
-                  <mat-card-subtitle
-                    >CPF: {{ dadosPessoais.cpf }}</mat-card-subtitle
-                  >
-                  <mat-card-subtitle
-                    >Setor:
-                    <span *ngFor="let setores of setores"
-                      ><span *ngIf="setor == setores.id">{{
-                        setores.setor
-                      }}</span></span
-                    ></mat-card-subtitle
-                  >
-  
-                  <mat-card-subtitle
-                    >Matrícula:
-                    <span *ngFor="let item of DadosAtualizados">
-                      <span *ngFor="let item2 of item.matriculas">
-                        <span>{{ item2.matricula }}</span></span
-                      >
-                    </span>
-                  </mat-card-subtitle>
-  
-                  <mat-card-subtitle
-                    *ngIf="
-                      dadosProfissionais.email_institucional == null ||
-                      dadosProfissionais.email_institucional == ''
-                    "
-                  >
-                    <a
-                      href="https://suporte.codata.pb.gov.br/suporte/default/suporte"
-                      target="_blank"
-                    >
-                      <button
-                        class="col-12"
-                        mat-raised-button
-                        color="accent"
-                        [cdkCopyToClipboard]="mensagemFinal"
-                      >
-                       Fazer Solicitação de um E-Mail
-                        Institucional na Codata
-                      </button>
-                    </a>
-                  </mat-card-subtitle>
-                </mat-card>
-              </div>
-           
-        </div>
-        </div>
-      </mat-step>
-
-      <mat-step>
         <ng-template matStepLabel>Arquivos</ng-template>
         <div class="container">
           <br />
@@ -1247,6 +1133,178 @@
         <div>
           <button mat-button matStepperPrevious>Back</button>
           <button mat-button (click)="stepper.reset()">Reset</button>
+        </div>
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel>Finalização</ng-template>
+
+        <div class="container">
+          <div class="row">
+            <div class="col-12">
+              <mat-card class="p-3 box-shadow">
+                <mat-card-title
+                  >Todas as etapas foram concluídas com sucesso!</mat-card-title
+                >
+                <br />
+                <div class="col-12">
+                  <mat-card-subtitle
+                    >Nome Completo:
+                    {{ dadosPessoais.nome_completo }}</mat-card-subtitle
+                  >
+                  <mat-card-subtitle
+                    >CPF: {{ dadosPessoais.cpf }}</mat-card-subtitle
+                  >
+                  <mat-card-subtitle
+                    >Setor:
+                    <span *ngFor="let setores of setores"
+                      ><span *ngIf="setor == setores.id">{{
+                        setores.setor
+                      }}</span></span
+                    ></mat-card-subtitle
+                  >
+                  <mat-card-subtitle
+                    >Vínculo:
+                    <span *ngFor="let vinculos of vinculos"
+                      ><span *ngIf="vinculo == vinculos.id">{{
+                        vinculos.vinculo
+                      }}</span></span
+                    ></mat-card-subtitle
+                  >
+
+                  <mat-card-subtitle
+                    >Matrícula:
+                    <span *ngFor="let item of DadosAtualizados">
+                      <span *ngFor="let item2 of item.matriculas">
+                        <span>{{ item2.matricula }}</span></span
+                      >
+                    </span>
+                  </mat-card-subtitle>
+
+                  
+                </div>
+              </mat-card>
+            <br>
+              <mat-card class="p-3 box-shadow">
+               
+                <mat-card-subtitle>
+                  Em que situação se encontra o(a) colaborador(a)?
+                </mat-card-subtitle>
+                <mat-radio-group
+                  aria-label="Select an option"
+                  (selectionChange)="salvarStatus()"
+                  [(ngModel)]="status"
+                >
+                  <mat-radio-button [value]="true">Ativo</mat-radio-button>
+                  <mat-radio-button [value]="false" color="warn"
+                    >Desativo</mat-radio-button
+                  >
+                </mat-radio-group>
+                
+                <span *ngIf="status == true" >
+                  <br> <br />
+                  <mat-card-subtitle >
+                    O(A) colaborador(a) deve usar à rede
+                    corporativa?</mat-card-subtitle
+                  >
+                  <mat-radio-group
+                    aria-label="Select an option"
+                    [(ngModel)]="status2"
+                    *ngIf="status == true"
+                  >
+                    <mat-radio-button [value]="true">Sim</mat-radio-button>
+                    <button
+                      mat-raised-button
+                      color="accent"
+                      *ngIf="status2 == true"
+                      style="font-size: 12px; margin-left: 10px"
+                    >
+                      Enviar E-Mail para GINF
+                    </button>
+                    <mat-radio-button [value]="false" color="warn"
+                      >Não</mat-radio-button
+                    >
+                  </mat-radio-group>
+                </span>
+                <br /><br />
+
+                <div class="col-12" *ngIf="status == true">
+                  <mat-card-subtitle>
+                    O(A) colaborador(a) deve ter um E-Mail Institucional?
+                  </mat-card-subtitle>
+                  <mat-radio-group
+                    aria-label="Select an option"
+                    [(ngModel)]="status3"
+                  >
+                    <mat-radio-button [value]="true">Sim</mat-radio-button>
+                    <a
+                      href="https://suporte.codata.pb.gov.br/suporte/default/suporte"
+                      target="_blank"
+                    >
+                      <button
+                        mat-raised-button
+                        color="accent"
+                        *ngIf="status3 == true"
+                        [cdkCopyToClipboard]="mensagemFinal"
+                        style="font-size: 12px; margin-left: 10px"
+                      >
+                        Fazer Solicitação de um E-Mail Institucional na Codata
+                      </button></a
+                    >
+                    <mat-radio-button [value]="false" color="warn"
+                      >Não</mat-radio-button
+                    >
+                  </mat-radio-group>
+                </div>
+                <br />
+                
+              </mat-card>
+              <br>
+              <mat-card class="p-3 box-shadow">
+                <div class="row">
+                  <div class="col-10"></div>
+                  <div class="col-2">
+                    <button
+                      mat-raised-button
+                      color="primary"
+                      class="col-12"
+                      matStepperNext
+                      [disabled]="botaoValido"
+                    >
+                      Finalizar
+                    </button>
+                  </div>
+                </div>
+              </mat-card>
+            </div>
+
+            <!--  <div class="col-6">
+            <mat-card>
+                 
+  
+                  <mat-card-subtitle
+                    *ngIf="
+                      dadosProfissionais.email_institucional == null ||
+                      dadosProfissionais.email_institucional == ''
+                    "
+                  >
+                    <a
+                      href="https://suporte.codata.pb.gov.br/suporte/default/suporte"
+                      target="_blank"
+                    >
+                      <button
+                        class="col-12"
+                        mat-raised-button
+                        color="accent"
+                        [cdkCopyToClipboard]="mensagemFinal"
+                      >
+                       Fazer Solicitação de um E-Mail
+                        Institucional na Codata
+                      </button>
+                    </a>
+                  </mat-card-subtitle>
+                </mat-card>
+              </div> -->
+          </div>
         </div>
       </mat-step>
     </mat-stepper>
