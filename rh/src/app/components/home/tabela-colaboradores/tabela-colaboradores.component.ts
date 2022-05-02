@@ -6,8 +6,10 @@ import {
   MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
 import { Sort } from '@angular/material/sort';
+import { ToastrService } from 'ngx-toastr';
 import { DadosPessoais, DadosProfissionais } from 'src/app/siscrh';
 import { SiscrhService } from 'src/app/siscrh.service';
+import { FichaComponent } from '../../cadastro/ficha/ficha.component';
 
 @Component({
   selector: 'app-tabela-colaboradores',
@@ -15,7 +17,7 @@ import { SiscrhService } from 'src/app/siscrh.service';
   styleUrls: ['./tabela-colaboradores.component.css'],
 })
 export class TabelaColaboradoresComponent implements OnInit {
-  constructor(private siscrhService: SiscrhService) {}
+  constructor(private siscrhService: SiscrhService, private toastr: ToastrService) {}
 
   filtro = new FormControl();
 
@@ -52,6 +54,9 @@ export class TabelaColaboradoresComponent implements OnInit {
 
         
     /*   console.log(this.array); */
+    },(error) => {
+      console.log('error', error);
+      this.toastr.error('Houve uma falha de conexão!', 'Erro!');
     });
   }
   sortData(sort: Sort) {

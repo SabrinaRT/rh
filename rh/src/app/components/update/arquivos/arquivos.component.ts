@@ -21,7 +21,6 @@ export class ArquivosComponent implements OnInit {
   
     this.siscrhService.getDocumentosList().subscribe((data: any) => {
       this.TiposDocumentos = data;
-      console.log(data)
     });
     this.resgatarDocumentos();
   }
@@ -67,7 +66,6 @@ export class ArquivosComponent implements OnInit {
     this.siscrhService
       .createDocumentosColaborador(this.documentos)
       .subscribe((data: any) => {
-        /* console.log(data); */
         this.resgatarDocumentos();
       });
 }
@@ -107,7 +105,6 @@ export class ArquivosComponent implements OnInit {
           }
         }
 
-        console.log(this.teste2);
       });
   }
 }

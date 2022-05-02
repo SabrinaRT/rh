@@ -213,7 +213,6 @@ export class FichaUpdateComponent implements OnInit {
     this.siscrhService
       .createDependentes(this.dependentes)
       .subscribe((data: any) => {
-        
         this.pegarDados();
       });
   }
@@ -222,7 +221,6 @@ export class FichaUpdateComponent implements OnInit {
 
     this.siscrhService.createMatricula(this.matriculas)
       .subscribe((data: any) => {
-        
          this.pegarDados();
       });
   }
@@ -233,7 +231,6 @@ export class FichaUpdateComponent implements OnInit {
       .subscribe((data: any) => {
         this.DadosPessoais = data;
         this.DadosAtualizados = Array.of(data);
-        /* console.log(this.DadosAtualizados); */
       });
   }
 

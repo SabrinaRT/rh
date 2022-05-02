@@ -69,6 +69,24 @@ export class FichaComponent implements OnInit {
     private toastr: ToastrService
   ) {}
 
+
+  
+  acessoRede: any;
+  status:any
+  salvarStatus(event:any){
+    console.log(event)
+    this.situacaoColaborador.id = this.IDSitu;
+    this.situacaoColaborador.acessoRede = false
+    this.situacaoColaborador.status = this.status
+    this.situacaoColaborador.dadosPessoais = {id:this.IDColab}
+    this.siscrhService.createSituacaoColaborador(this.situacaoColaborador).subscribe((data:any)=>{
+      this.toastr.success( 'Status Atualizado!');
+    },(error) => {
+      console.log('error', error);
+      this.toastr.error('Houve alguma falha de conexão!', 'Erro!');
+    })
+  }
+
   validandoCEP(searchValue: string): void {
     if(searchValue.length == 8 || searchValue.length == 9){
       const num = searchValue;
@@ -80,6 +98,10 @@ export class FichaComponent implements OnInit {
         this.dadosPessoais.cidade = this.cep.localidade
         this.dadosPessoais.uf_cidade = this.cep.uf
   
+      },
+      (error) => {
+        console.log('error', error);
+        this.toastr.error('Houve algum erro!', 'Erro!');
       })
     }
    
@@ -122,13 +144,20 @@ export class FichaComponent implements OnInit {
               this.EncontraCPF = true;
               this.botaoValido = false;
             } else {
+              
               this.EncontraCPF = false;
               this.botaoValido = true;
             }
-          });
+          },
+          (error) => {
+            console.log('error', error);
+            this.toastr.error('Houve algum erro!', 'Erro!');
+          }
+          );
       } else {
         this.CPFValido = false;
         this.botaoValido = true;
+        
       }
     }
   }
@@ -244,6 +273,7 @@ export class FichaComponent implements OnInit {
   EditarApagarMat = false;
 
   mensagemFinal: any;
+  
   gerarMensagemFinal() {
     let NomeEsplitado = this.dadosPessoais.nome_completo.split(' ');
     let UltimoNome = NomeEsplitado[NomeEsplitado.length - 1];
@@ -260,7 +290,7 @@ export class FichaComponent implements OnInit {
       }
     }
     this.mensagemFinal =
-      'Por gentileza, criar um E-Mail institucional para: \nNome Completo: ' +
+      'Por gentileza, criar um E-Mail Institucional PBprev para: \nNome Completo: ' +
       this.dadosPessoais.nome_completo +
       ' \nCPF: ' +
       this.dadosPessoais.cpf +
@@ -330,19 +360,21 @@ export class FichaComponent implements OnInit {
     ) {
       this.dadosPessoais.nome_pai = this.dadosPessoais.nome_pai.toUpperCase();
     }
-
+ 
     this.siscrhService.createColaborador(this.dadosPessoais).subscribe(
       (data: any) => {
         this.IDColab = data.id;
 
         this.situacaoColaborador.acessoRede = false;
-        this.situacaoColaborador.status = false;
+        this.situacaoColaborador.status = true;
+        this.status =  this.situacaoColaborador.status
         this.situacaoColaborador.dadosPessoais = { id: this.IDColab };
         this.situacaoColaborador.id = this.IDSitu;
         this.siscrhService
           .createSituacaoColaborador(this.situacaoColaborador)
           .subscribe(
             (data: any) => {
+              
               this.IDSitu = data.id;
             },
             (error) => {
@@ -381,6 +413,8 @@ export class FichaComponent implements OnInit {
               this.showWarn();
             }
           );
+
+
         this.resgatarDocumentos();
         this.gerarMensagemFinal();
         this.showSuccess();
