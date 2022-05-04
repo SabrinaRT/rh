@@ -76,29 +76,33 @@
           >Data de Exoneração: {{ dadosProfissionais.data_exoneracao }}
         </mat-card-subtitle>
         <mat-card-subtitle
-          >E-Mail Institucional:<span
-            *ngIf="
-              dadosProfissionais.email_institucional != null ||
-              dadosProfissionais.email_institucional != ''
-            "
-          >
-            {{ dadosProfissionais.email_institucional }}</span
-          >
-          <span
-            *ngIf="
-              dadosProfissionais.email_institucional == null ||
-              dadosProfissionais.email_institucional == ''
-            "
-          >
+          >E-Mail Institucional: {{ dadosProfissionais.email_institucional }} 
+
             <a
               href="https://suporte.codata.pb.gov.br/suporte/default/suporte"
               target="_blank"
             >
-              <button mat-raised-button color="accent" style="font-size: 12px; height:35px;" [cdkCopyToClipboard]="mensagemCodata">
+              <button
+              *ngIf="
+              verificacaoEmail == true 
+            "
+              mat-raised-button color="accent" style="font-size: 12px; height:35px;" [cdkCopyToClipboard]="mensagemCodataResetSenha">
+              Resetar Senha
+              </button>
+            </a>
+         
+            <a
+              href="https://suporte.codata.pb.gov.br/suporte/default/suporte"
+              target="_blank"
+            >
+              <button
+              *ngIf="
+              verificacaoEmail == false
+            "
+              mat-raised-button color="accent" style="font-size: 12px; height:35px;" [cdkCopyToClipboard]="mensagemCodata">
                 Fazer Solicitação de um E-Mail Institucional na Codata
               </button>
-            </a></span
-          >
+            </a>
         </mat-card-subtitle>
 
         <button mat-raised-button color="edit" class="col-12">
