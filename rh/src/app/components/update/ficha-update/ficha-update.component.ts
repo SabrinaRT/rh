@@ -10,6 +10,8 @@ import {
 } from '@angular/forms';
 import { MatStepperIntl } from '@angular/material/stepper';
 import { ActivatedRoute, Route, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { cpf } from 'cpf-cnpj-validator';
 import {
   DadosEstadoCivil,
   DadosPessoais,
@@ -21,6 +23,7 @@ import {
   Vinculos,
   Matriculas,
   Documentos,
+  CEP,
 } from 'src/app/siscrh';
 import { SiscrhService } from 'src/app/siscrh.service';
 
@@ -61,7 +64,8 @@ export class FichaUpdateComponent implements OnInit {
   constructor(
     private _formBuilder: FormBuilder,
     private siscrhService: SiscrhService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private toastr: ToastrService
   ) {
     this.IDColab = this.route.snapshot.params['id'];
   }
@@ -91,10 +95,18 @@ export class FichaUpdateComponent implements OnInit {
 
     this.siscrhService.getSetoresList().subscribe((data: any) => {
       this.setores = data;
+    },
+    (error) => {
+      console.log('error', error);
+      this.toastr.error('Houve algum erro!', 'Erro!');
     });
 
     this.siscrhService.getVinculosList().subscribe((data: any) => {
       this.vinculos = data;
+    },
+    (error) => {
+      console.log('error', error);
+      this.toastr.error('Houve algum erro!', 'Erro!');
     });
 
     this.siscrhService
@@ -104,6 +116,10 @@ export class FichaUpdateComponent implements OnInit {
           this.dadosPessoais = data;
           
         }
+      },
+      (error) => {
+        console.log('error', error);
+        this.toastr.error('Houve algum erro!', 'Erro!');
       });
 
     this.siscrhService
@@ -114,6 +130,10 @@ export class FichaUpdateComponent implements OnInit {
           this.IDBanco = data.id;
           
         }
+      },
+      (error) => {
+        console.log('error', error);
+        this.toastr.error('Houve algum erro!', 'Erro!');
       });
 
     this.siscrhService
@@ -145,12 +165,21 @@ export class FichaUpdateComponent implements OnInit {
          /*  this.setor = this.dadosProfissionais.setores.id;
           this.vinculo = this.dadosProfissionais.vinculos.id; */
         }
+      },
+      (error) => {
+        console.log('error', error);
+        this.toastr.error('Houve algum erro!', 'Erro!');
       });
 
     this.pegarDados();
   }
 
-
+  showSuccess() {
+    this.toastr.success(
+      'Dados foram cadastrados com sucesso no sistema!',
+      'Dados Registrados'
+    );
+  }
   Usuario: any;
   Email: any;
   IDEstado: number;
@@ -176,6 +205,11 @@ export class FichaUpdateComponent implements OnInit {
       .subscribe((data: any) => {
         
         this.IDColab = data.id;
+        this.showSuccess()
+      },
+      (error) => {
+        console.log('error', error);
+        this.toastr.error('Houve algum erro!', 'Erro!');
       });
   }
 
@@ -197,6 +231,11 @@ export class FichaUpdateComponent implements OnInit {
       .subscribe((data: any) => {
         
         this.IDEstado = data.id;
+        this.showSuccess()
+      },
+      (error) => {
+        console.log('error', error);
+        this.toastr.error('Houve algum erro!', 'Erro!');
       });
   }
   editarDependente(idDependente: any) {
@@ -214,6 +253,11 @@ export class FichaUpdateComponent implements OnInit {
       .createDependentes(this.dependentes)
       .subscribe((data: any) => {
         this.pegarDados();
+        this.showSuccess()
+      },
+      (error) => {
+        console.log('error', error);
+        this.toastr.error('Houve algum erro!', 'Erro!');
       });
   }
   salvarMatricula() {
@@ -222,6 +266,11 @@ export class FichaUpdateComponent implements OnInit {
     this.siscrhService.createMatricula(this.matriculas)
       .subscribe((data: any) => {
          this.pegarDados();
+         this.showSuccess()
+      },
+      (error) => {
+        console.log('error', error);
+        this.toastr.error('Houve algum erro!', 'Erro!');
       });
   }
 
@@ -231,7 +280,89 @@ export class FichaUpdateComponent implements OnInit {
       .subscribe((data: any) => {
         this.DadosPessoais = data;
         this.DadosAtualizados = Array.of(data);
+      },
+      (error) => {
+        console.log('error', error);
+        this.toastr.error('Houve algum erro!', 'Erro!');
       });
+  }
+
+  validandoCEP(searchValue: string): void {
+    if(searchValue.length == 8 || searchValue.length == 9){
+      const num = searchValue;
+      this.siscrhService.getCEP(num).subscribe((data:any)=>{
+        this.cep =data 
+        this.dadosPessoais.cep = this.cep.cep
+        this.dadosPessoais.endereco = this.cep.logradouro;
+        this.dadosPessoais.bairro = this.cep.bairro
+        this.dadosPessoais.cidade = this.cep.localidade
+        this.dadosPessoais.uf_cidade = this.cep.uf
+  
+      },
+      (error) => {
+        console.log('error', error);
+        this.toastr.error('Houve algum erro!', 'Erro!');
+      })
+    }
+   
+  }
+  cep:CEP = new CEP();
+  botaoValido: any;
+  botaoValidoCon: any;
+  CPFValidoConjuge: any;
+  botaoValidoDep: any;
+  CPFValidoDep: any;
+  CPFValido: any;
+  EncontraCPF: any;
+  MatriculasLista: any;
+  ValidandoCPF(searchValue: string, tipo: string): void {
+    const num = searchValue;
+    if (tipo == 'con') {
+      if (cpf.isValid(num) == true) {
+        this.CPFValidoConjuge = true;
+        this.botaoValidoCon = false;
+      } else {
+        this.CPFValidoConjuge = false;
+        this.botaoValidoCon = true;
+      }
+    }
+
+    if (tipo == 'dep') {
+      if (cpf.isValid(num) == true) {
+        this.CPFValidoDep = true;
+        this.botaoValidoDep = false;
+      } else {
+        this.CPFValidoDep = false;
+        this.botaoValidoDep = true;
+      }
+    }
+
+    if (tipo == 'colab') {
+      if (cpf.isValid(num) == true) {
+        this.CPFValido = true;
+        this.siscrhService
+          .getColaboradorByCPF(this.dadosPessoais.cpf)
+          .subscribe((b) => {
+            if (b == null) {
+              this.EncontraCPF = true;
+              this.botaoValido = false;
+            } else {
+              
+              this.EncontraCPF = false;
+              this.botaoValido = true;
+            }
+          },
+          (error) => {
+            console.log('error', error);
+            this.toastr.error('Houve algum erro!', 'Erro!');
+          }
+          );
+      } else {
+        this.CPFValido = false;
+        this.botaoValido = true;
+        
+      }
+    }
   }
 
   EditarApagarDep = false;
@@ -249,7 +380,11 @@ export class FichaUpdateComponent implements OnInit {
       .createDadosProfissionais(this.dadosProfissionais)
       .subscribe((data: any) => {
         this.IDProfi = data.id;
-        
+        this.showSuccess()
+      },
+      (error) => {
+        console.log('error', error);
+        this.toastr.error('Houve algum erro!', 'Erro!');
       });
   }
 
@@ -260,7 +395,11 @@ export class FichaUpdateComponent implements OnInit {
       .createDadosBancarios(this.dadosBancarios)
       .subscribe((data: any) => {
         this.IDBanco = data.id;
-        
+        this.showSuccess()
+      },
+      (error) => {
+        console.log('error', error);
+        this.toastr.error('Houve algum erro!', 'Erro!');
       });
   }
 }

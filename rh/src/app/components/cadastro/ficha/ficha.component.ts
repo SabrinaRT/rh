@@ -50,7 +50,7 @@ export class FichaComponent implements OnInit {
   situacaoColaborador: SituacaoColaborador = new SituacaoColaborador();
   dados: Dados = new Dados();
   documentos: DocumentosColaboradores = new DocumentosColaboradores();
-  cep:CEP = new CEP();
+
   setores: Setores[];
   vinculos: Vinculos[];
   Dependentes: Dependentes[];
@@ -58,6 +58,7 @@ export class FichaComponent implements OnInit {
   DadosEstadoCivil: DadosEstadoCivil[];
   TiposDocumentos: Documentos[];
 
+  cep:CEP = new CEP();
   CPFValido: any;
   EncontraCPF: any;
   DadosAtualizados: any;
