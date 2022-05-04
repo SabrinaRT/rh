@@ -44,8 +44,17 @@ export class ConfigPerfilComponent implements OnInit {
       this.siscrhService.getDadosProfissionaisByForeignKey(this.IDColab).subscribe((data:any)=>
       {
         this.dadosProfissionais = data
-        this.setor = data.setores.setor
-        this.vinculo = data.vinculos.vinculo
+        console.log(data)
+        if(data.setores != null){
+          this.setor = data.setores.setor
+        }
+        if(data.vinculos != null){
+          this.vinculo = data.vinculos.vinculo
+        }
+        
+       
+        
+        
         this.mensagemCodata =
         'Por gentileza, criar um E-Mail Institucional PBprev para: \nNome Completo: ' + this.dadosPessoais.nome_completo + ' \nCPF: ' + this.dadosPessoais.cpf +'\nSetor: ' + this.setor;
       })

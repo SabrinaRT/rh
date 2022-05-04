@@ -10,7 +10,7 @@ public interface DadosPessoaisRepository extends JpaRepository<DadosPessoais, Lo
     DadosPessoais findByCpf(String cpf);
  
     
-   
+    
    
 }
-  
+   

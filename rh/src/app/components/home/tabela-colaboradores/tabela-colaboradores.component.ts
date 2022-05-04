@@ -7,7 +7,7 @@ import {
 } from '@angular/material/dialog';
 import { Sort } from '@angular/material/sort';
 import { ToastrService } from 'ngx-toastr';
-import { DadosPessoais, DadosProfissionais } from 'src/app/siscrh';
+import { DadosPessoais, DadosProfissionais, Documentos, DocumentosColaboradores, SituacaoColaborador } from 'src/app/siscrh';
 import { SiscrhService } from 'src/app/siscrh.service';
 import { FichaComponent } from '../../cadastro/ficha/ficha.component';
 
@@ -21,15 +21,27 @@ export class TabelaColaboradoresComponent implements OnInit {
 
   filtro = new FormControl();
 
+  DocumentosColaboradores: DocumentosColaboradores = new DocumentosColaboradores();
+
+  TiposDocumentos: Documentos[];
+
   array2: any = [];
   array: any = [];
   teste: any;
 
   ngOnInit(): void {
+
+    this.siscrhService.getDocumentosList().subscribe(
+      (data: any) => {
+        this.TiposDocumentos = data;
+      },
+      (error) => {
+        console.log('error', error);
+      }
+    );
     this.siscrhService.getDadosProfissionaisList().subscribe((data: any) => {
+
       for (let i in data) {
-/* 
-        console.log(data[i].dadosPessoais.situacaoColaborador) */
        
         if( data[i].setores != null){
           this.array.push({
@@ -47,10 +59,10 @@ export class TabelaColaboradoresComponent implements OnInit {
           });
         }
  
-        
-
           
-        }
+}
+
+
 
         
     /*   console.log(this.array); */

@@ -11,7 +11,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 public class DocumentosColaboradores {
 
     @Id
-    @GeneratedValue(strategy  = GenerationType.AUTO)
+    @GeneratedValue(strategy  = GenerationType.IDENTITY)
     private Long id;
     
     @ManyToOne/* (fetch = FetchType.EAGER, cascade = CascadeType.DETACH) */
