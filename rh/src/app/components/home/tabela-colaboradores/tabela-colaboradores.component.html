@@ -1,41 +1,67 @@
 <mat-toolbar color="primary">
-  <button mat-raised-button color="accent"  [routerLink]="['config']">
+  <button mat-raised-button color="accent" [routerLink]="['config']">
     <mat-icon>settings</mat-icon>
+  </button>
+  <button mat-raised-button color="edit" [routerLink]="['pdf-perfil']">
+    <mat-icon>picture_as_pdf</mat-icon>
   </button>
 
   <span class="example-spacer"></span>
   <span>SISCOGEP Add</span>
 </mat-toolbar>
-
-
-<input type="text" [(ngModel)]="searchValue" > 
+<br />
+<mat-form-field appearance="outline" class="col-12">
+  <mat-label>Pesquisar...</mat-label>
+  <input matInput [(ngModel)]="searchValue" />
+</mat-form-field>
 
 <table class="styled-table" matSort (matSortChange)="sortData($event)">
   <thead>
-    <tr >
-      <th mat-sort-header="nome" >Colaboradores</th>
-      <th mat-sort-header="setor" >Setor</th>
+    <tr>
+      <th mat-sort-header="nome">Colaboradores</th>
+      <th mat-sort-header="setor">Setor</th>
       <th mat-sort-header="situacao">Situação</th>
       <th mat-sort-header="acessoRede">Acesso à Rede Corporativa</th>
       <th>Serviços</th>
     </tr>
-  </thead> 
+  </thead>
   <tbody>
-    <tr *ngFor="let TabelaInicial of TabelaInicial | searchfilter :  searchValue" >
-      <td >
-        {{ TabelaInicial.nome }}<br>
+    <tr *ngFor="let TabelaInicial of TabelaInicial | searchfilter: searchValue">
+      <td>{{ TabelaInicial.nome }}<br /></td>
+      <td>{{ TabelaInicial.setor }}</td>
+      <td>
+        <mat-icon *ngIf="TabelaInicial.status == true" style="color: green"
+          >check_circle</mat-icon
+        >
+        <mat-icon *ngIf="TabelaInicial.status == false" style="color: red"
+          >cancel</mat-icon
+        >
       </td>
-      <td  >  {{ TabelaInicial.setor }}</td>
-      <td  >
-        <mat-icon *ngIf="TabelaInicial.status == true" style="color: green">check_circle</mat-icon>
-        <mat-icon *ngIf="TabelaInicial.status == false" style="color: red">cancel</mat-icon >
+      <td>
+        <mat-icon *ngIf="TabelaInicial.acessoRede == true" style="color: green"
+          >check_circle</mat-icon
+        >
+        <mat-icon *ngIf="TabelaInicial.acessoRede == false" style="color: red"
+          >cancel</mat-icon
+        >
       </td>
-      <td  >
-        <mat-icon *ngIf="TabelaInicial.acessoRede == true" style="color: green">check_circle</mat-icon>
-        <mat-icon *ngIf="TabelaInicial.acessoRede == false" style="color: red">cancel</mat-icon>
+      <td>
+        <button
+          mat-raised-button
+          color="files"
+          [routerLink]="['painel', TabelaInicial.id]"
+        >
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button
+          mat-raised-button
+          color="edit"
+          [routerLink]="['pdf-perfil', TabelaInicial.id]"
+        >
+          <mat-icon>picture_as_pdf</mat-icon>
+        </button>
       </td>
-     <td> <button mat-raised-button color="files" [routerLink]="['painel', TabelaInicial.id]"><mat-icon>edit</mat-icon></button></td>
     </tr>
   </tbody>
-</table> 
+</table>
 <!-- <app-aniversarios></app-aniversarios> -->

@@ -15,6 +15,7 @@ const routes: Routes = [
   {path:"painel/:id", component:  PainelComponent},
   {path:"pdf/:id", component:  GerarPdfPerfilComponent},
   {path:"config", component: PainelConfigComponent},
+  {path:"pdf-perfil/:id", component: GerarPdfPerfilComponent},
 ];
 
 @NgModule({

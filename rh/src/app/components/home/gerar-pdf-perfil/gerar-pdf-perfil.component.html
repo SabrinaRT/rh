@@ -1,1 +1,77 @@
-{{dadosPessoais.nome_completo}}
+
+
+<table   id="customers" >    
+    
+    <tr>    
+      <td colspan="1"width="15%" >Nome Completo:  </td>    
+      <td colspan="6">{{dadosPessoais.nome_completo}}  </td>  
+
+    </tr>  
+ 
+    <tr>    
+        <td  style="width: 5px">CPF:  </td>    
+        <td colspan="1" width="15%" >{{dadosPessoais.cpf}}  </td>  
+         <td colspan="1" width="18%">Data de Nascimento:  </td>    
+        <td colspan="1" width="15%">{{dadosPessoais.data_nascimento}}  </td>  
+        <td colspan="2"> </td>   
+      </tr>  
+
+      <tr>    
+        <td colspan="1" width="5%">Identidade:  </td>    
+        <td colspan="1" width="15%">{{dadosPessoais.identidade}}   </td>   
+        <td colspan="1" width="3%">UF: </td> 
+        <td colspan="1" width="3%"> {{dadosPessoais.uf_identidade}} </td>
+      </tr>
+
+      <tr>    
+        <td>Naturalidade:  </td>    
+        <td>{{dadosPessoais.naturalidade}}     </td>    
+        <td>
+            UF:  {{dadosPessoais.uf_naturalidade}}
+        </td>
+      </tr>
+      <tr>    
+        <td>Titulo de Eleitor:  </td>    
+        <td> {{dadosPessoais.titulo_eleitor}}  </td>    
+      </tr> 
+      <tr>    
+        <td>PIS / PASEP:  </td>    
+        <td> {{dadosPessoais.pis_pasep}}  </td>    
+      </tr> 
+      <tr>    
+        <td>E-Mail:  </td>    
+        <td> {{dadosPessoais.email}}  </td>  
+        <td>Telefone:  </td>    
+        <td> {{dadosPessoais.telefone}}  </td>  
+        <td>Celular:  </td>    
+        <td> {{dadosPessoais.celular}}  </td>    
+      </tr> 
+    </table>  
+
+
+    <table   id="customers" >    
+  
+        <tr>    
+          <td>CEP: {{dadosPessoais.cep}} </td>    
+          <!-- <td>  </td>    --> 
+        </tr>  
+        <tr>    
+            <td>Endereço: {{dadosPessoais.endereco}}  </td>    
+           <!--  <td> </td>     -->
+            <td>Número: {{dadosPessoais.numero}}  </td>    
+            <td>Complemento: {{dadosPessoais.complemento}}</td>  
+          </tr>  
+          <tr>    
+            <td>Bairro:  </td>    
+            <td>{{dadosPessoais.bairro}}  </td>  
+            <td>Cidade: {{dadosPessoais.cidade}}   </td>   
+            <td>UF:  {{dadosPessoais.uf_cidade}} </td>
+          </tr>
+          <tr>    
+            <td> </td>    
+              
+            
+          </tr>
+    
+         
+        </table>  
