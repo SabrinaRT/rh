@@ -39,6 +39,14 @@ export class Dados {
   ];
 }
 
+export class TabelaInicial{
+  id: any
+  nome: any
+  setor:  any
+  status: any
+  acessoRede:  any
+}
+
 export class DadosPessoais {
   id: any;
   cpf: any;

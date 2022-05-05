@@ -39,6 +39,7 @@ import {ScrollingModule} from '@angular/cdk/scrolling';
 import { ToastrModule } from 'ngx-toastr';
 import {ClipboardModule} from '@angular/cdk/clipboard';
 import {MatRadioModule} from '@angular/material/radio';
+import { SearchfilterPipe } from './searchfilter.pipe';
 @NgModule({
   declarations: [
     AppComponent,
@@ -53,7 +54,8 @@ import {MatRadioModule} from '@angular/material/radio';
     PainelConfigComponent,
     ArquivosConfigComponent,
     VinculosComponent,
-    SetoresComponent
+    SetoresComponent,
+    SearchfilterPipe
   ],
   imports: [
     ScrollingModule,

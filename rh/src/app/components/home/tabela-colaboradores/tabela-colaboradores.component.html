@@ -8,6 +8,8 @@
 </mat-toolbar>
 
 
+<input type="text" [(ngModel)]="searchValue" > 
+
 <table class="styled-table" matSort (matSortChange)="sortData($event)">
   <thead>
     <tr >
@@ -19,21 +21,21 @@
     </tr>
   </thead> 
   <tbody>
-    <tr *ngFor="let item of array; let i = index " >
+    <tr *ngFor="let TabelaInicial of TabelaInicial | searchfilter :  searchValue" >
       <td >
-        {{ item.nome }}<br>
+        {{ TabelaInicial.nome }}<br>
       </td>
-      <td  >  {{ item.setor }}</td>
-      <td *ngFor="let item2 of item.situacao"  >
-        <mat-icon *ngIf="item2.status == true" style="color: green">check_circle</mat-icon>
-        <mat-icon *ngIf="item2.status == false" style="color: red">cancel</mat-icon >
+      <td  >  {{ TabelaInicial.setor }}</td>
+      <td  >
+        <mat-icon *ngIf="TabelaInicial.status == true" style="color: green">check_circle</mat-icon>
+        <mat-icon *ngIf="TabelaInicial.status == false" style="color: red">cancel</mat-icon >
       </td>
-      <td *ngFor="let item2 of item.situacao"  >
-        <mat-icon *ngIf="item2.acessoRede == true" style="color: green">check_circle</mat-icon>
-        <mat-icon *ngIf="item2.acessoRede == false" style="color: red">cancel</mat-icon>
+      <td  >
+        <mat-icon *ngIf="TabelaInicial.acessoRede == true" style="color: green">check_circle</mat-icon>
+        <mat-icon *ngIf="TabelaInicial.acessoRede == false" style="color: red">cancel</mat-icon>
       </td>
-     <td> <button mat-raised-button color="files" [routerLink]="['painel', item.id]"><mat-icon>edit</mat-icon></button></td>
+     <td> <button mat-raised-button color="files" [routerLink]="['painel', TabelaInicial.id]"><mat-icon>edit</mat-icon></button></td>
     </tr>
   </tbody>
-</table>
+</table> 
 <!-- <app-aniversarios></app-aniversarios> -->

@@ -7,7 +7,7 @@ import {
 } from '@angular/material/dialog';
 import { Sort } from '@angular/material/sort';
 import { ToastrService } from 'ngx-toastr';
-import { DadosPessoais, DadosProfissionais, Documentos, DocumentosColaboradores, SituacaoColaborador } from 'src/app/siscrh';
+import { DadosPessoais, DadosProfissionais, Documentos, DocumentosColaboradores, SituacaoColaborador, TabelaInicial } from 'src/app/siscrh';
 import { SiscrhService } from 'src/app/siscrh.service';
 import { FichaComponent } from '../../cadastro/ficha/ficha.component';
 
@@ -16,19 +16,19 @@ import { FichaComponent } from '../../cadastro/ficha/ficha.component';
   templateUrl: './tabela-colaboradores.component.html',
   styleUrls: ['./tabela-colaboradores.component.css'],
 })
+
+
+
 export class TabelaColaboradoresComponent implements OnInit {
   constructor(private siscrhService: SiscrhService, private toastr: ToastrService) {}
 
   filtro = new FormControl();
-
+  searchValue:any
   DocumentosColaboradores: DocumentosColaboradores = new DocumentosColaboradores();
 
   TiposDocumentos: Documentos[];
-
-  array2: any = [];
-  array: any = [];
-  teste: any;
-  search:any
+TabelaInicial:TabelaInicial[];
+  array: any = [ ];
   ngOnInit(): void {
 
     this.siscrhService.getDocumentosList().subscribe(
@@ -42,30 +42,26 @@ export class TabelaColaboradoresComponent implements OnInit {
     this.siscrhService.getDadosProfissionaisList().subscribe((data: any) => {
 
       for (let i in data) {
-       
-        if( data[i].setores != null){
-          this.array.push({
-            id: data[i].dadosPessoais.id,
-            nome: data[i].dadosPessoais.nome_completo,
-            setor: data[i].setores.setor,
-            situacao: [data[i].dadosPessoais.situacaoColaborador],
-          });
-        }else{
-          this.array.push({
-            id: data[i].dadosPessoais.id,
-            nome: data[i].dadosPessoais.nome_completo,
-            setor: "Não Definido",
-            situacao: [data[i].dadosPessoais.situacaoColaborador],
-          });
-        }
- 
-          
-}
-
-
-
-        
-    /*   console.log(this.array); */
+      if( data[i].setores != null){
+        this.array.push({
+          id: data[i].dadosPessoais.id,
+          nome: data[i].dadosPessoais.nome_completo,
+          setor: data[i].setores.setor,
+          status: data[i].dadosPessoais.situacaoColaborador.status,
+          acessoRede: data[i].dadosPessoais.situacaoColaborador.acessoRede,
+        });
+      }else{
+        this.array.push({
+          id: data[i].dadosPessoais.id,
+          nome: data[i].dadosPessoais.nome_completo,
+          setor: "Não Definido",
+          status: data[i].dadosPessoais.situacaoColaborador.status,
+          acessoRede: data[i].dadosPessoais.situacaoColaborador.acessoRede,
+        });
+      }
+    }
+    
+this.TabelaInicial = this.array
     },(error) => {
       console.log('error', error);
       this.toastr.error('Houve uma falha de conexão!', 'Erro!');
