@@ -28,7 +28,7 @@ export class TabelaColaboradoresComponent implements OnInit {
   array2: any = [];
   array: any = [];
   teste: any;
-
+  search:any
   ngOnInit(): void {
 
     this.siscrhService.getDocumentosList().subscribe(

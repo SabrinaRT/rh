@@ -192,6 +192,7 @@
                           matInput
                           [(ngModel)]="dadosPessoais.cep"
                           [ngModelOptions]="{ standalone: true }"
+                          (input)="validandoCEP(dadosPessoais.cep)"
                         />
                       </mat-form-field>
                     </div>

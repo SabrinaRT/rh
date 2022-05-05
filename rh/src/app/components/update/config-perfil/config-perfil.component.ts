@@ -62,7 +62,7 @@ export class ConfigPerfilComponent implements OnInit {
         'Por gentileza, criar um E-Mail Institucional PBprev para: \nNome Completo: ' + this.dadosPessoais.nome_completo + ' \nCPF: ' + this.dadosPessoais.cpf +'\nSetor: ' + this.setor;
         console.log(this.dadosProfissionais.email_institucional)
         this.mensagemCodataResetSenha =
-        'Por gentileza, resetar senha de E-Mail de: \nNome Completo: ' + this.dadosPessoais.nome_completo + ' \nCPF: ' + this.dadosPessoais.cpf +'\nSetor: ' + this.setor +'\nE-Mail Institucional: ' +  this.dadosProfissionais.email_institucional;
+        'Por gentileza, resetar senha de E-Mail de: \nNome Completo: ' + this.dadosPessoais.nome_completo + ' \nCPF: ' + this.dadosPessoais.cpf +'\nE-Mail Institucional: ' +  this.dadosProfissionais.email_institucional;
 
 
 
