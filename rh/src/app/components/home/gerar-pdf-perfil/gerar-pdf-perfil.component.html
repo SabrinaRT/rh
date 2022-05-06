@@ -1,77 +1,566 @@
+<div class="container px-4">
+  <div class="row gx-5">
+    <div class="col-12">
+      <div class="row">
+        <div class="col-6"><h2>Dados Pessoais</h2></div>
 
+        <div class="col-12">
+          <div class="mb-3">
+            <label class="form-label">Nome Completo</label>
+            <input
+              class="form-control form-control-sm"
+              type="text"
+              [(ngModel)]="dadosPessoais.nome_completo"
+              disabled
+              readonly
+            />
+          </div>
+        </div>
+        <div class="col-3">
+          <div class="mb-3">
+            <label class="form-label">CPF</label>
+            <input
+              class="form-control form-control-sm"
+              type="text"
+              [(ngModel)]="dadosPessoais.cpf"
+              disabled
+              readonly
+            />
+          </div>
+        </div>
 
-<table   id="customers" >    
-    
-    <tr>    
-      <td colspan="1"width="15%" >Nome Completo:  </td>    
-      <td colspan="6">{{dadosPessoais.nome_completo}}  </td>  
+        <div class="col-3">
+          <div class="mb-3">
+            <label class="form-label">Data de Nascimento</label>
+            <input
+              class="form-control form-control-sm"
+              type="text"
+              [(ngModel)]="dadosPessoais.data_nascimento"
+              disabled
+              readonly
+            />
+          </div>
+        </div>
+        <div class="col-3">
+          <div class="mb-3">
+            <label class="form-label">Nacionalidade</label>
+            <input
+              class="form-control form-control-sm"
+              type="text"
+              [(ngModel)]="dadosPessoais.nacionalidade"
+              disabled
+              readonly
+            />
+          </div>
+        </div>
+        <div class="col-3">
+          <div class="mb-3">
+            <label class="form-label">Naturalidade - UF</label>
+            <input
+              class="form-control form-control-sm"
+              type="text"
+              value="{{ dadosPessoais.naturalidade }} - {{
+                dadosPessoais.uf_naturalidade
+              }}"
+              disabled
+              readonly
+            />
+          </div>
+        </div>
 
-    </tr>  
- 
-    <tr>    
-        <td  style="width: 5px">CPF:  </td>    
-        <td colspan="1" width="15%" >{{dadosPessoais.cpf}}  </td>  
-         <td colspan="1" width="18%">Data de Nascimento:  </td>    
-        <td colspan="1" width="15%">{{dadosPessoais.data_nascimento}}  </td>  
-        <td colspan="2"> </td>   
-      </tr>  
+        <div class="col-3">
+          <div class="mb-3">
+            <label class="form-label">Identidade - UF</label>
+            <input
+              class="form-control form-control-sm"
+              type="text"
+              value="{{ dadosPessoais.identidade }} - {{
+                dadosPessoais.uf_identidade
+              }}"
+              disabled
+              readonly
+            />
+          </div>
+        </div>
 
-      <tr>    
-        <td colspan="1" width="5%">Identidade:  </td>    
-        <td colspan="1" width="15%">{{dadosPessoais.identidade}}   </td>   
-        <td colspan="1" width="3%">UF: </td> 
-        <td colspan="1" width="3%"> {{dadosPessoais.uf_identidade}} </td>
-      </tr>
-
-      <tr>    
-        <td>Naturalidade:  </td>    
-        <td>{{dadosPessoais.naturalidade}}     </td>    
-        <td>
-            UF:  {{dadosPessoais.uf_naturalidade}}
-        </td>
-      </tr>
-      <tr>    
-        <td>Titulo de Eleitor:  </td>    
-        <td> {{dadosPessoais.titulo_eleitor}}  </td>    
-      </tr> 
-      <tr>    
-        <td>PIS / PASEP:  </td>    
-        <td> {{dadosPessoais.pis_pasep}}  </td>    
-      </tr> 
-      <tr>    
-        <td>E-Mail:  </td>    
-        <td> {{dadosPessoais.email}}  </td>  
-        <td>Telefone:  </td>    
-        <td> {{dadosPessoais.telefone}}  </td>  
-        <td>Celular:  </td>    
-        <td> {{dadosPessoais.celular}}  </td>    
-      </tr> 
-    </table>  
-
-
-    <table   id="customers" >    
-  
-        <tr>    
-          <td>CEP: {{dadosPessoais.cep}} </td>    
-          <!-- <td>  </td>    --> 
-        </tr>  
-        <tr>    
-            <td>Endereço: {{dadosPessoais.endereco}}  </td>    
-           <!--  <td> </td>     -->
-            <td>Número: {{dadosPessoais.numero}}  </td>    
-            <td>Complemento: {{dadosPessoais.complemento}}</td>  
-          </tr>  
-          <tr>    
-            <td>Bairro:  </td>    
-            <td>{{dadosPessoais.bairro}}  </td>  
-            <td>Cidade: {{dadosPessoais.cidade}}   </td>   
-            <td>UF:  {{dadosPessoais.uf_cidade}} </td>
-          </tr>
-          <tr>    
-            <td> </td>    
-              
-            
-          </tr>
-    
+        <div class="col-3">
+          <div class="mb-3">
+            <label class="form-label">PIS / PASEP</label>
+            <input
+              class="form-control form-control-sm"
+              type="text"
+              [(ngModel)]="dadosPessoais.pis_pasep"
+              disabled
+              readonly
+            />
+          </div>
+        </div>
          
-        </table>  
+        <div class="col-3">
+          <div class="mb-3">
+            <label class="form-label">Titulo de Eleitor</label>
+            <input
+              class="form-control form-control-sm"
+              type="text"
+              [(ngModel)]="dadosPessoais.titulo_eleitor"
+              disabled
+              readonly
+            />
+          </div>
+        </div>
+        <div class="col-3" *ngIf="dadosEstadoCivil.estado_civil == 'Solteiro(a)'">
+            <div class="mb-3">
+              <label class="form-label">Estado Civil</label>
+              <input
+                class="form-control form-control-sm"
+                type="text"
+                [(ngModel)]="dadosEstadoCivil.estado_civil"
+                disabled
+                readonly
+              />
+            </div>
+          </div>
+      </div>
+      <div class="row">
+        <div class="col-3">
+          <div class="mb-3">
+            <label class="form-label">Celular</label>
+            <input
+              class="form-control form-control-sm"
+              type="text"
+              [(ngModel)]="dadosPessoais.celular"
+              disabled
+              readonly
+            />
+          </div>
+        </div>
+
+        <div class="col-3">
+          <div class="mb-3">
+            <label class="form-label">Telefone</label>
+            <input
+              class="form-control form-control-sm"
+              type="text"
+              [(ngModel)]="dadosPessoais.telefone"
+              disabled
+              readonly
+            />
+          </div>
+        </div>
+
+        <div class="col-6">
+          <div class="mb-3">
+            <label class="form-label">E-Mail</label>
+            <input
+              class="form-control form-control-sm"
+              type="text"
+              [(ngModel)]="dadosPessoais.email"
+              disabled
+              readonly
+            />
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-8">
+          <div class="mb-3">
+            <label class="form-label">Endereço</label>
+            <input
+              class="form-control form-control-sm"
+              type="text"
+              value="{{ dadosPessoais.endereco }}"
+              disabled
+              readonly
+            />
+          </div>
+        </div>
+        <div class="col-2">
+          <div class="mb-3">
+            <label class="form-label">Número</label>
+            <input
+              class="form-control form-control-sm"
+              type="text"
+              value="{{ dadosPessoais.numero }}"
+              disabled
+              readonly
+            />
+          </div>
+        </div>
+        <div class="col-2">
+          <div class="mb-3">
+            <label class="form-label">Complemento</label>
+            <input
+              class="form-control form-control-sm"
+              type="text"
+              value="{{ dadosPessoais.complemento }}"
+              disabled
+              readonly
+            />
+          </div>
+        </div>
+        <div class="col-3">
+          <div class="mb-3">
+            <label class="form-label">Bairro</label>
+            <input
+              class="form-control form-control-sm"
+              type="text"
+              value="{{ dadosPessoais.bairro }}"
+              disabled
+              readonly
+            />
+          </div>
+        </div>
+
+        <div class="col-3">
+          <div class="mb-3">
+            <label class="form-label">CEP</label>
+            <input
+              class="form-control form-control-sm"
+              type="text"
+              value="{{ dadosPessoais.cep }}"
+              disabled
+              readonly
+            />
+          </div>
+        </div>
+        <div class="col-4">
+          <div class="mb-3">
+            <label class="form-label">Cidade - UF</label>
+            <input
+              class="form-control form-control-sm"
+              type="text"
+              value="{{ dadosPessoais.cidade }} - {{
+                dadosPessoais.uf_cidade
+              }} "
+              disabled
+              readonly
+            />
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-12">
+          <div class="mb-3">
+            <label class="form-label">Nome do Pai</label>
+            <input
+              class="form-control form-control-sm"
+              type="text"
+              [(ngModel)]="dadosPessoais.nome_pai"
+              disabled
+              readonly
+            />
+          </div>
+        </div>
+        <div class="col-12">
+          <div class="mb-3">
+            <label class="form-label">Nome da Mãe</label>
+            <input
+              class="form-control form-control-sm"
+              type="text"
+              [(ngModel)]="dadosPessoais.nome_mae"
+              disabled
+              readonly
+            />
+          </div>
+        </div>
+      </div>
+      <br />
+      <div class="row">
+        <div class="col-6"><h2>Dados Profissionais</h2></div>
+      </div>
+      <div class="row">
+        <div class="col-6">
+          <div class="mb-3">
+            <label class="form-label">Setor</label>
+            <input
+              class="form-control form-control-sm"
+              type="text"
+              [(ngModel)]="setor"
+              disabled
+              readonly
+            />
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="mb-3">
+            <label class="form-label">Vínculo</label>
+            <input
+              class="form-control form-control-sm"
+              type="text"
+              [(ngModel)]="vinculo"
+              disabled
+              readonly
+            />
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="mb-3">
+            <label class="form-label">Cargo</label>
+            <input
+              class="form-control form-control-sm"
+              type="text"
+              [(ngModel)]="dadosProfissionais.cargo"
+              disabled
+              readonly
+            />
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="mb-3">
+            <label class="form-label">Função</label>
+            <input
+              class="form-control form-control-sm"
+              type="text"
+              [(ngModel)]="dadosProfissionais.funcao"
+              disabled
+              readonly
+            />
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="mb-3">
+            <label class="form-label">Qualificação Profissional</label>
+            <input
+              class="form-control form-control-sm"
+              type="text"
+              [(ngModel)]="dadosProfissionais.qualificacao_profissional"
+              disabled
+              readonly
+            />
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="mb-3">
+            <label class="form-label">Escolaridade</label>
+            <input
+              class="form-control form-control-sm"
+              type="text"
+              [(ngModel)]="dadosProfissionais.escolaridade"
+              disabled
+              readonly
+            />
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="mb-3">
+            <label class="form-label">Data de Admissão</label>
+            <input
+              class="form-control form-control-sm"
+              type="text"
+              [(ngModel)]="dadosProfissionais.data_admissao"
+              disabled
+              readonly
+            />
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="mb-3">
+            <label class="form-label">Data de Exoneração</label>
+            <input
+              class="form-control form-control-sm"
+              type="text"
+              [(ngModel)]="dadosProfissionais.data_exoneracao"
+              disabled
+              readonly
+            />
+          </div>
+        </div>
+      </div>
+      <div class="row" *ngIf="dadosPessoais.matriculas.length > 0">
+        <div class="col-12">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th>Matrícula</th>
+                <th>Observação</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let i of dadosPessoais.matriculas">
+                <td>{{ i.matricula }}</td>
+                <td>{{ i.observacao }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <br />
+      <div class="row">
+        <div class="col-6"><h2>Dados Bancários</h2></div>
+      </div>
+
+      <div class="row">
+        <div class="col-3">
+          <div class="mb-3">
+            <label class="form-label">Banco</label>
+            <input
+              class="form-control form-control-sm"
+              type="text"
+              [(ngModel)]="dadosBancarios.banco"
+              disabled
+              readonly
+            />
+          </div>
+        </div>
+        <div class="col-3">
+          <div class="mb-3">
+            <label class="form-label">Conta Corrente</label>
+            <input
+              class="form-control form-control-sm"
+              type="text"
+              [(ngModel)]="dadosBancarios.conta_corrente"
+              disabled
+              readonly
+            />
+          </div>
+        </div>
+        <div class="col-3">
+          <div class="mb-3">
+            <label class="form-label">Código</label>
+            <input
+              class="form-control form-control-sm"
+              type="text"
+              [(ngModel)]="dadosBancarios.codigo"
+              disabled
+              readonly
+            />
+          </div>
+        </div>
+        <div class="col-3">
+          <div class="mb-3">
+            <label class="form-label">Agência</label>
+            <input
+              class="form-control form-control-sm"
+              type="text"
+              [(ngModel)]="dadosBancarios.agencia"
+              disabled
+              readonly
+            />
+          </div>
+        </div>
+      </div>
+     <span *ngIf="dadosPessoais.matriculas.length == 1"> <br ></span>
+     <span
+     *ngIf="
+     dadosEstadoCivil.estado_civil == 'Casado(a)' ||
+     dadosEstadoCivil.estado_civil == 'Viúvo(a)' ||
+     dadosEstadoCivil.estado_civil == 'Separado(a) Júdicialmente' ||
+     dadosEstadoCivil.estado_civil == 'Divorciado(a)' ||
+     dadosEstadoCivil.estado_civil == 'União Estável' ||
+     dadosEstadoCivil.estado_civil == 'Outros'
+   "
+     >
+          <div class="row" >
+            <div class="col-6"><h2>Dados Estado Civil</h2></div>
+          </div>
+    
+          <div class="row">
+            <div class="col-4">
+              <div class="mb-3">
+                <label class="form-label">Estado Civil</label>
+                <input
+                  class="form-control form-control-sm"
+                  type="text"
+                  [(ngModel)]="dadosEstadoCivil.estado_civil"
+                  disabled
+                  readonly
+                />
+              </div>
+            </div>
+          </div>
+          <div
+            class="row"
+           
+          >
+            <div class="col-12">
+              <div class="mb-3">
+                <label class="form-label">Nome Completo Cônjuge</label>
+                <input
+                  class="form-control form-control-sm"
+                  type="text"
+                  [(ngModel)]="dadosEstadoCivil.nome_completo_conjuge"
+                  disabled
+                  readonly
+                />
+              </div>
+            </div>
+            <div class="col-3">
+                <div class="mb-3">
+                  <label class="form-label">CPF Cônjuge</label>
+                  <input
+                    class="form-control form-control-sm"
+                    type="text"
+                    [(ngModel)]="dadosEstadoCivil.cpf_conjuge"
+                    disabled
+                    readonly
+                  />
+                </div>
+              </div>
+              <div class="col-4">
+                <div class="mb-3">
+                  <label class="form-label">Data de Nascimento Cônjuge</label>
+                  <input
+                    class="form-control form-control-sm"
+                    type="text"
+                    [(ngModel)]="dadosEstadoCivil.data_nascimento_conjuge"
+                    disabled
+                    readonly
+                  />
+                </div>
+              </div>
+              <div class="col-3">
+                <div class="mb-3">
+                  <label class="form-label">Identidade Cônjuge - UF</label>
+                  <input
+                    class="form-control form-control-sm"
+                    type="text"
+                    value="{{ dadosEstadoCivil.identidade_conjuge }} - {{
+                        dadosEstadoCivil.uf_identidade_conjuge
+                    }}"
+                    disabled
+                    readonly
+                  />
+                </div>
+              </div>
+              <div class="col-12">
+                <div class="mb-3">
+                  <label class="form-label">Profissão / Atividade</label>
+                  <input
+                    class="form-control form-control-sm"
+                    type="text"
+                    value="{{ dadosEstadoCivil.profissao_atividade}}"
+                    disabled
+                    readonly
+                  />
+                </div>
+              </div>
+          </div>
+     </span>
+      <br />
+      <div class="row" *ngIf="dadosPessoais.dependentes.length > 0">
+        <div class="col-6"><h2>Dependentes</h2></div>
+      </div>
+      <div class="row" *ngIf="dadosPessoais.dependentes.length > 0">
+        <div class="col-12">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th>Nome Completo</th>
+                <th>CPF</th>
+                <th>Data de Nascimento</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let i of dadosPessoais.dependentes">
+                <td>{{ i.nome_completo_dependente }}</td>
+                <td>{{ i.cpf_dependente }}</td>
+                <td>{{ i.data_nascimento_dependente }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
