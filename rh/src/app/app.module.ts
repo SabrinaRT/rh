@@ -40,6 +40,7 @@ import { ToastrModule } from 'ngx-toastr';
 import {ClipboardModule} from '@angular/cdk/clipboard';
 import {MatRadioModule} from '@angular/material/radio';
 import { SearchfilterPipe } from './searchfilter.pipe';
+import { TotalComponent } from './components/gerador-pdf/total/total.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -55,7 +56,8 @@ import { SearchfilterPipe } from './searchfilter.pipe';
     ArquivosConfigComponent,
     VinculosComponent,
     SetoresComponent,
-    SearchfilterPipe
+    SearchfilterPipe,
+    TotalComponent
   ],
   imports: [
     ScrollingModule,

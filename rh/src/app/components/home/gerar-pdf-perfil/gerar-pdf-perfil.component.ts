@@ -17,10 +17,15 @@ export class GerarPdfPerfilComponent implements OnInit {
 
   constructor(private siscrhService:SiscrhService, private route:ActivatedRoute) {
     this.IDColab = this.route.snapshot.params["id"];
+
+  
    }
+
+   
+
 IDColab:any
   ngOnInit(): void {
-
+   
     this.siscrhService.getColaboradorById(this.IDColab).subscribe((data:any)=>{
       this.dadosPessoais = data
       console.log(data)
@@ -70,9 +75,14 @@ IDColab:any
     (error) => {
       console.log('error', error);
     });
-
+    
   }
   setor:any
   vinculo:any
+
+  print:any
+
+  
+
 
 }

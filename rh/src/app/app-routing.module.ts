@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { FichaComponent } from './components/cadastro/ficha/ficha.component';
 import { PainelConfigComponent } from './components/config/painel-config/painel-config.component';
+import { TotalComponent } from './components/gerador-pdf/total/total.component';
 import { GerarPdfPerfilComponent } from './components/home/gerar-pdf-perfil/gerar-pdf-perfil.component';
 import { TabelaColaboradoresComponent } from './components/home/tabela-colaboradores/tabela-colaboradores.component';
 import { FichaUpdateComponent } from './components/update/ficha-update/ficha-update.component';
@@ -16,6 +17,7 @@ const routes: Routes = [
   {path:"pdf/:id", component:  GerarPdfPerfilComponent},
   {path:"config", component: PainelConfigComponent},
   {path:"pdf-perfil/:id", component: GerarPdfPerfilComponent},
+  {path:"gerador", component: TotalComponent},
 ];
 
 @NgModule({
