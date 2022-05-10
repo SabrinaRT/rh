@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChildren, AfterViewInit  } from '@angular/core';
 import { Sort } from '@angular/material/sort';
 import { Setores, Vinculos } from 'src/app/siscrh';
 import { SiscrhService } from 'src/app/siscrh.service';
@@ -19,10 +19,28 @@ export class TotalComponent implements OnInit {
 
   print: any;
 
+ 
+
   status: any;
   acessoRede:any
 
- 
+  @ViewChildren('myVar') createdItems:any;
+  
+  mouseEnter(div : string){
+    this.print = this.createdItems.toArray().length;
+ }
+
+ mouseLeave(div : string){
+   console.log('mouse leave :' + div);
+ }
+  
+  clickMe(){
+
+    
+  }
+  teste() {
+    console.log(this.createdItems.toArray().length);
+  }
 
   sortData(sort: Sort) {
     const data = this.array.slice();

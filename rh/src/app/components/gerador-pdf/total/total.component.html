@@ -1,10 +1,10 @@
 <!-- <div class="container "> -->
 
-  <div class="row">
+  <div class="row" (mouseenter) ="mouseEnter('div a') "  (mouseleave) ="mouseLeave('div A')">
     <div class="col-6">
       <mat-form-field appearance="outline" class="col-12">
         <mat-label>Setor</mat-label>
-        <mat-select [(ngModel)]="setor" [ngModelOptions]="{ standalone: true }">
+        <mat-select [(ngModel)]="setor" [ngModelOptions]="{ standalone: true }" >
           <mat-option value="Todos"> Todos </mat-option>
           <mat-option value="Não Definido"> Não Definido </mat-option>
           <mat-option *ngFor="let setores of setores" [value]="setores.setor">
@@ -62,15 +62,19 @@
         mat-raised-button
         color="primary"
         style="margin-top: 15px"
-        id="printPageButton" onClick="window.print();"
+        id="printPageButton" 
+        
+        onClick="window.print();"
+        
       >
         Imprimir
       </button>
     </div>
+    
   </div>
 <br>
-
-
+<mat-card-title>Total de Colaboradores: {{print}}</mat-card-title>
+<br>
 <div class="row" id="component1">
   <div class="col-12">
     <table class="table table-hover" matSort (matSortChange)="sortData($event)">
@@ -85,7 +89,7 @@
       </thead>
       <tbody *ngFor="let i of array; count as c">
       
-          <tr
+          <tr #myVar 
             *ngIf="
               setor == 'Todos' &&
               vinculo == 'Todos' &&
@@ -113,7 +117,7 @@
               >
             </td>
           </tr>
-        <tr *ngIf="i.setor == setor && i.vinculo == vinculo && i.status == status && i.acessoRede == acessoRede" >
+        <tr #myVar *ngIf="i.setor == setor && i.vinculo == vinculo && i.status == status && i.acessoRede == acessoRede" >
           <td>{{ i.nome }}</td>
           <td>{{ i.setor }}</td>
           <td>{{ i.vinculo }}</td>
@@ -135,7 +139,7 @@
           </td>
         </tr>
 
-        <tr *ngIf="setor == 'Todos' && i.vinculo == vinculo && i.status == status && i.acessoRede == acessoRede" >
+        <tr #myVar *ngIf="setor == 'Todos' && i.vinculo == vinculo && i.status == status && i.acessoRede == acessoRede" >
           <td>{{ i.nome }}</td>
           <td>{{ i.setor }}</td>
           <td>{{ i.vinculo }}</td>
@@ -157,7 +161,7 @@
           </td>
           
         </tr>
-        <tr *ngIf="i.setor == setor && vinculo == 'Todos' && i.status == status && i.acessoRede == acessoRede" >
+        <tr #myVar *ngIf="i.setor == setor && vinculo == 'Todos' && i.status == status && i.acessoRede == acessoRede" >
           <td>{{ i.nome }}</td>
           <td>{{ i.setor }}</td>
           <td>{{ i.vinculo }}</td>
@@ -178,7 +182,7 @@
             >
           </td>
         </tr>
-        <tr *ngIf="i.setor == setor && vinculo == 'Todos' && status == 'Todos' && acessoRede == 'Todos'" >
+        <tr #myVar *ngIf="i.setor == setor && vinculo == 'Todos' && status == 'Todos' && acessoRede == 'Todos'" >
           <td>{{ i.nome }}</td>
           <td>{{ i.setor }}</td>
           <td>{{ i.vinculo }}</td>
@@ -199,7 +203,7 @@
             >
           </td>
         </tr>
-        <tr *ngIf="setor == 'Todos' && i.vinculo == vinculo && status == 'Todos' && acessoRede == 'Todos'" >
+        <tr #myVar *ngIf="setor == 'Todos' && i.vinculo == vinculo && status == 'Todos' && acessoRede == 'Todos'" >
           <td>{{ i.nome }}</td>
           <td>{{ i.setor }}</td>
           <td>{{ i.vinculo }}</td>
@@ -220,7 +224,7 @@
             >
           </td>
         </tr>
-        <tr *ngIf="setor == 'Todos' && vinculo == 'Todos' && status == 'Todos' && i.acessoRede == acessoRede" >
+        <tr #myVar *ngIf="setor == 'Todos' && vinculo == 'Todos' && status == 'Todos' && i.acessoRede == acessoRede" >
           <td>{{ i.nome }}</td>
           <td>{{ i.setor }}</td>
           <td>{{ i.vinculo }}</td>
@@ -241,7 +245,7 @@
             >
           </td>
         </tr>
-        <tr *ngIf="setor == 'Todos' && vinculo == 'Todos' && i.status == status  && acessoRede == 'Todos'" >
+        <tr #myVar *ngIf="setor == 'Todos' && vinculo == 'Todos' && i.status == status  && acessoRede == 'Todos'" >
           <td>{{ i.nome }}</td>
           <td>{{ i.setor }}</td>
           <td>{{ i.vinculo }}</td>
@@ -263,7 +267,7 @@
           </td>
         </tr>
 
-        <tr *ngIf="setor == 'Todos' && vinculo == 'Todos' && i.status == status  && i.acessoRede == acessoRede" >
+        <tr #myVar *ngIf="setor == 'Todos' && vinculo == 'Todos' && i.status == status  && i.acessoRede == acessoRede" >
           <td>{{ i.nome }}</td>
           <td>{{ i.setor }}</td>
           <td>{{ i.vinculo }}</td>
@@ -284,7 +288,7 @@
             >
           </td>
         </tr>
-        <tr *ngIf="i.setor == setor && i.vinculo == vinculo && status == 'Todos'  && acessoRede == 'Todos'" >
+        <tr #myVar *ngIf="i.setor == setor && i.vinculo == vinculo && status == 'Todos'  && acessoRede == 'Todos'" >
           <td>{{ i.nome }}</td>
           <td>{{ i.setor }}</td>
           <td>{{ i.vinculo }}</td>
@@ -305,7 +309,7 @@
             >
           </td>
         </tr>
-        <tr *ngIf="i.setor == setor && vinculo == 'Todos' && status == 'Todos'  && i.acessoRede == acessoRede" >
+        <tr #myVar *ngIf="i.setor == setor && vinculo == 'Todos' && status == 'Todos'  && i.acessoRede == acessoRede" >
           <td>{{ i.nome }}</td>
           <td>{{ i.setor }}</td>
           <td>{{ i.vinculo }}</td>
@@ -326,7 +330,7 @@
             >
           </td>
         </tr>
-        <tr *ngIf="i.setor == setor && vinculo == 'Todos' && i.status == status  && acessoRede == 'Todos'" >
+        <tr #myVar *ngIf="i.setor == setor && vinculo == 'Todos' && i.status == status  && acessoRede == 'Todos'" >
           <td>{{ i.nome }}</td>
           <td>{{ i.setor }}</td>
           <td>{{ i.vinculo }}</td>
@@ -347,7 +351,7 @@
             >
           </td>
         </tr>
-        <tr *ngIf="setor == 'Todos' && i.vinculo == vinculo && i.status == status  && acessoRede == 'Todos'" >
+        <tr #myVar *ngIf="setor == 'Todos' && i.vinculo == vinculo && i.status == status  && acessoRede == 'Todos'" >
           <td>{{ i.nome }}</td>
           <td>{{ i.setor }}</td>
           <td>{{ i.vinculo }}</td>
@@ -368,7 +372,7 @@
             >
           </td>
         </tr>
-        <tr *ngIf="setor == 'Todos' && i.vinculo == vinculo && status == 'Todos'  && i.acessoRede == acessoRede" >
+        <tr #myVar *ngIf="setor == 'Todos' && i.vinculo == vinculo && status == 'Todos'  && i.acessoRede == acessoRede" >
           <td>{{ i.nome }}</td>
           <td>{{ i.setor }}</td>
           <td>{{ i.vinculo }}</td>
@@ -389,7 +393,7 @@
             >
           </td>
         </tr>
-        <tr *ngIf="i.setor == setor && i.vinculo == vinculo && status == 'Todos'  && i.acessoRede == acessoRede" >
+        <tr #myVar *ngIf="i.setor == setor && i.vinculo == vinculo && status == 'Todos'  && i.acessoRede == acessoRede" >
           <td>{{ i.nome }}</td>
           <td>{{ i.setor }}</td>
           <td>{{ i.vinculo }}</td>
@@ -410,7 +414,7 @@
             >
           </td>
         </tr>
-        <tr *ngIf="i.setor == setor && i.vinculo == vinculo && i.status == status  && acessoRede == 'Todos'" >
+        <tr #myVar *ngIf="i.setor == setor && i.vinculo == vinculo && i.status == status  && acessoRede == 'Todos'" >
           <td>{{ i.nome }}</td>
           <td>{{ i.setor }}</td>
           <td>{{ i.vinculo }}</td>

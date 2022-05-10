@@ -7,7 +7,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { MatStepperIntl } from '@angular/material/stepper';
+import { MatStepper, MatStepperIntl } from '@angular/material/stepper';
 import { ToastrService } from 'ngx-toastr';
 import {
   DadosEstadoCivil,
@@ -345,7 +345,7 @@ export class FichaComponent implements OnInit {
   }
 
   IDSitu: any;
-  salvarDadosPessoais() {
+  salvarDadosPessoais(stepper: MatStepper) {
     this.dadosPessoais.id = this.IDColab;
     this.dadosPessoais.nome_completo =
       this.dadosPessoais.nome_completo.toUpperCase();
@@ -366,6 +366,7 @@ export class FichaComponent implements OnInit {
     this.siscrhService.createColaborador(this.dadosPessoais).subscribe(
       (data: any) => {
         this.IDColab = data.id;
+
 
         this.situacaoColaborador.acessoRede = false;
         this.situacaoColaborador.status = true;
@@ -420,6 +421,7 @@ export class FichaComponent implements OnInit {
         this.resgatarDocumentos();
         this.gerarMensagemFinal();
         this.showSuccess();
+        stepper.next();
       },
       (error) => {
         console.log('error', error);
@@ -455,7 +457,7 @@ export class FichaComponent implements OnInit {
     );
   }
 
-  salvarEstadoCivil() {
+  salvarEstadoCivil(stepper: MatStepper) {
     this.dadosEstadoCivil.id = this.IDEstado;
     if (this.dadosEstadoCivil.estado_civil == 'Solteiro(a)') {
       this.dadosEstadoCivil.cpf_conjuge = null;
@@ -484,6 +486,7 @@ export class FichaComponent implements OnInit {
         this.showWarn();
       }
     );
+    stepper.next();
   }
   editarDependente(idDependente: any) {
     console.log(idDependente);
@@ -536,7 +539,7 @@ export class FichaComponent implements OnInit {
 
   setor: any;
   vinculo: any;
-  salvarDadosProfissionais() {
+  salvarDadosProfissionais(stepper:MatStepper) {
     this.dadosProfissionais.id = this.IDProfi;
 
     if (this.setor != undefined) {
@@ -556,6 +559,7 @@ export class FichaComponent implements OnInit {
           this.IDProfi = data.id;
           this.showSuccess();
           this.gerarMensagemFinal();
+          stepper.next();
         },
         (error) => {
           console.log('error', error);
@@ -564,13 +568,14 @@ export class FichaComponent implements OnInit {
       );
   }
 
-  salvarDadosBancarios() {
+  salvarDadosBancarios(stepper:MatStepper) {
     this.dadosBancarios.id = this.IDBanco;
     this.dadosBancarios.dadosPessoais = { id: this.IDColab };
     this.siscrhService.createDadosBancarios(this.dadosBancarios).subscribe(
       (data: any) => {
         this.IDBanco = data.id;
         this.showSuccess();
+        stepper.next();
       },
       (error) => {
         console.log('error', error);

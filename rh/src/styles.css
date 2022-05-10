@@ -152,3 +152,44 @@ tr:hover {background-color: #f3f3f3; color:#3F51B5}
 .mat-radio-button.mat-accent .mat-radio-ripple .mat-ripple-element {
     background-color:rgb(255, 37, 37,.26)
 }
+
+
+
+
+
+
+
+.mat-button.mat-config,
+.mat-stroked-button.mat-config {
+    color: #8b99b1 ;
+}
+.mat-button.mat-config:hover,
+.mat-stroked-button.mat-config:hover {
+  background-color: #f0fff3;
+}
+
+.mat-raised-button.mat-config,
+.mat-flat-button.mat-config,
+.mat-fab.mat-config,
+.mat-mini-fab.mat-config {
+  color: #f0fff3;
+  background-color: #8b99b1 ;
+}
+
+.mat-icon-button.mat-config {
+  color:#8b99b1 ;
+}
+
+.mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle{
+  border-color:#8b99b1 ;
+}
+
+.mat-radio-button.mat-accent .mat-radio-inner-circle{
+  color:#8b99b1 ;
+  background-color:#8b99b1 ;
+}
+
+.mat-radio-button.mat-accent .mat-radio-ripple .mat-ripple-element {
+    background-color:rgb(255, 37, 37,.26)
+}
+

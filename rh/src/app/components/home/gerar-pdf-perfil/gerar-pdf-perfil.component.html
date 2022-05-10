@@ -1,11 +1,15 @@
-<button
-        mat-raised-button
-        color="primary"
-        style="margin-top: 15px"
-        id="printPageButton" onClick="window.print();"
-      >
-        Imprimir
-      </button>
+<button mat-raised-button color="accent"  [routerLink]="['']"  id="printPageButton">
+  <mat-icon>arrow_back</mat-icon>
+</button>
+
+      <button
+      mat-raised-button
+      color="primary"
+      style="margin-top: 15px"
+      id="printPageButton" onClick="window.print();"
+    >
+      Imprimir
+    </button>
 <div>
   <div class="container px-4" >
     <div class="row gx-5">

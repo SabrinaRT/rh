@@ -176,8 +176,8 @@ export class FichaUpdateComponent implements OnInit {
 
   showSuccess() {
     this.toastr.success(
-      'Dados foram cadastrados com sucesso no sistema!',
-      'Dados Registrados'
+      'Dados foram atualizados com sucesso no sistema!',
+      'Dados Atualizados'
     );
   }
   Usuario: any;

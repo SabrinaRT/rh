@@ -1,9 +1,12 @@
 <mat-toolbar color="primary">
-  <button mat-raised-button color="accent" [routerLink]="['config']">
+  <button mat-raised-button color="config" [routerLink]="['config']">
     <mat-icon>settings</mat-icon>
   </button>
   <button mat-raised-button color="edit" [routerLink]="['gerador']">
     <mat-icon>picture_as_pdf</mat-icon>
+  </button>
+  <button mat-raised-button color="accent" [routerLink]="['add']">
+    <mat-icon>person_add</mat-icon>
   </button>
 
   <span class="example-spacer"></span>

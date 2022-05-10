@@ -355,8 +355,8 @@
                         mat-raised-button
                         color="primary"
                         class="col-12"
-                        matStepperNext
-                        (click)="salvarDadosPessoais()"
+                        
+                        (click)="salvarDadosPessoais(stepper)"
                         [disabled]="botaoValido"
                       >
                         Continuar
@@ -531,8 +531,7 @@
                         mat-raised-button
                         color="primary"
                         class="col-12"
-                        matStepperNext
-                        (click)="salvarEstadoCivil()"
+                        (click)="salvarEstadoCivil(stepper)"
                         [disabled]="botaoValidoCon"
                       >
                         Continuar
@@ -944,8 +943,7 @@
                         mat-raised-button
                         color="primary"
                         class="col-12"
-                        matStepperNext
-                        (click)="salvarDadosProfissionais()"
+                        (click)="salvarDadosProfissionais(stepper)"
                       >
                         Continuar
                       </button>
@@ -1033,8 +1031,7 @@
                         mat-raised-button
                         color="primary"
                         class="col-12"
-                        matStepperNext
-                        (click)="salvarDadosBancarios()"
+                        (click)="salvarDadosBancarios(stepper)"
                       >
                         Continuar
                       </button>

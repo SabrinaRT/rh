@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { DadosPessoais, DadosProfissionais, SituacaoColaborador } from 'src/app/siscrh';
 import { SiscrhService } from 'src/app/siscrh.service';
@@ -15,9 +15,13 @@ export class ConfigPerfilComponent implements OnInit {
   dadosProfissionais:DadosProfissionais = new DadosProfissionais();
   situacaoColaborador:SituacaoColaborador = new SituacaoColaborador();
 
-  constructor(private siscrhService:SiscrhService,  private route: ActivatedRoute, private toastr: ToastrService) {
+  constructor(private siscrhService:SiscrhService,  private route: ActivatedRoute, private toastr: ToastrService,private router: Router) {
     this.IDColab= this.route.snapshot.params["id"];
   
+  }
+
+  teste(){
+    this.router.navigate(['pdf-perfil', this.IDColab]); 
   }
 
   nome:any
