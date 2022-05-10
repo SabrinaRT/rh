@@ -1,22 +1,28 @@
-<button mat-raised-button color="accent"  [routerLink]="['']"  id="printPageButton">
+<button
+  mat-raised-button
+  color="accent"
+  [routerLink]="['']"
+  id="printPageButton"
+>
   <mat-icon>arrow_back</mat-icon>
 </button>
 
-      <button
-      mat-raised-button
-      color="primary"
-      style="margin-top: 15px"
-      id="printPageButton" onClick="window.print();"
-    >
-      Imprimir
-    </button>
+<button
+  mat-raised-button
+  color="primary"
+  style="margin-top: 15px"
+  id="printPageButton"
+  onClick="window.print();"
+>
+  Imprimir
+</button>
 <div>
-  <div class="container px-4" >
+  <div class="container px-4">
     <div class="row gx-5">
       <div class="col-12">
         <div class="row">
           <div class="col-6"><h2>Dados Pessoais</h2></div>
-  
+
           <div class="col-12">
             <div class="mb-3">
               <label class="form-label">Nome Completo</label>
@@ -41,7 +47,7 @@
               />
             </div>
           </div>
-  
+
           <div class="col-3">
             <div class="mb-3">
               <label class="form-label">Data de Nascimento</label>
@@ -80,7 +86,7 @@
               />
             </div>
           </div>
-  
+
           <div class="col-3">
             <div class="mb-3">
               <label class="form-label">Identidade - UF</label>
@@ -95,7 +101,7 @@
               />
             </div>
           </div>
-  
+
           <div class="col-3">
             <div class="mb-3">
               <label class="form-label">PIS / PASEP</label>
@@ -108,7 +114,7 @@
               />
             </div>
           </div>
-           
+
           <div class="col-3">
             <div class="mb-3">
               <label class="form-label">Titulo de Eleitor</label>
@@ -121,18 +127,21 @@
               />
             </div>
           </div>
-          <div class="col-3" *ngIf="dadosEstadoCivil.estado_civil == 'Solteiro(a)'">
-              <div class="mb-3">
-                <label class="form-label">Estado Civil</label>
-                <input
-                  class="form-control form-control-sm"
-                  type="text"
-                  [(ngModel)]="dadosEstadoCivil.estado_civil"
-                  disabled
-                  readonly
-                />
-              </div>
+          <div
+            class="col-3"
+            *ngIf="dadosEstadoCivil.estado_civil == 'Solteiro(a)'"
+          >
+            <div class="mb-3">
+              <label class="form-label">Estado Civil</label>
+              <input
+                class="form-control form-control-sm"
+                type="text"
+                [(ngModel)]="dadosEstadoCivil.estado_civil"
+                disabled
+                readonly
+              />
             </div>
+          </div>
         </div>
         <div class="row">
           <div class="col-3">
@@ -147,7 +156,7 @@
               />
             </div>
           </div>
-  
+
           <div class="col-3">
             <div class="mb-3">
               <label class="form-label">Telefone</label>
@@ -160,7 +169,7 @@
               />
             </div>
           </div>
-  
+
           <div class="col-6">
             <div class="mb-3">
               <label class="form-label">E-Mail</label>
@@ -223,7 +232,7 @@
               />
             </div>
           </div>
-  
+
           <div class="col-3">
             <div class="mb-3">
               <label class="form-label">CEP</label>
@@ -251,7 +260,7 @@
             </div>
           </div>
         </div>
-  
+
         <div class="row">
           <div class="col-12">
             <div class="mb-3">
@@ -278,7 +287,7 @@
             </div>
           </div>
         </div>
-      
+
         <div class="row">
           <div class="col-6"><h2>Dados Profissionais</h2></div>
         </div>
@@ -410,12 +419,11 @@
             </table>
           </div>
         </div>
-      
+
         <div class="row">
-  
           <div class="col-6"><h2>Dados Bancários</h2></div>
         </div>
-  
+
         <div class="row">
           <div class="col-3">
             <div class="mb-3">
@@ -466,106 +474,107 @@
             </div>
           </div>
         </div>
-       <span *ngIf="dadosPessoais.matriculas.length == 1"> <br ></span>
-       <span
-       *ngIf="
-       dadosEstadoCivil.estado_civil == 'Casado(a)' ||
-       dadosEstadoCivil.estado_civil == 'Viúvo(a)' ||
-       dadosEstadoCivil.estado_civil == 'Separado(a) Júdicialmente' ||
-       dadosEstadoCivil.estado_civil == 'Divorciado(a)' ||
-       dadosEstadoCivil.estado_civil == 'União Estável' ||
-       dadosEstadoCivil.estado_civil == 'Outros'
-     "
-       >
-            <div class="row" >
-              <div class="col-6"><h2>Dados Estado Civil</h2></div>
-            </div>
-      
-            <div class="row">
-              <div class="col-4">
-                <div class="mb-3">
-                  <label class="form-label">Estado Civil</label>
-                  <input
-                    class="form-control form-control-sm"
-                    type="text"
-                    [(ngModel)]="dadosEstadoCivil.estado_civil"
-                    disabled
-                    readonly
-                  />
-                </div>
+        <span *ngIf="dadosPessoais.matriculas.length == 1"> <br /></span>
+        <span
+          *ngIf="
+            dadosEstadoCivil.estado_civil == 'Casado(a)' ||
+            dadosEstadoCivil.estado_civil == 'Viúvo(a)' ||
+            dadosEstadoCivil.estado_civil == 'Separado(a) Júdicialmente' ||
+            dadosEstadoCivil.estado_civil == 'Divorciado(a)' ||
+            dadosEstadoCivil.estado_civil == 'União Estável' ||
+            dadosEstadoCivil.estado_civil == 'Outros'
+          "
+        >
+          <div class="row">
+            <div class="col-6"><h2>Dados Estado Civil</h2></div>
+          </div>
+
+          <div class="row">
+            <div class="col-4">
+              <div class="mb-3">
+                <label class="form-label">Estado Civil</label>
+                <input
+                  class="form-control form-control-sm"
+                  type="text"
+                  [(ngModel)]="dadosEstadoCivil.estado_civil"
+                  disabled
+                  readonly
+                />
               </div>
             </div>
-            <div
-              class="row"
-             
-            >
-              <div class="col-12">
-                <div class="mb-3">
-                  <label class="form-label">Nome Completo Cônjuge</label>
-                  <input
-                    class="form-control form-control-sm"
-                    type="text"
-                    [(ngModel)]="dadosEstadoCivil.nome_completo_conjuge"
-                    disabled
-                    readonly
-                  />
-                </div>
+          </div>
+          <div class="row">
+            <div class="col-12">
+              <div class="mb-3">
+                <label class="form-label">Nome Completo Cônjuge</label>
+                <input
+                  class="form-control form-control-sm"
+                  type="text"
+                  [(ngModel)]="dadosEstadoCivil.nome_completo_conjuge"
+                  disabled
+                  readonly
+                />
               </div>
-              <div class="col-3">
-                  <div class="mb-3">
-                    <label class="form-label">CPF Cônjuge</label>
-                    <input
-                      class="form-control form-control-sm"
-                      type="text"
-                      [(ngModel)]="dadosEstadoCivil.cpf_conjuge"
-                      disabled
-                      readonly
-                    />
-                  </div>
-                </div>
-                <div class="col-4">
-                  <div class="mb-3">
-                    <label class="form-label">Data de Nascimento Cônjuge</label>
-                    <input
-                      class="form-control form-control-sm"
-                      type="text"
-                      [(ngModel)]="dadosEstadoCivil.data_nascimento_conjuge"
-                      disabled
-                      readonly
-                    />
-                  </div>
-                </div>
-                <div class="col-3">
-                  <div class="mb-3">
-                    <label class="form-label">Identidade Cônjuge - UF</label>
-                    <input
-                      class="form-control form-control-sm"
-                      type="text"
-                      value="{{ dadosEstadoCivil.identidade_conjuge }} - {{
-                          dadosEstadoCivil.uf_identidade_conjuge
-                      }}"
-                      disabled
-                      readonly
-                    />
-                  </div>
-                </div>
-                <div class="col-12">
-                  <div class="mb-3">
-                    <label class="form-label">Profissão / Atividade</label>
-                    <input
-                      class="form-control form-control-sm"
-                      type="text"
-                      value="{{ dadosEstadoCivil.profissao_atividade}}"
-                      disabled
-                      readonly
-                    />
-                  </div>
-                </div>
             </div>
-       </span>
-       
+            <div class="col-3">
+              <div class="mb-3">
+                <label class="form-label">CPF Cônjuge</label>
+                <input
+                  class="form-control form-control-sm"
+                  type="text"
+                  [(ngModel)]="dadosEstadoCivil.cpf_conjuge"
+                  disabled
+                  readonly
+                />
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="mb-3">
+                <label class="form-label">Data de Nascimento Cônjuge</label>
+                <input
+                  class="form-control form-control-sm"
+                  type="text"
+                  [(ngModel)]="dadosEstadoCivil.data_nascimento_conjuge"
+                  disabled
+                  readonly
+                />
+              </div>
+            </div>
+            <div class="col-3">
+              <div class="mb-3">
+                <label class="form-label">Identidade Cônjuge - UF</label>
+                <input
+                  class="form-control form-control-sm"
+                  type="text"
+                  value="{{ dadosEstadoCivil.identidade_conjuge }} - {{
+                    dadosEstadoCivil.uf_identidade_conjuge
+                  }}"
+                  disabled
+                  readonly
+                />
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="mb-3">
+                <label class="form-label">Profissão / Atividade</label>
+                <input
+                  class="form-control form-control-sm"
+                  type="text"
+                  value="{{ dadosEstadoCivil.profissao_atividade }}"
+                  disabled
+                  readonly
+                />
+              </div>
+            </div>
+          </div>
+        </span>
+
+        <div *ngIf="dadosPessoais.dependentes.length >= 1">
+          <br>
+        </div>
+
         <div class="row" *ngIf="dadosPessoais.dependentes.length > 0">
-          <br />
+         
           <div class="col-6"><h2>Dependentes</h2></div>
         </div>
         <div class="row" *ngIf="dadosPessoais.dependentes.length > 0">
@@ -591,5 +600,4 @@
       </div>
     </div>
   </div>
-
-</div>  
+</div>
