@@ -1,0 +1,11 @@
+<div mat-dialog-content>
+  <mat-form-field appearance="outline">
+    <mat-label>Vínculo</mat-label>
+    <input matInput [(ngModel)]="data.nome">
+  </mat-form-field>
+  <button mat-raised-button (click)="onNoClick()" color="primary" cdkFocusInitial>Salvar</button>
+</div>
+<div mat-dialog-actions>
+  <button mat-raised-button  color="warn" >Cancelar</button>
+  
+</div>

@@ -1,29 +1,41 @@
-
 <mat-form-field appearance="outline">
   <mat-label>Novo Vínculo</mat-label>
-  <input matInput>
+  <input matInput />
 </mat-form-field>
 <button mat-raised-button color="primary">Adicionar</button>
 
+<table class="styled-table">
+  <thead>
+    <tr>
+      <th style="width: 50px">QTD</th>
+      <th class="th-table">Tipos</th>
+      <th colspan="2">Serviços</th>
+    </tr>
+  </thead>
 
-        <table class="styled-table " >
-          <thead>
-            <tr>
-              <th class="th-table">Tipos</th>
-              <th colspan="2">Serviços</th>
-            </tr>
-          </thead>
-          
-          <tbody >
+  <tbody>
+    <tr *ngFor="let i of array2">
+      <td style="width: 50px">{{ i.count }}</td>
+      <td style="width: 700px">{{ i.vinculo }}</td>
 
-
-            <tr *ngFor="let i of Vinculos">
-              <td> {{i.vinculo}} </td>
-              <td  class="td-table"> <button mat-raised-button color="files" ><mat-icon>edit</mat-icon></button></td>
-           <td  class="td-table"> <button mat-raised-button color="warn" ><mat-icon>cancel</mat-icon></button></td>
-            </tr>
-          </tbody>
-        </table>
-
-
-        
+      <td style="width: 50px">
+        <button
+          mat-raised-button
+          color="files"
+          (click)="openDialog(i.id, i.vinculo)"
+        >
+          <mat-icon>edit</mat-icon>
+        </button>
+      </td>
+      <td style="width: 50px">
+        <button
+          mat-raised-button
+          color="warn"
+          (click)="openDialog2(i.id, i.vinculo)"
+        >
+          <mat-icon>cancel</mat-icon>
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>

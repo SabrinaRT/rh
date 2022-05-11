@@ -33,7 +33,7 @@ import { AniversariosComponent } from './components/home/aniversarios/aniversari
 import { GerarPdfPerfilComponent } from './components/home/gerar-pdf-perfil/gerar-pdf-perfil.component';
 import { PainelConfigComponent } from './components/config/painel-config/painel-config.component';
 import { ArquivosConfigComponent } from './components/config/arquivos-config/arquivos-config.component';
-import { VinculosComponent } from './components/config/vinculos/vinculos.component';
+import { DeleteVinculoDialog, EditVinculoDialog, VinculosComponent } from './components/config/vinculos/vinculos.component';
 import { SetoresComponent } from './components/config/setores/setores.component'
 import {ScrollingModule} from '@angular/cdk/scrolling';
 import { ToastrModule } from 'ngx-toastr';
@@ -41,6 +41,7 @@ import {ClipboardModule} from '@angular/cdk/clipboard';
 import {MatRadioModule} from '@angular/material/radio';
 import { SearchfilterPipe } from './searchfilter.pipe';
 import { TotalComponent } from './components/gerador-pdf/total/total.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -57,7 +58,9 @@ import { TotalComponent } from './components/gerador-pdf/total/total.component';
     VinculosComponent,
     SetoresComponent,
     SearchfilterPipe,
-    TotalComponent
+    TotalComponent,
+    EditVinculoDialog,
+    DeleteVinculoDialog
   ],
   imports: [
     ScrollingModule,

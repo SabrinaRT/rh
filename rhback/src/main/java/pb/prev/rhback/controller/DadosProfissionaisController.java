@@ -45,6 +45,13 @@ public class DadosProfissionaisController {
 		return ResponseEntity.ok(dadosProfissionais); 
 	}
 
+	/* @GetMapping("/dados3/{id}")
+	public ResponseEntity<DadosProfissionais> getAllDadosProfissionais(@PathVariable Long id) {
+		DadosProfissionais dadosProfissionais = dadosProfissionaisRepository.countByVinculos(id);
+				
+		return ResponseEntity.ok(dadosProfissionais);
+	} */
+
 	@DeleteMapping("/dados/{id}")  
 	private void deleteBook(@PathVariable("id") Long id)   
 	{  

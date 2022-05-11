@@ -119,6 +119,23 @@ url:any = "http://localhost:8080/api"
       this.url + `/v11/dados/${id}`
     );
   }
+  deleteVinculo(id: number) {
+    this.httpClient
+      .delete(this.url + `/v11/dados/${id}`)
+      .subscribe(
+        (data) => {
+          console.log(data);
+        },
+        (error: any) => console.log(error)
+      );
+  }
+
+  createVinculo(colaborador: Vinculos): Observable<Object> {
+    return this.httpClient.post(
+      this.url + `/v11/dados`,
+      colaborador
+    );
+  }
 
 
   createMatricula(colaborador: Matriculas): Observable<Object> {
