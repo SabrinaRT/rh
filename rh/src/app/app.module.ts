@@ -42,6 +42,7 @@ import {MatRadioModule} from '@angular/material/radio';
 import { SearchfilterPipe } from './searchfilter.pipe';
 import { TotalComponent } from './components/gerador-pdf/total/total.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatTooltipModule} from '@angular/material/tooltip';
 @NgModule({
   declarations: [
     AppComponent,
@@ -63,6 +64,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     DeleteVinculoDialog
   ],
   imports: [
+    MatTooltipModule,
     ScrollingModule,
     MatProgressSpinnerModule,
     MatRadioModule,

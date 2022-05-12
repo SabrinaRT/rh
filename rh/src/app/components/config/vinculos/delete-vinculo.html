@@ -6,9 +6,11 @@
     (click)="Deletar()"
     [disabled]="teste3"
     style="margin-left: 15px"
+   
   >
-    Deletar Vínculo
+    <span  matTooltip="Para deletar, todos os colaboradores listados devem estar desvinculados!">Deletar Vínculo</span>
   </button>
+
   <br /><br />
   <button
     mat-raised-button
@@ -16,7 +18,7 @@
     class="col-12"
     (click)="statusNull()"
   >
-    Retribuir todos os colaboradores listados sem definição
+    Retribuir aos colaboradores listados sem definição
   </button>
   <table class="styled-table">
     <thead>

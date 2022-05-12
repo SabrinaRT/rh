@@ -45,7 +45,7 @@ export class VinculosComponent implements OnInit {
       this.carregarDadosVinculos();
     });
   }
-
+esconder = false
   ngOnInit(): void {
     this.carregarDadosVinculos();
   }
@@ -76,6 +76,7 @@ export class VinculosComponent implements OnInit {
           count: lucky,
         });
       }
+      this.esconder = true
     });
   }
 
@@ -244,7 +245,8 @@ export class DeleteVinculoDialog {
       this.teste3 = false;
     }
     })
-
+   
+  
     
   }
 }
