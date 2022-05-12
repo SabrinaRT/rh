@@ -2,7 +2,6 @@ package  pb.prev.rhback.model;
 
 import javax.persistence.*;
 
-import com.fasterxml.jackson.annotation.*;
 
 @Entity
 @Table(name="dados_bancarios")

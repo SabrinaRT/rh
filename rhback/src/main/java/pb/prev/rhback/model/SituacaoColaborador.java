@@ -1,6 +1,5 @@
 package pb.prev.rhback.model;
 import javax.persistence.*;
-import java.util.*;
 
 import com.fasterxml.jackson.annotation.*;
 @Entity

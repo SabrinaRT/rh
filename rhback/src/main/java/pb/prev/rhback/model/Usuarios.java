@@ -1,6 +1,5 @@
 package  pb.prev.rhback.model;
 
-import java.util.*;
 
 import javax.persistence.*;
 

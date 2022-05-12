@@ -5,7 +5,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import  pb.prev.rhback.exception.ResourceNotFoundException;
 
 import  pb.prev.rhback.model.DadosBancarios;
 import  pb.prev.rhback.repository.DadosBancariosRepository;
@@ -29,13 +28,6 @@ public class DadosBancariosController {
 		return dadosBancariosRepository.save(dadosBancarios);
 	}
 
-	/* @GetMapping("/dados/{id}")
-	public ResponseEntity<DadosBancarios> getAllDadosBancarios(@PathVariable Long id) {
-		DadosBancarios dadosBancarios = dadosBancariosRepository.findById(id)
-				.orElseThrow(() -> new ResourceNotFoundException("DadosBancarios not exist with id: " + id));
-
-		return ResponseEntity.ok(dadosBancarios);
-	} */
 
 	@GetMapping("/dados/{id}")
 	public ResponseEntity<DadosBancarios> getDadosBancariosByForeignKey(@PathVariable Long id) {
@@ -43,14 +35,6 @@ public class DadosBancariosController {
 		return ResponseEntity.ok(dadosBancarios); 
 	}
 
-/* 	@GetMapping("/dados1/{cpf}")
-	public ResponseEntity<DadosBancarios> getAllDadosBancarios(@PathVariable String cpf) {
-		DadosBancarios dadosBancarios = dadosBancariosRepository.findByCpf(cpf);
-		return ResponseEntity.ok(dadosBancarios);
-	}
- */
-
-	
 
 	@DeleteMapping("/dados/{id}")  
 	private void deleteBook(@PathVariable("id") Long id)   

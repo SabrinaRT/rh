@@ -1,10 +1,8 @@
 package pb.prev.rhback.model;
 
-import java.util.*;
 
 import javax.persistence.*;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 public class Setores {

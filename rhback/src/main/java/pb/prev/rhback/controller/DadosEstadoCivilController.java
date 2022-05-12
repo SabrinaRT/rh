@@ -2,13 +2,11 @@ package pb.prev.rhback.controller;
 
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import  pb.prev.rhback.exception.ResourceNotFoundException;
 
 import pb.prev.rhback.model.DadosEstadoCivil;
 import  pb.prev.rhback.repository.DadosEstadoCivilRepository;
@@ -32,12 +30,6 @@ public class DadosEstadoCivilController {
 		return estadoCivilRepository.save(estadoCivil);
 	}
 
-	/* @GetMapping("/dados/{id}")
-	public ResponseEntity<DadosEstadoCivil> getAllEstadoCivil(@PathVariable Long id) {
-		DadosEstadoCivil estadoCivil = estadoCivilRepository.findById(id)
-				.orElseThrow(() -> new ResourceNotFoundException("EstadoCivil not exist with id: " + id));
-		return ResponseEntity.ok(estadoCivil);
-	} */
 
 	@GetMapping("/dados/{id}")
 	public ResponseEntity<DadosEstadoCivil> getEstadoCivilByForeignKey(@PathVariable Long id) {

@@ -1,9 +1,7 @@
 package pb.prev.rhback.controller;
 
 import java.util.List;
-import java.util.Optional;
 
-import org.apache.tomcat.util.http.parser.MediaType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
