@@ -55,6 +55,7 @@ esconder = false
     this.array = [];
     this.vinculos = [];
     this.dadosProfissionais = [];
+    this.esconder = false
     this.siscrhService.getVinculosList().subscribe((data) => {
       this.vinculos = data;
     });

@@ -34,7 +34,7 @@ import { GerarPdfPerfilComponent } from './components/home/gerar-pdf-perfil/gera
 import { PainelConfigComponent } from './components/config/painel-config/painel-config.component';
 import { ArquivosConfigComponent } from './components/config/arquivos-config/arquivos-config.component';
 import { DeleteVinculoDialog, EditVinculoDialog, VinculosComponent } from './components/config/vinculos/vinculos.component';
-import { SetoresComponent } from './components/config/setores/setores.component'
+import { DeleteSetorDialog, EditSetorDialog, SetoresComponent } from './components/config/setores/setores.component'
 import {ScrollingModule} from '@angular/cdk/scrolling';
 import { ToastrModule } from 'ngx-toastr';
 import {ClipboardModule} from '@angular/cdk/clipboard';
@@ -61,7 +61,9 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     SearchfilterPipe,
     TotalComponent,
     EditVinculoDialog,
-    DeleteVinculoDialog
+    DeleteVinculoDialog,
+    DeleteSetorDialog,
+    EditSetorDialog
   ],
   imports: [
     MatTooltipModule,

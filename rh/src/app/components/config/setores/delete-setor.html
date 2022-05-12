@@ -1,0 +1,60 @@
+<div mat-dialog-content>
+    <mat-card-title>{{data.nome}}</mat-card-title>
+    <button
+      mat-raised-button
+      color="warn"
+      (click)="Deletar()"
+      [disabled]="teste3"
+      style="margin-left: 15px"
+     
+    >
+      <span  matTooltip="Para deletar, todos os colaboradores listados devem estar desvinculados!">Deletar Setor</span>
+    </button>
+  
+    <br /><br />
+    <button
+      mat-raised-button
+      color="primary"
+      class="col-12"
+      (click)="statusNull()"
+    >
+      Retribuir aos colaboradores listados sem definição
+    </button>
+    <table class="styled-table">
+      <thead>
+        <tr>
+          <td>nome</td>
+          <td>Serviços</td>
+        </tr>
+      </thead>
+      <tbody style="max-height: 250px">
+        <tr *ngFor="let i of teste">
+          <td>{{i.nome}}</td>
+          <td>
+            <mat-form-field appearance="outline">
+              <mat-label>Setores</mat-label>
+              <mat-select
+                (selectionChange)="salvarStatus(i.idpessoa, i.id_setor)"
+                [(ngModel)]="i.id_setor"
+              >
+                <mat-option
+                  *ngFor="let setor of setores2"
+                  [value]="setor.id"
+                >
+                  {{setor.setor}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="row" [hidden]="esconder">
+      <div class="col-5"></div>
+      <div class="col-3"><mat-spinner></mat-spinner></div>
+    </div>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-raised-button color="warn" (click)="onNoClick()">Cancelar</button>
+  </div>
+  
