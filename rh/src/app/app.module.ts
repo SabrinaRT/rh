@@ -41,7 +41,7 @@ import {ClipboardModule} from '@angular/cdk/clipboard';
 import {MatRadioModule} from '@angular/material/radio';
 import { SearchfilterPipe } from './searchfilter.pipe';
 import { TotalComponent } from './components/gerador-pdf/total/total.component';
-
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 @NgModule({
   declarations: [
     AppComponent,
@@ -64,6 +64,7 @@ import { TotalComponent } from './components/gerador-pdf/total/total.component';
   ],
   imports: [
     ScrollingModule,
+    MatProgressSpinnerModule,
     MatRadioModule,
     BrowserAnimationsModule, // required animations module
     ToastrModule.forRoot(), // ToastrModule added

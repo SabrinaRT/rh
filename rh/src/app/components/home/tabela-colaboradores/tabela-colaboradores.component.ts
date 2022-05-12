@@ -69,6 +69,7 @@ export class TabelaColaboradoresComponent implements OnInit {
         }
 
         this.TabelaInicial = this.array;
+        this.esconder =true 
       },
       (error) => {
         console.log('error', error);
@@ -99,6 +100,7 @@ export class TabelaColaboradoresComponent implements OnInit {
       }
     });
   }
+  esconder = false
   editContact(id: number) {
     /* console.log(id); */
   }

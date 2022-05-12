@@ -65,12 +65,13 @@ url:any = "http://localhost:8080/api"
       colaborador
     );
   }
-
   getDadosProfissionaisByForeignKey(id: number): Observable<DadosProfissionais> {
     return this.httpClient.get<DadosProfissionais>(
       this.url + `/v6/dados/${id}`
     );
   }
+
+
 
   createDadosBancarios(colaborador: DadosBancarios): Observable<Object> {
     return this.httpClient.post(

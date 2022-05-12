@@ -10,8 +10,8 @@ import java.util.*;
 @Repository
 public interface DadosProfissionaisRepository extends JpaRepository <DadosProfissionais, Long> {
     DadosProfissionais findByDadosPessoais_Id(Long id);
+
     
-    long countByVinculos(Long id);
   
   
 }
