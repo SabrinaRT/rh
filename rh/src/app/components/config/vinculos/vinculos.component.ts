@@ -144,7 +144,7 @@ export class DeleteVinculoDialog {
         
       );
       if(this.teste.length == 0){
-        this.teste3 = false
+        this.botaoDeletarDisabled = false
       }
       this.esconder =true 
     });
@@ -154,6 +154,47 @@ export class DeleteVinculoDialog {
       this.vinculos2 = data;
     });
   }
+
+  vinculo:any
+  definirSetor(){
+    this.disabledBotaoEBox = true
+this.esconder =false
+    for (let i in this.teste) {
+      this.siscrhService
+        .getDadosProfissionaisByForeignKey(this.teste[i].idpessoa)
+        .subscribe((data: any) => {
+          this.dadosProfissionais2 = data;
+          this.dadosProfissionais2.vinculos = {id: this.vinculo};
+          this.siscrhService
+            .createDadosProfissionais(this.dadosProfissionais2)
+            .subscribe(
+              (data: any) => {},
+              (error) => {
+                console.log('error', error);
+              }
+            );
+        });
+    }
+
+    this.siscrhService.getDadosProfissionaisList().subscribe((data: any) => {
+      let count = 0;
+      for (let i in data) {
+        if (data[i].id_vinculo == this.data.id_docu) {
+          count++;
+        }
+      }
+      if (count == 0) {
+        this.teste = [];
+        this.botaoDeletarDisabled = false;
+        this.esconder =true
+      }
+    });
+
+  }
+  disabledBotaoEBox= false
+
+
+
   array3: any = [];
   teste: any;
   vinculos: Vinculos = new Vinculos();
@@ -197,17 +238,17 @@ export class DeleteVinculoDialog {
       }
     }
     if (count == 0) {
-      this.teste3 = false;
+      this.botaoDeletarDisabled = false;
       this.toastr.warning(
         "",
         'Vínculo poderá ser deletado!'
       );
     }else{
-      this.teste3 = true;
+      this.botaoDeletarDisabled = true;
     }
   }
 
-  teste3 = true;
+  botaoDeletarDisabled = true;
 
   Deletar() {
     this.siscrhService.deleteVinculo(this.data.id_docu);
@@ -243,7 +284,7 @@ export class DeleteVinculoDialog {
     }
     if (count == 0) {
       this.teste = [];
-      this.teste3 = false;
+      this.botaoDeletarDisabled = false;
     }
     })
    

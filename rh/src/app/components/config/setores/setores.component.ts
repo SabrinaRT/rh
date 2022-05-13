@@ -1,5 +1,9 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import {
+  MatDialog,
+  MatDialogRef,
+  MAT_DIALOG_DATA,
+} from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
 import { DadosProfissionais, Setores } from 'src/app/siscrh';
 import { SiscrhService } from 'src/app/siscrh.service';
@@ -8,7 +12,7 @@ import { DialogData } from '../vinculos/vinculos.component';
 @Component({
   selector: 'app-setores',
   templateUrl: './setores.component.html',
-  styleUrls: ['./setores.component.css']
+  styleUrls: ['./setores.component.css'],
 })
 export class SetoresComponent implements OnInit {
   setores: Setores[];
@@ -21,14 +25,14 @@ export class SetoresComponent implements OnInit {
 
   openDialog(id: any, setor: any): void {
     const dialogRef = this.dialog.open(EditSetorDialog, {
-      width: '600px',
+      width: '900px',
       data: { id_docu: id, nome: setor },
     });
   }
 
   openDialog2(id: any, setor: any): void {
     const dialogRef = this.dialog.open(DeleteSetorDialog, {
-      width: '600px',
+      width: '800px',
       height: '550px',
       data: { id_docu: id, nome: setor },
     });
@@ -36,7 +40,7 @@ export class SetoresComponent implements OnInit {
       this.carregarDadosSetores();
     });
   }
-esconder = false
+  esconder = false;
   ngOnInit(): void {
     this.carregarDadosSetores();
   }
@@ -46,7 +50,7 @@ esconder = false
     this.array = [];
     this.setores = [];
     this.dadosProfissionais = [];
-    this.esconder = false
+    this.esconder = false;
     this.siscrhService.getSetoresList().subscribe((data) => {
       this.setores = data;
     });
@@ -68,21 +72,18 @@ esconder = false
           count: lucky,
         });
       }
-      this.esconder = true
+      this.esconder = true;
     });
   }
 
- /*  @ViewChild(CdkVirtualScrollViewport)
+  /*  @ViewChild(CdkVirtualScrollViewport)
   viewport: CdkVirtualScrollViewport; */
 
   // example
- /*  go() {
+  /*  go() {
     this.viewport.scrollToIndex(23);
   } */
-
 }
-
-
 
 @Component({
   selector: 'edit-setor',
@@ -132,18 +133,16 @@ export class DeleteSetorDialog {
           });
         }
       }
-      
+
       this.teste = this.array3.filter(
         (el: any) => el.id_setor == this.data.id_docu
-        
       );
-      if(this.teste.length == 0){
-        this.teste3 = false
+      if (this.teste.length == 0) {
+        this.botaoDeletarDisabled = false;
       }
-      this.esconder =true 
+      this.esconder = true;
     });
 
-    
     this.siscrhService.getSetoresList().subscribe((data: any) => {
       this.setores2 = data;
     });
@@ -152,9 +151,46 @@ export class DeleteSetorDialog {
   teste: any;
   setores: Setores = new Setores();
 
-  esconder = false
+  esconder = false;
   onNoClick(): void {
     this.dialogRef.close();
+  }
+  disabledBotaoEBox=false
+setor:any
+  definirSetor(){
+    this.disabledBotaoEBox = true
+this.esconder =false
+    for (let i in this.teste) {
+      this.siscrhService
+        .getDadosProfissionaisByForeignKey(this.teste[i].idpessoa)
+        .subscribe((data: any) => {
+          this.dadosProfissionais2 = data;
+          this.dadosProfissionais2.setores = {id: this.setor};
+          this.siscrhService
+            .createDadosProfissionais(this.dadosProfissionais2)
+            .subscribe(
+              (data: any) => {},
+              (error) => {
+                console.log('error', error);
+              }
+            );
+        });
+    }
+
+    this.siscrhService.getDadosProfissionaisList().subscribe((data: any) => {
+      let count = 0;
+      for (let i in data) {
+        if (data[i].id_setor == this.data.id_docu) {
+          count++;
+        }
+      }
+      if (count == 0) {
+        this.teste = [];
+        this.botaoDeletarDisabled = false;
+        this.esconder =true
+      }
+    });
+
   }
 
   salvarStatus(idForeignKey: any, teste: any) {
@@ -168,7 +204,6 @@ export class DeleteSetorDialog {
           .createDadosProfissionais(this.dadosProfissionais2)
           .subscribe(
             (data: any) => {
-
               this.toastr.success(
                 'Perfil atualizado com sucesso!',
                 'Dados Atualizados'
@@ -191,22 +226,21 @@ export class DeleteSetorDialog {
       }
     }
     if (count == 0) {
-      this.teste3 = false;
-      this.toastr.warning(
-        "",
-        'Vínculo poderá ser deletado!'
-      );
-    }else{
-      this.teste3 = true;
+      this.botaoDeletarDisabled = false;
+      this.toastr.warning('', 'Vínculo poderá ser deletado!');
+    } else {
+      this.botaoDeletarDisabled = true;
     }
   }
 
-  teste3 = true;
+  botaoDeletarDisabled = true;
 
   Deletar() {
     this.siscrhService.deleteSetores(this.data.id_docu);
     this.dialogRef.close();
   }
+
+  
 
   statusNull() {
     for (let i in this.teste) {
@@ -227,21 +261,17 @@ export class DeleteSetorDialog {
         });
     }
 
-    this.siscrhService.getDadosProfissionaisList().subscribe((data:any)=>{
-
+    this.siscrhService.getDadosProfissionaisList().subscribe((data: any) => {
       let count = 0;
-    for (let i in data) {
-      if (data[i].id_setor == this.data.id_docu) {
-        count++;
+      for (let i in data) {
+        if (data[i].id_setor == this.data.id_docu) {
+          count++;
+        }
       }
-    }
-    if (count == 0) {
-      this.teste = [];
-      this.teste3 = false;
-    }
-    })
-   
-  
-    
+      if (count == 0) {
+        this.teste = [];
+        this.botaoDeletarDisabled = false;
+      }
+    });
   }
 }
