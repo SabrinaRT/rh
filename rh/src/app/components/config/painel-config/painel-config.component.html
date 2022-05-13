@@ -1,21 +1,12 @@
 <mat-toolbar color="primary">
-  <button mat-raised-button color="accent"  [routerLink]="['']">
+  <button mat-raised-button color="accent" [routerLink]="['']">
     <mat-icon>arrow_back</mat-icon>
   </button>
- 
+
   <span class="example-spacer"></span>
   <span>SISCOGEP</span>
 </mat-toolbar>
 <mat-tab-group>
-  <mat-tab label="Vínculos"> 
-    <div class="container">
-      <br />
-      <div class="row">
-        <div class="col-12" ><app-vinculos></app-vinculos></div>
-        
-      </div>
-    </div>
-  </mat-tab>
   <mat-tab label="Documentos">
     <div class="container">
       <br />
@@ -30,11 +21,17 @@
     <div class="container">
       <br />
       <div class="row">
-        <div class="col-12" ><app-setores></app-setores></div>
-      
+        <div class="col-12"><app-setores></app-setores></div>
       </div>
     </div>
-
   </mat-tab>
- 
+
+  <mat-tab label="Vínculos">
+    <div class="container">
+      <br />
+      <div class="row">
+        <div class="col-12"><app-vinculos></app-vinculos></div>
+      </div>
+    </div>
+  </mat-tab>
 </mat-tab-group>

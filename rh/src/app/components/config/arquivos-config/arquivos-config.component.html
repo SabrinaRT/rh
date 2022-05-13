@@ -1,22 +1,35 @@
 <mat-form-field appearance="outline">
   <mat-label>Novo Tipo de Documento</mat-label>
-  <input matInput>
-</mat-form-field> <button mat-raised-button color="primary">Adicionar</button>
-      <table class="styled-table"  >
-        <thead>
-          <tr>
+  <input matInput />
+</mat-form-field>
+<button mat-raised-button color="primary" style="margin-left: 15px">
+  Adicionar
+</button>
+<table class="styled-table">
+  <thead>
+    <tr>
+      
+      <th style="width: 50px">QTD</th>
             <th class="th-table">Tipos</th>
             <th colspan="2">Serviços</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let i of Documentos">
-            <td *ngIf="i.id != 1">
-           {{i.tipo}}
-            
-            </td>
-           <td *ngIf="i.id != 1" class="td-table"> <button mat-raised-button color="files" ><mat-icon>edit</mat-icon></button></td>
-           <td *ngIf="i.id != 1" class="td-table"> <button mat-raised-button color="warn" ><mat-icon>cancel</mat-icon></button></td>
-          </tr>
-        </tbody>
-      </table>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let i of teste">
+      <td style="width: 50px">{{i.qtdTem}}</td>
+      <td style="width: 700px">
+        {{ i.nome }}
+      </td>
+      <td class="td-table" style="width: 50px">
+        <button mat-raised-button color="files" *ngIf="i.id != 1" >
+          <mat-icon>edit</mat-icon>
+        </button>
+      </td>
+      <td  class="td-table" style="width: 50px">
+        <button mat-raised-button color="warn" *ngIf="i.id != 1">
+          <mat-icon>cancel</mat-icon>
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
