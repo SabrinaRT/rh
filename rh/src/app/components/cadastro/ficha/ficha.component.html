@@ -355,7 +355,6 @@
                         mat-raised-button
                         color="primary"
                         class="col-12"
-                        
                         (click)="salvarDadosPessoais(stepper)"
                         [disabled]="botaoValido"
                       >
@@ -1046,7 +1045,7 @@
 
       <mat-step>
         <ng-template matStepLabel>Arquivos</ng-template>
-       <!--  <div class="container">
+        <!--  <div class="container">
           <br />
           <div class="row">
             <div class="col-12">
@@ -1140,35 +1139,58 @@
                       </mat-panel-title>
                     </mat-expansion-panel-header>
 
-                    <input type="file" (change)="inputFileChange($event)" />
+                    <!--   <input type="file" (change)="inputFileChange($event)" /> -->
                     <table class="styled-table">
                       <thead>
                         <tr>
-                                <th class="th-table" style="width:85%">Tipos</th>
-                                <th colspan="2" >Serviços</th>
+                          <th class="th-table" style="width: 85%">Tipos</th>
+                          <th colspan="2">Serviços</th>
                         </tr>
                       </thead>
                       <tbody>
-                        <tr *ngFor="let index of teste; let i = index ">
-                          <td style="width:84.5%" *ngIf="index.id_documento != 1">
+                        <tr *ngFor="let index of teste; let i = index">
+                          <td
+                            style="width: 84.5%"
+                            *ngIf="index.id_documento != 1"
+                          >
                             {{ index.tipo }}
                           </td>
-                          <td class="td-table" style="width: 50px" *ngIf="index.id_documento != 1">
-                            <button mat-raised-button color="files" *ngIf="index.id == null"  (click)="upload(index.id_documento)">
+                          <td
+                            class="td-table"
+                            style="width: 50px"
+                            *ngIf="index.id_documento != 1"
+                          >
+                            <input
+                              #fileUpload
+                              type="file"
+                              (change)="
+                                inputFileChange($event, index.id_documento, i)
+                              "
+                              style="display: none"
+                            />
+                            <button
+                              mat-raised-button
+                              color="files"
+                              *ngIf="index.id == null"
+                              (click)="fileUpload.click()"
+                            >
                               <mat-icon>edit</mat-icon>
                             </button>
-                            
-                      
-                            <button mat-raised-button color="warn" (click)="deleteDocu(index.id, i)" *ngIf="index.id != null" >
-                              <mat-icon>cancel</mat-icon>
-                            </button>
-
-                           
+                         <!--    <a  href="http://localhost:8080/fotos/download/{{idColab}}/{{index.nome_arquivo}}"> -->
+                              <button
+                                mat-raised-button
+                                color="warn"
+                                *ngIf="index.id != null"
+                                (click)="downloadArquivo(index.nome_arquivo)"
+                              >
+                                <mat-icon>cancel</mat-icon>
+                              </button>
+                           <!--    </a> -->  
+                              
                           </td>
                         </tr>
                       </tbody>
                     </table>
-
                   </mat-expansion-panel>
                   <mat-expansion-panel
                     (opened)="panelOpenState = true"
@@ -1177,8 +1199,6 @@
                     <mat-expansion-panel-header>
                       <mat-panel-title> Documentos Adicionais </mat-panel-title>
                     </mat-expansion-panel-header>
-
-                   
                   </mat-expansion-panel>
                 </mat-accordion>
               </mat-card>
@@ -1186,10 +1206,7 @@
           </div>
           <br />
         </div>
-        <div>
-          <button mat-button matStepperPrevious>Back</button>
-          <button mat-button (click)="stepper.reset()">Reset</button>
-        </div>
+       
       </mat-step>
       <mat-step>
         <ng-template matStepLabel>Finalização</ng-template>
@@ -1235,13 +1252,10 @@
                       >
                     </span>
                   </mat-card-subtitle>
-
-                  
                 </div>
               </mat-card>
-            <br>
+              <br />
               <mat-card class="p-3 box-shadow">
-               
                 <mat-card-subtitle>
                   Em que situação se encontra o(a) colaborador(a)?
                 </mat-card-subtitle>
@@ -1255,10 +1269,11 @@
                     >Desativo</mat-radio-button
                   >
                 </mat-radio-group>
-                
-                <span *ngIf="status == true" >
-                  <br> <br />
-                  <mat-card-subtitle >
+
+                <span *ngIf="status == true">
+                  <br />
+                  <br />
+                  <mat-card-subtitle>
                     O(A) colaborador(a) deve usar à rede
                     corporativa?</mat-card-subtitle
                   >
@@ -1312,9 +1327,8 @@
                   </mat-radio-group>
                 </div>
                 <br />
-                
               </mat-card>
-              <br>
+              <br />
               <mat-card class="p-3 box-shadow">
                 <div class="row">
                   <div class="col-10"></div>

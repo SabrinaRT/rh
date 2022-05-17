@@ -27,6 +27,7 @@ import {
 import { SiscrhService } from 'src/app/siscrh.service';
 import { cpf } from 'cpf-cnpj-validator';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-ficha',
@@ -70,7 +71,8 @@ export class FichaComponent implements OnInit {
     private _formBuilder: FormBuilder,
     private siscrhService: SiscrhService,
     private toastr: ToastrService,
-    private http: HttpClient
+    private http: HttpClient,
+    private route: Router
   ) {}
 
   acessoRede: any;
@@ -215,6 +217,7 @@ export class FichaComponent implements OnInit {
         for (let i in this.TiposDocumentos) {
           this.teste.push({
             id: null,
+            nome_arquivo: null,
             id_documento: this.TiposDocumentos[i].id,
             tipo: this.TiposDocumentos[i].tipo,
           });
@@ -234,81 +237,81 @@ export class FichaComponent implements OnInit {
       (error) => {
         console.log('error', error);
         this.showWarn();
-        
       }
     );
-
-   
   }
 
-  DocumentosColaboradores: DocumentosColaboradores[]
+  DocumentosColaboradores: DocumentosColaboradores[];
   atualizar() {
     this.siscrhService
-        .getDocumentosColaboradorByForeignKey(this.IDColab)
-        .subscribe((data: any) => {
-          console.log(data);
-         
-          this.DocumentosColaboradores = data
-          console.log(this.DocumentosColaboradores)
-         
-          for(let i in this.teste){
-            for(let i2 in this.DocumentosColaboradores){
-            
-              if(this.teste[i].id_documento == this.DocumentosColaboradores[i2].tipo){
-                this.teste[i].id = this.DocumentosColaboradores[i2].id
-              }
+      .getDocumentosColaboradorByForeignKey(this.IDColab)
+      .subscribe((data: any) => {
+        console.log(data);
+
+        this.DocumentosColaboradores = data;
+        console.log(this.DocumentosColaboradores);
+
+        for (let i in this.teste) {
+          for (let i2 in this.DocumentosColaboradores) {
+            if (
+              this.teste[i].id_documento ==
+              this.DocumentosColaboradores[i2].tipo
+            ) {
+              this.teste[i].id = this.DocumentosColaboradores[i2].id;
             }
-            
           }
-       
-          console.log(this.teste)
-         
-        });
+        }
+
+        console.log(this.teste);
+      });
+  }
+
+  inputFileChange(event: any, tipo: any, index: any) {
+    if (event.target.files && event.target.files[0]) {
+      const foto = event.target.files[0];
+      const formData = new FormData();
+      formData.append('foto', foto);
+      this.documentosColaboradores.nome_documento_upload =
+        event.target.files[0].name;
+      this.documentosColaboradores.tipo = tipo;
+
+      this.documentosColaboradores.dadosPessoais = { id: this.IDColab };
+      this.siscrhService.createArquivo(formData, this.IDColab).subscribe(
+        (data: any) => {
+          console.log(data);
+          this.siscrhService
+            .createDocumentosColaborador(this.documentosColaboradores)
+            .subscribe(
+              (data: any) => {
+                console.log(data);
+                this.teste[index].id = data.id;
+                this.teste[index].nome_arquivo = data.nome_documento_upload;
+              },
+              (error) => {
+                console.log('error', error);
+                this.showWarn();
+              }
+            );
+        },
+        (error) => {
+          console.log('error', error);
+          this.showWarn();
+        }
+      );
+    }
+  }
+
+  downloadArquivo(nome: any) {
+    this.siscrhService.downloadArquivo(this.IDColab, nome);
    
   }
 
-
-inputFileChange(event:any){
-if(event.target.files && event.target.files[0]){
-    const foto = event.target.files[0];
-    const formData = new FormData();
-    formData.append("foto", foto);
-
-    this.siscrhService.createArquivo(formData, this.IDColab).subscribe((data:any)=>{console.log(data)})
-   /*  this.http.post("http://localhost:8080/fotos/arquivo", formData).subscribe((data:any)=>{console.log("upload ok")}); */
-
-}
-}
-  
-  importFile(event:any) {
-
-    if (event.target.files.length == 0) {
-       console.log("No file selected!");
-       return
-    }
-      let file: File = event.target.files[0];
-      console.log(file.name) // importante para o banco de dados
-      console.log()
-      // after here 'file' can be accessed and used for further process
-    }
-
-  deleteDocu(id:any, index:any){
-
+  deleteDocu(id: any, index: any) {
     this.siscrhService.deleteDocumentoColaborador(id);
     this.teste[index].id = null;
-
   }
 
-  
-
   upload(idtipo: any) {
-
-  /*   const e: HTMLElement = this.FileSelectInputDialog.nativeElement;
-    e.click();
-     */
-    
-
-    
     this.documentosColaboradores.dadosPessoais = { id: this.IDColab };
     this.documentosColaboradores.tipo = idtipo;
     this.siscrhService
@@ -317,9 +320,6 @@ if(event.target.files && event.target.files[0]){
         console.log(data);
         this.atualizar();
       });
-   
-      
-    
   }
 
   delete(idDocumento: any) {

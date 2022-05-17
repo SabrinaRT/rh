@@ -113,6 +113,10 @@ url:any = "http://localhost:8080/api"
       
     );
   }
+    downloadArquivo(id:any, nome:any){
+      window.location.href =
+      'http://localhost:8080/fotos/download/' + id + '/' + nome;
+    }
 
   getDependentesByForeignKey(id: number): Observable<Dependentes> {
     return this.httpClient.get<Dependentes>(
