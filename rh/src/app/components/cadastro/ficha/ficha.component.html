@@ -1046,7 +1046,7 @@
 
       <mat-step>
         <ng-template matStepLabel>Arquivos</ng-template>
-        <div class="container">
+       <!--  <div class="container">
           <br />
           <div class="row">
             <div class="col-12">
@@ -1120,6 +1120,65 @@
                         </tr>
                       </tbody>
                     </table>
+                  </mat-expansion-panel>
+                </mat-accordion>
+              </mat-card>
+            </div>
+          </div>
+          <br />
+        </div> -->
+        <div class="container">
+          <br />
+          <div class="row">
+            <div class="col-12">
+              <mat-card>
+                <mat-accordion>
+                  <mat-expansion-panel [expanded]="true">
+                    <mat-expansion-panel-header>
+                      <mat-panel-title>
+                        Documentos Obrigatórios
+                      </mat-panel-title>
+                    </mat-expansion-panel-header>
+
+                    <input type="file" (change)="inputFileChange($event)" />
+                    <table class="styled-table">
+                      <thead>
+                        <tr>
+                                <th class="th-table" style="width:85%">Tipos</th>
+                                <th colspan="2" >Serviços</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let index of teste; let i = index ">
+                          <td style="width:84.5%" *ngIf="index.id_documento != 1">
+                            {{ index.tipo }}
+                          </td>
+                          <td class="td-table" style="width: 50px" *ngIf="index.id_documento != 1">
+                            <button mat-raised-button color="files" *ngIf="index.id == null"  (click)="upload(index.id_documento)">
+                              <mat-icon>edit</mat-icon>
+                            </button>
+                            
+                      
+                            <button mat-raised-button color="warn" (click)="deleteDocu(index.id, i)" *ngIf="index.id != null" >
+                              <mat-icon>cancel</mat-icon>
+                            </button>
+
+                           
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+
+                  </mat-expansion-panel>
+                  <mat-expansion-panel
+                    (opened)="panelOpenState = true"
+                    (closed)="panelOpenState = false"
+                  >
+                    <mat-expansion-panel-header>
+                      <mat-panel-title> Documentos Adicionais </mat-panel-title>
+                    </mat-expansion-panel-header>
+
+                   
                   </mat-expansion-panel>
                 </mat-accordion>
               </mat-card>

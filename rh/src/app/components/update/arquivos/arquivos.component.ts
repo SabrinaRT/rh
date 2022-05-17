@@ -22,7 +22,7 @@ export class ArquivosComponent implements OnInit {
     this.siscrhService.getDocumentosList().subscribe((data: any) => {
       this.TiposDocumentos = data;
     });
-    this.resgatarDocumentos();
+ 
   }
 
   fileAttr = 'Escolhe o Arquivo';
@@ -58,7 +58,7 @@ export class ArquivosComponent implements OnInit {
   teste: any = [];
   teste2: any = [];
   
-  upload(tipo_id:any, id:any, status:any){
+ /*  upload(tipo_id:any, id:any, status:any){
     this.documentos.id = id
     this.documentos.tipo = tipo_id;
     this.documentos.status =  !status;
@@ -68,9 +68,9 @@ export class ArquivosComponent implements OnInit {
       .subscribe((data: any) => {
         this.resgatarDocumentos();
       });
-}
+} */
 
-  resgatarDocumentos() {
+  /* resgatarDocumentos() {
     this.teste = [];
     this.teste2 = [];
     this.siscrhService
@@ -106,5 +106,5 @@ export class ArquivosComponent implements OnInit {
         }
 
       });
-  }
+  } */
 }

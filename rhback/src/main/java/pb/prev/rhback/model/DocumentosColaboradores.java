@@ -16,10 +16,10 @@ public class DocumentosColaboradores {
     @JsonBackReference
     private DadosPessoais dadosPessoais;
 
-    private String nome;
+    
     private int tipo;
-
-    private Boolean status;
+    private String nome;
+   
     private String nome_documento_upload;
     
 
@@ -28,11 +28,10 @@ public class DocumentosColaboradores {
 
 
 
-    public DocumentosColaboradores(DadosPessoais dadosPessoais, String nome, int tipo, Boolean status, String nome_documento_upload) {
+    public DocumentosColaboradores(DadosPessoais dadosPessoais, String nome, int tipo, String nome_documento_upload) {
         this.dadosPessoais = dadosPessoais;
         this.nome = nome;
         this.tipo = tipo;
-        this.status = status;
         this.nome_documento_upload = nome_documento_upload;
     }
    
@@ -69,17 +68,7 @@ public class DocumentosColaboradores {
         this.tipo = tipo;
     }
 
-    public Boolean isStatus() {
-        return this.status;
-    }
-
-    public Boolean getStatus() {
-        return this.status;
-    }
-
-    public void setStatus(Boolean status) {
-        this.status = status;
-    }
+   
 
     public String getNome_documento_upload() {
         return this.nome_documento_upload;

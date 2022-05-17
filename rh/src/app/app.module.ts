@@ -32,7 +32,7 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import { AniversariosComponent } from './components/home/aniversarios/aniversarios.component';
 import { GerarPdfPerfilComponent } from './components/home/gerar-pdf-perfil/gerar-pdf-perfil.component';
 import { PainelConfigComponent } from './components/config/painel-config/painel-config.component';
-import { ArquivosConfigComponent } from './components/config/arquivos-config/arquivos-config.component';
+import { ArquivosConfigComponent, DeleteArquivoDialog } from './components/config/arquivos-config/arquivos-config.component';
 import { DeleteVinculoDialog, EditVinculoDialog, VinculosComponent } from './components/config/vinculos/vinculos.component';
 import { DeleteSetorDialog, EditSetorDialog, SetoresComponent } from './components/config/setores/setores.component'
 import {ScrollingModule} from '@angular/cdk/scrolling';
@@ -43,6 +43,7 @@ import { SearchfilterPipe } from './searchfilter.pipe';
 import { TotalComponent } from './components/gerador-pdf/total/total.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatTooltipModule} from '@angular/material/tooltip';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -63,7 +64,8 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     EditVinculoDialog,
     DeleteVinculoDialog,
     DeleteSetorDialog,
-    EditSetorDialog
+    EditSetorDialog,
+    DeleteArquivoDialog
   ],
   imports: [
     MatTooltipModule,

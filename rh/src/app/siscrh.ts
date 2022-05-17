@@ -76,7 +76,6 @@ export class DadosPessoais {
       id: any;
       nome:any;
       nome_documento_upload: any;
-      status: any;
       tipo: any;
     }
   ];
@@ -151,7 +150,6 @@ export class DocumentosColaboradores {
   id: any;
   nome:any;
   nome_documento_upload: any;
-  status: any;
   dadosPessoais: {
     id: any;
   };

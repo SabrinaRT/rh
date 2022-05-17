@@ -26,6 +26,7 @@ import {
 } from 'src/app/siscrh';
 import { SiscrhService } from 'src/app/siscrh.service';
 import { cpf } from 'cpf-cnpj-validator';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-ficha',
@@ -49,7 +50,8 @@ export class FichaComponent implements OnInit {
   matriculas: Matriculas = new Matriculas();
   situacaoColaborador: SituacaoColaborador = new SituacaoColaborador();
   dados: Dados = new Dados();
-  documentos: DocumentosColaboradores = new DocumentosColaboradores();
+  documentosColaboradores: DocumentosColaboradores =
+    new DocumentosColaboradores();
 
   setores: Setores[];
   vinculos: Vinculos[];
@@ -58,7 +60,7 @@ export class FichaComponent implements OnInit {
   DadosEstadoCivil: DadosEstadoCivil[];
   TiposDocumentos: Documentos[];
 
-  cep:CEP = new CEP();
+  cep: CEP = new CEP();
   CPFValido: any;
   EncontraCPF: any;
   DadosAtualizados: any;
@@ -67,46 +69,50 @@ export class FichaComponent implements OnInit {
   constructor(
     private _formBuilder: FormBuilder,
     private siscrhService: SiscrhService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private http: HttpClient
   ) {}
 
-
-  
   acessoRede: any;
-  status:any
-  status2:any
-  status3:any;
-  salvarStatus(){
+  status: any;
+  status2: any;
+  status3: any;
+  salvarStatus() {
     this.situacaoColaborador.id = this.IDSitu;
-    this.situacaoColaborador.acessoRede = false
-    this.situacaoColaborador.status = this.status
-    this.situacaoColaborador.dadosPessoais = {id:this.IDColab}
-    this.siscrhService.createSituacaoColaborador(this.situacaoColaborador).subscribe((data:any)=>{
-      this.toastr.success( 'Status Atualizado!');
-    },(error) => {
-      console.log('error', error);
-      this.toastr.error('Houve alguma falha de conexão!', 'Erro!');
-    })
+    this.situacaoColaborador.acessoRede = false;
+    this.situacaoColaborador.status = this.status;
+    this.situacaoColaborador.dadosPessoais = { id: this.IDColab };
+    this.siscrhService
+      .createSituacaoColaborador(this.situacaoColaborador)
+      .subscribe(
+        (data: any) => {
+          this.toastr.success('Status Atualizado!');
+        },
+        (error) => {
+          console.log('error', error);
+          this.toastr.error('Houve alguma falha de conexão!', 'Erro!');
+        }
+      );
   }
 
   validandoCEP(searchValue: string): void {
-    if(searchValue.length == 8 || searchValue.length == 9){
+    if (searchValue.length == 8 || searchValue.length == 9) {
       const num = searchValue;
-      this.siscrhService.getCEP(num).subscribe((data:any)=>{
-        this.cep =data 
-        this.dadosPessoais.cep = this.cep.cep
-        this.dadosPessoais.endereco = this.cep.logradouro;
-        this.dadosPessoais.bairro = this.cep.bairro
-        this.dadosPessoais.cidade = this.cep.localidade
-        this.dadosPessoais.uf_cidade = this.cep.uf
-  
-      },
-      (error) => {
-        console.log('error', error);
-        this.toastr.error('Houve algum erro!', 'Erro!');
-      })
+      this.siscrhService.getCEP(num).subscribe(
+        (data: any) => {
+          this.cep = data;
+          this.dadosPessoais.cep = this.cep.cep;
+          this.dadosPessoais.endereco = this.cep.logradouro;
+          this.dadosPessoais.bairro = this.cep.bairro;
+          this.dadosPessoais.cidade = this.cep.localidade;
+          this.dadosPessoais.uf_cidade = this.cep.uf;
+        },
+        (error) => {
+          console.log('error', error);
+          this.toastr.error('Houve algum erro!', 'Erro!');
+        }
+      );
     }
-   
   }
 
   botaoValido: any;
@@ -141,28 +147,28 @@ export class FichaComponent implements OnInit {
         this.CPFValido = true;
         this.siscrhService
           .getColaboradorByCPF(this.dadosPessoais.cpf)
-          .subscribe((b) => {
-            if (b == null) {
-              this.EncontraCPF = true;
-              this.botaoValido = false;
-            } else {
-              
-              this.EncontraCPF = false;
-              this.botaoValido = true;
+          .subscribe(
+            (b) => {
+              if (b == null) {
+                this.EncontraCPF = true;
+                this.botaoValido = false;
+              } else {
+                this.EncontraCPF = false;
+                this.botaoValido = true;
+              }
+            },
+            (error) => {
+              console.log('error', error);
+              this.toastr.error('Houve algum erro!', 'Erro!');
             }
-          },
-          (error) => {
-            console.log('error', error);
-            this.toastr.error('Houve algum erro!', 'Erro!');
-          }
           );
       } else {
         this.CPFValido = false;
         this.botaoValido = true;
-        
       }
     }
   }
+  teste: any = [];
 
   ngOnInit() {
     this.firstFormGroup = this._formBuilder.group({
@@ -184,9 +190,36 @@ export class FichaComponent implements OnInit {
       ],
     });
 
+    if (this.IDColab != undefined) {
+      this.siscrhService
+        .getDocumentosColaboradorByForeignKey(this.IDColab)
+        .subscribe((data: any) => {
+          console.log(data);
+        });
+    }
+
     this.siscrhService.getSetoresList().subscribe(
       (data: any) => {
         this.setores = data;
+      },
+      (error) => {
+        console.log('error', error);
+        this.showWarn();
+      }
+    );
+
+    this.siscrhService.getDocumentosList().subscribe(
+      (data: any) => {
+        this.TiposDocumentos = data;
+
+        for (let i in this.TiposDocumentos) {
+          this.teste.push({
+            id: null,
+            id_documento: this.TiposDocumentos[i].id,
+            tipo: this.TiposDocumentos[i].tipo,
+          });
+        }
+        console.log(data);
       },
       (error) => {
         console.log('error', error);
@@ -201,20 +234,98 @@ export class FichaComponent implements OnInit {
       (error) => {
         console.log('error', error);
         this.showWarn();
+        
       }
     );
 
-    this.siscrhService.getDocumentosList().subscribe(
-      (data: any) => {
-        this.TiposDocumentos = data;
-      },
-      (error) => {
-        console.log('error', error);
-        this.showWarn();
-      }
-    );
    
   }
+
+  DocumentosColaboradores: DocumentosColaboradores[]
+  atualizar() {
+    this.siscrhService
+        .getDocumentosColaboradorByForeignKey(this.IDColab)
+        .subscribe((data: any) => {
+          console.log(data);
+         
+          this.DocumentosColaboradores = data
+          console.log(this.DocumentosColaboradores)
+         
+          for(let i in this.teste){
+            for(let i2 in this.DocumentosColaboradores){
+            
+              if(this.teste[i].id_documento == this.DocumentosColaboradores[i2].tipo){
+                this.teste[i].id = this.DocumentosColaboradores[i2].id
+              }
+            }
+            
+          }
+       
+          console.log(this.teste)
+         
+        });
+   
+  }
+
+
+inputFileChange(event:any){
+if(event.target.files && event.target.files[0]){
+    const foto = event.target.files[0];
+    const formData = new FormData();
+    formData.append("foto", foto);
+
+    this.siscrhService.createArquivo(formData, this.IDColab).subscribe((data:any)=>{console.log(data)})
+   /*  this.http.post("http://localhost:8080/fotos/arquivo", formData).subscribe((data:any)=>{console.log("upload ok")}); */
+
+}
+}
+  
+  importFile(event:any) {
+
+    if (event.target.files.length == 0) {
+       console.log("No file selected!");
+       return
+    }
+      let file: File = event.target.files[0];
+      console.log(file.name) // importante para o banco de dados
+      console.log()
+      // after here 'file' can be accessed and used for further process
+    }
+
+  deleteDocu(id:any, index:any){
+
+    this.siscrhService.deleteDocumentoColaborador(id);
+    this.teste[index].id = null;
+
+  }
+
+  
+
+  upload(idtipo: any) {
+
+  /*   const e: HTMLElement = this.FileSelectInputDialog.nativeElement;
+    e.click();
+     */
+    
+
+    
+    this.documentosColaboradores.dadosPessoais = { id: this.IDColab };
+    this.documentosColaboradores.tipo = idtipo;
+    this.siscrhService
+      .createDocumentosColaborador(this.documentosColaboradores)
+      .subscribe((data: any) => {
+        console.log(data);
+        this.atualizar();
+      });
+   
+      
+    
+  }
+
+  delete(idDocumento: any) {
+    this.siscrhService.deleteDocumentoColaborador(idDocumento);
+  }
+
   datemask = [/\d/, /\d/, '/', /\d/, /\d/, '/', /\d/, /\d/, /\d/, /\d/];
   cpfmask = [
     /\d/,
@@ -275,7 +386,7 @@ export class FichaComponent implements OnInit {
   EditarApagarMat = false;
 
   mensagemFinal: any;
-  
+
   gerarMensagemFinal() {
     let NomeEsplitado = this.dadosPessoais.nome_completo.split(' ');
     let UltimoNome = NomeEsplitado[NomeEsplitado.length - 1];
@@ -300,50 +411,6 @@ export class FichaComponent implements OnInit {
       setorDefinido;
   }
 
-  DocumentosObrigatorios: any = [];
-  DocumentosOpcionais: any = [];
-  resgatarDocumentos() {
-    this.DocumentosObrigatorios = [];
-    this.DocumentosOpcionais = [];
-    this.siscrhService.getColaboradorById(this.IDColab).subscribe(
-      (data: any) => {
-        this.dadosPessoais = data;
-        this.dadosPessoais.documentosColaboradores.sort((a, b) => a.id - b.id);
-        for (let i in this.dadosPessoais.documentosColaboradores) {
-          if (this.dadosPessoais.documentosColaboradores[i].tipo != 1) {
-            this.DocumentosObrigatorios.push({
-              id: this.dadosPessoais.documentosColaboradores[i].id,
-              status: this.dadosPessoais.documentosColaboradores[i].status,
-              nome_documento_upload:
-                this.dadosPessoais.documentosColaboradores[i]
-                  .nome_documento_upload,
-              tipo: this.TiposDocumentos.find(
-                (b) =>
-                  b.id == this.dadosPessoais.documentosColaboradores[i].tipo
-              )?.tipo,
-              tipo_id: this.dadosPessoais.documentosColaboradores[i].tipo,
-            });
-          } else {
-            this.DocumentosOpcionais.push({
-              id: this.dadosPessoais.documentosColaboradores[i].id,
-              nome: this.dadosPessoais.documentosColaboradores[i].nome,
-              status: this.dadosPessoais.documentosColaboradores[i].status,
-              nome_documento_upload:
-                this.dadosPessoais.documentosColaboradores[i]
-                  .nome_documento_upload,
-              tipo: this.dadosPessoais.documentosColaboradores[i].nome,
-              tipo_id: this.dadosPessoais.documentosColaboradores[i].tipo,
-            });
-          }
-        }
-      },
-      (error) => {
-        console.log('error', error);
-        this.showWarn();
-      }
-    );
-  }
-
   IDSitu: any;
   salvarDadosPessoais(stepper: MatStepper) {
     this.dadosPessoais.id = this.IDColab;
@@ -362,22 +429,20 @@ export class FichaComponent implements OnInit {
     ) {
       this.dadosPessoais.nome_pai = this.dadosPessoais.nome_pai.toUpperCase();
     }
- 
+
     this.siscrhService.createColaborador(this.dadosPessoais).subscribe(
       (data: any) => {
         this.IDColab = data.id;
 
-
         this.situacaoColaborador.acessoRede = false;
         this.situacaoColaborador.status = true;
-        this.status =  this.situacaoColaborador.status
+        this.status = this.situacaoColaborador.status;
         this.situacaoColaborador.dadosPessoais = { id: this.IDColab };
         this.situacaoColaborador.id = this.IDSitu;
         this.siscrhService
           .createSituacaoColaborador(this.situacaoColaborador)
           .subscribe(
             (data: any) => {
-              
               this.IDSitu = data.id;
             },
             (error) => {
@@ -386,13 +451,12 @@ export class FichaComponent implements OnInit {
             }
           );
 
-        for (let i in this.TiposDocumentos) {
+        /* for (let i in this.TiposDocumentos) {
           if (this.TiposDocumentos[i].id != 1) {
-            this.documentos.tipo = this.TiposDocumentos[i].id;
-            this.documentos.status = false;
-            this.documentos.dadosPessoais = { id: this.IDColab };
+            this.documentosColaboradores.tipo = this.TiposDocumentos[i].id;
+            this.documentosColaboradores.dadosPessoais = { id: this.IDColab };
             this.siscrhService
-              .createDocumentosColaborador(this.documentos)
+              .createDocumentosColaborador(this.documentosColaboradores)
               .subscribe(
                 (data: any) => {},
                 (error) => {
@@ -401,7 +465,7 @@ export class FichaComponent implements OnInit {
                 }
               );
           }
-        }
+        } */
 
         this.dadosProfissionais.dadosPessoais = { id: this.IDColab };
         this.dadosProfissionais.id = this.IDProfi;
@@ -417,8 +481,7 @@ export class FichaComponent implements OnInit {
             }
           );
 
-
-        this.resgatarDocumentos();
+        /*    this.resgatarDocumentos(); */
         this.gerarMensagemFinal();
         this.showSuccess();
         stepper.next();
@@ -438,23 +501,6 @@ export class FichaComponent implements OnInit {
   }
   showWarn() {
     this.toastr.error('Dados não foram cadastrados no sistema! ', 'Erro!');
-  }
-
-  upload(tipo_id: any, id: any, status: any) {
-    this.documentos.id = id;
-    this.documentos.tipo = tipo_id;
-    this.documentos.status = !status;
-    this.documentos.dadosPessoais = { id: this.IDColab };
-    this.siscrhService.createDocumentosColaborador(this.documentos).subscribe(
-      (data: any) => {
-        /* console.log(data); */
-        this.resgatarDocumentos();
-      },
-      (error) => {
-        console.log('error', error);
-        this.showWarn();
-      }
-    );
   }
 
   salvarEstadoCivil(stepper: MatStepper) {
@@ -539,7 +585,7 @@ export class FichaComponent implements OnInit {
 
   setor: any;
   vinculo: any;
-  salvarDadosProfissionais(stepper:MatStepper) {
+  salvarDadosProfissionais(stepper: MatStepper) {
     this.dadosProfissionais.id = this.IDProfi;
 
     if (this.setor != undefined) {
@@ -568,7 +614,7 @@ export class FichaComponent implements OnInit {
       );
   }
 
-  salvarDadosBancarios(stepper:MatStepper) {
+  salvarDadosBancarios(stepper: MatStepper) {
     this.dadosBancarios.id = this.IDBanco;
     this.dadosBancarios.dadosPessoais = { id: this.IDColab };
     this.siscrhService.createDadosBancarios(this.dadosBancarios).subscribe(

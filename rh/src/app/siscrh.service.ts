@@ -71,6 +71,20 @@ url:any = "http://localhost:8080/api"
     );
   }
 
+ /*  getDocumentosColaboradorByForeignKey(id: number): Observable<DocumentosColaboradores> {
+    return this.httpClient.get<DocumentosColaboradores>(
+      this.url + `/v27/dados/${id}`
+    );
+  } */
+
+  getDocumentosColaboradorByForeignKey(id: number): Observable<DocumentosColaboradores[]> {
+    return this.httpClient.get<DocumentosColaboradores[]>(
+      this.url + `/v27/dados/${id}`
+    );
+    
+  }
+
+
 
 
   createDadosBancarios(colaborador: DadosBancarios): Observable<Object> {
@@ -90,6 +104,13 @@ url:any = "http://localhost:8080/api"
     return this.httpClient.post(
       this.url + `/v3/dados`,
       colaborador
+    );
+  }
+
+   createArquivo(formData: FormData, id:number): Observable<Object> {
+    return this.httpClient.post(
+      `http://localhost:8080/fotos/${id}`,formData
+      
     );
   }
 
@@ -123,6 +144,17 @@ url:any = "http://localhost:8080/api"
   deleteVinculo(id: number) {
     this.httpClient
       .delete(this.url + `/v11/dados/${id}`)
+      .subscribe(
+        (data) => {
+          console.log(data);
+        },
+        (error: any) => console.log(error)
+      );
+  }
+
+   deleteDocumentoColaborador(id: number) {
+    this.httpClient
+      .delete(this.url + `/v27/dados/${id}`)
       .subscribe(
         (data) => {
           console.log(data);

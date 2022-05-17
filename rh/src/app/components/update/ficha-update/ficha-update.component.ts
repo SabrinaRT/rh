@@ -172,6 +172,13 @@ export class FichaUpdateComponent implements OnInit {
       });
 
     this.pegarDados();
+
+    this.siscrhService
+        .getDocumentosColaboradorByForeignKey(this.IDColab)
+        .subscribe((data: any) => {
+         console.log(data)
+         
+        });
   }
 
   showSuccess() {

@@ -17,30 +17,36 @@ import  pb.prev.rhback.repository.DocumentosColaboradoresRepository;
 public class DocumentosColaboradoresController {
 
 	@Autowired
-	private DocumentosColaboradoresRepository setoresRepository;
+	private DocumentosColaboradoresRepository documentosColaboradoresRepository;
     
 
 	@GetMapping("/dados")
 	public List<DocumentosColaboradores> getAllDocumentosColaboradores() {
-		return setoresRepository.findAll();
+		return documentosColaboradoresRepository.findAll();
 	}
 
 	@PostMapping("/dados")
 	public DocumentosColaboradores createDocumentosColaboradores(@RequestBody DocumentosColaboradores setores) {
-		return setoresRepository.save(setores);
+		return documentosColaboradoresRepository.save(setores);
 	}
 
 	@GetMapping("/dados/{id}")
+	public List<DocumentosColaboradores> getDocumentosColaboradoresByForeignKey(@PathVariable Long id) {
+		/* DocumentosColaboradores documentosColaboradores = documentosColaboradoresRepository.findByDadosPessoais_Id(id); */
+		return documentosColaboradoresRepository.findByDadosPessoais_Id(id);
+	}
+
+	/* @GetMapping("/dados/{id}")
 	public ResponseEntity<DocumentosColaboradores> getAllDocumentosColaboradores(@PathVariable Long id) {
-		DocumentosColaboradores setores = setoresRepository.findById(id)
+		DocumentosColaboradores setores = documentosColaboradores.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("DocumentosColaboradores not exist with id: " + id));
 
 		return ResponseEntity.ok(setores);
-	}
+	} */
 
 	@DeleteMapping("/dados/{id}")  
 	private void deleteBook(@PathVariable("id") Long id)   
 	{  
-		setoresRepository.deleteById(id);
+		documentosColaboradoresRepository.deleteById(id);
 	} 
 }

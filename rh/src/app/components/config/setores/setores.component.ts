@@ -76,13 +76,6 @@ export class SetoresComponent implements OnInit {
     });
   }
 
-  /*  @ViewChild(CdkVirtualScrollViewport)
-  viewport: CdkVirtualScrollViewport; */
-
-  // example
-  /*  go() {
-    this.viewport.scrollToIndex(23);
-  } */
 }
 
 @Component({
