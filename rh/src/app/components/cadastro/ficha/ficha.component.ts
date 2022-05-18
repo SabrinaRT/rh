@@ -299,7 +299,7 @@ export class FichaComponent implements OnInit {
       );
     }
   }
-
+  ExcluirDocumento =false
   downloadArquivo(nome: any) {
     this.siscrhService.downloadArquivo(this.IDColab, nome);
   }

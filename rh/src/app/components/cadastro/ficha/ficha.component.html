@@ -1059,24 +1059,29 @@
                       </mat-panel-title>
                     </mat-expansion-panel-header>
 
+                    <mat-slide-toggle
+                    [(ngModel)]="ExcluirDocumento"
+                    >Excluir</mat-slide-toggle
+                  >
                     <table class="styled-table">
                       <thead>
                         <tr>
                           <th class="th-table" style="width: 85%">Tipos</th>
-                          <th colspan="2">Serviços</th>
+                          <th ></th>
+                          <th *ngIf="ExcluirDocumento == true"></th>
                         </tr>
                       </thead>
                       <tbody>
                         <tr *ngFor="let index of ArrayDocumentos; let i = index">
                           <td
-                            style="width: 75%"
+                            style="width: 90%"
                             *ngIf="index.id_documento != 1"
                           >
                             {{ index.tipo }}
                           </td>
                           <td
                             class="td-table"
-                            style="width: 100px"
+                          
                             *ngIf="index.id_documento != 1"
                           >
                             <input
@@ -1093,25 +1098,29 @@
                               *ngIf="index.id == null"
                               (click)="fileUpload.click()"
                             >
-                              <mat-icon>edit</mat-icon>
+                              <mat-icon>upload_file</mat-icon>
                             </button>
-                              <button
-                                mat-raised-button
-                                color="warn"
-                                *ngIf="index.id != null"
-                                (click)="deleteDocu(index.id, i, index.nome_arquivo)"
-                              >
-                                <mat-icon>cancel</mat-icon>
-                              </button>
-                              <button
-                              mat-raised-button
-                              color="primary"
-                              *ngIf="index.id != null"
-                              (click)="downloadArquivo(index.nome_arquivo)"
-                            >
-                              <mat-icon>cancel</mat-icon>
-                            </button>
-                              
+                            <button
+                            mat-raised-button
+                            color="primary"
+                            *ngIf="index.id != null"
+                            (click)="downloadArquivo(index.nome_arquivo)"
+                          >
+                            <mat-icon>file_download</mat-icon>
+                          </button>
+                             
+                             
+                          </td>
+                          <td   *ngIf="index.id_documento != 1 && ExcluirDocumento == true">
+                            <button
+                            mat-raised-button
+                            color="warn"
+                            *ngIf="index.id != null"
+                            (click)="deleteDocu(index.id, i, index.nome_arquivo)"
+                          
+                          >
+                            <mat-icon>cancel</mat-icon>
+                          </button>
                           </td>
                         </tr>
                       </tbody>
