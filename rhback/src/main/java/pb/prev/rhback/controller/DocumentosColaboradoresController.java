@@ -34,9 +34,25 @@ public class DocumentosColaboradoresController {
 		return documentosColaboradoresRepository.save(documentos);
 	}
 
+	@GetMapping("/dados/{id}")
+	public List<DocumentosColaboradores> getDocumentosColaboradoresByForeignKey(@PathVariable Long id) {
+	/* 	DocumentosColaboradores documentosColaboradores = documentosColaboradoresRepository.findByDadosPessoais_Id(id); */
+		return documentosColaboradoresRepository.findByDadosPessoais_Id(id);
+	}
+
+	/* @GetMapping("/dados/{id}")
+	public ResponseEntity<DocumentosColaboradores> getAllDocumentosColaboradores(@PathVariable Long id) {
+		DocumentosColaboradores documentos = documentosColaboradores.findById(id)
+				.orElseThrow(() -> new ResourceNotFoundException("DocumentosColaboradores not exist with id: " + id));
+
+		return ResponseEntity.ok(documentos);
+	} */
+
 	@DeleteMapping("/dados/{id}")  
 	private void deleteBook(@PathVariable("id") Long id)   
 	{  
+		
+
 		documentosColaboradoresRepository.deleteById(id);
 	} 
 }

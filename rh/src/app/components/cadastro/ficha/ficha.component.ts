@@ -251,18 +251,19 @@ export class FichaComponent implements OnInit {
         this.DocumentosColaboradores = data;
         console.log(this.DocumentosColaboradores);
 
-        for (let i in this.ArrayDocumentos) {
-          for (let i2 in this.DocumentosColaboradores) {
-            if (
-              this.ArrayDocumentos[i].id_documento ==
-              this.DocumentosColaboradores[i2].tipo
-            ) {
-              this.ArrayDocumentos[i].id = this.DocumentosColaboradores[i2].id;
+          for (let i in this.ArrayDocumentos) {
+            for (let i2 in this.DocumentosColaboradores) {
+              if (
+                this.ArrayDocumentos[i].id_documento ==
+                this.DocumentosColaboradores[i2].tipo
+              ) {
+                this.ArrayDocumentos[i].id = this.DocumentosColaboradores[i2].id;
+                this.ArrayDocumentos[i].nome_arquivo = this.DocumentosColaboradores[i2].nome_documento_upload
+              }
             }
           }
-        }
 
-        console.log(this.ArrayDocumentos);
+          console.log(this.ArrayDocumentos);
       });
   }
 
@@ -283,8 +284,7 @@ export class FichaComponent implements OnInit {
             .createDocumentosColaborador(this.documentosColaboradores)
             .subscribe(
               (data: any) => {
-                this.ArrayDocumentos[index].id = data.id;
-                this.ArrayDocumentos[index].nome_arquivo = data.nome_documento_upload;
+                this.atualizar();
               },
               (error) => {
                 console.log('error', error);
