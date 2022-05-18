@@ -267,7 +267,7 @@ export class FichaComponent implements OnInit {
       });
   }
 
-  upload(event: any, tipo: any, index: any) {
+  upload(event: any, tipo: any) {
     if (event.target.files && event.target.files[0]) {
      var nome_upload= Math.floor((Math.random() * 1000) + 1) +" - "  + event.target.files[0].name 
       const foto = event.target.files[0] ;
@@ -307,7 +307,8 @@ export class FichaComponent implements OnInit {
   deleteDocu(id: any, index: any, nome: any) {
     console.log(id)
     this.siscrhService.deleteDocumentoColaborador(id);    
-    this.ArrayDocumentos[index].id = null;
+ /*    this.ArrayDocumentos[index].id = null; */
+    this.atualizar();
     this.siscrhService.deleteArquivo(this.IDColab, nome);
    
   }
