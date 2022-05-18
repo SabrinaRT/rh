@@ -170,7 +170,7 @@ export class FichaComponent implements OnInit {
       }
     }
   }
-  teste: any = [];
+  ArrayDocumentos: any = [];
 
   ngOnInit() {
     this.firstFormGroup = this._formBuilder.group({
@@ -215,7 +215,7 @@ export class FichaComponent implements OnInit {
         this.TiposDocumentos = data;
 
         for (let i in this.TiposDocumentos) {
-          this.teste.push({
+          this.ArrayDocumentos.push({
             id: null,
             nome_arquivo: null,
             id_documento: this.TiposDocumentos[i].id,
@@ -251,28 +251,28 @@ export class FichaComponent implements OnInit {
         this.DocumentosColaboradores = data;
         console.log(this.DocumentosColaboradores);
 
-        for (let i in this.teste) {
+        for (let i in this.ArrayDocumentos) {
           for (let i2 in this.DocumentosColaboradores) {
             if (
-              this.teste[i].id_documento ==
+              this.ArrayDocumentos[i].id_documento ==
               this.DocumentosColaboradores[i2].tipo
             ) {
-              this.teste[i].id = this.DocumentosColaboradores[i2].id;
+              this.ArrayDocumentos[i].id = this.DocumentosColaboradores[i2].id;
             }
           }
         }
 
-        console.log(this.teste);
+        console.log(this.ArrayDocumentos);
       });
   }
 
   upload(event: any, tipo: any, index: any) {
     if (event.target.files && event.target.files[0]) {
-      const foto = event.target.files[0];
+     var nome_upload= Math.floor((Math.random() * 1000) + 1) +" - "  + event.target.files[0].name 
+      const foto = event.target.files[0] ;
       const formData = new FormData();
-      formData.append('foto', foto);
-      this.documentosColaboradores.nome_documento_upload =
-        event.target.files[0].name;
+      formData.append('foto', foto,nome_upload );
+      this.documentosColaboradores.nome_documento_upload = nome_upload
       this.documentosColaboradores.tipo = tipo;
 
       this.documentosColaboradores.dadosPessoais = { id: this.IDColab };
@@ -283,9 +283,8 @@ export class FichaComponent implements OnInit {
             .createDocumentosColaborador(this.documentosColaboradores)
             .subscribe(
               (data: any) => {
-                console.log(data);
-                this.teste[index].id = data.id;
-                this.teste[index].nome_arquivo = data.nome_documento_upload;
+                this.ArrayDocumentos[index].id = data.id;
+                this.ArrayDocumentos[index].nome_arquivo = data.nome_documento_upload;
               },
               (error) => {
                 console.log('error', error);
@@ -306,21 +305,14 @@ export class FichaComponent implements OnInit {
   }
 
   deleteDocu(id: any, index: any, nome: any) {
-    this.siscrhService.deleteDocumentoColaborador(id);
-    this.teste[index].id = null;
+    console.log(id)
+    this.siscrhService.deleteDocumentoColaborador(id);    
+    this.ArrayDocumentos[index].id = null;
     this.siscrhService.deleteArquivo(this.IDColab, nome);
+   
   }
 
- /*  upload(idtipo: any) {
-    this.documentosColaboradores.dadosPessoais = { id: this.IDColab };
-    this.documentosColaboradores.tipo = idtipo;
-    this.siscrhService
-      .createDocumentosColaborador(this.documentosColaboradores)
-      .subscribe((data: any) => {
-        console.log(data);
-        this.atualizar();
-      });
-  } */
+
 
   delete(idDocumento: any) {
     this.siscrhService.deleteDocumentoColaborador(idDocumento);

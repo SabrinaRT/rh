@@ -1067,7 +1067,7 @@
                         </tr>
                       </thead>
                       <tbody>
-                        <tr *ngFor="let index of teste; let i = index">
+                        <tr *ngFor="let index of ArrayDocumentos; let i = index">
                           <td
                             style="width: 75%"
                             *ngIf="index.id_documento != 1"
@@ -1099,7 +1099,7 @@
                                 mat-raised-button
                                 color="warn"
                                 *ngIf="index.id != null"
-                                (click)="deleteDocu(index.id_documento, i, index.nome_arquivo)"
+                                (click)="deleteDocu(index.id, i, index.nome_arquivo)"
                               >
                                 <mat-icon>cancel</mat-icon>
                               </button>
