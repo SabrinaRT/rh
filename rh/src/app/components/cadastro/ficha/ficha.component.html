@@ -1045,87 +1045,7 @@
 
       <mat-step>
         <ng-template matStepLabel>Arquivos</ng-template>
-        <!--  <div class="container">
-          <br />
-          <div class="row">
-            <div class="col-12">
-              <mat-card>
-                <mat-accordion>
-                  <mat-expansion-panel [expanded]="true">
-                    <mat-expansion-panel-header>
-                      <mat-panel-title>
-                        Documentos Obrigatórios
-                      </mat-panel-title>
-                    </mat-expansion-panel-header>
-                    <table class="styled-table">
-                      <tbody>
-                        <tr *ngFor="let i of DocumentosObrigatorios">
-                          <td style="width: 70%">{{ i.tipo }}</td>
-                          <td style="width: 15%" *ngIf="i.status == true">
-                            <mat-icon style="color: green"
-                              >check_circle</mat-icon
-                            >
-                          </td>
-                          <td style="width: 15%" *ngIf="i.status == false">
-                            <mat-icon style="color: red">cancel</mat-icon>
-                          </td>
-                          <td *ngIf="i.status == true">
-                            <button
-                              mat-raised-button
-                              color="warn"
-                              (click)="upload(i.tipo_id, i.id, i.status)"
-                            >
-                              <mat-icon>delete</mat-icon>
-                            </button>
-                          </td>
-                          <td *ngIf="i.status == false">
-                            <button
-                              mat-raised-button
-                              color="primary"
-                              (click)="upload(i.tipo_id, i.id, i.status)"
-                            >
-                              <mat-icon>upload</mat-icon>
-                            </button>
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </mat-expansion-panel>
-                  <mat-expansion-panel
-                    (opened)="panelOpenState = true"
-                    (closed)="panelOpenState = false"
-                  >
-                    <mat-expansion-panel-header>
-                      <mat-panel-title> Documentos Adicionais </mat-panel-title>
-                    </mat-expansion-panel-header>
-
-                    <table class="styled-table">
-                      <tbody style="min-height: 500px; max-height: 600px">
-                        <tr *ngFor="let i of DocumentosOpcionais">
-                          <td style="width: 70%">{{ i.nome }}</td>
-                          <td style="width: 15%" *ngIf="i.status == true">
-                            <mat-icon style="color: green"
-                              >check_circle</mat-icon
-                            >
-                          </td>
-                          <td style="width: 15%" *ngIf="i.status == false">
-                            <mat-icon style="color: red">cancel</mat-icon>
-                          </td>
-                          <td>
-                            <button mat-raised-button color="primary">
-                              <mat-icon>upload</mat-icon>
-                            </button>
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </mat-expansion-panel>
-                </mat-accordion>
-              </mat-card>
-            </div>
-          </div>
-          <br />
-        </div> -->
+        
         <div class="container">
           <br />
           <div class="row">
@@ -1139,7 +1059,6 @@
                       </mat-panel-title>
                     </mat-expansion-panel-header>
 
-                    <!--   <input type="file" (change)="inputFileChange($event)" /> -->
                     <table class="styled-table">
                       <thead>
                         <tr>
@@ -1150,21 +1069,21 @@
                       <tbody>
                         <tr *ngFor="let index of teste; let i = index">
                           <td
-                            style="width: 84.5%"
+                            style="width: 75%"
                             *ngIf="index.id_documento != 1"
                           >
                             {{ index.tipo }}
                           </td>
                           <td
                             class="td-table"
-                            style="width: 50px"
+                            style="width: 100px"
                             *ngIf="index.id_documento != 1"
                           >
                             <input
                               #fileUpload
                               type="file"
                               (change)="
-                                inputFileChange($event, index.id_documento, i)
+                                upload($event, index.id_documento, i)
                               "
                               style="display: none"
                             />
@@ -1176,16 +1095,22 @@
                             >
                               <mat-icon>edit</mat-icon>
                             </button>
-                         <!--    <a  href="http://localhost:8080/fotos/download/{{idColab}}/{{index.nome_arquivo}}"> -->
                               <button
                                 mat-raised-button
                                 color="warn"
                                 *ngIf="index.id != null"
-                                (click)="downloadArquivo(index.nome_arquivo)"
+                                (click)="deleteDocu(index.id_documento, i, index.nome_arquivo)"
                               >
                                 <mat-icon>cancel</mat-icon>
                               </button>
-                           <!--    </a> -->  
+                              <button
+                              mat-raised-button
+                              color="primary"
+                              *ngIf="index.id != null"
+                              (click)="downloadArquivo(index.nome_arquivo)"
+                            >
+                              <mat-icon>cancel</mat-icon>
+                            </button>
                               
                           </td>
                         </tr>

@@ -266,7 +266,7 @@ export class FichaComponent implements OnInit {
       });
   }
 
-  inputFileChange(event: any, tipo: any, index: any) {
+  upload(event: any, tipo: any, index: any) {
     if (event.target.files && event.target.files[0]) {
       const foto = event.target.files[0];
       const formData = new FormData();
@@ -303,15 +303,15 @@ export class FichaComponent implements OnInit {
 
   downloadArquivo(nome: any) {
     this.siscrhService.downloadArquivo(this.IDColab, nome);
-   
   }
 
-  deleteDocu(id: any, index: any) {
+  deleteDocu(id: any, index: any, nome: any) {
     this.siscrhService.deleteDocumentoColaborador(id);
     this.teste[index].id = null;
+    this.siscrhService.deleteArquivo(this.IDColab, nome);
   }
 
-  upload(idtipo: any) {
+ /*  upload(idtipo: any) {
     this.documentosColaboradores.dadosPessoais = { id: this.IDColab };
     this.documentosColaboradores.tipo = idtipo;
     this.siscrhService
@@ -320,7 +320,7 @@ export class FichaComponent implements OnInit {
         console.log(data);
         this.atualizar();
       });
-  }
+  } */
 
   delete(idDocumento: any) {
     this.siscrhService.deleteDocumentoColaborador(idDocumento);

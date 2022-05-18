@@ -11,6 +11,8 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,24 +25,24 @@ import org.springframework.web.multipart.MultipartFile;
 @RestController
 @RequestMapping("/fotos")
 public class FotosResource {
-	
+
 	@Autowired
 	private Disco disco;
-	
-	@Value("${contato.disco.raiz}/${contato.disco.diretorio-fotos}/" )
+
+	@Value("${contato.disco.raiz}/${contato.disco.diretorio-fotos}/")
 	private String diretorioFotos;
-	
+
 	@PostMapping("/{id}")
 	public void upload(@RequestParam MultipartFile foto, @PathVariable Long id) {
 		disco.salvarFoto(foto, id);
 	}
 
-	@RequestMapping(value = "/download/{id}/{nome}", method = RequestMethod.GET)
-	public ResponseEntity<Object> downloadFile(@PathVariable Long id, @PathVariable String nome) throws IOException{
-		String filename = diretorioFotos +id +"/"+nome;
+	@GetMapping("/download/{id}/{nome}")
+	public ResponseEntity<Object> downloadFile(@PathVariable Long id, @PathVariable String nome) throws IOException {
+		String filename = diretorioFotos + id + "/" + nome;
 		File file = new File(filename);
 		InputStreamResource resource = new InputStreamResource(new FileInputStream(file));
-		
+
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("Content-Disposition",
 				String.format("attachment; filename=\"%s\"", file.getName()));
@@ -54,5 +56,13 @@ public class FotosResource {
 
 		return responseEntity;
 	}
+
+	@GetMapping("/delete/{id}/{nome}")
+	private void deleteBook(@PathVariable Long id, @PathVariable String nome) {
+		String filename = diretorioFotos + id + "/" + nome;
+		File file = new File(filename);
+		file.delete();
+	}
+	
 
 }

@@ -51,6 +51,8 @@ public class DocumentosColaboradoresController {
 	@DeleteMapping("/dados/{id}")  
 	private void deleteBook(@PathVariable("id") Long id)   
 	{  
+		
+
 		documentosColaboradoresRepository.deleteById(id);
 	} 
 }
