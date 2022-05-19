@@ -252,10 +252,12 @@ export class FichaComponent implements OnInit {
         console.log(this.DocumentosColaboradores);
 
           for (let i in this.ArrayDocumentos) {
+            this.ArrayDocumentos[i].id = null
+            this.ArrayDocumentos[i].nome_arquivo =null
+           
             for (let i2 in this.DocumentosColaboradores) {
               if (
-                this.ArrayDocumentos[i].id_documento ==
-                this.DocumentosColaboradores[i2].tipo
+                this.ArrayDocumentos[i].id_documento == this.DocumentosColaboradores[i2].tipo
               ) {
                 this.ArrayDocumentos[i].id = this.DocumentosColaboradores[i2].id;
                 this.ArrayDocumentos[i].nome_arquivo = this.DocumentosColaboradores[i2].nome_documento_upload
@@ -305,12 +307,13 @@ export class FichaComponent implements OnInit {
   }
 
   deleteDocu(id: any, index: any, nome: any) {
-    console.log(id)
     this.siscrhService.deleteDocumentoColaborador(id);    
- /*    this.ArrayDocumentos[index].id = null; */
+    this.atualizar();
     this.atualizar();
     this.siscrhService.deleteArquivo(this.IDColab, nome);
-   
+  
+    
+
   }
 
 
@@ -369,6 +372,7 @@ export class FichaComponent implements OnInit {
     /\d/,
     /\d/,
   ];
+
   Usuario: any;
   Email: any;
   IDEstado: number;
@@ -377,7 +381,6 @@ export class FichaComponent implements OnInit {
   IDBanco: number;
   EditarApagarDep = false;
   EditarApagarMat = false;
-
   mensagemFinal: any;
 
   gerarMensagemFinal() {
@@ -444,21 +447,7 @@ export class FichaComponent implements OnInit {
             }
           );
 
-        /* for (let i in this.TiposDocumentos) {
-          if (this.TiposDocumentos[i].id != 1) {
-            this.documentosColaboradores.tipo = this.TiposDocumentos[i].id;
-            this.documentosColaboradores.dadosPessoais = { id: this.IDColab };
-            this.siscrhService
-              .createDocumentosColaborador(this.documentosColaboradores)
-              .subscribe(
-                (data: any) => {},
-                (error) => {
-                  console.log('error', error);
-                  this.showWarn();
-                }
-              );
-          }
-        } */
+      
 
         this.dadosProfissionais.dadosPessoais = { id: this.IDColab };
         this.dadosProfissionais.id = this.IDProfi;
@@ -474,7 +463,6 @@ export class FichaComponent implements OnInit {
             }
           );
 
-        /*    this.resgatarDocumentos(); */
         this.gerarMensagemFinal();
         this.showSuccess();
         stepper.next();
