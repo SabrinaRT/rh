@@ -1045,51 +1045,44 @@
 
       <mat-step>
         <ng-template matStepLabel>Arquivos</ng-template>
-        
+
         <div class="container">
           <br />
           <div class="row">
             <div class="col-12">
               <mat-card>
-                <mat-accordion>
-                  <mat-expansion-panel [expanded]="true">
-                    <mat-expansion-panel-header>
-                      <mat-panel-title>
-                        Documentos Obrigatórios
-                      </mat-panel-title>
-                    </mat-expansion-panel-header>
 
-                    <mat-slide-toggle
-                    [(ngModel)]="ExcluirDocumento"
-                    >Excluir</mat-slide-toggle
-                  >
+
+                <mat-tab-group  >
+                  <mat-tab label="Documentos Obrigatórios">  
+                    
+                  <br>
+                    <mat-slide-toggle [(ngModel)]="ExcluirDocumento"
+                      >Excluir</mat-slide-toggle
+                    >
                     <table class="styled-table">
                       <thead>
                         <tr>
                           <th class="th-table" style="width: 85%">Tipos</th>
-                          <th ></th>
+                          <th></th>
                           <th *ngIf="ExcluirDocumento == true"></th>
                         </tr>
                       </thead>
                       <tbody>
-                        <tr *ngFor="let index of ArrayDocumentos; let i = index">
+                        <tr
+                          *ngFor="let index of ArrayDocumentos; let i = index"
+                        >
                           <td
                             style="width: 90%"
                             *ngIf="index.id_documento != 1"
                           >
                             {{ index.tipo }}
                           </td>
-                          <td
-                            class="td-table"
-                          
-                            *ngIf="index.id_documento != 1"
-                          >
+                          <td class="td-table" *ngIf="index.id_documento != 1">
                             <input
                               #fileUpload
                               type="file"
-                              (change)="
-                                upload($event, index.id_documento)
-                              "
+                              (change)="upload($event, index.id_documento)"
                               style="display: none"
                             />
                             <button
@@ -1101,95 +1094,87 @@
                               <mat-icon>upload_file</mat-icon>
                             </button>
                             <button
-                            mat-raised-button
-                            color="primary"
-                            *ngIf="index.id != null"
-                            (click)="downloadArquivo(index.nome_arquivo)"
-                          >
-                            <mat-icon>file_download</mat-icon>
-                          </button>
-                             
-                             
+                              mat-raised-button
+                              color="primary"
+                              *ngIf="index.id != null"
+                              (click)="downloadArquivo(index.nome_arquivo)"
+                            >
+                              <mat-icon>file_download</mat-icon>
+                            </button>
                           </td>
-                          <td   *ngIf="index.id_documento != 1 && ExcluirDocumento == true">
-                            <button
-                            mat-raised-button
-                            color="warn"
-                            *ngIf="index.id != null"
-                            (click)="deleteDocu(index.id, index.nome_arquivo)"
-                          
+                          <td
+                            *ngIf="
+                              index.id_documento != 1 &&
+                              ExcluirDocumento == true
+                            "
                           >
-                            <mat-icon>cancel</mat-icon>
-                          </button>
+                            <button
+                              mat-raised-button
+                              color="warn"
+                              *ngIf="index.id != null"
+                              (click)="deleteDocu(index.id, index.nome_arquivo)"
+                            >
+                              <mat-icon>cancel</mat-icon>
+                            </button>
                           </td>
                         </tr>
                       </tbody>
                     </table>
-                  </mat-expansion-panel>
-                  <mat-expansion-panel
-                    (opened)="panelOpenState = true"
-                    (closed)="panelOpenState = false"
-                  >
-                    <mat-expansion-panel-header>
-                      <mat-panel-title> Documentos Adicionais </mat-panel-title>
-                    </mat-expansion-panel-header>
-                    <div class="row">
-                      <div class="col-2">
-                        <mat-slide-toggle
-                        [(ngModel)]="ExcluirDocumentoOpcionais"
-                        >Excluir</mat-slide-toggle
-                      >
+                  </mat-tab>
+                  <mat-tab label="Documentos Opcionais"> 
+                    <br>
+                    <div class="container">
+                      <div class="row">
+                        <div class="col-2">
+                          <mat-slide-toggle
+                            [(ngModel)]="ExcluirDocumentoOpcionais"
+                            >Excluir</mat-slide-toggle
+                          >
+                        </div>
+                        <div class="col-8"></div>
+                        <div class="col-2" >
+                          <input
+                            #fileUpload
+                            type="file"
+                            (change)="upload($event, 1)"
+                            style="display: none"
+                          />
+                          <button
+                            mat-raised-button
+                            color="files"
+                            (click)="fileUpload.click()"
+                            class="col-12"
+                          >
+                            <mat-icon>upload_file</mat-icon>
+                            Escolher arquivo
+                          </button>
+                        </div>
                       </div>
-                      <div class="col-7"></div>
-                      <div class="col-2">
-                        <input
-                    #fileUpload
-                    type="file"
-                    (change)="
-                      upload($event, 1)
-                    "
-                    style="display: none"
-                  />
-                  <button
-                    mat-raised-button
-                    color="files"
-                   
-                    (click)="fileUpload.click()"
-                  >
-                    <mat-icon>upload_file</mat-icon>
-                    Escolher arquivo
-                  </button>
-                      </div>
-
                     </div>
-                    
+      
                     <table class="styled-table">
                       <thead>
                         <tr>
                           <th class="th-table" style="width: 85%">Tipos</th>
-                          <th ></th>
+                          <th></th>
                           <th *ngIf="ExcluirDocumentoOpcionais == true"></th>
                         </tr>
                       </thead>
                       <tbody>
-                        <tr *ngFor="let index of ArrayDocumentosOpcionais; let i = index">
-                          <td
-                            style="width: 90%"
-                        
-                          >
+                        <tr
+                          *ngFor="
+                            let index of ArrayDocumentosOpcionais;
+                            let i = index
+                          "
+                        >
+                          <td style="width: 90%">
                             {{ index.nome_arquivo }}
                           </td>
-                          <td
-                            class="td-table"
-                          
-                            
-                          >
+                          <td class="td-table">
                             <input
                               #fileUpload
                               type="file"
-                              (change)="
-                                upload($event, index.id_documento)
-                              "
+                              (change)="upload($event, index.id_documento)"
                               style="display: none"
                             />
                             <button
@@ -1201,38 +1186,36 @@
                               <mat-icon>upload_file</mat-icon>
                             </button>
                             <button
-                            mat-raised-button
-                            color="primary"
-                            *ngIf="index.id != null"
-                            (click)="downloadArquivo(index.nome_arquivo)"
-                          >
-                            <mat-icon>file_download</mat-icon>
-                          </button>
-                             
-                             
+                              mat-raised-button
+                              color="primary"
+                              *ngIf="index.id != null"
+                              (click)="downloadArquivo(index.nome_arquivo)"
+                            >
+                              <mat-icon>file_download</mat-icon>
+                            </button>
                           </td>
-                          <td   *ngIf="ExcluirDocumentoOpcionais == true">
+                          <td *ngIf="ExcluirDocumentoOpcionais == true">
                             <button
-                            mat-raised-button
-                            color="warn"
-                            *ngIf="index.id != null"
-                            (click)="deleteDocu(index.id, index.nome_arquivo)"
-                          
-                          >
-                            <mat-icon>cancel</mat-icon>
-                          </button>
+                              mat-raised-button
+                              color="warn"
+                              *ngIf="index.id != null"
+                              (click)="deleteDocu(index.id, index.nome_arquivo)"
+                            >
+                              <mat-icon>cancel</mat-icon>
+                            </button>
                           </td>
                         </tr>
                       </tbody>
-                    </table>
-                  </mat-expansion-panel>
-                </mat-accordion>
+                    </table>  
+                  </mat-tab>
+                </mat-tab-group>
+                <br>
+      
               </mat-card>
             </div>
           </div>
           <br />
         </div>
-       
       </mat-step>
       <mat-step>
         <ng-template matStepLabel>Finalização</ng-template>

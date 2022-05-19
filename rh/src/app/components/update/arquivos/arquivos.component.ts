@@ -2,6 +2,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DadosPessoais, Documentos, DocumentosColaboradores } from 'src/app/siscrh';
 import { SiscrhService } from 'src/app/siscrh.service';
+import { FichaComponent } from '../../cadastro/ficha/ficha.component';
 
 @Component({
   selector: 'app-arquivos',
@@ -10,7 +11,6 @@ import { SiscrhService } from 'src/app/siscrh.service';
 })
 export class ArquivosComponent implements OnInit {
 
-  @ViewChild('fileInput') fileInput: ElementRef;
   
   panelOpenState = true;
   constructor(private siscrhService: SiscrhService, private route:ActivatedRoute) {
@@ -22,89 +22,128 @@ export class ArquivosComponent implements OnInit {
     this.siscrhService.getDocumentosList().subscribe((data: any) => {
       this.TiposDocumentos = data;
     });
- 
+    this.siscrhService.getDocumentosList().subscribe(
+      (data: any) => {
+        this.TiposDocumentos = data;
+
+        for (let i in this.TiposDocumentos) {
+          if (this.TiposDocumentos[i].id != 1) {
+            this.ArrayDocumentos.push({
+              id: null,
+              nome_arquivo: null,
+              id_documento: this.TiposDocumentos[i].id,
+              tipo: this.TiposDocumentos[i].tipo,
+            });
+          }
+        }
+        console.log(data);
+      },
+      (error) => {
+        console.log('error', error);
+      }
+    );
+    this.atualizar()
   }
 
-  fileAttr = 'Escolhe o Arquivo';
-  uploadFileEvt(imgFile: any) {
-    if (imgFile.target.files && imgFile.target.files[0]) {
-      this.fileAttr = '';
-      Array.from(imgFile.target.files).forEach((file: any) => {
-        this.fileAttr += file.name;
+  ArrayDocumentos: any = [];
+  ArrayDocumentosOpcionais: any = [];
+  DocumentosColaboradores: DocumentosColaboradores[];
+  atualizar() {
+    this.siscrhService
+      .getDocumentosColaboradorByForeignKey(this.IDColab)
+      .subscribe((data: any) => {
+        console.log(data);
+
+        this.DocumentosColaboradores = data;
+
+        this.ArrayDocumentosOpcionais = [];
+        for (let i2 in this.DocumentosColaboradores) {
+          if (this.DocumentosColaboradores[i2].tipo == 1) {
+            this.ArrayDocumentosOpcionais.push({
+              id: this.DocumentosColaboradores[i2].id,
+              nome_arquivo:
+                this.DocumentosColaboradores[i2].nome_documento_upload,
+              id_documento: this.DocumentosColaboradores[i2].tipo,
+            });
+          }
+        }
+
+        for (let i in this.ArrayDocumentos) {
+          this.ArrayDocumentos[i].id = null;
+          this.ArrayDocumentos[i].nome_arquivo = null;
+
+          for (let i2 in this.DocumentosColaboradores) {
+            if (
+              this.ArrayDocumentos[i].id_documento ==
+              this.DocumentosColaboradores[i2].tipo
+            ) {
+              this.ArrayDocumentos[i].id = this.DocumentosColaboradores[i2].id;
+              this.ArrayDocumentos[i].nome_arquivo =
+                this.DocumentosColaboradores[i2].nome_documento_upload;
+            }
+          }
+        }
+
       });
-      let reader = new FileReader();
-      reader.onload = (e: any) => {
-        let image = new Image();
-        image.src = e.target.result;
-        image.onload = (rs) => {
-          let imgBase64Path = e.target.result;
-          
-        };
-      };
-      reader.readAsDataURL(imgFile.target.files[0]);
-      this.fileInput.nativeElement.value = '';
-      console.log(this.fileAttr)
-    } else {
-      this.fileAttr = 'Escolhe o Arquivo';
+  }
+
+  documentosColaboradores: DocumentosColaboradores =
+    new DocumentosColaboradores();
+
+  upload(event: any, tipo: any) {
+    
+    if (event.target.files && event.target.files[0]) {
+      var nome_upload =
+        Math.floor(Math.random() * 1000 + 1) +
+        ' - ' +
+        event.target.files[0].name;
+      const foto = event.target.files[0];
+      const formData = new FormData();
+      formData.append('foto', foto, nome_upload);
+      this.documentosColaboradores.nome_documento_upload = nome_upload;
+      this.documentosColaboradores.tipo = tipo;
+
+      this.documentosColaboradores.dadosPessoais = { id: this.IDColab };
+      this.siscrhService.createArquivo(formData, this.IDColab).subscribe(
+        (data: any) => {
+          console.log(data);
+          this.siscrhService
+            .createDocumentosColaborador(this.documentosColaboradores)
+            .subscribe(
+              (data: any) => {
+                this.atualizar();
+              },
+              (error) => {
+                console.log('error', error);
+                ;
+              }
+            );
+        },
+        (error) => {
+          console.log('error', error);
+          ;
+        }
+      );
     }
   }
+  ExcluirDocumento = false;
+  ExcluirDocumentoOpcionais = false;
+  downloadArquivo(nome: any) {
+    this.siscrhService.downloadArquivo(this.IDColab, nome);
+  }
 
+  deleteDocu(id: any, nome: any) {
+    this.siscrhService.deleteDocumentoColaborador(id);
+    this.siscrhService.deleteArquivo(this.IDColab, nome);
+    this.atualizar();
+    this.atualizar();
+  }
 
   TiposDocumentos: Documentos[];
   
   dadosPessoais: DadosPessoais = new DadosPessoais();
   documentos:DocumentosColaboradores = new DocumentosColaboradores();
   IDColab: any;
-  teste: any = [];
-  teste2: any = [];
+
   
- /*  upload(tipo_id:any, id:any, status:any){
-    this.documentos.id = id
-    this.documentos.tipo = tipo_id;
-    this.documentos.status =  !status;
-    this.documentos.dadosPessoais = { id: this.IDColab };
-    this.siscrhService
-      .createDocumentosColaborador(this.documentos)
-      .subscribe((data: any) => {
-        this.resgatarDocumentos();
-      });
-} */
-
-  /* resgatarDocumentos() {
-    this.teste = [];
-    this.teste2 = [];
-    this.siscrhService
-      .getColaboradorById(this.IDColab)
-      .subscribe((data: any) => {
-        this.dadosPessoais = data;
-        this.dadosPessoais.documentosColaboradores.sort((a, b) => a.id - b.id);
-        for (let i in this.dadosPessoais.documentosColaboradores) {
-         
-          if (this.dadosPessoais.documentosColaboradores[i].tipo != 1) {
-            this.teste.push({
-              id: this.dadosPessoais.documentosColaboradores[i].id,
-              status: this.dadosPessoais.documentosColaboradores[i].status,
-              nome_documento_upload:
-                this.dadosPessoais.documentosColaboradores[i]
-                  .nome_documento_upload,
-              tipo: this.TiposDocumentos.find((b) => b.id == this.dadosPessoais.documentosColaboradores[i].tipo)?.tipo,
-              tipo_id: this.dadosPessoais.documentosColaboradores[i].tipo,
-            });
-           
-          } else {
-            this.teste2.push({
-              id: this.dadosPessoais.documentosColaboradores[i].id,
-              nome: this.dadosPessoais.documentosColaboradores[i].nome,
-              status: this.dadosPessoais.documentosColaboradores[i].status,
-              nome_documento_upload:
-                this.dadosPessoais.documentosColaboradores[i]
-                  .nome_documento_upload,
-              tipo: this.dadosPessoais.documentosColaboradores[i].nome,
-              tipo_id: this.dadosPessoais.documentosColaboradores[i].tipo,
-            });
-          }
-        }
-
-      });
-  } */
 }
