@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import  pb.prev.rhback.model.DadosBancarios;
 import  pb.prev.rhback.repository.DadosBancariosRepository;
 
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "${servidor-porta}")
 @RestController
 @RequestMapping("/api/v4/")
 public class DadosBancariosController {

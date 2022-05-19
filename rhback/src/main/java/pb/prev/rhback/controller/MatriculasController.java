@@ -11,7 +11,7 @@ import   pb.prev.rhback.exception.ResourceNotFoundException;
 import  pb.prev.rhback.model.Matriculas;
 import  pb.prev.rhback.repository.MatriculasRepository;
 
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "${servidor-porta}")
 @RestController
 @RequestMapping("/api/v12/")
 public class MatriculasController {

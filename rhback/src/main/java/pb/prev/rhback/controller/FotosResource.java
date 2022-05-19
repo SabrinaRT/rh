@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "${servidor-porta}")
 @RestController
 @RequestMapping("/fotos")
 public class FotosResource {

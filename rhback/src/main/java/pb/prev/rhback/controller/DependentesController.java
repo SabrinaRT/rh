@@ -11,7 +11,7 @@ import   pb.prev.rhback.exception.ResourceNotFoundException;
 import  pb.prev.rhback.model.Dependentes;
 import  pb.prev.rhback.repository.DependentesRepository;
 
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "${servidor-porta}")
 @RestController
 @RequestMapping("/api/v3/")
 public class DependentesController {

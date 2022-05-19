@@ -11,7 +11,7 @@ import   pb.prev.rhback.exception.ResourceNotFoundException;
 import  pb.prev.rhback.model.Vinculos;
 import  pb.prev.rhback.repository.VinculosRepository;
 
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "${servidor-porta}")
 @RestController
 @RequestMapping("/api/v11/")
 public class VinculosController {

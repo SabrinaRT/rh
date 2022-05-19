@@ -1116,7 +1116,7 @@
                             mat-raised-button
                             color="warn"
                             *ngIf="index.id != null"
-                            (click)="deleteDocu(index.id, i, index.nome_arquivo)"
+                            (click)="deleteDocu(index.id, index.nome_arquivo)"
                           
                           >
                             <mat-icon>cancel</mat-icon>
@@ -1133,6 +1133,84 @@
                     <mat-expansion-panel-header>
                       <mat-panel-title> Documentos Adicionais </mat-panel-title>
                     </mat-expansion-panel-header>
+                    <input
+                    #fileUpload
+                    type="file"
+                    (change)="
+                      upload($event, 1)
+                    "
+                    style="display: none"
+                  />
+                  <button
+                    mat-raised-button
+                    color="files"
+                   
+                    (click)="fileUpload.click()"
+                  >
+                    <mat-icon>upload_file</mat-icon>
+                  </button>
+                    <table class="styled-table">
+                      <thead>
+                        <tr>
+                          <th class="th-table" style="width: 85%">Tipos</th>
+                          <th ></th>
+                          <th *ngIf="ExcluirDocumento == true"></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let index of ArrayDocumentosOpcionais; let i = index">
+                          <td
+                            style="width: 90%"
+                        
+                          >
+                            {{ index.nome_arquivo }}
+                          </td>
+                          <td
+                            class="td-table"
+                          
+                            
+                          >
+                            <input
+                              #fileUpload
+                              type="file"
+                              (change)="
+                                upload($event, index.id_documento)
+                              "
+                              style="display: none"
+                            />
+                            <button
+                              mat-raised-button
+                              color="files"
+                              *ngIf="index.id == null"
+                              (click)="fileUpload.click()"
+                            >
+                              <mat-icon>upload_file</mat-icon>
+                            </button>
+                            <button
+                            mat-raised-button
+                            color="primary"
+                            *ngIf="index.id != null"
+                            (click)="downloadArquivo(index.nome_arquivo)"
+                          >
+                            <mat-icon>file_download</mat-icon>
+                          </button>
+                             
+                             
+                          </td>
+                          <td   *ngIf="ExcluirDocumento == true">
+                            <button
+                            mat-raised-button
+                            color="warn"
+                            *ngIf="index.id != null"
+                            (click)="deleteDocu(index.id, index.nome_arquivo)"
+                          
+                          >
+                            <mat-icon>cancel</mat-icon>
+                          </button>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
                   </mat-expansion-panel>
                 </mat-accordion>
               </mat-card>

@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import pb.prev.rhback.model.DadosEstadoCivil;
 import  pb.prev.rhback.repository.DadosEstadoCivilRepository;
 
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "${servidor-porta}")
 @RestController
 @RequestMapping("/api/v2/")
 public class DadosEstadoCivilController {

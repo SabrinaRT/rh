@@ -171,6 +171,7 @@ export class FichaComponent implements OnInit {
     }
   }
   ArrayDocumentos: any = [];
+  ArrayDocumentosOpcionais: any = [];
 
   ngOnInit() {
     this.firstFormGroup = this._formBuilder.group({
@@ -215,12 +216,15 @@ export class FichaComponent implements OnInit {
         this.TiposDocumentos = data;
 
         for (let i in this.TiposDocumentos) {
-          this.ArrayDocumentos.push({
-            id: null,
-            nome_arquivo: null,
-            id_documento: this.TiposDocumentos[i].id,
-            tipo: this.TiposDocumentos[i].tipo,
-          });
+          if(this.TiposDocumentos[i].id != 1){
+            this.ArrayDocumentos.push({
+              id: null,
+              nome_arquivo: null,
+              id_documento: this.TiposDocumentos[i].id,
+              tipo: this.TiposDocumentos[i].tipo,
+            });
+          }
+         
         }
         console.log(data);
       },
@@ -251,31 +255,53 @@ export class FichaComponent implements OnInit {
         this.DocumentosColaboradores = data;
         console.log(this.DocumentosColaboradores);
 
-          for (let i in this.ArrayDocumentos) {
-            this.ArrayDocumentos[i].id = null
-            this.ArrayDocumentos[i].nome_arquivo =null
-           
-            for (let i2 in this.DocumentosColaboradores) {
-              if (
-                this.ArrayDocumentos[i].id_documento == this.DocumentosColaboradores[i2].tipo
-              ) {
-                this.ArrayDocumentos[i].id = this.DocumentosColaboradores[i2].id;
-                this.ArrayDocumentos[i].nome_arquivo = this.DocumentosColaboradores[i2].nome_documento_upload
-              }
-            }
-          }
+        this.ArrayDocumentosOpcionais = []
+        for(let i2 in this.DocumentosColaboradores){
+          if(this.DocumentosColaboradores[i2].tipo == 1){
 
-          console.log(this.ArrayDocumentos);
+                  
+              this.ArrayDocumentosOpcionais.push({
+                id: this.DocumentosColaboradores[i2].id,
+                nome_arquivo: this.DocumentosColaboradores[i2].nome_documento_upload,
+                id_documento: this.DocumentosColaboradores[i2].tipo
+                
+
+              })
+            }
+        }
+
+        for (let i in this.ArrayDocumentos) {
+          this.ArrayDocumentos[i].id = null;
+          this.ArrayDocumentos[i].nome_arquivo = null;
+          
+
+          for (let i2 in this.DocumentosColaboradores) {
+          if (
+              this.ArrayDocumentos[i].id_documento ==
+              this.DocumentosColaboradores[i2].tipo
+            ) {
+              this.ArrayDocumentos[i].id = this.DocumentosColaboradores[i2].id;
+              this.ArrayDocumentos[i].nome_arquivo =
+                this.DocumentosColaboradores[i2].nome_documento_upload;
+            }
+            
+          }
+        }
+
+        console.log(this.ArrayDocumentosOpcionais);
       });
   }
 
   upload(event: any, tipo: any) {
     if (event.target.files && event.target.files[0]) {
-     var nome_upload= Math.floor((Math.random() * 1000) + 1) +" - "  + event.target.files[0].name 
-      const foto = event.target.files[0] ;
+      var nome_upload =
+        Math.floor(Math.random() * 1000 + 1) +
+        ' - ' +
+        event.target.files[0].name;
+      const foto = event.target.files[0];
       const formData = new FormData();
-      formData.append('foto', foto,nome_upload );
-      this.documentosColaboradores.nome_documento_upload = nome_upload
+      formData.append('foto', foto, nome_upload);
+      this.documentosColaboradores.nome_documento_upload = nome_upload;
       this.documentosColaboradores.tipo = tipo;
 
       this.documentosColaboradores.dadosPessoais = { id: this.IDColab };
@@ -301,22 +327,17 @@ export class FichaComponent implements OnInit {
       );
     }
   }
-  ExcluirDocumento =false
+  ExcluirDocumento = false;
   downloadArquivo(nome: any) {
     this.siscrhService.downloadArquivo(this.IDColab, nome);
   }
 
-  deleteDocu(id: any, index: any, nome: any) {
-    this.siscrhService.deleteDocumentoColaborador(id);    
-    this.atualizar();
-    this.atualizar();
+  deleteDocu(id: any, nome: any) {
+    this.siscrhService.deleteDocumentoColaborador(id);
     this.siscrhService.deleteArquivo(this.IDColab, nome);
-  
-    
-
+    this.atualizar();
+    this.atualizar();
   }
-
-
 
   delete(idDocumento: any) {
     this.siscrhService.deleteDocumentoColaborador(idDocumento);
@@ -446,8 +467,6 @@ export class FichaComponent implements OnInit {
               this.showWarn();
             }
           );
-
-      
 
         this.dadosProfissionais.dadosPessoais = { id: this.IDColab };
         this.dadosProfissionais.id = this.IDProfi;
