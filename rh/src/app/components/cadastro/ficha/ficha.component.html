@@ -1133,7 +1133,16 @@
                     <mat-expansion-panel-header>
                       <mat-panel-title> Documentos Adicionais </mat-panel-title>
                     </mat-expansion-panel-header>
-                    <input
+                    <div class="row">
+                      <div class="col-2">
+                        <mat-slide-toggle
+                        [(ngModel)]="ExcluirDocumentoOpcionais"
+                        >Excluir</mat-slide-toggle
+                      >
+                      </div>
+                      <div class="col-7"></div>
+                      <div class="col-2">
+                        <input
                     #fileUpload
                     type="file"
                     (change)="
@@ -1148,13 +1157,18 @@
                     (click)="fileUpload.click()"
                   >
                     <mat-icon>upload_file</mat-icon>
+                    Escolher arquivo
                   </button>
+                      </div>
+
+                    </div>
+                    
                     <table class="styled-table">
                       <thead>
                         <tr>
                           <th class="th-table" style="width: 85%">Tipos</th>
                           <th ></th>
-                          <th *ngIf="ExcluirDocumento == true"></th>
+                          <th *ngIf="ExcluirDocumentoOpcionais == true"></th>
                         </tr>
                       </thead>
                       <tbody>
@@ -1197,7 +1211,7 @@
                              
                              
                           </td>
-                          <td   *ngIf="ExcluirDocumento == true">
+                          <td   *ngIf="ExcluirDocumentoOpcionais == true">
                             <button
                             mat-raised-button
                             color="warn"

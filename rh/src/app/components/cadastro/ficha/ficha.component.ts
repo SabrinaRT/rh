@@ -216,7 +216,7 @@ export class FichaComponent implements OnInit {
         this.TiposDocumentos = data;
 
         for (let i in this.TiposDocumentos) {
-          if(this.TiposDocumentos[i].id != 1){
+          if (this.TiposDocumentos[i].id != 1) {
             this.ArrayDocumentos.push({
               id: null,
               nome_arquivo: null,
@@ -224,7 +224,6 @@ export class FichaComponent implements OnInit {
               tipo: this.TiposDocumentos[i].tipo,
             });
           }
-         
         }
         console.log(data);
       },
@@ -253,30 +252,25 @@ export class FichaComponent implements OnInit {
         console.log(data);
 
         this.DocumentosColaboradores = data;
-        console.log(this.DocumentosColaboradores);
 
-        this.ArrayDocumentosOpcionais = []
-        for(let i2 in this.DocumentosColaboradores){
-          if(this.DocumentosColaboradores[i2].tipo == 1){
-
-                  
-              this.ArrayDocumentosOpcionais.push({
-                id: this.DocumentosColaboradores[i2].id,
-                nome_arquivo: this.DocumentosColaboradores[i2].nome_documento_upload,
-                id_documento: this.DocumentosColaboradores[i2].tipo
-                
-
-              })
-            }
+        this.ArrayDocumentosOpcionais = [];
+        for (let i2 in this.DocumentosColaboradores) {
+          if (this.DocumentosColaboradores[i2].tipo == 1) {
+            this.ArrayDocumentosOpcionais.push({
+              id: this.DocumentosColaboradores[i2].id,
+              nome_arquivo:
+                this.DocumentosColaboradores[i2].nome_documento_upload,
+              id_documento: this.DocumentosColaboradores[i2].tipo,
+            });
+          }
         }
 
         for (let i in this.ArrayDocumentos) {
           this.ArrayDocumentos[i].id = null;
           this.ArrayDocumentos[i].nome_arquivo = null;
-          
 
           for (let i2 in this.DocumentosColaboradores) {
-          if (
+            if (
               this.ArrayDocumentos[i].id_documento ==
               this.DocumentosColaboradores[i2].tipo
             ) {
@@ -284,15 +278,16 @@ export class FichaComponent implements OnInit {
               this.ArrayDocumentos[i].nome_arquivo =
                 this.DocumentosColaboradores[i2].nome_documento_upload;
             }
-            
           }
         }
 
-        console.log(this.ArrayDocumentosOpcionais);
       });
   }
 
+
+
   upload(event: any, tipo: any) {
+    
     if (event.target.files && event.target.files[0]) {
       var nome_upload =
         Math.floor(Math.random() * 1000 + 1) +
@@ -328,6 +323,7 @@ export class FichaComponent implements OnInit {
     }
   }
   ExcluirDocumento = false;
+  ExcluirDocumentoOpcionais = false;
   downloadArquivo(nome: any) {
     this.siscrhService.downloadArquivo(this.IDColab, nome);
   }
