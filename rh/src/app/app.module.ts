@@ -43,6 +43,7 @@ import { SearchfilterPipe } from './searchfilter.pipe';
 import { TotalComponent } from './components/gerador-pdf/total/total.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import { UsuariosComponent } from './components/config/usuarios/usuarios.component';
 
 @NgModule({
   declarations: [
@@ -65,7 +66,8 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     DeleteVinculoDialog,
     DeleteSetorDialog,
     EditSetorDialog,
-    DeleteArquivoDialog
+    DeleteArquivoDialog,
+    UsuariosComponent
   ],
   imports: [
     MatTooltipModule,

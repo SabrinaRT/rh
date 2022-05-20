@@ -1,83 +1,99 @@
+<mat-toolbar color="primary">
+  <button
+    mat-raised-button
+    color="config"
+    [routerLink]="['config']"
+    style="margin-right: 1%"
+  >
+    <mat-icon>settings</mat-icon>
+  </button>
+  <button
+    mat-raised-button
+    color="edit"
+    [routerLink]="['gerador']"
+    style="margin-right: 1%"
+  >
+    <mat-icon>picture_as_pdf</mat-icon>
+  </button>
+  <button
+    mat-raised-button
+    color="accent"
+    [routerLink]="['add']"
+    style="margin-right: 1%"
+  >
+    <mat-icon>person_add</mat-icon>
+  </button>
 
-  <mat-toolbar color="primary">
-    <button mat-raised-button color="config" [routerLink]="['config']" style="margin-right: 1%;">
-      <mat-icon>settings</mat-icon>
-    </button>
-    <button mat-raised-button color="edit" [routerLink]="['gerador']" style="margin-right: 1%;">
-      <mat-icon>picture_as_pdf</mat-icon>
-    </button>
-    <button mat-raised-button color="accent" [routerLink]="['add']" style="margin-right: 1%;">
-      <mat-icon>person_add</mat-icon>
-    </button>
-  
-    <span class="example-spacer"></span>
-    <span>SISCOGEP</span>
-  </mat-toolbar>
-  <br />
-  <mat-form-field appearance="outline" class="col-11"  style="margin-left: 3%;">
-    <mat-label><mat-icon>search</mat-icon>Pesquisar...</mat-label>
-    <input matInput [(ngModel)]="searchValue" />
-  </mat-form-field>
-  
-  
-    
-    <div class="col-11"  style="margin-left: 3%;">
-    <table  matSort (matSortChange)="sortData($event)" class="box-shadow">
-      <thead>
-        <tr>
-          <th mat-sort-header="nome" colspan="2">Colaboradores</th>
-          <th mat-sort-header="setor">Setor</th>
-          <th  style="text-align: center;" >Situação</th>
-          <th style="text-align: center;" >Acesso à Rede Corporativa</th>
-          <th style="text-align: center;"> Serviços</th>
-        </tr>
-      </thead>
-      <tbody>
-          <div class="row" [hidden]="esconder" >
-            <div class="col-5"></div>
-            <div class="col-3" ><mat-spinner></mat-spinner></div>
-          </div>
-   
-        <tr *ngFor="let TabelaInicial of TabelaInicial | searchfilter: searchValue">
-          <td colspan="2">{{ TabelaInicial.nome }}<br /></td>
-          <td >{{ TabelaInicial.setor }}</td>
-          <td style="text-align: center;">
-            <mat-icon *ngIf="TabelaInicial.status == true" style="color: green"
-              >check_circle</mat-icon
-            >
-            <mat-icon *ngIf="TabelaInicial.status == false" style="color: red"
-              >cancel</mat-icon
-            >
-          </td>
-          <td style="text-align: center;">
-            <mat-icon *ngIf="TabelaInicial.acessoRede == true" style="color: green"
-              >check_circle</mat-icon
-            >
-            <mat-icon *ngIf="TabelaInicial.acessoRede == false" style="color: red"
-              >cancel</mat-icon
-            >
-          </td>
-      
-          <td style="text-align: center;">
-            <button
-              mat-raised-button
-              color="files"
-              [routerLink]="['painel', TabelaInicial.id]"
-              style="margin-right: 10px;"
-            >
-              <mat-icon>edit</mat-icon>
-            </button>
-          
-            <button
-              mat-raised-button
-              color="edit"
-              [routerLink]="['pdf-perfil', TabelaInicial.id]"
-            >
-              <mat-icon>picture_as_pdf</mat-icon>
-            </button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+  <span class="example-spacer"></span>
+  <span>SISCOGEP</span>
+</mat-toolbar>
+<br />
+<mat-form-field appearance="outline" class="col-11" style="margin-left: 3%">
+  <mat-label><mat-icon>search</mat-icon>Pesquisar...</mat-label>
+  <input matInput [(ngModel)]="searchValue" />
+</mat-form-field>
+
+<div class="col-11" style="margin-left: 3%">
+  <table matSort (matSortChange)="sortData($event)" class="box-shadow">
+    <thead>
+      <tr>
+        <th mat-sort-header="nome" colspan="2">Colaboradores</th>
+        <th mat-sort-header="setor">Setor</th>
+        <th style="text-align: center">Situação</th>
+        <th style="text-align: center">Acesso à Rede Corporativa</th>
+        <th style="text-align: center">Serviços</th>
+      </tr>
+    </thead>
+    <tbody>
+      <div class="row" [hidden]="esconder">
+        <div class="col-5"></div>
+        <div class="col-3"><mat-spinner></mat-spinner></div>
+      </div>
+
+      <tr
+        *ngFor="let TabelaInicial of TabelaInicial | searchfilter: searchValue"
+      >
+        <td colspan="2">{{ TabelaInicial.nome }}<br /></td>
+        <td>{{ TabelaInicial.setor }}</td>
+        <td style="text-align: center">
+          <mat-icon *ngIf="TabelaInicial.status == true" style="color: green"
+            >check_circle</mat-icon
+          >
+          <mat-icon *ngIf="TabelaInicial.status == false" style="color: red"
+            >cancel</mat-icon
+          >
+        </td>
+        <td style="text-align: center">
+          <mat-icon
+            *ngIf="TabelaInicial.acessoRede == true"
+            style="color: green"
+            >check_circle</mat-icon
+          >
+          <mat-icon *ngIf="TabelaInicial.acessoRede == false" style="color: red"
+            >cancel</mat-icon
+          >
+        </td>
+
+        <td style="text-align: center">
+          <button
+            mat-raised-button
+            color="files"
+            [routerLink]="['painel', TabelaInicial.id]"
+            style="margin-right: 10px"
+          >
+            <mat-icon>edit</mat-icon>
+          </button>
+
+          <button
+            mat-raised-button
+            color="edit"
+            [routerLink]="['pdf-perfil', TabelaInicial.id]"
+          >
+            <mat-icon>picture_as_pdf</mat-icon>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 <!-- <app-aniversarios></app-aniversarios> -->
