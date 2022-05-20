@@ -625,33 +625,45 @@
             <div class="row gx-5">
               <div class="col">
                 <mat-card class="p-3 box-shadow">
-                  <div class="row" >
+                  <div class="row">
                     <!-- <div class="col-1"></div> -->
-                    <div class="col-11" style="margin: auto;">
+                    <div class="col-11" style="margin: auto">
                       <mat-slide-toggle
                         [(ngModel)]="EditarApagarDep"
                         [ngModelOptions]="{ standalone: true }"
                         >Editar/Deletar</mat-slide-toggle
                       >
-                      <br> <br>
-                      <table  class="box-shadow">
+                      <br />
+                      <br />
+                      <table class="box-shadow">
                         <thead>
                           <tr>
-                            <th >Nome Completo</th>
-                            <th style="text-align: center;"> CPF</th>
-                            <th style="text-align: center;">Data de Nascimento</th>
-                            <th *ngIf="EditarApagarDep == true" style="text-align: center;">Edição</th>
+                            <th>Nome Completo</th>
+                            <th style="text-align: center">CPF</th>
+                            <th style="text-align: center">
+                              Data de Nascimento
+                            </th>
+                            <th
+                              *ngIf="EditarApagarDep == true"
+                              style="text-align: center"
+                            >
+                              Edição
+                            </th>
                           </tr>
                         </thead>
-                        <tbody
-                          *ngFor="let item of DadosAtualizados"
-                          
-                        >
+                        <tbody *ngFor="let item of DadosAtualizados">
                           <tr *ngFor="let item2 of item.dependentes">
                             <td>{{ item2.nome_completo_dependente }}</td>
-                            <td style="text-align: center;">{{ item2.cpf_dependente }}</td>
-                            <td style="text-align: center;">{{ item2.data_nascimento_dependente }}</td>
-                            <td *ngIf="EditarApagarDep == true" style="text-align: center;">
+                            <td style="text-align: center">
+                              {{ item2.cpf_dependente }}
+                            </td>
+                            <td style="text-align: center">
+                              {{ item2.data_nascimento_dependente }}
+                            </td>
+                            <td
+                              *ngIf="EditarApagarDep == true"
+                              style="text-align: center"
+                            >
                               <button
                                 mat-raised-button
                                 color="primary"
@@ -889,8 +901,8 @@
                         [(ngModel)]="EditarApagarMat"
                         [ngModelOptions]="{ standalone: true }"
                         >Editar/Deletar</mat-slide-toggle
-                      ><br><br>
-                      <table  class="box-shadow">
+                      ><br /><br />
+                      <table class="box-shadow">
                         <thead>
                           <tr>
                             <th>Matrícula</th>
@@ -900,7 +912,7 @@
                         </thead>
                         <tbody
                           *ngFor="let item of DadosAtualizados"
-                         style=" height: 150px;"
+                          style="height: 150px"
                         >
                           <tr *ngFor="let item2 of item.matriculas">
                             <td>{{ item2.matricula }}</td>
@@ -1052,34 +1064,37 @@
           <div class="row">
             <div class="col-12">
               <mat-card>
-
-
-                <mat-tab-group  >
-                  <mat-tab label="Documentos Obrigatórios">  
-                    
-                  <br>
-                    <mat-slide-toggle [(ngModel)]="ExcluirDocumento"
-                      >Excluir</mat-slide-toggle
-                    ><br><br>
-                    <table>
+                <mat-tab-group>
+                  <mat-tab label="Documentos Obrigatórios">
+                    <br />
+                    <div class="container">
+                      <div class="row">
+                        <mat-slide-toggle [(ngModel)]="ExcluirDocumento"
+                          >Excluir</mat-slide-toggle
+                        >
+                      </div>
+                    </div>
+                    <br /><br />
+                    <table class="box-shadow" style="width: 90%; margin: auto">
                       <thead>
                         <tr>
-                          <th  style="width: 85%">Tipos</th>
-                          <th></th>
-                          <th *ngIf="ExcluirDocumento == true"></th>
+                          <th style="width: 80%">Tipos</th>
+                          <th colspan="2" style="text-align: center">
+                            {{ countDocu }}/{{ this.ArrayDocumentos.length }}
+                          </th>
                         </tr>
                       </thead>
-                      <tbody style="height: 400px;">
+                      <tbody style="height: 400px">
                         <tr
                           *ngFor="let index of ArrayDocumentos; let i = index"
                         >
                           <td
-                            style="width: 90%"
+                            style="width: 80%"
                             *ngIf="index.id_documento != 1"
                           >
                             {{ index.tipo }}
                           </td>
-                          <td  *ngIf="index.id_documento != 1" >
+                          <td *ngIf="index.id_documento != 1">
                             <input
                               #fileUpload
                               type="file"
@@ -1094,25 +1109,23 @@
                             >
                               <mat-icon>upload_file</mat-icon>
                             </button>
+
                             <button
                               mat-raised-button
                               color="primary"
                               *ngIf="index.id != null"
                               (click)="downloadArquivo(index.nome_arquivo)"
+                              style="margin-right: 10px"
                             >
                               <mat-icon>file_download</mat-icon>
                             </button>
-                          </td>
-                          <td
-                            *ngIf="
-                              index.id_documento != 1 &&
-                              ExcluirDocumento == true
-                            "
-                          >
+                        
                             <button
                               mat-raised-button
                               color="warn"
-                              *ngIf="index.id != null"
+                              *ngIf="
+                                index.id != null && ExcluirDocumento == true
+                              "
                               (click)="deleteDocu(index.id, index.nome_arquivo)"
                             >
                               <mat-icon>cancel</mat-icon>
@@ -1121,9 +1134,10 @@
                         </tr>
                       </tbody>
                     </table>
+                    <br /><br />
                   </mat-tab>
-                  <mat-tab label="Documentos Opcionais"> 
-                    <br>
+                  <mat-tab label="Documentos Opcionais">
+                    <br />
                     <div class="container">
                       <div class="row">
                         <div class="col-2">
@@ -1133,7 +1147,7 @@
                           >
                         </div>
                         <div class="col-8"></div>
-                        <div class="col-2" >
+                        <div class="col-2">
                           <input
                             #fileUpload
                             type="file"
@@ -1152,17 +1166,17 @@
                         </div>
                       </div>
                     </div>
-                    <br><br>
-      
-                    <table>
+                    <br /><br />
+
+                    <table class="box-shadow" style="width: 95%; margin: auto">
                       <thead>
                         <tr>
-                          <th  style="width: 85%">Arquivos</th>
+                          <th style="width: 85%">Arquivos</th>
                           <th></th>
                           <th *ngIf="ExcluirDocumentoOpcionais == true"></th>
                         </tr>
                       </thead>
-                      <tbody style="height: 400px;">
+                      <tbody style="height: 400px">
                         <tr
                           *ngFor="
                             let index of ArrayDocumentosOpcionais;
@@ -1172,7 +1186,7 @@
                           <td style="width: 90%">
                             {{ index.nome_arquivo }}
                           </td>
-                          <td >
+                          <td>
                             <input
                               #fileUpload
                               type="file"
@@ -1208,11 +1222,11 @@
                           </td>
                         </tr>
                       </tbody>
-                    </table>  
+                    </table>
+                    <br /><br />
                   </mat-tab>
                 </mat-tab-group>
-                <br>
-      
+                <br />
               </mat-card>
             </div>
           </div>
@@ -1221,13 +1235,13 @@
       </mat-step>
       <mat-step>
         <ng-template matStepLabel>Finalização</ng-template>
-
+        <br />
         <div class="container">
           <div class="row">
             <div class="col-12">
               <mat-card class="p-3 box-shadow">
                 <mat-card-title
-                  >Todas as etapas foram concluídas com sucesso!</mat-card-title
+                  >Todas as do cadastro foram concluídas com sucesso!</mat-card-title
                 >
                 <br />
                 <div class="col-12">
@@ -1359,6 +1373,7 @@
             </div>
           </div>
         </div>
+        <br />
       </mat-step>
     </mat-stepper>
   </mat-drawer-content>

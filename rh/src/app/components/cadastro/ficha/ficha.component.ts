@@ -225,7 +225,19 @@ export class FichaComponent implements OnInit {
             });
           }
         }
-        console.log(data);
+        this.countDocu=0
+        
+        this.ArrayDocumentos.sort(function (a:any, b:any) {
+          if (a.tipo > b.tipo) {
+            return 1;
+          }
+          if (a.tipo < b.tipo) {
+            return -1;
+          }
+          return 0;
+        })
+        
+
       },
       (error) => {
         console.log('error', error);
@@ -244,6 +256,7 @@ export class FichaComponent implements OnInit {
     );
   }
 
+  countDocu:any
   DocumentosColaboradores: DocumentosColaboradores[];
   atualizar() {
     this.siscrhService
@@ -264,7 +277,7 @@ export class FichaComponent implements OnInit {
             });
           }
         }
-
+      var count = 0
         for (let i in this.ArrayDocumentos) {
           this.ArrayDocumentos[i].id = null;
           this.ArrayDocumentos[i].nome_arquivo = null;
@@ -274,13 +287,15 @@ export class FichaComponent implements OnInit {
               this.ArrayDocumentos[i].id_documento ==
               this.DocumentosColaboradores[i2].tipo
             ) {
+              count++;
               this.ArrayDocumentos[i].id = this.DocumentosColaboradores[i2].id;
               this.ArrayDocumentos[i].nome_arquivo =
                 this.DocumentosColaboradores[i2].nome_documento_upload;
             }
           }
         }
-
+        this.countDocu=count
+       
       });
   }
 
@@ -331,6 +346,7 @@ export class FichaComponent implements OnInit {
   deleteDocu(id: any, nome: any) {
     this.siscrhService.deleteDocumentoColaborador(id);
     this.siscrhService.deleteArquivo(this.IDColab, nome);
+    this.atualizar();
     this.atualizar();
     this.atualizar();
   }

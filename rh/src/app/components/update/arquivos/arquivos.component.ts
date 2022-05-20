@@ -37,6 +37,15 @@ export class ArquivosComponent implements OnInit {
           }
         }
         console.log(data);
+        this.ArrayDocumentos.sort(function (a:any, b:any) {
+          if (a.tipo > b.tipo) {
+            return 1;
+          }
+          if (a.tipo < b.tipo) {
+            return -1;
+          }
+          return 0;
+        })
       },
       (error) => {
         console.log('error', error);
