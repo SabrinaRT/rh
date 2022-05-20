@@ -8,7 +8,7 @@ import javax.persistence.*;
 public class DadosBancarios {
 
     @Id  
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
     private String banco;
     private String codigo;

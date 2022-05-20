@@ -11,7 +11,7 @@ public class DocumentosColaboradores {
     @GeneratedValue(strategy  = GenerationType.IDENTITY)
     private Long id;
     
-    @ManyToOne/* (fetch = FetchType.EAGER, cascade = CascadeType.DETACH) */
+    @ManyToOne
 	@JoinColumn(name = "dadosPessoaisId")
     @JsonBackReference
     private DadosPessoais dadosPessoais;

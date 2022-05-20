@@ -1,71 +1,39 @@
-.example-accordion {
-    display: block;
-    max-width: 100%;
-  }
-  
-  .example-accordion-item {
-    display: block;
-    border: solid 1px #ccc;
-  }
-  
-  .example-accordion-item + .example-accordion-item {
-    border-top: none;
-  }
-  
-  .example-accordion-item-header {
-    display: flex;
-    align-content: center;
-    justify-content: space-between;
-  }
-  
-  .example-accordion-item-description {
-    font-size: 0.85em;
-    color: #999;
-  }
-  
-  .example-accordion-item-header,
-  .example-accordion-item-body {
-    padding: 16px;
-  }
-  
-  .example-accordion-item-header:hover {
-    cursor: pointer;
-    background-color: #eee;
-  }
-  
-  .example-accordion-item:first-child {
-    border-top-left-radius: 4px;
-    border-top-right-radius: 4px;
-  }
-  
-  .example-accordion-item:last-child {
-    border-bottom-left-radius: 4px;
-    border-bottom-right-radius: 4px;
-  }
-  
+tbody tr {
+  border-bottom: 1px solid #dddddd;
+}
 
-  /*  */
+table, tr td, th {
+  border: 1px solid red
+  
+}
 
-  .mat-form-field {
-    width: 500px !important;
+tbody tr:last-of-type {
+  border-bottom: 1px solid #3F51B5;
 }
-.mat-toolbar-single-row {
-    height: auto !important;
-    background: transparent;
+th, td, th {
+  padding: 12px 15px;
+
 }
-.mat-toolbar-single-row button {
-    width: 200px;
+tbody {
+  display: block;
+  height: 480px;
+  overflow: auto; 
+ /*  width: calc( 100% - 1em ) */
 }
-.mat-form-field {
-    width: 100%;
+thead, tbody tr {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
 }
-#uploadFile {
-    top: 0px;
-    left: 0px;
-    width: 100%;    
-    z-index: 9;
-    opacity: 0;
-    height: 100%;
-    cursor: pointer;
-    position: absolute;
+thead {
+  background-color: #3F51B5;
+  width: calc( 100% - 1em )
+}
+table {
+  width: 100%;
+}
+
+thead tr {
+  background-color: #3F51B5;
+  color: #ffffff;
 }

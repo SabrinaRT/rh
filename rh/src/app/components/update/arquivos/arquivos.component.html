@@ -107,9 +107,9 @@
               <table class="styled-table">
                 <thead>
                   <tr>
-                    <th class="th-table" style="width: 85%">Tipos</th>
-                    <th></th>
-                    <th *ngIf="ExcluirDocumentoOpcionais == true"></th>
+                    <th >Tipos</th>
+                  
+                 
                   </tr>
                 </thead>
                 <tbody>
@@ -119,7 +119,7 @@
                       let i = index
                     "
                   >
-                    <td style="width: 90%">
+                    <td style="width: 80%">
                       {{ index.nome_arquivo }}
                     </td>
                     <td class="td-table">
@@ -145,13 +145,13 @@
                       >
                         <mat-icon>file_download</mat-icon>
                       </button>
-                    </td>
-                    <td *ngIf="ExcluirDocumentoOpcionais == true">
+                    
                       <button
                         mat-raised-button
                         color="warn"
-                        *ngIf="index.id != null"
+                        *ngIf="index.id != null && ExcluirDocumentoOpcionais == true"
                         (click)="deleteDocu(index.id, index.nome_arquivo)"
+                    
                       >
                         <mat-icon>cancel</mat-icon>
                       </button>

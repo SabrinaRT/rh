@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.*;
 public class SituacaoColaborador {
    
     @Id
-    @GeneratedValue(strategy =GenerationType.AUTO)
+    @GeneratedValue(strategy =GenerationType.IDENTITY)
     private Long id;
  
     private boolean status;

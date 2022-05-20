@@ -7,12 +7,11 @@ import com.fasterxml.jackson.annotation.*;
 
 
 @Entity
-/* @JsonIgnoreProperties(ignoreUnknown = true) */
 @Table(name="dados_pessoais") 
 public class DadosPessoais {
 
     @Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
 	private long id;
     @Column(name="cpf",unique = true)

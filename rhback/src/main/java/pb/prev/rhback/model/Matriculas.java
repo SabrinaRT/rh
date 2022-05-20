@@ -8,16 +8,12 @@ import com.fasterxml.jackson.annotation.*;
 public class Matriculas {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String matricula;
     private String observacao;
-    
-     
-  /*   @ManyToOne(cascade = CascadeType.DETACH)
-    @JoinColumn(name = "idDadosProfissionais")
-    private DadosProfissionais dadosProfissionais; */
+
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
 	@JoinColumn(name = "idDadosPessoais")

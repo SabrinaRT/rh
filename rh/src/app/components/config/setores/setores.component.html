@@ -7,27 +7,27 @@
       <table class="styled-table">
         <thead>
           <tr>
-            <th style="width: 50px">QTD</th>
-            <th class="th-table">Tipos</th>
-            <th colspan="2">Serviços</th>
+            <th style="width: 5%">QTD</th>
+            <th  style="width:70%">Tipos</th>
+            <th colspan="2" style="text-align: center;">Serviços</th>
           </tr>
         </thead>
       
         <tbody>
           <tr *ngFor="let i of array2">
-            <td style="width: 50px">{{ i.count }}</td>
-            <td style="width: 700px">{{ i.setor }}</td>
+            <td style="width: 5%">{{ i.count }}</td>
+            <td style="width:70%">{{ i.setor }}</td>
       
-            <td style="width: 50px">
+            <td style="text-align: center;" >
               <button
                 mat-raised-button
                 color="files"
                 (click)="openDialog(i.id, i.setor)"
+                style="margin-right: 10px;"
               >
                 <mat-icon>edit</mat-icon>
               </button>
-            </td>
-            <td style="width: 50px">
+          
               <button
                 mat-raised-button
                 color="warn"
@@ -39,6 +39,8 @@
           </tr>
         </tbody>
       </table>
+
+
       <div class="row" [hidden]="esconder">
           <div class="col-5"></div>
           <div class="col-3"><mat-spinner></mat-spinner></div>

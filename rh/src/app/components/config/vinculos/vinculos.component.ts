@@ -37,7 +37,7 @@ export class VinculosComponent implements OnInit {
 
   openDialog2(id: any, vinculo: any): void {
     const dialogRef = this.dialog.open(DeleteVinculoDialog, {
-      width: '600px',
+      width: '900px',
       height: '550px',
       data: { id_docu: id, nome: vinculo },
     });

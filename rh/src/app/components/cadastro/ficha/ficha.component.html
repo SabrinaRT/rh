@@ -625,32 +625,33 @@
             <div class="row gx-5">
               <div class="col">
                 <mat-card class="p-3 box-shadow">
-                  <div class="row">
+                  <div class="row" >
                     <!-- <div class="col-1"></div> -->
-                    <div class="col-12">
+                    <div class="col-11" style="margin: auto;">
                       <mat-slide-toggle
                         [(ngModel)]="EditarApagarDep"
                         [ngModelOptions]="{ standalone: true }"
                         >Editar/Deletar</mat-slide-toggle
                       >
-                      <table class="styled-table" style="table-layout: fixed">
+                      <br> <br>
+                      <table>
                         <thead>
                           <tr>
-                            <th>Nome Completo</th>
-                            <th>CPF</th>
-                            <th>Data de Nascimento</th>
-                            <th *ngIf="EditarApagarDep == true">Edição</th>
+                            <th >Nome Completo</th>
+                            <th style="text-align: center;"> CPF</th>
+                            <th style="text-align: center;">Data de Nascimento</th>
+                            <th *ngIf="EditarApagarDep == true" style="text-align: center;">Edição</th>
                           </tr>
                         </thead>
                         <tbody
                           *ngFor="let item of DadosAtualizados"
-                          class="tbody-max"
+                          
                         >
                           <tr *ngFor="let item2 of item.dependentes">
                             <td>{{ item2.nome_completo_dependente }}</td>
-                            <td>{{ item2.cpf_dependente }}</td>
-                            <td>{{ item2.data_nascimento_dependente }}</td>
-                            <td *ngIf="EditarApagarDep == true">
+                            <td style="text-align: center;">{{ item2.cpf_dependente }}</td>
+                            <td style="text-align: center;">{{ item2.data_nascimento_dependente }}</td>
+                            <td *ngIf="EditarApagarDep == true" style="text-align: center;">
                               <button
                                 mat-raised-button
                                 color="primary"
@@ -888,8 +889,8 @@
                         [(ngModel)]="EditarApagarMat"
                         [ngModelOptions]="{ standalone: true }"
                         >Editar/Deletar</mat-slide-toggle
-                      >
-                      <table class="styled-table">
+                      ><br><br>
+                      <table>
                         <thead>
                           <tr>
                             <th>Matrícula</th>
@@ -899,7 +900,7 @@
                         </thead>
                         <tbody
                           *ngFor="let item of DadosAtualizados"
-                          class="tbody-max"
+                         style=" height: 150px;"
                         >
                           <tr *ngFor="let item2 of item.matriculas">
                             <td>{{ item2.matricula }}</td>
@@ -1059,16 +1060,16 @@
                   <br>
                     <mat-slide-toggle [(ngModel)]="ExcluirDocumento"
                       >Excluir</mat-slide-toggle
-                    >
-                    <table class="styled-table">
+                    ><br><br>
+                    <table>
                       <thead>
                         <tr>
-                          <th class="th-table" style="width: 85%">Tipos</th>
+                          <th  style="width: 85%">Tipos</th>
                           <th></th>
                           <th *ngIf="ExcluirDocumento == true"></th>
                         </tr>
                       </thead>
-                      <tbody>
+                      <tbody style="height: 400px;">
                         <tr
                           *ngFor="let index of ArrayDocumentos; let i = index"
                         >
@@ -1078,7 +1079,7 @@
                           >
                             {{ index.tipo }}
                           </td>
-                          <td class="td-table" *ngIf="index.id_documento != 1">
+                          <td  *ngIf="index.id_documento != 1" >
                             <input
                               #fileUpload
                               type="file"
@@ -1151,16 +1152,17 @@
                         </div>
                       </div>
                     </div>
+                    <br><br>
       
-                    <table class="styled-table">
+                    <table>
                       <thead>
                         <tr>
-                          <th class="th-table" style="width: 85%">Tipos</th>
+                          <th  style="width: 85%">Arquivos</th>
                           <th></th>
                           <th *ngIf="ExcluirDocumentoOpcionais == true"></th>
                         </tr>
                       </thead>
-                      <tbody>
+                      <tbody style="height: 400px;">
                         <tr
                           *ngFor="
                             let index of ArrayDocumentosOpcionais;
@@ -1170,7 +1172,7 @@
                           <td style="width: 90%">
                             {{ index.nome_arquivo }}
                           </td>
-                          <td class="td-table">
+                          <td >
                             <input
                               #fileUpload
                               type="file"

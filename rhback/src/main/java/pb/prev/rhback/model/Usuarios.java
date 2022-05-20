@@ -22,9 +22,6 @@ public class Usuarios {
     private String nivel;
 
 
-  /*   @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuarios")
-	@JsonIgnoreProperties("usuarios")
-	private List<DadosPessoais> dadosPessoais; */
 
     public Usuarios() {
     }

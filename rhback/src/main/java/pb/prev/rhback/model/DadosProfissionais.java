@@ -10,7 +10,7 @@ import com.fasterxml.jackson.annotation.*;
 public class DadosProfissionais {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     private String cargo;
@@ -24,34 +24,6 @@ public class DadosProfissionais {
     private String funcao;
     private String email_institucional;
     
-
-    /*
-     * @OneToOne
-     * 
-     * @MapsId
-     * 
-     * @JoinColumn(name = "id")
-     * 
-     * @JsonBackReference
-     * private DadosPessoais dadosPessoais;
-     */
-    /*
-     * @OneToOne
-     * 
-     * @JoinColumn(updatable=false)
-     * private DadosPessoais dadosPessoais;
-     */
-
-    /*
-     * @OneToOne(cascade = CascadeType.ALL)
-     * 
-     * @MapsId
-     * 
-     * @JoinColumn(name = "id")
-     * 
-     * @JsonBackReference
-     * private DadosPessoais dadosPessoais;
-     */
 
     @OneToOne(cascade = CascadeType.DETACH)
     @JoinColumn(name = "dadosPessoaisId", referencedColumnName = "id")

@@ -5,26 +5,25 @@
 <button mat-raised-button color="primary" style="margin-left: 15px">
   Adicionar
 </button>
-<table class="styled-table">
+<table >
   <thead>
     <tr>
-      <th style="width: 5%">Total</th>
-            <th class="th-table" style="width:75%">Tipos</th>
-            <th colspan="2" >Serviços</th>
+      <th style="width: 5%;">Total</th>
+            <th  style="width: 70%;">Tipos</th>
+            <th colspan="2" style="text-align: center;">Serviços</th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let index of DocumentosAtualizados">
-      <td style="width: 5%">{{index.qtdTotal}}</td>
-      <td style="width:75%">
+      <td style="width: 5%;" >{{index.qtdTotal}}</td>
+      <td style="width: 70%;">
         {{ index.nome }}
       </td>
-      <td class="td-table" style="width: 50px">
-        <button mat-raised-button color="files" *ngIf="index.id != 1" >
+      <td style="text-align: center;"  >
+        <button mat-raised-button color="files" *ngIf="index.id != 1"  style="margin-right: 10px;" >
           <mat-icon>edit</mat-icon>
         </button>
-      </td>
-      <td  class="td-table" style="width: 50px">
+ 
         <button mat-raised-button color="warn" *ngIf="index.id != 1">
           <mat-icon>cancel</mat-icon>
         </button>
