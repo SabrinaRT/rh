@@ -2,11 +2,11 @@ tbody tr {
   border-bottom: 1px solid #dddddd;
 }
 
-table, tr td, th {
+/* table, tr td, th {
   border: 1px solid red
   
 }
-
+ */
 tbody tr:last-of-type {
   border-bottom: 1px solid #3F51B5;
 }

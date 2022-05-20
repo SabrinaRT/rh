@@ -13,13 +13,14 @@ import { DialogData } from '../vinculos/vinculos.component';
 export class ArquivosConfigComponent implements OnInit {
   Documentos: Documentos[];
   DadosPessoais: DadosPessoais[];
-
+  esconder = false;
   DocumentosAtualizados: any = [];
   constructor(private siscrhService: SiscrhService) {}
 
   ngOnInit(): void {
     this.siscrhService.getDocumentosList().subscribe((data) => {
       this.Documentos = data;
+ 
     });
 
     this.siscrhService.getColaboradorList().subscribe((data) => {
@@ -46,7 +47,7 @@ export class ArquivosConfigComponent implements OnInit {
           qtdTotal: countTotal,
         });
       }
-
+      this.esconder = true;
     });
   }
 }
