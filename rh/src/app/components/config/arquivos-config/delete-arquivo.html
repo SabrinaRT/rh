@@ -1,22 +1,20 @@
 <div mat-dialog-content>
   <mat-card-title style="margin-right: 10px">{{data.nome}}</mat-card-title>
-  <button mat-raised-button color="warn">Deletar Tipo de Arquivo</button>
+  <button mat-raised-button color="warn">Deletar</button>
 </div>
 <br><br>
 
 <div class="row">
     <div class="col-12">
         <h4>Para deletar, todos os arquivos registrados serão definidos como
-            'Documentos Opcionais'! Está ação não poderá ser desfeita. Deseja mesmo continuar? </h4>
+            'Documentos Opcionais'! Esta ação não poderá ser desfeita. Deseja mesmo continuar? </h4>
+            <button mat-raised-button color="primary"  class="col-12" (click)=" definirSetor()">
+              <span matTooltip="Está ação não poderá ser desfeita"
+                >Sim, continuar</span
+              >
+            </button>
     </div>
-    <div class="col-10"></div>
-  <div class="col-2">
-    <button mat-raised-button color="primary"  class="col-12">
-      <span matTooltip="Está ação não poderá ser desfeita"
-        >Sim, continuar</span
-      >
-    </button>
-  </div>
+  
 </div>
 <div mat-dialog-actions>
   <button mat-raised-button color="warn">Cancelar</button>
