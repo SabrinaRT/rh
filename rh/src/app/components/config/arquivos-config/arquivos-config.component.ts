@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
 import { DadosPessoais, Documentos, Vinculos } from 'src/app/siscrh';
 import { SiscrhService } from 'src/app/siscrh.service';
@@ -15,7 +15,26 @@ export class ArquivosConfigComponent implements OnInit {
   DadosPessoais: DadosPessoais[];
   esconder = false;
   DocumentosAtualizados: any = [];
-  constructor(private siscrhService: SiscrhService) {}
+  constructor(private siscrhService: SiscrhService, public dialog: MatDialog) {}
+
+
+  openDialog(id: any, arquivo: any): void {
+    const dialogRef = this.dialog.open(EditArquivoDialog, {
+      width: '900px',
+      data: { id_docu: id, nome: arquivo },
+    });
+  }
+
+  openDialog2(id: any, arquivo: any): void {
+    const dialogRef = this.dialog.open(DeleteArquivoDialog, {
+      width: '800px',
+      height: '550px',
+      data: { id_docu: id, nome: arquivo },
+    });
+    dialogRef.afterClosed().subscribe((result:any) => {
+      console.log(result)
+    });
+  }
 
   ngOnInit(): void {
     this.siscrhService.getDocumentosList().subscribe((data) => {
@@ -23,13 +42,14 @@ export class ArquivosConfigComponent implements OnInit {
  
     });
 
+    
+
     this.siscrhService.getColaboradorList().subscribe((data) => {
       this.DadosPessoais = data;
 
       for (let index in this.Documentos) {
         let countTotal = 0;
-        let countTem = 0;
-        let countNTem = 0;
+      
 
         for (let index2 in this.DadosPessoais) {
           if (
@@ -76,3 +96,20 @@ export class DeleteArquivoDialog {
 
 }
 
+@Component({
+  selector: 'edit-arquivo',
+  templateUrl: 'edit-arquivo.html',
+})
+export class EditArquivoDialog {
+  constructor(
+    public dialogRef: MatDialogRef<EditArquivoDialog>,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData,
+    private siscrhService: SiscrhService
+  ) {}
+
+ /*  arquivoes: arquivoes = new arquivoes(); */
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+}

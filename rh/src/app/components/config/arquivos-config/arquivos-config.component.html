@@ -28,7 +28,7 @@
           <mat-icon>edit</mat-icon>
         </button>
  
-        <button mat-raised-button color="warn" *ngIf="index.id != 1">
+        <button mat-raised-button color="warn" *ngIf="index.id != 1"      (click)="openDialog2(index.id, index.nome)">
           <mat-icon>cancel</mat-icon>
         </button>
       </td>
