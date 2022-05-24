@@ -1,6 +1,8 @@
 package  pb.prev.rhback.model;
 
 
+import java.util.Set;
+
 import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.*;
@@ -9,7 +11,6 @@ import com.fasterxml.jackson.annotation.*;
 
 @Entity
 @Table(name="usuarios")
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Usuarios {
 
     @Id
@@ -21,7 +22,17 @@ public class Usuarios {
     private String senha;
     private String nivel;
 
+   /*  @OneToMany
+    @JoinColumn(name="usuario_id")
+    private  Set<RegistroAtividade> registro_atividade; */
 
+    public Usuarios(String nome_completo, String usuario, String senha, String nivel) {
+        this.nome_completo = nome_completo;
+        this.usuario = usuario;
+        this.senha = senha;
+        this.nivel = nivel;
+      /*   this.registro_atividade = registro_atividade; */
+    }
 
     public Usuarios() {
     }
@@ -65,23 +76,8 @@ public class Usuarios {
     public void setNivel(String nivel) {
         this.nivel = nivel;
     }
+
  
 
-   /*  public List<DadosPessoais> getDadosPessoais() {
-        return this.dadosPessoais;
-    }
-
-    public void setDadosPessoais(List<DadosPessoais> dadosPessoais) {
-        this.dadosPessoais = dadosPessoais;
-    }
-
-
-    public Usuarios(String nome_completo, String usuario, String senha, String nivel, List<DadosPessoais> dadosPessoais) {
-        this.nome_completo = nome_completo;
-        this.usuario = usuario;
-        this.senha = senha;
-        this.nivel = nivel;
-        this.dadosPessoais = dadosPessoais;
-    } */
    
 }
