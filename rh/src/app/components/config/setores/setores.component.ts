@@ -17,7 +17,7 @@ import { DialogData } from '../vinculos/vinculos.component';
 export class SetoresComponent implements OnInit {
   setores: Setores[];
   dadosProfissionais: DadosProfissionais[];
-  Setor:Setores = new Setores();
+  Setor: Setores = new Setores();
 
   array: any = [];
   DadosAtualizados: any = [];
@@ -46,25 +46,20 @@ export class SetoresComponent implements OnInit {
     this.carregarDadosSetores();
   }
 
-  nomeDocumento:any
-  adicionarTipo(){
-    console.log(this.nomeDocumento)
-    this.Setor.setor = this.nomeDocumento
-    this.siscrhService.createSetor(this.Setor).subscribe((data:any)=>{
-      console.log(data)
-       this.carregarDadosSetores();
-    })
+  nomeDocumento: any;
+  adicionarTipo() {
+    console.log(this.nomeDocumento);
+    this.Setor.setor = this.nomeDocumento;
+    this.siscrhService.createSetor(this.Setor).subscribe((data: any) => {
+      this.carregarDadosSetores();
+    });
   }
 
   carregarDadosSetores() {
-    this.DadosAtualizados = [];
-    this.array = [];
-    this.setores = [];
-    this.dadosProfissionais = [];
     this.esconder = false;
-
     this.siscrhService.getSetoresList().subscribe((data) => {
-
+      this.DadosAtualizados = [];
+      this.array = [];
       this.setores = [];
       this.dadosProfissionais = [];
       this.setores = data;
@@ -90,7 +85,6 @@ export class SetoresComponent implements OnInit {
       this.esconder = true;
     });
   }
-
 }
 
 @Component({
@@ -163,17 +157,17 @@ export class DeleteSetorDialog {
   onNoClick(): void {
     this.dialogRef.close();
   }
-  disabledBotaoEBox=false
-setor:any
-  definirSetor(){
-    this.disabledBotaoEBox = true
-this.esconder =false
+  disabledBotaoEBox = false;
+  setor: any;
+  definirSetor() {
+    this.disabledBotaoEBox = true;
+    this.esconder = false;
     for (let i in this.teste) {
       this.siscrhService
         .getDadosProfissionaisByForeignKey(this.teste[i].idpessoa)
         .subscribe((data: any) => {
           this.dadosProfissionais2 = data;
-          this.dadosProfissionais2.setores = {id: this.setor};
+          this.dadosProfissionais2.setores = { id: this.setor };
           this.siscrhService
             .createDadosProfissionais(this.dadosProfissionais2)
             .subscribe(
@@ -195,10 +189,9 @@ this.esconder =false
       if (count == 0) {
         this.teste = [];
         this.botaoDeletarDisabled = false;
-        this.esconder =true
+        this.esconder = true;
       }
     });
-
   }
 
   salvarStatus(idForeignKey: any, teste: any) {
@@ -247,8 +240,6 @@ this.esconder =false
     this.siscrhService.deleteSetores(this.data.id_docu);
     this.dialogRef.close();
   }
-
-  
 
   statusNull() {
     for (let i in this.teste) {

@@ -137,6 +137,7 @@
                         mat-raised-button
                         color="primary"
                         *ngIf="index.id != null"
+                        style="margin-right: 10px;"
                         (click)="downloadArquivo(index.nome_arquivo)"
                       >
                         <mat-icon>file_download</mat-icon>
@@ -145,6 +146,7 @@
                       <button
                         mat-raised-button
                         color="warn"
+                     
                         *ngIf="index.id != null && ExcluirDocumentoOpcionais == true"
                         (click)="deleteDocu(index.id, index.nome_arquivo)"
                     

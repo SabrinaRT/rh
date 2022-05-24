@@ -57,7 +57,6 @@ adicionarTipo(){
   this.siscrhService.createDocumento(this.documentos).subscribe((data:any)=>{
     console.log(data)
      this.carregarDados();
-     this.carregarDados();
   })
 }
 
