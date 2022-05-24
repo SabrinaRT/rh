@@ -1,8 +1,8 @@
 <mat-form-field appearance="outline">
   <mat-label>Novo Tipo de Documento</mat-label>
-  <input matInput />
+  <input matInput [(ngModel)]="nomeDocumento" />
 </mat-form-field>
-<button mat-raised-button color="primary" style="margin-left: 15px">
+<button mat-raised-button color="primary" style="margin-left: 15px" (click)="adicionarTipo()">
   Adicionar
 </button>
 <table class="box-shadow" >
@@ -28,7 +28,7 @@
           <mat-icon>edit</mat-icon>
         </button>
  
-        <button mat-raised-button color="warn" *ngIf="index.id != 1"      (click)="openDialog2(index.id, index.nome)">
+        <button mat-raised-button color="warn" *ngIf="index.id != 1"      (click)="openDialog2(index.id, index.nome, index.qtdTotal)">
           <mat-icon>cancel</mat-icon>
         </button>
       </td>

@@ -1,8 +1,8 @@
 <mat-form-field appearance="outline">
   <mat-label>Novo Setor</mat-label>
-  <input matInput />
+  <input matInput  [(ngModel)]="nomeDocumento"/>
 </mat-form-field>
-<button mat-raised-button color="primary" style="margin-left: 15px;" >Adicionar</button>
+<button mat-raised-button color="primary" style="margin-left: 15px;" (click)="adicionarTipo()" >Adicionar</button>
 
       <table  class="box-shadow">
         <thead>
@@ -18,7 +18,7 @@
             <div class="col-5"></div>
             <div class="col-3"><mat-spinner></mat-spinner></div>
           </div>
-          <tr *ngFor="let i of array2">
+          <tr *ngFor="let i of DadosAtualizados">
             <td style="width: 5%">{{ i.count }}</td>
             <td style="width:70%">{{ i.setor }}</td>
       

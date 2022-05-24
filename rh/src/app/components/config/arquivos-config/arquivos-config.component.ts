@@ -23,6 +23,7 @@ export class ArquivosConfigComponent implements OnInit {
   Documentos: Documentos[];
   DadosPessoais: DadosPessoais[];
   esconder = false;
+  documentos: Documentos = new Documentos();
   DocumentosAtualizados: any = [];
   constructor(private siscrhService: SiscrhService, public dialog: MatDialog) {}
 
@@ -33,11 +34,12 @@ export class ArquivosConfigComponent implements OnInit {
     });
   }
 
-  openDialog2(id: any, arquivo: any): void {
+  openDialog2(id: any, arquivo: any, qtdTotal:any): void {
+    
     const dialogRef = this.dialog.open(DeleteArquivoDialog, {
       width: '800px',
       height: '550px',
-      data: { id_docu: id, nome: arquivo },
+      data: { id_docu: id, nome: arquivo,  qtdTotal: qtdTotal },
     });
     dialogRef.afterClosed().subscribe((result: any) => {
       this.carregarDados();
@@ -45,17 +47,30 @@ export class ArquivosConfigComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.siscrhService.getDocumentosList().subscribe((data) => {
-      this.Documentos = data;
-    });
     this.carregarDados();
   }
+
+  nomeDocumento:any
+adicionarTipo(){
+  console.log(this.nomeDocumento)
+  this.documentos.tipo = this.nomeDocumento
+  this.siscrhService.createDocumento(this.documentos).subscribe((data:any)=>{
+    console.log(data)
+     this.carregarDados();
+     this.carregarDados();
+  })
+}
+
   carregarDados() {
     this.DocumentosAtualizados = [];
+    this.siscrhService.getDocumentosList().subscribe((data) => {
+      this.Documentos = data;
+      this.DocumentosAtualizados = [];
+    });
     this.siscrhService
       .getDocumentosColaboradoresList()
       .subscribe((data: any) => {
-
+        this.DocumentosAtualizados = [];
         for (let index in this.Documentos) {
           var countTotal = 0;
           for (let i in data) {
@@ -89,6 +104,10 @@ export class DeleteArquivoDialog {
     private siscrhService: SiscrhService,
     private toastr: ToastrService
   ) {
+    if (this.data.qtdTotal == 0) {
+      this.botaoDelete = false;
+      this.esconderDiv = true;
+    }
     this.siscrhService
       .getDocumentosColaboradoresList()
       .subscribe((data: any) => {
@@ -111,13 +130,19 @@ export class DeleteArquivoDialog {
         }
       }
 
+      
     });
   }
-
+  esconderDiv = false;
+  botaoDelete = true;
   documentos2: any = [];
-  carregarDados() {}
 
-  definirSetor() {
+  deletarArquivo() {
+    this.siscrhService.deleteDocumento(this.data.id_docu);
+    this.dialogRef.close();
+  }
+
+  definirOpcional() {
     for (let i in this.documentos2) {
       this.siscrhService
         .getDocumentosColaboradorByForeignKey(this.documentos2[i].id)
@@ -133,12 +158,13 @@ export class DeleteArquivoDialog {
               this.siscrhService
                 .createDocumentosColaborador(this.documentos3)
                 .subscribe((data: any) => {
+                  console.log(data);
                 });
             }
           }
         });
     }
-    this.dialogRef.close();
+    this.botaoDelete = false;
   }
 }
 

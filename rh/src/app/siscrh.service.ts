@@ -153,6 +153,9 @@ export class SiscrhService {
     return this.httpClient.post(this.url + `/v11/dados`, colaborador);
   }
 
+  createSetor(colaborador: Setores): Observable<Object> {
+    return this.httpClient.post(this.url + `/v10/dados`, colaborador);
+  }
   createMatricula(colaborador: Matriculas): Observable<Object> {
     return this.httpClient.post(this.url + `/v12/dados`, colaborador);
   }
@@ -176,6 +179,15 @@ export class SiscrhService {
 
   getDocumentosList(): Observable<Documentos[]> {
     return this.httpClient.get<Documentos[]>(this.url + `/v26/dados`);
+  }
+
+  deleteDocumento(id: number) {
+    this.httpClient.delete(this.url + `/v26/dados/${id}`).subscribe(
+      (data) => {
+        console.log(data);
+      },
+      (error: any) => console.log(error)
+    );
   }
 
   getDocumentosColaboradoresList(): Observable<DocumentosColaboradores[]> {

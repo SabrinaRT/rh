@@ -12,7 +12,8 @@ import { SiscrhService } from 'src/app/siscrh.service';
 export interface DialogData {
   nome: any;
   id_docu: any;
-  reload: any;
+  qtdTotal: any;
+  reload:any
 }
 @Component({
   selector: 'app-vinculos',
@@ -22,9 +23,10 @@ export interface DialogData {
 export class VinculosComponent implements OnInit {
   vinculos: Vinculos[];
   dadosProfissionais: DadosProfissionais[];
+  Vinculo:Vinculos  = new Vinculos();
 
   array: any = [];
-  array2: any = [];
+  DadosAtualizados: any = [];
 
   constructor(private siscrhService: SiscrhService, public dialog: MatDialog) {}
 
@@ -50,13 +52,25 @@ esconder = false
     this.carregarDadosVinculos();
   }
 
+  nomeDocumento:any
+  adicionarTipo(){
+    console.log(this.nomeDocumento)
+    this.Vinculo.vinculo = this.nomeDocumento
+    this.siscrhService.createVinculo(this.Vinculo).subscribe((data:any)=>{
+      
+       this.carregarDadosVinculos();
+     
+    })
+  }
+
   carregarDadosVinculos() {
-    this.array2 = [];
-    this.array = [];
-    this.vinculos = [];
-    this.dadosProfissionais = [];
+  
     this.esconder = false
     this.siscrhService.getVinculosList().subscribe((data) => {
+      this.DadosAtualizados = [];
+      this.array = [];
+      this.vinculos = [];
+      this.dadosProfissionais = [];
       this.vinculos = data;
     });
     this.siscrhService.getDadosProfissionaisList().subscribe((data: any) => {
@@ -71,7 +85,7 @@ esconder = false
         lucky = this.array.filter(
           (obj: any) => obj === this.vinculos[i].id
         ).length;
-        this.array2.push({
+        this.DadosAtualizados.push({
           id: this.vinculos[i].id,
           vinculo: this.vinculos[i].vinculo,
           count: lucky,
@@ -81,13 +95,7 @@ esconder = false
     });
   }
 
-  @ViewChild(CdkVirtualScrollViewport)
-  viewport: CdkVirtualScrollViewport;
-
-  // example
-  go() {
-    this.viewport.scrollToIndex(23);
-  }
+  
 }
 
 @Component({

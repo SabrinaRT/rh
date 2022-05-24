@@ -17,9 +17,10 @@ import { DialogData } from '../vinculos/vinculos.component';
 export class SetoresComponent implements OnInit {
   setores: Setores[];
   dadosProfissionais: DadosProfissionais[];
+  Setor:Setores = new Setores();
 
   array: any = [];
-  array2: any = [];
+  DadosAtualizados: any = [];
 
   constructor(private siscrhService: SiscrhService, public dialog: MatDialog) {}
 
@@ -45,13 +46,27 @@ export class SetoresComponent implements OnInit {
     this.carregarDadosSetores();
   }
 
+  nomeDocumento:any
+  adicionarTipo(){
+    console.log(this.nomeDocumento)
+    this.Setor.setor = this.nomeDocumento
+    this.siscrhService.createSetor(this.Setor).subscribe((data:any)=>{
+      console.log(data)
+       this.carregarDadosSetores();
+    })
+  }
+
   carregarDadosSetores() {
-    this.array2 = [];
+    this.DadosAtualizados = [];
     this.array = [];
     this.setores = [];
     this.dadosProfissionais = [];
     this.esconder = false;
+
     this.siscrhService.getSetoresList().subscribe((data) => {
+
+      this.setores = [];
+      this.dadosProfissionais = [];
       this.setores = data;
     });
     this.siscrhService.getDadosProfissionaisList().subscribe((data: any) => {
@@ -66,7 +81,7 @@ export class SetoresComponent implements OnInit {
         lucky = this.array.filter(
           (obj: any) => obj === this.setores[i].id
         ).length;
-        this.array2.push({
+        this.DadosAtualizados.push({
           id: this.setores[i].id,
           setor: this.setores[i].setor,
           count: lucky,
