@@ -52,6 +52,23 @@ INSERT IGNORE INTO `documentos`(`id`, `tipo`) VALUES
   
  ;
 
+/*  private long id;
+
+    private String nome_completo;
+    private String usuario;
+    private String senha;
+    private String nivel; */
+
+/*  `ID_LOGIN` int(11) NOT NULL AUTO_INCREMENT,
+  `USUARIO` text DEFAULT NULL,
+  `SENHA` text DEFAULT NULL,
+  `NIVEL` int(11) DEFAULT NULL, */
+ INSERT IGNORE INTO `usuarios`(`id`,`usuario`,`senha`, `nivel`) VALUES 
+ (1,'SABRINA','202cb962ac59075b964b07152d234b70',3),
+ (3,'ADMINISTRADOR','cfb0812fc7bef8d7306ecfd5ffe562e8',1),(4,'FRED','202cb962ac59075b964b07152d234b70',2),(5,'RIVALDO','202cb962ac59075b964b07152d234b70',3),(9,'EMILLY CAROLINE','e10adc3949ba59abbe56e057f20f883e',2),(10,'MARILENE','202cb962ac59075b964b07152d234b70',2),(11,'CLAUDIA','202cb962ac59075b964b07152d234b70',2),(12,'JOSE','202cb962ac59075b964b07152d234b70',2),(13,'JACIRA','202cb962ac59075b964b07152d234b70',2),(14,'ALVARO','202cb962ac59075b964b07152d234b70',3),(15,'GUSTAVO','202cb962ac59075b964b07152d234b70',3);
+
+/* UNLOCK TABLES; */
+
  INSERT IGNORE INTO `dados_pessoais`(`id`, `cpf`,`nome_completo`,`data_nascimento`,  `nacionalidade`,`naturalidade`, `uf_naturalidade`,`identidade`, `uf_identidade`, `titulo_eleitor`,`pis_pasep`,`telefone`, `celular`,`email`, `endereco`, `numero`,`complemento`,`bairro`,`cep`, `cidade`, `uf_cidade`,  `nome_mae`, `nome_pai`   )
 VALUES 
 (51,'103.494.974-86','JHEFFREY ITTLER LEITE CARVALHO','1999-04-30','BRASILEIRO','JOÃO PESSOA','PB','4331411','PB','047388441279','20677773441',NULL,'(83) 9 8718-0434','jheffreyitller2013@gmail.com','Rua das Cerejas','56','casa','Mangabeira','58059774','João Pessoa','PB','EVANILDO DO NASCIMENTO TRABALHO','AMALIA LEITE PEREIRA'),
