@@ -30,17 +30,26 @@ public class RegistroAtividadesController {
 		return registroAtividadeRepository.save(registros);
 	}
 
-	@GetMapping("/registros/{id}")
+	/* @GetMapping("/registros/{id}")
 	public ResponseEntity<RegistroAtividade> getAllRegistroAtividade(@PathVariable Long id) {
 		RegistroAtividade registros = registroAtividadeRepository.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("RegistroAtividade not exist with id: " + id));
 
 		return ResponseEntity.ok(registros);
+	} */
+
+    @GetMapping("/registros/{id}")
+	public ResponseEntity<RegistroAtividade> getRegistroAtividadeByForeignKey(@PathVariable Long id) {
+		RegistroAtividade registroAtividade = registroAtividadeRepository.findByDadosPessoais_Id(id);
+		return ResponseEntity.ok(registroAtividade); 
 	}
+
 
 	@DeleteMapping("/registros/{id}")  
 	private void deleteBook(@PathVariable("id") Long id)   
 	{  
 		registroAtividadeRepository.deleteById(id);
 	} 
+
+
 }

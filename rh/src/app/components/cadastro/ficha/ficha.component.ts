@@ -1,5 +1,6 @@
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
-import { DatePipe, formatDate } from '@angular/common';
+import { formatDate } from '@angular/common';
+
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import {
   FormBuilder,
@@ -23,11 +24,15 @@ import {
   Documentos,
   DocumentosColaboradores,
   CEP,
+  RegistroAtividade,
+  Usuarios,
+  RegistroAtividadeCadastro,
 } from 'src/app/siscrh';
 import { SiscrhService } from 'src/app/siscrh.service';
 import { cpf } from 'cpf-cnpj-validator';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-ficha',
@@ -53,6 +58,10 @@ export class FichaComponent implements OnInit {
   dados: Dados = new Dados();
   documentosColaboradores: DocumentosColaboradores =
     new DocumentosColaboradores();
+
+  registroAtividades: RegistroAtividadeCadastro =
+    new RegistroAtividadeCadastro();
+  usuario: Usuarios = new Usuarios();
 
   setores: Setores[];
   vinculos: Vinculos[];
@@ -225,9 +234,9 @@ export class FichaComponent implements OnInit {
             });
           }
         }
-        this.countDocu=0
-        
-        this.ArrayDocumentos.sort(function (a:any, b:any) {
+        this.countDocu = 0;
+
+        this.ArrayDocumentos.sort(function (a: any, b: any) {
           if (a.tipo > b.tipo) {
             return 1;
           }
@@ -235,9 +244,7 @@ export class FichaComponent implements OnInit {
             return -1;
           }
           return 0;
-        })
-        
-
+        });
       },
       (error) => {
         console.log('error', error);
@@ -256,7 +263,7 @@ export class FichaComponent implements OnInit {
     );
   }
 
-  countDocu:any
+  countDocu: any;
   DocumentosColaboradores: DocumentosColaboradores[];
   atualizar() {
     this.siscrhService
@@ -277,7 +284,7 @@ export class FichaComponent implements OnInit {
             });
           }
         }
-      var count = 0
+        var count = 0;
         for (let i in this.ArrayDocumentos) {
           this.ArrayDocumentos[i].id = null;
           this.ArrayDocumentos[i].nome_arquivo = null;
@@ -294,15 +301,11 @@ export class FichaComponent implements OnInit {
             }
           }
         }
-        this.countDocu=count
-       
+        this.countDocu = count;
       });
   }
 
-
-
   upload(event: any, tipo: any) {
-    
     if (event.target.files && event.target.files[0]) {
       var nome_upload =
         Math.floor(Math.random() * 1000 + 1) +
@@ -462,6 +465,7 @@ export class FichaComponent implements OnInit {
     this.siscrhService.createColaborador(this.dadosPessoais).subscribe(
       (data: any) => {
         this.IDColab = data.id;
+        this.registroAtividade(data.id);
 
         this.situacaoColaborador.acessoRede = false;
         this.situacaoColaborador.status = true;
@@ -503,6 +507,22 @@ export class FichaComponent implements OnInit {
         this.showWarn();
       }
     );
+  }
+  registroAtividade(id: any) {
+    this.registroAtividades.dadosPessoais = { id: id };
+    this.registroAtividades.usuario_c = { id: 1 };
+    this.registroAtividades.usuario_u = { id: 1 };
+    this.registroAtividades.data_c = formatDate(new Date(), 'dd/MM/yyyy', 'en');
+    this.registroAtividades.data_u = formatDate(new Date(), 'dd/MM/yyyy', 'en');
+    this.siscrhService
+      .createRegistroAtividade(this.registroAtividades)
+      .subscribe(
+        (data: any) => {},
+        (error) => {
+          console.log('error', error);
+          this.showWarn();
+        }
+      );
   }
 
   showSuccess() {

@@ -24,6 +24,8 @@ import {
   Matriculas,
   Documentos,
   CEP,
+  RegistroAtividade,
+  RegistroAtividadeCadastro,
 } from 'src/app/siscrh';
 import { SiscrhService } from 'src/app/siscrh.service';
 
@@ -194,6 +196,29 @@ export class FichaUpdateComponent implements OnInit {
   IDProfi: number;
   IDBanco: number;
 
+
+  registroAtividades:RegistroAtividadeCadastro =  new RegistroAtividadeCadastro();
+
+  registroAtividade() {
+
+    this.siscrhService.getRegistroAtividadeByForeignKey(this.IDColab).subscribe((data:any)=>{
+    this.registroAtividades = data
+    this.registroAtividades.usuario_u = { id: 3 };
+    this.registroAtividades.data_u = formatDate(new Date(), 'dd/MM/yyyy', 'en');
+    this.siscrhService
+      .createRegistroAtividade(this.registroAtividades)
+      .subscribe(
+        (data: any) => {console.log(data)},
+        (error) => {
+          console.log('error', error);
+         /*  this.showWarn(); */
+        }
+      );
+     
+    })
+    
+  }
+
   gerarMensagemFinal() {
     let NomeEsplitado = this.dadosPessoais.nome_completo.split(' ');
     let UltimoNome = NomeEsplitado[NomeEsplitado.length - 1];
@@ -213,6 +238,7 @@ export class FichaUpdateComponent implements OnInit {
         
         this.IDColab = data.id;
         this.showSuccess()
+        this.registroAtividade();
       },
       (error) => {
         console.log('error', error);
@@ -287,11 +313,13 @@ export class FichaUpdateComponent implements OnInit {
       .subscribe((data: any) => {
         this.DadosPessoais = data;
         this.DadosAtualizados = Array.of(data);
+      
       },
       (error) => {
         console.log('error', error);
         this.toastr.error('Houve algum erro!', 'Erro!');
       });
+      this.registroAtividade()
   }
 
   validandoCEP(searchValue: string): void {

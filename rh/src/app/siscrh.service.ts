@@ -18,6 +18,7 @@ import {
   CEP,
   Usuarios,
   RegistroAtividade,
+  RegistroAtividadeCadastro,
 } from './siscrh';
 
 @Injectable({
@@ -232,6 +233,15 @@ export class SiscrhService {
     );
   }
 
+  createRegistroAtividade(
+    colaborador: RegistroAtividadeCadastro
+  ): Observable<Object> {
+    return this.httpClient.post(this.url + `/v27/registros`, colaborador);
+  }
+
+  getRegistroAtividadeByForeignKey(id: number): Observable<RegistroAtividadeCadastro> {
+    return this.httpClient.get<RegistroAtividadeCadastro>(this.url + `/v27/registros/${id}`);
+  }
 }
 
 

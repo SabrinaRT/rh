@@ -31,7 +31,7 @@ public class RegistroAtividade {
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "dados_pessoais_id")
-    private DadosPessoais dados_pessoais_id;
+    private DadosPessoais dadosPessoais;
 
     
     public RegistroAtividade() {
@@ -70,21 +70,30 @@ public class RegistroAtividade {
         this.data_u = data_u;
     }
 
-    public DadosPessoais getDados_pessoais_id() {
-        return this.dados_pessoais_id;
-    }
 
-    public void setDados_pessoais_id(DadosPessoais dados_pessoais_id) {
-        this.dados_pessoais_id = dados_pessoais_id;
-    }
-
-
-    public RegistroAtividade(Usuarios usuario_c, Usuarios usuario_u, Date data_c, Date data_u, DadosPessoais dados_pessoais_id) {
+    public RegistroAtividade(Usuarios usuario_c, Usuarios usuario_u, Date data_c, Date data_u, DadosPessoais dadosPessoais) {
         this.usuario_c = usuario_c;
         this.usuario_u = usuario_u;
         this.data_c = data_c;
         this.data_u = data_u;
-        this.dados_pessoais_id = dados_pessoais_id;
+        this.dadosPessoais = dadosPessoais;
+    }
+   
+
+    public Long getId() {
+        return this.id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public DadosPessoais getDadosPessoais() {
+        return this.dadosPessoais;
+    }
+
+    public void setDadosPessoais(DadosPessoais dadosPessoais) {
+        this.dadosPessoais = dadosPessoais;
     }
 
 

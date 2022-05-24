@@ -49,10 +49,26 @@ export class RegistroAtividade {
   };
   data_c: any;
   data_u: any;
-  dados_pessoais_id: {
+  dadosPessoais: {
     id: any;
     nome_completo:any
     cpf:any
+  };
+}
+
+export class RegistroAtividadeCadastro {
+  id: any;
+  usuario_c:{
+    id:any
+  };
+  usuario_u:{
+    id:any
+  };
+  data_c: any;
+  data_u: any;
+  dadosPessoais: {
+    id: any;
+
   };
 }
 
