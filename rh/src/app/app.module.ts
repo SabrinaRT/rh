@@ -44,6 +44,7 @@ import { TotalComponent } from './components/gerador-pdf/total/total.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import { UsuariosComponent } from './components/config/usuarios/usuarios.component';
+import { RegistroAtividadeComponent } from './components/config/registro-atividade/registro-atividade.component';
 
 @NgModule({
   declarations: [
@@ -68,7 +69,8 @@ import { UsuariosComponent } from './components/config/usuarios/usuarios.compone
     EditSetorDialog,
     DeleteArquivoDialog,
     UsuariosComponent,
-    EditArquivoDialog
+    EditArquivoDialog,
+    RegistroAtividadeComponent
     
   ],
   imports: [

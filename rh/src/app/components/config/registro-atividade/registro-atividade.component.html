@@ -1,0 +1,38 @@
+<div class="container">
+   <div class="row">
+        <div class="col-12">
+            <table  class="box-shadow">
+                <thead>
+                  <tr>
+                    <th style="width: 22%;">Nome do Colaborador</th>
+                    <th style="width: 15%; text-align: center;">CPF do Colaborador</th>
+                    <th style="width: 15%; ">Cadastrado por:</th>
+                    <th style="width: 15%; ">Data do Cadastro:</th>
+                    <th style="width: 15%; ">Atualizado por:</th>
+                    <th >Data do Atualização:</th>
+                  </tr>
+                </thead>
+              
+                <tbody>
+                  <div class="row" [hidden]="esconder">
+                    <div class="col-5"></div>
+                    <div class="col-3"><mat-spinner></mat-spinner></div>
+                  </div>
+                  <tr *ngFor="let i of this.RegistroAtividade">
+                    <td style="width: 22%;">{{ i.dados_pessoais_id.nome_completo }}</td>
+                    <td style="width: 15%; text-align: center;">{{ i.dados_pessoais_id.cpf }}</td>
+                    <td style="width: 15%;">{{ i.usuario_c.usuario }}</td>
+                    <td style="width: 15%; ">{{ i.data_c }}</td>
+                    <td style="width: 15%; ">{{ i.usuario_u.usuario }}</td>
+                    <td >{{ i.data_u }}</td>
+              
+                    <td >
+                      
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+        </div>
+   </div>
+</div>
+<br><br><br>

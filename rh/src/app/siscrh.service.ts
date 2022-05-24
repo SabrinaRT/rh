@@ -16,6 +16,8 @@ import {
   Documentos,
   DocumentosColaboradores,
   CEP,
+  Usuarios,
+  RegistroAtividade,
 } from './siscrh';
 
 @Injectable({
@@ -201,4 +203,35 @@ export class SiscrhService {
   ): Observable<Object> {
     return this.httpClient.post(this.url + `/v27/dados`, colaborador);
   }
+
+
+  createUsuario(
+    colaborador: Usuarios
+  ): Observable<Object> {
+    return this.httpClient.post(this.url + `/v2/usuarios`, colaborador);
+  }
+
+  getUsuarioList(): Observable<Usuarios[]> {
+    return this.httpClient.get<Usuarios[]>(
+      this.url + `/v27/usuarios`
+    );
+  }
+
+  deleteUsuario(id: number) {
+    this.httpClient.delete(this.url + `/v27/usuarios/${id}`).subscribe(
+      (data) => {
+        console.log(data);
+      },
+      (error: any) => console.log(error)
+    );
+  }
+
+  getRegistroAtividadeList(): Observable<RegistroAtividade[]> {
+    return this.httpClient.get<RegistroAtividade[]>(
+      this.url + `/v27/registros`
+    );
+  }
+
 }
+
+

@@ -39,12 +39,37 @@ export class Dados {
   ];
 }
 
-export class TabelaInicial{
-  id: any
-  nome: any
-  setor:  any
-  status: any
-  acessoRede:  any
+export class RegistroAtividade {
+  id: any;
+  usuario_c:{
+    usuario:any
+  };
+  usuario_u:{
+    usuario:any
+  };
+  data_c: any;
+  data_u: any;
+  dados_pessoais_id: {
+    id: any;
+    nome_completo:any
+    cpf:any
+  };
+}
+
+export class Usuarios {
+  id: any;
+  nome_completo: any;
+  usuario: any;
+  senha: any;
+  nivel: any;
+}
+
+export class TabelaInicial {
+  id: any;
+  nome: any;
+  setor: any;
+  status: any;
+  acessoRede: any;
 }
 
 export class DadosPessoais {
@@ -74,7 +99,7 @@ export class DadosPessoais {
   documentosColaboradores: [
     {
       id: any;
-      nome:any;
+      nome: any;
       nome_documento_upload: any;
       tipo: any;
     }
@@ -148,7 +173,7 @@ export class DadosProfissionais {
 
 export class DocumentosColaboradores {
   id: any;
-  nome:any;
+  nome: any;
   nome_documento_upload: any;
   dadosPessoais: {
     id: any;
@@ -195,15 +220,14 @@ export class Dependentes {
   dadosPessoais: {
     id: any;
   };
-  
 }
-export class CEP{
+export class CEP {
   cep: any;
-  logradouro:any;
-  complemento:any;
+  logradouro: any;
+  complemento: any;
   bairro: any;
   localidade: any;
-  uf:any;
+  uf: any;
   ibge: any;
   gia: any;
   ddd: any;
