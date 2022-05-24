@@ -1,19 +1,23 @@
-<div mat-dialog-content style="height: 110%">
-  <mat-card-title>{{data.nome}}</mat-card-title>
-  <button
-    mat-raised-button
-    color="warn"
-    (click)="Deletar()"
-    [disabled]="botaoDeletarDisabled"
-    style="margin-left: 15px"
-  >
-    <span
-      matTooltip="Para deletar, todos os colaboradores listados devem estar desvinculados!"
-      >Deletar Setor</span
+<div mat-dialog-content style="height: 110%" >
+  <div class="col-12" style="text-align: center;">
+    <mat-card-title>{{data.nome}}</mat-card-title>
+    <br><br>
+    <button
+      mat-raised-button
+      color="warn"
+      (click)="Deletar()"
+      [disabled]="botaoDeletarDisabled"
+     
+      class="col-12"
     >
-  </button>
+      <span
+        matTooltip="Para deletar, todos os colaboradores listados devem estar desvinculados!"
+        >Deletar Setor</span
+      >
+    </button>
+  </div>
   <br /><br />
-  <mat-accordion>
+  <mat-accordion [hidden]="esconderOpcao">
     <mat-expansion-panel>
       <mat-expansion-panel-header>
         <mat-panel-title>

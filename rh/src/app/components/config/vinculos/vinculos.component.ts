@@ -37,11 +37,11 @@ export class VinculosComponent implements OnInit {
     });
   }
 
-  openDialog2(id: any, vinculo: any): void {
+  openDialog2(id: any, vinculo: any, qtdTotal:any): void {
     const dialogRef = this.dialog.open(DeleteVinculoDialog, {
       width: '900px',
-      height: '550px',
-      data: { id_docu: id, nome: vinculo },
+      height:"50%",
+      data: { id_docu: id, nome: vinculo , qtdTotal:qtdTotal},
     });
     dialogRef.afterClosed().subscribe((result) => {
       this.carregarDadosVinculos();
@@ -54,7 +54,6 @@ esconder = false
 
   nomeDocumento:any
   adicionarTipo(){
-    console.log(this.nomeDocumento)
     this.Vinculo.vinculo = this.nomeDocumento
     this.siscrhService.createVinculo(this.Vinculo).subscribe((data:any)=>{
       
@@ -131,9 +130,17 @@ export class DeleteVinculoDialog {
     private siscrhService: SiscrhService,
     private toastr: ToastrService
   ) {
-    this.carregarDados();
+    if( this.data.qtdTotal > 0){
+      
+      this.carregarDados();
+      this.esconderOpcao = false
+      this.botaoDeletarDisabled = true
+    }else{
+      this.esconderOpcao = true
+      this.botaoDeletarDisabled = false
+    }
   }
-
+  esconderOpcao = true
   carregarDados() {
     this.array3 = [];
     this.siscrhService.getDadosProfissionaisList().subscribe((data: any) => {
@@ -166,7 +173,7 @@ export class DeleteVinculoDialog {
   vinculo:any
   definirSetor(){
     this.disabledBotaoEBox = true
-this.esconder =false
+    this.esconder = false
     for (let i in this.teste) {
       this.siscrhService
         .getDadosProfissionaisByForeignKey(this.teste[i].idpessoa)
@@ -200,13 +207,9 @@ this.esconder =false
 
   }
   disabledBotaoEBox= false
-
-
-
   array3: any = [];
   teste: any;
   vinculos: Vinculos = new Vinculos();
-
   esconder = false
   onNoClick(): void {
     this.dialogRef.close(this.data.reload);

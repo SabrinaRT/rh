@@ -31,11 +31,11 @@ export class SetoresComponent implements OnInit {
     });
   }
 
-  openDialog2(id: any, setor: any): void {
+  openDialog2(id: any, setor: any, qtdTotal:any): void {
     const dialogRef = this.dialog.open(DeleteSetorDialog, {
       width: '800px',
-      height: '550px',
-      data: { id_docu: id, nome: setor },
+      height:"50%",
+      data: { id_docu: id, nome: setor , qtdTotal:qtdTotal},
     });
     dialogRef.afterClosed().subscribe((result) => {
       this.carregarDadosSetores();
@@ -48,7 +48,6 @@ export class SetoresComponent implements OnInit {
 
   nomeDocumento: any;
   adicionarTipo() {
-    console.log(this.nomeDocumento);
     this.Setor.setor = this.nomeDocumento;
     this.siscrhService.createSetor(this.Setor).subscribe((data: any) => {
       this.carregarDadosSetores();
@@ -120,9 +119,18 @@ export class DeleteSetorDialog {
     private siscrhService: SiscrhService,
     private toastr: ToastrService
   ) {
-    this.carregarDados();
+    if( this.data.qtdTotal > 0){
+      
+      this.carregarDados();
+      this.esconderOpcao = false
+      this.botaoDeletarDisabled = true
+    }else{
+      this.esconderOpcao = true
+      this.botaoDeletarDisabled = false
+    }
   }
-
+  esconderOpcao = true
+esconder = true
   carregarDados() {
     this.array3 = [];
     this.siscrhService.getDadosProfissionaisList().subscribe((data: any) => {
@@ -153,7 +161,7 @@ export class DeleteSetorDialog {
   teste: any;
   setores: Setores = new Setores();
 
-  esconder = false;
+
   onNoClick(): void {
     this.dialogRef.close();
   }

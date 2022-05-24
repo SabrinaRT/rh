@@ -38,7 +38,7 @@ export class ArquivosConfigComponent implements OnInit {
     
     const dialogRef = this.dialog.open(DeleteArquivoDialog, {
       width: '800px',
-      height: '550px',
+     /*  height: '550px', */
       data: { id_docu: id, nome: arquivo,  qtdTotal: qtdTotal },
     });
     dialogRef.afterClosed().subscribe((result: any) => {
