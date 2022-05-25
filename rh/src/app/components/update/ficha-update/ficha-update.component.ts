@@ -264,6 +264,7 @@ export class FichaUpdateComponent implements OnInit {
       .subscribe((data: any) => {
         
         this.IDEstado = data.id;
+        this.registroAtividade();
         this.showSuccess()
       },
       (error) => {
@@ -286,6 +287,7 @@ export class FichaUpdateComponent implements OnInit {
       .createDependentes(this.dependentes)
       .subscribe((data: any) => {
         this.pegarDados();
+        this.registroAtividade() 
         this.showSuccess()
       },
       (error) => {
@@ -299,6 +301,7 @@ export class FichaUpdateComponent implements OnInit {
     this.siscrhService.createMatricula(this.matriculas)
       .subscribe((data: any) => {
          this.pegarDados();
+         this.registroAtividade() 
          this.showSuccess()
       },
       (error) => {
@@ -313,6 +316,7 @@ export class FichaUpdateComponent implements OnInit {
       .subscribe((data: any) => {
         this.DadosPessoais = data;
         this.DadosAtualizados = Array.of(data);
+   
       
       },
       (error) => {
@@ -416,6 +420,7 @@ export class FichaUpdateComponent implements OnInit {
       .subscribe((data: any) => {
         this.IDProfi = data.id;
         this.showSuccess()
+        this.registroAtividade();
       },
       (error) => {
         console.log('error', error);
@@ -431,6 +436,7 @@ export class FichaUpdateComponent implements OnInit {
       .subscribe((data: any) => {
         this.IDBanco = data.id;
         this.showSuccess()
+        this.registroAtividade();
       },
       (error) => {
         console.log('error', error);
