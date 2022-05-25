@@ -242,6 +242,12 @@ export class SiscrhService {
   getRegistroAtividadeByForeignKey(id: number): Observable<RegistroAtividadeCadastro> {
     return this.httpClient.get<RegistroAtividadeCadastro>(this.url + `/v27/registros/${id}`);
   }
+
+  verificarUser(usuario: any, senha:any): Observable<Usuarios> {
+    return this.httpClient.get<Usuarios>(this.url + `/v2/usuarios/usuario=${usuario}&senha=${senha}`);
+  }
 }
+
+
 
 
