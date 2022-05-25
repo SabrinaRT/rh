@@ -17,14 +17,6 @@ export class RegistroAtividadeComponent implements OnInit {
       this.esconder = true;
     });
 
-    const md5 = new Md5();
-    this.siscrhService.verificarUser("sabrina",md5.appendStr('123').end()).subscribe((data:any)=>{
-      if(data == null){
-        console.log("bloqueado")
-        
-      }else{
-        console.log(data)
-      }
-    })
+   
   }
 }

@@ -17,12 +17,13 @@ export class GerarPdfPerfilComponent implements OnInit {
 
   constructor(private siscrhService:SiscrhService, private route:ActivatedRoute) {
     this.IDColab = this.route.snapshot.params["id"];
+    this.idUser = this.route.snapshot.params["idUser"];
 
   
    }
 
    
-
+idUser:any
 IDColab:any
   ngOnInit(): void {
    

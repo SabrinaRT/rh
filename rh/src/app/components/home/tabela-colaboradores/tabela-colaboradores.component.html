@@ -2,7 +2,8 @@
   <button
     mat-raised-button
     color="config"
-    [routerLink]="['config']"
+    [routerLink]="['',idUser, 'config']"
+   
     style="margin-right: 1%"
   >
     <mat-icon>settings</mat-icon>
@@ -10,7 +11,7 @@
   <button
     mat-raised-button
     color="edit"
-    [routerLink]="['gerador']"
+    [routerLink]="['',idUser, 'gerador']"
     style="margin-right: 1%"
   >
     <mat-icon>picture_as_pdf</mat-icon>
@@ -18,7 +19,8 @@
   <button
     mat-raised-button
     color="accent"
-    [routerLink]="['add']"
+    [routerLink]="['',idUser, 'add']"
+   
     style="margin-right: 1%"
   >
     <mat-icon>person_add</mat-icon>
@@ -26,6 +28,7 @@
 
   <span class="example-spacer"></span>
   <span>SISCOGEP</span>
+ 
 </mat-toolbar>
 <br />
 <mat-form-field appearance="outline" class="col-11" style="margin-left: 3%">
@@ -79,6 +82,7 @@
             mat-raised-button
             color="files"
             [routerLink]="['painel', TabelaInicial.id]"
+            [routerLink]="['',idUser,'painel', TabelaInicial.id]"
             style="margin-right: 10px"
           >
             <mat-icon>edit</mat-icon>
@@ -87,7 +91,8 @@
           <button
             mat-raised-button
             color="edit"
-            [routerLink]="['pdf-perfil', TabelaInicial.id]"
+            [routerLink]="['',idUser,'pdf-perfil', TabelaInicial.id]"
+           
           >
             <mat-icon>picture_as_pdf</mat-icon>
           </button>

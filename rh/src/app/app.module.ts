@@ -45,6 +45,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import { UsuariosComponent } from './components/config/usuarios/usuarios.component';
 import { RegistroAtividadeComponent } from './components/config/registro-atividade/registro-atividade.component';
+import { LoginComponent } from './components/login/login.component';
 
 @NgModule({
   declarations: [
@@ -70,7 +71,8 @@ import { RegistroAtividadeComponent } from './components/config/registro-ativida
     DeleteArquivoDialog,
     UsuariosComponent,
     EditArquivoDialog,
-    RegistroAtividadeComponent
+    RegistroAtividadeComponent,
+    LoginComponent
     
   ],
   imports: [

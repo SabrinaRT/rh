@@ -6,6 +6,7 @@ import {
   MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
 import { Sort } from '@angular/material/sort';
+import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import {
   DadosPessoais,
@@ -26,9 +27,13 @@ import { FichaComponent } from '../../cadastro/ficha/ficha.component';
 export class TabelaColaboradoresComponent implements OnInit {
   constructor(
     private siscrhService: SiscrhService,
-    private toastr: ToastrService
-  ) {}
+    private toastr: ToastrService,
+    private route:ActivatedRoute
+  ) {
 
+    this.idUser = this.route.snapshot.params["idUser"];
+  }
+idUser:any
   filtro = new FormControl();
   searchValue: any;
   DocumentosColaboradores: DocumentosColaboradores =

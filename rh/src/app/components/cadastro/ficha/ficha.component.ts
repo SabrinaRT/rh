@@ -31,7 +31,7 @@ import {
 import { SiscrhService } from 'src/app/siscrh.service';
 import { cpf } from 'cpf-cnpj-validator';
 import { HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { DatePipe } from '@angular/common';
 
 @Component({
@@ -81,9 +81,12 @@ export class FichaComponent implements OnInit {
     private siscrhService: SiscrhService,
     private toastr: ToastrService,
     private http: HttpClient,
-    private route: Router
-  ) {}
+    private route: Router,
+    private router: ActivatedRoute
 
+  ) {  this.idUser= this.router.snapshot.params["idUser"];
+}
+idUser:any
   acessoRede: any;
   status: any;
   status2: any;

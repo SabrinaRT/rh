@@ -105,7 +105,7 @@
             </a>
         </mat-card-subtitle>
 
-        <button mat-raised-button color="edit" class="col-12" (click)="teste()" >
+        <button mat-raised-button color="edit" class="col-12"  [routerLink]="['',idUser,'pdf-perfil', this.IDColab]" >
           Baixar Perfil em PDF
         </button>
       </mat-card>

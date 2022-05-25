@@ -17,12 +17,10 @@ export class ConfigPerfilComponent implements OnInit {
 
   constructor(private siscrhService:SiscrhService,  private route: ActivatedRoute, private toastr: ToastrService,private router: Router) {
     this.IDColab= this.route.snapshot.params["id"];
+    this.idUser = this.route.snapshot.params["idUser"];
   
   }
-
-  teste(){
-    this.router.navigate(['pdf-perfil', this.IDColab]); 
-  }
+  idUser:any
 
   nome:any
   setor:any;
