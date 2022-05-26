@@ -43,11 +43,11 @@ import { SearchfilterPipe } from './searchfilter.pipe';
 import { TotalComponent } from './components/gerador-pdf/total/total.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatTooltipModule} from '@angular/material/tooltip';
-import { UsuariosComponent } from './components/config/usuarios/usuarios.component';
+import {  UsuariosComponent } from './components/config/usuarios/usuarios.component';
 import { RegistroAtividadeComponent } from './components/config/registro-atividade/registro-atividade.component';
 import { LoginComponent } from './components/login/login.component';
 import { SearchfilterPipe2 } from './searchfilter2.pipe';
-import { ListaUsuariosComponent } from './components/config/lista-usuarios/lista-usuarios.component';
+import { DeleteUsuarioDialog, EditUsuarioDialog, ListaUsuariosComponent } from './components/config/lista-usuarios/lista-usuarios.component';
 
 @NgModule({
   declarations: [
@@ -76,7 +76,9 @@ import { ListaUsuariosComponent } from './components/config/lista-usuarios/lista
     EditArquivoDialog,
     RegistroAtividadeComponent,
     LoginComponent,
-    ListaUsuariosComponent
+    ListaUsuariosComponent,
+    DeleteUsuarioDialog,
+    EditUsuarioDialog
     
   ],
   imports: [

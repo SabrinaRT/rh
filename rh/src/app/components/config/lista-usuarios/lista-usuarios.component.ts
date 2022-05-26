@@ -1,8 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
 import { Usuarios } from 'src/app/siscrh';
 import { SiscrhService } from 'src/app/siscrh.service';
 
+export interface DialogData {
+  id: any;
+  nome: any;
+}
 @Component({
   selector: 'app-lista-usuarios',
   templateUrl: './lista-usuarios.component.html',
@@ -11,7 +16,8 @@ import { SiscrhService } from 'src/app/siscrh.service';
 export class ListaUsuariosComponent implements OnInit {
   constructor(
     private siscrhService: SiscrhService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    public dialog: MatDialog 
   ) {}
   esconder = true;
 
@@ -99,4 +105,49 @@ export class ListaUsuariosComponent implements OnInit {
       }
     );
   }
+
+  openDialog(id: any, nome: any): void {
+    const dialogRef = this.dialog.open(EditUsuarioDialog, {
+      width: '900px',
+      data: { id_docu: id, nome: nome },
+    });
+  }
+}
+
+
+
+@Component({
+  selector: 'edit-usuario',
+  templateUrl: 'edit-usuario.html',
+})
+export class EditUsuarioDialog {
+  constructor(
+    public dialogRef: MatDialogRef<EditUsuarioDialog>,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData,
+    private siscrhService: SiscrhService
+  ) {}
+
+ /*  setores: Setores = new Setores(); */
+
+ /*  onNoClick(): void {
+    this.dialogRef.close();
+  } */
+}
+
+
+@Component({
+  selector: 'delete-usuario',
+  templateUrl: 'delete-usuario.html',
+})
+export class DeleteUsuarioDialog {
+  constructor(
+    public dialogRef: MatDialogRef<DeleteUsuarioDialog>,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData,
+    private siscrhService: SiscrhService
+  ) {}
+
+ 
+/*   onNoClick(): void {
+    this.dialogRef.close();
+  } */
 }
