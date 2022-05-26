@@ -42,7 +42,7 @@
   					<i class="login__icon fas fa-lock"></i>
   					<input type="password" class="login__input" placeholder="Senha" name="senha" [(ngModel)]="senha">
   				</div>
-  				<button class="button login__submit" (click)="verificarUsuario()">
+  				<button class="button login__submit" (click)="verificarUsuario()"  (keyup.enter)="verificarUsuario()">
   					<span class="button__text">Entrar</span>
   					<i class="button__icon fas fa-chevron-right"></i>
   				</button>				

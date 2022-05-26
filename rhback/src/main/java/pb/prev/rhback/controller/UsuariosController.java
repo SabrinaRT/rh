@@ -45,7 +45,7 @@ public class UsuariosController {
 		usuariosRepository.deleteById(id);
 	} 
 
-	@GetMapping("/usuarios/usuario={usuario}&senha={senha}")
+	@GetMapping("/usuarios2/usuario={usuario}&senha={senha}")
 	public ResponseEntity<Usuarios> getAllUsuarios2(@PathVariable String usuario, @PathVariable String senha) {
 		Usuarios usuarios = usuariosRepository.findByUsuarioAndSenha(usuario, senha);
 		return ResponseEntity.ok(usuarios);

@@ -26,7 +26,7 @@ import {
 })
 export class SiscrhService {
   constructor(private httpClient: HttpClient, private toastr: ToastrService) {}
-  
+
   url: any = 'http://localhost:8080/api';
 
   getCEP(cep: String): Observable<CEP> {
@@ -246,7 +246,7 @@ export class SiscrhService {
   }
 
   verificarUser(usuario: any, senha:any): Observable<Usuarios> {
-    return this.httpClient.get<Usuarios>(this.url + `/v2/usuarios/usuario=${usuario}&senha=${senha}`);
+    return this.httpClient.get<Usuarios>(this.url + `/v2/usuarios2/usuario=${usuario}&senha=${senha}`);
   }
 
   getUsuarioById(id: number): Observable<Usuarios> {
