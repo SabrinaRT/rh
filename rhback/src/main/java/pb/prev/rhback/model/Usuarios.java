@@ -17,21 +17,14 @@ public class Usuarios {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 
-    private String nome_completo;
     private String usuario;
     private String senha;
     private String nivel;
 
-   /*  @OneToMany
-    @JoinColumn(name="usuario_id")
-    private  Set<RegistroAtividade> registro_atividade; */
-
-    public Usuarios(String nome_completo, String usuario, String senha, String nivel) {
-        this.nome_completo = nome_completo;
+    public Usuarios( String usuario, String senha, String nivel) {
         this.usuario = usuario;
         this.senha = senha;
         this.nivel = nivel;
-      /*   this.registro_atividade = registro_atividade; */
     }
 
     public Usuarios() {
@@ -45,13 +38,6 @@ public class Usuarios {
         this.id = id;
     }
 
-    public String getNome_completo() {
-        return this.nome_completo;
-    }
-
-    public void setNome_completo(String nome_completo) {
-        this.nome_completo = nome_completo;
-    }
 
     public String getUsuario() {
         return this.usuario;
@@ -76,8 +62,4 @@ public class Usuarios {
     public void setNivel(String nivel) {
         this.nivel = nivel;
     }
-
- 
-
-   
 }
