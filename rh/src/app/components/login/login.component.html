@@ -1,25 +1,59 @@
 
+<!-- 
+<div class="background">
+<mat-toolbar color="primary">
+  
+  <span class="example-spacer"></span>
+  <span>SISCOGEP</span>
+ 
+</mat-toolbar> 
 
-<br> <br> <br> <br>
-<div class="container">
-    <div class="row">
+  <div class="background" >
+    <br><br> <br> <br> 
+    <div class="col-3" style="margin: auto;">
+      <mat-form-field appearance="outline" class="col-12"  style="text-align: center;  border-color: white;">
+          <mat-label style="color: white;">Usuário</mat-label>
+          <input matInput  [(ngModel)]="usuario" style="color: white ; border-color: white;">
+        </mat-form-field><br>
+        <mat-form-field appearance="outline" class="col-12"  style="text-align: center;"> 
+          <mat-label style="color: white;">Senha</mat-label>
+          <input matInput  type="password" style="color: white;" [(ngModel)]="senha">
+        </mat-form-field>
      
-        <div class="col-4">
-    
-        </div>
-        <div class="col-4">
-            <mat-form-field appearance="outline" class="col-12">
-                <mat-label>Usuário</mat-label>
-                <input matInput  [(ngModel)]="usuario">
-              </mat-form-field><br>
-              <mat-form-field appearance="outline" class="col-12"> 
-                <mat-label>Senha</mat-label>
-                <input matInput  type="password" [(ngModel)]="senha">
-              </mat-form-field>
-           
-            <br>
-            <button mat-raised-button color="primary" class="col-12" (click)="verificarUsuario()" > Entrar</button>
-        </div>
+      <br>
+      <button mat-raised-button color="primary" class="col-12" (click)="verificarUsuario()" > Entrar</button>
+    </div>
+   
+  </div> 
+</div> -->
 
-    </div>    
+<div class="container" style="margin: auto;">
+  	<div class="screen">
+  		<div class="screen__content">
+        
+  			<form class="login">
+          <h1 class="button__text" style="color: #6C63AC; font-weight:bolder;">SISCOGEP</h1>
+  				<div class="login__field">
+            
+  					<i class="login__icon fas fa-user"></i>
+  					<input type="text" class="login__input" placeholder="Usuário" name="usuario" [(ngModel)]="usuario">
+  				</div>
+  				<div class="login__field">
+  					<i class="login__icon fas fa-lock"></i>
+  					<input type="password" class="login__input" placeholder="Senha" name="senha" [(ngModel)]="senha">
+  				</div>
+  				<button class="button login__submit" (click)="verificarUsuario()">
+  					<span class="button__text">Entrar</span>
+  					<i class="button__icon fas fa-chevron-right"></i>
+  				</button>				
+  			</form>
+  			
+  		</div>
+  		<div class="screen__background">
+  			<span class="screen__background__shape screen__background__shape4"></span>
+  			<span class="screen__background__shape screen__background__shape3"></span>		
+  			<span class="screen__background__shape screen__background__shape2"></span>
+  			<span class="screen__background__shape screen__background__shape1"></span>
+  		</div>		
+  	</div>
 </div>
