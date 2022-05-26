@@ -1,14 +1,6 @@
 package  pb.prev.rhback.model;
 
-
-import java.util.Set;
-
 import javax.persistence.*;
-
-import com.fasterxml.jackson.annotation.*;
-
-
-
 @Entity
 @Table(name="usuarios")
 public class Usuarios {

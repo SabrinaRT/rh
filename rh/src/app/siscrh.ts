@@ -88,6 +88,16 @@ export class TabelaInicial {
   acessoRede: any;
 }
 
+export class TabelaInicial2 {
+  id: any;
+  nome: any;
+  cpf: any;
+  data_c: any;
+  data_u: any;
+  usuario_c: any;
+  usuario_u: any;
+}
+
 export class DadosPessoais {
   id: any;
   cpf: any;

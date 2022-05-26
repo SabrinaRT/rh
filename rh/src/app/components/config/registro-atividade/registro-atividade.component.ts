@@ -17,6 +17,7 @@ export class RegistroAtividadeComponent implements OnInit {
     this.idUser = this.route.snapshot.params['idUser'];
   }
   idUser: any;
+  searchValue:any
   esconder = false;
   ngOnInit(): void {
     this.siscrhService.getRegistroAtividadeList().subscribe((data: any) => {
