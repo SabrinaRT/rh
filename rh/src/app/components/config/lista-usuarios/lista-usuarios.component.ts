@@ -14,9 +14,13 @@ export class ListaUsuariosComponent implements OnInit {
     private toastr: ToastrService
   ) {}
   esconder = true;
-  nivel:any
+
   Usuarios: Usuarios[];
   usuarios: Usuarios = new Usuarios();
+
+  nome_usuario: any;
+  senha: any;
+  nivel: any;
 
   niveis = [
     { nome_nivel: 'Administrador', id_nivel: 1 },
@@ -25,16 +29,52 @@ export class ListaUsuariosComponent implements OnInit {
   ];
 
   ngOnInit(): void {
+    this.atualizarDados();
+  }
+
+  atualizarDados() {
+    this.Usuarios = [];
     this.siscrhService.getUsuarioList().subscribe((data: any) => {
       this.Usuarios = data;
     });
   }
 
-  salvarStatus(idForeignKey: any, teste: any) {
+  createUser() {
+    this.usuarios.usuario = this.nome_usuario;
+    this.usuarios.senha = this.senha;
+    this.usuarios.nivel = this.nivel;
+    this.siscrhService.createUsuario(this.usuarios).subscribe(
+      (data: any) => {
+        console.log(data);
+        this.toastr.success(
+          'Perfil atualizado com sucesso!',
+          'Dados Atualizados'
+        );
+        this.atualizarDados();
+      },
+      (error) => {
+        console.log('error', error);
+      }
+    );
+  }
+
+  deleteUser(idForeignKey: any) {
+    this.siscrhService.deleteUsuario(idForeignKey);
+    this.atualizarDados();
+    this.atualizarDados();
+    this.siscrhService.getUsuarioById(idForeignKey).subscribe(
+      (data: any) => {},
+      (error) => {
+        console.log('error', error);
+        this.toastr.success('Usuário deletado com sucesso!', 'Atenção!');
+      }
+    );
+  }
+  salvarStatus(idForeignKey: any, nivel: any) {
     this.siscrhService.getUsuarioById(idForeignKey).subscribe((data: any) => {
       console.log(data);
       this.usuarios = data;
-      this.usuarios.nivel = teste;
+      this.usuarios.nivel = nivel;
       this.siscrhService.createUsuario(this.usuarios).subscribe(
         (data: any) => {
           console.log(data);
@@ -50,26 +90,13 @@ export class ListaUsuariosComponent implements OnInit {
         console.log(data);
 
         this.toastr.success(
-          'Perfil atualizado com sucesso!',
-          'Dados Atualizados'
+          'Usuário cadastrado com sucesso!',
+          'Atenção!'
         );
       },
       (error) => {
         console.log('error', error);
       }
     );
-
-    /*   let count = 0;
-    for (let i in this.teste) {
-      if (this.teste[i].id_setor == this.data.id_docu) {
-        count++;
-      }
-    }
-    if (count == 0) {
-      this.botaoDeletarDisabled = false;
-      this.toastr.warning('', 'Vínculo poderá ser deletado!');
-    } else {
-      this.botaoDeletarDisabled = true;
-    } */
   }
 }

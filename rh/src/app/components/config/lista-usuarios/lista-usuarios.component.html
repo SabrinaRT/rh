@@ -2,12 +2,12 @@
     <br>
 <mat-form-field appearance="outline"  style="margin-right: 10px;">
 <mat-label>Novo Usuário</mat-label>
-<input matInput  />
+<input matInput [(ngModel)]="nome_usuario"  />
 </mat-form-field>
 
 <mat-form-field appearance="outline"  style="margin-right: 10px;">
     <mat-label>Senha</mat-label>
-    <input matInput type="password"  />
+    <input matInput type="password"  [(ngModel)]="senha" />
     </mat-form-field>
 
 <mat-form-field appearance="outline" >
@@ -20,7 +20,7 @@
     </mat-select>
   </mat-form-field>
 
-<button mat-raised-button color="primary" style="margin-left: 15px;" >Adicionar</button>
+<button mat-raised-button color="primary" style="margin-left: 15px;" (click)="createUser()" >Adicionar</button>
 
     <table  class="box-shadow">
       <thead>
@@ -61,7 +61,7 @@
             <button
               mat-raised-button
               color="warn"
-           
+              (click)="deleteUser(i.id)"
             >
               <mat-icon>cancel</mat-icon>
             </button>
