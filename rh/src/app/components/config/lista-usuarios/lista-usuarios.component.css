@@ -1,0 +1,38 @@
+.box-shadow{
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+  }
+  tbody tr {
+    border-bottom: 1px solid #dddddd;
+    padding: 1px 1px;
+  }
+  
+  tbody tr:last-of-type {
+    border-bottom: 1px solid #3F51B5;
+  }
+  th, td {
+    padding: 12px 15px;
+  
+  }
+  tbody {
+    display: block;
+    height: 400px;
+    overflow: auto;
+  }
+  thead, tbody tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+  }
+  thead {
+    background-color: #3F51B5;
+    width: calc( 100% - 1em )
+  }
+  table {
+    width: 100%;
+  }
+  
+  thead tr {
+    background-color: #3F51B5;
+    color: #ffffff;
+    
+  }

@@ -31,13 +31,13 @@ public class UsuariosController {
 		return usuariosRepository.save(usuarios);
 	}
 
-	/* @GetMapping("/usuarios/{id}")
+	@GetMapping("/usuarios/{id}")
 	public ResponseEntity<Usuarios> getAllUsuarios(@PathVariable Long id) {
 		Usuarios usuarios = usuariosRepository.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("Usuarios not exist with id: " + id));
 
 		return ResponseEntity.ok(usuarios);
-	} */
+	}
 
 	@DeleteMapping("/usuarios/{id}")  
 	private void deleteBook(@PathVariable("id") Long id)   

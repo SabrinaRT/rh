@@ -26,12 +26,14 @@ import {
 })
 export class SiscrhService {
   constructor(private httpClient: HttpClient, private toastr: ToastrService) {}
+  
+  url: any = 'http://localhost:8080/api';
 
   getCEP(cep: String): Observable<CEP> {
     return this.httpClient.get<CEP>(`https://viacep.com.br/ws/${cep}/json`);
   }
   /*   url:any = "http://10.83.1.2:8080/gprevback/api" */
-  url: any = 'http://localhost:8080/api';
+ 
   getColaboradorList(): Observable<DadosPessoais[]> {
     return this.httpClient.get<DadosPessoais[]>(this.url + `/v1/dados`);
   }
@@ -214,12 +216,12 @@ export class SiscrhService {
 
   getUsuarioList(): Observable<Usuarios[]> {
     return this.httpClient.get<Usuarios[]>(
-      this.url + `/v27/usuarios`
+      this.url + `/v2/usuarios`
     );
   }
 
   deleteUsuario(id: number) {
-    this.httpClient.delete(this.url + `/v27/usuarios/${id}`).subscribe(
+    this.httpClient.delete(this.url + `/v2/usuarios/${id}`).subscribe(
       (data) => {
         console.log(data);
       },
@@ -245,6 +247,10 @@ export class SiscrhService {
 
   verificarUser(usuario: any, senha:any): Observable<Usuarios> {
     return this.httpClient.get<Usuarios>(this.url + `/v2/usuarios/usuario=${usuario}&senha=${senha}`);
+  }
+
+  getUsuarioById(id: number): Observable<Usuarios> {
+    return this.httpClient.get<Usuarios>(this.url + `/v2/usuarios/${id}`);
   }
 }
 

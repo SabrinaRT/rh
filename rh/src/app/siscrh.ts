@@ -74,7 +74,6 @@ export class RegistroAtividadeCadastro {
 
 export class Usuarios {
   id: any;
-  nome_completo: any;
   usuario: any;
   senha: any;
   nivel: any;

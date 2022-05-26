@@ -1,59 +1,8 @@
 <mat-tab-group class="box-shadow">
+  <mat-tab label="Lista de Usuários"> 
+    <app-lista-usuarios></app-lista-usuarios>
+</mat-tab>
     <mat-tab label="Registro de Atividades" > <br> <app-registro-atividade></app-registro-atividade> </mat-tab>
-    <mat-tab label="Lista de Usuários"> 
-        <div class="col-11" style="margin: auto;">
-            <br>
-    <mat-form-field appearance="outline">
-        <mat-label>Novo Usuário</mat-label>
-        <input matInput />
-      </mat-form-field>
-      
-      <button mat-raised-button color="primary" style="margin-left: 15px;" >Adicionar</button>
-      
-            <table  class="box-shadow">
-              <thead>
-                <tr>
-                  <th>Usuários</th>
-                  <th>Nome Completo</th>
-                  <th> Tipo de Acesso</th>
-                  <th colspan="2" style="text-align: center;">Serviços</th>
-                </tr>
-              </thead>
-            
-              <tbody>
-                <div class="row" [hidden]="esconder">
-                  <div class="col-5"></div>
-                  <div class="col-3"><mat-spinner></mat-spinner></div>
-                </div>
-                <tr >
-                  <td style="width: 5%"></td>
-                  <td style="width:70%"></td>
-            
-                  <td style="text-align: center;" >
-                    <button
-                      mat-raised-button
-                      color="files"
-                      style="margin-right: 10px;"
-                    >
-                      <mat-icon>edit</mat-icon>
-                    </button>
-                
-                    <button
-                      mat-raised-button
-                      color="warn"
-                   
-                    >
-                      <mat-icon>cancel</mat-icon>
-                    </button>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-      
-      
-        
-        </div>
-<br><br>
-    </mat-tab>
+  
    
   </mat-tab-group>
