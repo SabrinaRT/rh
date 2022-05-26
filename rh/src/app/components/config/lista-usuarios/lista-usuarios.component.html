@@ -1,76 +1,87 @@
-<div class="col-11" style="margin: auto;">
-    <br>
-<mat-form-field appearance="outline"  style="margin-right: 10px;">
-<mat-label>Novo Usuário</mat-label>
-<input matInput [(ngModel)]="nome_usuario"  />
-</mat-form-field>
+<div class="col-11" style="margin: auto">
+  <br />
+  <mat-form-field appearance="outline" style="margin-right: 10px">
+    <mat-label>Novo Usuário</mat-label>
+    <input matInput [(ngModel)]="nome_usuario" (ngModelChange)="comparando()" />
+  </mat-form-field>
 
-<mat-form-field appearance="outline"  style="margin-right: 10px;">
+  <mat-form-field appearance="outline" style="margin-right: 10px">
     <mat-label>Senha</mat-label>
-    <input matInput type="password"  [(ngModel)]="senha" />
-    </mat-form-field>
+    <input
+      matInput
+      type="password"
+      [(ngModel)]="senha"
+      (ngModelChange)="comparando()"
+    />
+  </mat-form-field>
 
-<mat-form-field appearance="outline" >
+  <mat-form-field appearance="outline">
     <mat-label>Nível</mat-label>
-    <mat-select   [(ngModel)]="nivel">
-      <mat-option  *ngFor="let niveis of niveis" [value]="niveis.id_nivel" >
-       {{niveis.nome_nivel}}
+    <mat-select [(ngModel)]="nivel" (ngModelChange)="comparando()">
+      <mat-option *ngFor="let niveis of niveis" [value]="niveis.id_nivel">
+        {{ niveis.nome_nivel }}
       </mat-option>
-     
     </mat-select>
   </mat-form-field>
 
-<button mat-raised-button color="primary" style="margin-left: 15px;" (click)="createUser()" >Adicionar</button>
+  <button
+    mat-raised-button
+    color="primary"
+    style="margin-left: 15px"
+    (click)="createUser()"
+    [disabled]="botaoOff"
+  >
+    Adicionar
+  </button>
 
-    <table  class="box-shadow">
-      <thead>
-        <tr>
-          <th  style="width: 30%">Usuários</th>
-          <th  style="width: 40%" > Tipo de Acesso</th>
-          <th colspan="2" style="text-align: center;">Serviços</th>
-        </tr>
-      </thead>
-    
-      <tbody>
-        <div class="row" [hidden]="esconder">
-          <div class="col-5"></div>
-          <div class="col-3"><mat-spinner></mat-spinner></div>
-        </div>
-        <tr *ngFor="let i of Usuarios">
-          <td style="width: 30%; font-size: 15px;">{{i.usuario}}</td>
-          <td style="width: 40%;font-size: 5px;" >
-            <mat-form-field appearance="outline" style="font-size: 13px;">
-                <mat-label>Nível</mat-label>
-                <mat-select   [(ngModel)]="i.nivel" (selectionChange)="salvarStatus(i.id, i.nivel)">
-                  <mat-option  *ngFor="let niveis of niveis" [value]="niveis.id_nivel" >
-                   {{niveis.nome_nivel}}
-                  </mat-option>
-                 
-                </mat-select>
-              </mat-form-field>
-           </td>
-          <td style="text-align: center;font-size: 15px;">
-            <button
-              mat-raised-button
-              color="files"
-              style="margin-right: 10px;"
+  <table class="box-shadow">
+    <thead>
+      <tr>
+        <th style="width: 30%">Usuários</th>
+        <th style="width: 40%">Tipo de Acesso</th>
+        <th colspan="2" style="text-align: center">Serviços</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <div class="row" [hidden]="esconder">
+        <div class="col-5"></div>
+        <div class="col-3"><mat-spinner></mat-spinner></div>
+      </div>
+      <tr *ngFor="let i of Usuarios">
+        <td style="width: 30%; font-size: 15px">{{ i.usuario }}</td>
+        <td style="width: 40%; font-size: 5px">
+          <mat-form-field appearance="outline" style="font-size: 13px">
+            <mat-label>Nível</mat-label>
+            <mat-select
+              [(ngModel)]="i.nivel"
+              (selectionChange)="salvarStatus(i.id, i.nivel)"
             >
-              <mat-icon>edit</mat-icon>
-            </button>
-        
-            <button
-              mat-raised-button
-              color="warn"
-              (click)="deleteUser(i.id)"
-            >
-              <mat-icon>cancel</mat-icon>
-            </button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+              <mat-option
+                *ngFor="let niveis of niveis"
+                [value]="niveis.id_nivel"
+              >
+                {{ niveis.nome_nivel }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </td>
+        <td style="text-align: center; font-size: 15px">
+          <button
+            mat-raised-button
+            color="files"
+            style="margin-right: 10px"
+            (click)="openDialog(i.id, i.usuario, i.nivel)"
+          >
+            <mat-icon>edit</mat-icon>
+          </button>
 
-
-
+          <button mat-raised-button color="warn" (click)="openDialog2(i.id, i.usuario, i.nivel)">
+            <mat-icon>cancel</mat-icon>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </div>
-<br><br>
+<br /><br />

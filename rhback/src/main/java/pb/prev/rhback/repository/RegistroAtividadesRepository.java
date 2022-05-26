@@ -8,4 +8,5 @@ import pb.prev.rhback.model.RegistroAtividade;
 @Repository
 public interface RegistroAtividadesRepository extends JpaRepository<RegistroAtividade, Long> {
     RegistroAtividade findByDadosPessoais_Id(Long id);
+
 }

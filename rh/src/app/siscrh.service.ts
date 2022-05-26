@@ -221,11 +221,11 @@ export class SiscrhService {
   }
 
   deleteUsuario(id: number) {
-    this.httpClient.delete(this.url + `/v2/usuarios/${id}`).subscribe(
+    return  this.httpClient.delete(this.url + `/v2/usuarios/${id}`).subscribe(
       (data) => {
         console.log(data);
       },
-      (error: any) => console.log(error)
+      (error: any) =>  console.log(error)
     );
   }
 
