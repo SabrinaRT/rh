@@ -4,7 +4,9 @@ import {
   MatDialogRef,
   MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { Subscription } from 'rxjs';
 import {
   RegistroAtividade,
   RegistroAtividadeCadastro,
@@ -12,6 +14,7 @@ import {
 } from 'src/app/siscrh';
 import { SiscrhService } from 'src/app/siscrh.service';
 import { Md5 } from 'ts-md5';
+import { RegistroAtividadeComponent } from '../registro-atividade/registro-atividade.component';
 
 export interface DialogData {
   id: any;
@@ -28,7 +31,8 @@ export class ListaUsuariosComponent implements OnInit {
   constructor(
     private siscrhService: SiscrhService,
     private toastr: ToastrService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private router: Router
   ) {}
   esconder = true;
 
@@ -153,12 +157,18 @@ export class ListaUsuariosComponent implements OnInit {
     });
   }
 
+ 
+ 
   openDialog2(id: any, nome: any, nivel: any): void {
     const dialogRef = this.dialog.open(DeleteUsuarioDialog, {
       data: { id: id, nome: nome, nivel: nivel, users: this.Usuarios },
     });
     dialogRef.afterClosed().subscribe((result) => {
       this.atualizarDados();
+
+      this.router.navigateByUrl('/1/config', { skipLocationChange: true }).then(() => {
+        this.router.navigate(['/1/config']);
+    }); 
     });
   }
 }
@@ -337,6 +347,8 @@ export class DeleteUsuarioDialog {
     this.siscrhService.deleteUsuario(this.data.id);
     this.toastr.success('Usuário deletado com sucesso!', 'Atenção!');
     this.dialogRef.close();
+
+    
   }
 
   onNoClick(): void {

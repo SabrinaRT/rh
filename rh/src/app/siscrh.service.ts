@@ -1,7 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
 import {
   DadosBancarios,
@@ -25,7 +23,9 @@ import {
   providedIn: 'root',
 })
 export class SiscrhService {
-  constructor(private httpClient: HttpClient, private toastr: ToastrService) {}
+  constructor(private httpClient: HttpClient) {}
+
+  
 
   url: any = 'http://localhost:8080/api';
 
