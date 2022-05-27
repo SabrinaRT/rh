@@ -22,9 +22,7 @@ import {
   DadosBancarios,
   Vinculos,
   Matriculas,
-  Documentos,
   CEP,
-  RegistroAtividade,
   RegistroAtividadeCadastro,
 } from 'src/app/siscrh';
 import { SiscrhService } from 'src/app/siscrh.service';
@@ -67,10 +65,13 @@ export class FichaUpdateComponent implements OnInit {
     private _formBuilder: FormBuilder,
     private siscrhService: SiscrhService,
     private route: ActivatedRoute,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+ 
   ) {
     this.IDColab = this.route.snapshot.params['id'];
+    this.idUser= this.route.snapshot.params["idUser"];
   }
+  idUser:any
   DadosAtualizados: any;
   ngOnInit() {
     this.firstFormGroup = this._formBuilder.group({
@@ -203,7 +204,7 @@ export class FichaUpdateComponent implements OnInit {
 
     this.siscrhService.getRegistroAtividadeByForeignKey(this.IDColab).subscribe((data:any)=>{
     this.registroAtividades = data
-    this.registroAtividades.usuarioU = { id: 3 };
+    this.registroAtividades.usuarioU = { id: this.idUser };
     this.registroAtividades.data_u = formatDate(new Date(), 'dd/MM/yyyy', 'en');
     this.siscrhService
       .createRegistroAtividade(this.registroAtividades)

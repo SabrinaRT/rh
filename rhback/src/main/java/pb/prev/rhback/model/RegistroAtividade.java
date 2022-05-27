@@ -17,11 +17,11 @@ public class RegistroAtividade {
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "usuario_c")
-    private Usuarios usuario_c;
+    private Usuarios usuarioC;
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "usuario_u")
-    private Usuarios usuario_u;
+    private Usuarios usuarioU;
 
     @JsonFormat(pattern = "dd/MM/yyyy")
     private Date data_c;
@@ -38,20 +38,21 @@ public class RegistroAtividade {
     }
 
 
-    public Usuarios getUsuario_c() {
-        return this.usuario_c;
+
+    public Usuarios getUsuarioC() {
+        return this.usuarioC;
     }
 
-    public void setUsuario_c(Usuarios usuario_c) {
-        this.usuario_c = usuario_c;
+    public void setUsuarioC(Usuarios usuarioC) {
+        this.usuarioC = usuarioC;
     }
 
-    public Usuarios getUsuario_u() {
-        return this.usuario_u;
+    public Usuarios getUsuarioU() {
+        return this.usuarioU;
     }
 
-    public void setUsuario_u(Usuarios usuario_u) {
-        this.usuario_u = usuario_u;
+    public void setUsuarioU(Usuarios usuarioU) {
+        this.usuarioU = usuarioU;
     }
 
     public Date getData_c() {
@@ -69,16 +70,7 @@ public class RegistroAtividade {
     public void setData_u(Date data_u) {
         this.data_u = data_u;
     }
-
-
-    public RegistroAtividade(Usuarios usuario_c, Usuarios usuario_u, Date data_c, Date data_u, DadosPessoais dadosPessoais) {
-        this.usuario_c = usuario_c;
-        this.usuario_u = usuario_u;
-        this.data_c = data_c;
-        this.data_u = data_u;
-        this.dadosPessoais = dadosPessoais;
-    }
-   
+    
 
     public Long getId() {
         return this.id;
@@ -96,5 +88,13 @@ public class RegistroAtividade {
         this.dadosPessoais = dadosPessoais;
     }
 
+
+    public RegistroAtividade(Usuarios usuarioC, Usuarios usuarioU, Date data_c, Date data_u, DadosPessoais dadosPessoais) {
+        this.usuarioC = usuarioC;
+        this.usuarioU = usuarioU;
+        this.data_c = data_c;
+        this.data_u = data_u;
+        this.dadosPessoais = dadosPessoais;
+    }
 
 }

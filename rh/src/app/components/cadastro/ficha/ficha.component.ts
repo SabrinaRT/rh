@@ -512,8 +512,8 @@ idUser:any
   }
   registroAtividade(id: any) {
     this.registroAtividades.dadosPessoais = { id: id };
-    this.registroAtividades.usuarioC = { id: 1 };
-    this.registroAtividades.usuarioU = { id: 1 };
+    this.registroAtividades.usuarioC = { id: this.idUser };
+    this.registroAtividades.usuarioU = { id: this.idUser };
     this.registroAtividades.data_c = formatDate(new Date(), 'dd/MM/yyyy', 'en');
     this.registroAtividades.data_u = formatDate(new Date(), 'dd/MM/yyyy', 'en');
     this.siscrhService
