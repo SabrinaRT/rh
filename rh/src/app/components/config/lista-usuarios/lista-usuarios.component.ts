@@ -5,7 +5,11 @@ import {
   MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
-import {  RegistroAtividadeCadastro, Usuarios } from 'src/app/siscrh';
+import {
+  RegistroAtividade,
+  RegistroAtividadeCadastro,
+  Usuarios,
+} from 'src/app/siscrh';
 import { SiscrhService } from 'src/app/siscrh.service';
 import { Md5 } from 'ts-md5';
 
@@ -222,34 +226,120 @@ export class DeleteUsuarioDialog {
   constructor(
     public dialogRef: MatDialogRef<DeleteUsuarioDialog>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
-    private siscrhService: SiscrhService
+    private siscrhService: SiscrhService,
+    private toastr: ToastrService
   ) {
+    this.atualizarDados();
+  }
+  registroAtividadesAtt: RegistroAtividadeCadastro[];
 
-    this.siscrhService.getRegistroAtividadeList().subscribe((data:any) =>{
-      console.log(data)
-      this.registroAtividades = data
+  botaoOff = true;
 
-      console.log(this.registroAtividades.findIndex((b)=>{ b.usuario_u.id === this.data.id}))
+  esconderDiv1 = true;
+  esconderDiv2 = true;
+  esconderDiv3 = true;
 
-      var count = 0
-      for(let i in this.registroAtividades){
-        if(this.registroAtividades[i].usuario_c.id == this.data.id )
-        {
-          console.log("encontrou")
-          this.botaoOff = true
-          count++
+  usuario_novo: any;
+  esconder = false;
+
+  atualizarDados() {
+    this.registroAtividadesAtt = [];
+    this.siscrhService
+      .getUsuarioCAndUsuarioUListById(this.data.id)
+      .subscribe((data: any) => {
+        this.registroAtividadesAtt = data;
+        if (this.registroAtividadesAtt.length > 0) {
+          this.esconderDiv1 = false;
+          this.esconderDiv2 = true;
+          this.esconderDiv3 = true;
+          this.botaoOff = true;
+        } else {
+          this.esconderDiv1 = true;
+          this.esconderDiv2 = true;
+          this.esconderDiv3 = false;
+          this.botaoOff = false;
+        }
+        this.esconder = true;
+      });
+  }
+  alterarAtividades() {
+    this.esconder = false;
+    var count = 0;
+    do {
+      for (let i in this.registroAtividadesAtt) {
+        if (this.registroAtividadesAtt[i].usuarioC.id == this.data.id) {
+          this.registroAtividadesAtt[i].usuarioC = {
+            id: this.usuario_novo,
+          };
+          this.siscrhService
+            .createRegistroAtividade(this.registroAtividadesAtt[i])
+            .subscribe((data: any) => {});
+        }
+
+        if (this.registroAtividadesAtt[i].usuarioU.id == this.data.id) {
+          this.registroAtividadesAtt[i].usuarioU = {
+            id: this.usuario_novo,
+          };
+          this.siscrhService
+            .createRegistroAtividade(this.registroAtividadesAtt[i])
+            .subscribe((data: any) => {});
         }
       }
-      console.log(count)
-    })
+      this.siscrhService
+        .getUsuarioCAndUsuarioUListById(this.data.id)
+        .subscribe((data: any) => {
+          if (data.length > 0) {
+            count++;
+          }
+        });
+    } while (count > 0);
+    {
+      count++;
+
+      this.siscrhService
+        .getUsuarioCAndUsuarioUListById(this.data.id)
+        .subscribe((data: any) => {
+          if (data.length > 0) {
+            this.registroAtividadesAtt = [];
+            this.registroAtividadesAtt = data;
+
+            for (let i in this.registroAtividadesAtt) {
+              if (this.registroAtividadesAtt[i].usuarioC.id == this.data.id) {
+                this.registroAtividadesAtt[i].usuarioC = {
+                  id: this.usuario_novo,
+                };
+                this.siscrhService
+                  .createRegistroAtividade(this.registroAtividadesAtt[i])
+                  .subscribe((data: any) => {});
+              }
+
+              if (this.registroAtividadesAtt[i].usuarioU.id == this.data.id) {
+                this.registroAtividadesAtt[i].usuarioU = {
+                  id: this.usuario_novo,
+                };
+                this.siscrhService
+                  .createRegistroAtividade(this.registroAtividadesAtt[i])
+                  .subscribe((data: any) => {});
+              }
+            }
+          }
+
+          this.esconderDiv1 = true;
+          this.esconderDiv2 = true;
+          this.esconderDiv3 = false;
+          this.botaoOff = false;
+          this.esconder = true;
+        });
+    }
   }
 
-  registroAtividades : RegistroAtividadeCadastro [];
-  botaoOff = true
-
-
-
-  /*   onNoClick(): void {
+  deleteUser() {
+    this.siscrhService.deleteUsuario(this.data.id);
+    this.toastr.success('Usuário deletado com sucesso!', 'Atenção!');
     this.dialogRef.close();
-  } */
+  }
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
 }

@@ -203,7 +203,7 @@ export class FichaUpdateComponent implements OnInit {
 
     this.siscrhService.getRegistroAtividadeByForeignKey(this.IDColab).subscribe((data:any)=>{
     this.registroAtividades = data
-    this.registroAtividades.usuario_u = { id: 3 };
+    this.registroAtividades.usuarioU = { id: 3 };
     this.registroAtividades.data_u = formatDate(new Date(), 'dd/MM/yyyy', 'en');
     this.siscrhService
       .createRegistroAtividade(this.registroAtividades)

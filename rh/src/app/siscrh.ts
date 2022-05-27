@@ -41,10 +41,10 @@ export class Dados {
 
 export class RegistroAtividade {
   id: any;
-  usuario_c:{
+  usuarioC:{
     usuario:any
   };
-  usuario_u:{
+  usuarioU:{
     usuario:any
   };
   data_c: any;
@@ -58,10 +58,10 @@ export class RegistroAtividade {
 
 export class RegistroAtividadeCadastro {
   id: any;
-  usuario_c:{
+  usuarioC:{
     id:any
   };
-  usuario_u:{
+  usuarioU:{
     id:any
   };
   data_c: any;
@@ -93,8 +93,8 @@ export class TabelaInicial2 {
   cpf: any;
   data_c: any;
   data_u: any;
-  usuario_c: any;
-  usuario_u: any;
+  usuarioC: any;
+  usuarioU: any;
 }
 
 export class DadosPessoais {

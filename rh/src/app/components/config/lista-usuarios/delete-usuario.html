@@ -1,12 +1,57 @@
 <div mat-dialog-content>
-  <h1>Deletar Perfil de Acesso: </h1>
-  <h3>{{data.nome}}  <button mat-raised-button color="warn" style="margin-left: 5px;" [disabled]="botaoOff" >Deletar</button></h3>
- <!--  <mat-form-field appearance="outline">
-    <mat-label style="color: black">Usuário</mat-label>
-    <input matInput [(ngModel)]="" disabled style="color: black" />
-  </mat-form-field> -->
- <br />
+  <div class="col-12" [hidden]="esconderDiv1">
+    <h1 style="text-align: center">
+      Identificamos atividades registradas com o usuário: {{data.nome}}
+    </h1>
+    <h3>
+      Para deletar, o usuário deve estar desvinculada com os registros. Escolha
+      um outro usuário para substituir as atividades registradas:
+
+      <mat-form-field appearance="outline" style="font-size: 13px">
+        <mat-label>Usuários</mat-label>
+        <mat-select [(ngModel)]="usuario_novo">
+          <span *ngFor="let users of data.users">
+            <mat-option [value]="users.id" *ngIf="users.id != data.id ">
+              {{ users.usuario }}
+            </mat-option>
+          </span>
+        </mat-select>
+      </mat-form-field>
+      <button
+        mat-raised-button
+        color="primary"
+        style="margin-left: 5px"
+        (click)="alterarAtividades()"
+        [disabled]="usuario_novo == null"
+      >
+        <span matTooltip="Esta ação não poderá ser desfeita."
+          >Fazer a alteração</span
+        >
+      </button>
+    </h3>
+    <div class="row" [hidden]="esconder">
+      <div class="col-5"></div>
+      <div class="col-3"><mat-spinner></mat-spinner></div>
+    </div>
+  </div>
+  <div class="col-12" [hidden]="esconderDiv2">
+    <h2>Alteração concluída com sucesso!</h2>
+  </div>
+  <div class="col-12" [hidden]="esconderDiv3">
+    <h3>
+      Deletar Perfil de Acesso: {{data.nome}}
+      <button
+        mat-raised-button
+        color="warn"
+        style="margin-left: 5px"
+        [disabled]="botaoOff"
+        (click)="deleteUser()"
+      >
+        Deletar
+      </button>
+    </h3>
+  </div>
 </div>
 <div mat-dialog-actions>
-  <button mat-raised-button color="primary">Cancelar</button>
+  <button mat-raised-button color="primary" (click)="onNoClick()" >Cancelar</button>
 </div>

@@ -252,6 +252,17 @@ export class SiscrhService {
   getUsuarioById(id: number): Observable<Usuarios> {
     return this.httpClient.get<Usuarios>(this.url + `/v2/usuarios/${id}`);
   }
+
+  getUsuarioCAndUsuarioUListById(id:number): Observable<RegistroAtividadeCadastro[]> {
+    return this.httpClient.get<RegistroAtividadeCadastro[]>(
+      this.url + `/v27/registrosC/${id}`
+    );
+  }
+  /* getUsuarioUList(id:number): Observable<RegistroAtividade[]> {
+    return this.httpClient.get<RegistroAtividade[]>(
+      this.url + `/v27/registrosU/${id}`
+    );
+  } */
 }
 
 
