@@ -28,6 +28,9 @@ export class SetoresComponent implements OnInit {
     const dialogRef = this.dialog.open(EditSetorDialog, {
       data: { id_docu: id, nome: setor },
     });
+    dialogRef.afterClosed().subscribe((result) => {
+      this.carregarDadosSetores();
+    });
   }
 
   openDialog2(id: any, setor: any, qtdTotal: any): void {
@@ -101,6 +104,13 @@ export class EditSetorDialog {
   onNoClick(): void {
     this.dialogRef.close();
   }
+
+  modificar(){
+    this.setores.id = this.data.id_docu
+    this.setores.setor = this.data.nome
+    this.siscrhService.createSetor(this.setores).subscribe((data:any)=>{console.log(data); this.dialogRef.close();})
+  }
+
 }
 
 @Component({

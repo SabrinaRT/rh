@@ -24,7 +24,7 @@
         {{ index.nome }}
       </td>
       <td style="text-align: center;"  >
-        <button mat-raised-button color="files" *ngIf="index.id != 1"  style="margin-right: 10px;" >
+        <button mat-raised-button color="files" *ngIf="index.id != 1" (click)="openDialog(index.id, index.nome)" style="margin-right: 10px;" >
           <mat-icon>edit</mat-icon>
         </button>
  

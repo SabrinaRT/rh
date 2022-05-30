@@ -1,0 +1,12 @@
+<div mat-dialog-content>
+    <mat-form-field appearance="outline">
+      <mat-label>Documento</mat-label>
+      <input matInput [(ngModel)]="data.nome">
+    </mat-form-field>
+    <button mat-raised-button (click)="modificar()" style="margin-left:10px" color="primary" cdkFocusInitial>Salvar</button>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-raised-button (click)="onNoClick()" color="warn" >Cancelar</button>
+    
+  </div>
+  

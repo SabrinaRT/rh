@@ -29,8 +29,11 @@ export class ArquivosConfigComponent implements OnInit {
 
   openDialog(id: any, arquivo: any): void {
     const dialogRef = this.dialog.open(EditArquivoDialog, {
-      width: '900px',
+ 
       data: { id_docu: id, nome: arquivo },
+    });
+    dialogRef.afterClosed().subscribe((result: any) => {
+      this.carregarDados();
     });
   }
 
@@ -181,4 +184,15 @@ export class EditArquivoDialog {
   onNoClick(): void {
     this.dialogRef.close();
   }
+
+  documentos: Documentos = new Documentos();
+
+ 
+
+  modificar(){
+    this.documentos.id = this.data.id_docu
+    this.documentos.tipo = this.data.nome
+    this.siscrhService.createDocumento(this.documentos).subscribe((data:any)=>{console.log(data); this.dialogRef.close();})
+  }
+
 }
