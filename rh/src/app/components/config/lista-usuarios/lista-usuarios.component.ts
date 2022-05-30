@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import {
   MatDialog,
   MatDialogRef,
@@ -6,7 +6,7 @@ import {
 } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { Subscription } from 'rxjs';
+import { Subject, Subscription } from 'rxjs';
 import {
   RegistroAtividade,
   RegistroAtividadeCadastro,
@@ -32,7 +32,9 @@ export class ListaUsuariosComponent implements OnInit {
     private siscrhService: SiscrhService,
     private toastr: ToastrService,
     public dialog: MatDialog,
-    private router: Router
+    private router: Router,
+
+  
   ) {}
   esconder = true;
 
@@ -48,7 +50,10 @@ export class ListaUsuariosComponent implements OnInit {
     { nome_nivel: 'Recursos Humanos', id_nivel: 2 },
     { nome_nivel: 'Informática', id_nivel: 3 },
   ];
-
+  private subject = new Subject<any>();
+  sendMessage(message: string) {
+    this.subject.next({ text: message });
+}
   ngOnInit(): void {
     this.atualizarDados();
   }
@@ -166,9 +171,7 @@ export class ListaUsuariosComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result) => {
       this.atualizarDados();
 
-      this.router.navigateByUrl('/1/config', { skipLocationChange: true }).then(() => {
-        this.router.navigate(['/1/config']);
-    }); 
+      
     });
   }
 }
@@ -181,7 +184,8 @@ export class EditUsuarioDialog {
   constructor(
     public dialogRef: MatDialogRef<EditUsuarioDialog>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
-    private siscrhService: SiscrhService
+    private siscrhService: SiscrhService,
+    private toastr: ToastrService,
   ) {}
 
   usuario: Usuarios = new Usuarios();
@@ -219,6 +223,7 @@ export class EditUsuarioDialog {
         ) != -1
       ) {
         this.botaoOff = true;
+        
       } else {
         this.botaoOff = false;
       }
@@ -230,6 +235,7 @@ export class EditUsuarioDialog {
 
 @Component({
   selector: 'delete-usuario',
+  styleUrls: ['./lista-usuarios.component.css'],
   templateUrl: 'delete-usuario.html',
 })
 export class DeleteUsuarioDialog {

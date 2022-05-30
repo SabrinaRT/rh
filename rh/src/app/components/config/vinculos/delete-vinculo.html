@@ -15,8 +15,8 @@
     </button>
  </div>
   <br /><br />
-  <mat-accordion [hidden]="esconderOpcao" >
-    <mat-expansion-panel>
+  <mat-accordion  >
+    <mat-expansion-panel [disabled]="disabledBotaoEBox">
       <mat-expansion-panel-header>
         <mat-panel-title>
           Definir ao todos colaboradores listados para um vínculo específico
@@ -25,9 +25,11 @@
       <mat-form-field appearance="outline">
         <mat-label>Vínculos</mat-label>
         <mat-select [(ngModel)]="vinculo" [disabled]="disabledBotaoEBox">
-          <mat-option *ngFor="let vinculo of vinculos2" [value]="vinculo.id">
-            {{vinculo.vinculo}}
-          </mat-option>
+         <span *ngFor="let vinculo of vinculos2" >
+            <mat-option  [value]="vinculo.id"  *ngIf="vinculo.id != data.id_docu ">
+              {{vinculo.vinculo}}
+            </mat-option>
+         </span>
         </mat-select>
       </mat-form-field>
       <button
@@ -46,7 +48,7 @@
       </div>
     </mat-expansion-panel>
 
-    <mat-expansion-panel>
+    <mat-expansion-panel [disabled]="disabledBotaoEBox">
       <mat-expansion-panel-header>
         <mat-panel-title>
           Definir individualmente cada colaborador para um vínculo específico
@@ -86,7 +88,7 @@
         <div class="col-3"><mat-spinner></mat-spinner></div>
       </div>
     </mat-expansion-panel>
-    <mat-expansion-panel>
+    <mat-expansion-panel [disabled]="disabledBotaoEBox">
       <mat-expansion-panel-header>
         <mat-panel-title>
           Definir ao todos colaboradores listados para "Não Definido"
@@ -97,8 +99,9 @@
         color="primary"
         class="col-12"
         (click)="statusNull()"
+        [disabled]="disabledBotaoEBox"
       >
-        <span matTooltip="Está ação não poderá ser desfeita">
+        <span matTooltip="Está ação não poderá ser desfeita" >
           Definir ao todos colaboradores listados para "Não Definido"</span
         >
       </button>

@@ -13,7 +13,7 @@ export interface DialogData {
   nome: any;
   id_docu: any;
   qtdTotal: any;
-  reload:any
+  reload: any;
 }
 @Component({
   selector: 'app-vinculos',
@@ -23,7 +23,7 @@ export interface DialogData {
 export class VinculosComponent implements OnInit {
   vinculos: Vinculos[];
   dadosProfissionais: DadosProfissionais[];
-  Vinculo:Vinculos  = new Vinculos();
+  Vinculo: Vinculos = new Vinculos();
 
   array: any = [];
   DadosAtualizados: any = [];
@@ -32,39 +32,35 @@ export class VinculosComponent implements OnInit {
 
   openDialog(id: any, vinculo: any): void {
     const dialogRef = this.dialog.open(EditVinculoDialog, {
-      width: '600px',
       data: { id_docu: id, nome: vinculo },
     });
   }
 
-  openDialog2(id: any, vinculo: any, qtdTotal:any): void {
+  openDialog2(id: any, vinculo: any, qtdTotal: any): void {
     const dialogRef = this.dialog.open(DeleteVinculoDialog, {
-      width: '900px',
-      height:"50%",
-      data: { id_docu: id, nome: vinculo , qtdTotal:qtdTotal},
+      width: '800px',
+      height: '25vw',
+      data: { id_docu: id, nome: vinculo, qtdTotal: qtdTotal },
     });
     dialogRef.afterClosed().subscribe((result) => {
       this.carregarDadosVinculos();
     });
   }
-esconder = false
+  esconder = false;
   ngOnInit(): void {
     this.carregarDadosVinculos();
   }
 
-  nomeDocumento:any
-  adicionarTipo(){
-    this.Vinculo.vinculo = this.nomeDocumento
-    this.siscrhService.createVinculo(this.Vinculo).subscribe((data:any)=>{
-      
-       this.carregarDadosVinculos();
-     
-    })
+  nomeDocumento: any;
+  adicionarTipo() {
+    this.Vinculo.vinculo = this.nomeDocumento;
+    this.siscrhService.createVinculo(this.Vinculo).subscribe((data: any) => {
+      this.carregarDadosVinculos();
+    });
   }
 
   carregarDadosVinculos() {
-  
-    this.esconder = false
+    this.esconder = false;
     this.siscrhService.getVinculosList().subscribe((data) => {
       this.DadosAtualizados = [];
       this.array = [];
@@ -90,11 +86,9 @@ esconder = false
           count: lucky,
         });
       }
-      this.esconder = true
+      this.esconder = true;
     });
   }
-
-  
 }
 
 @Component({
@@ -130,17 +124,16 @@ export class DeleteVinculoDialog {
     private siscrhService: SiscrhService,
     private toastr: ToastrService
   ) {
-    if( this.data.qtdTotal > 0){
-      
+    if (this.data.qtdTotal > 0) {
       this.carregarDados();
-      this.esconderOpcao = false
-      this.botaoDeletarDisabled = true
-    }else{
-      this.esconderOpcao = true
-      this.botaoDeletarDisabled = false
+      this.esconderOpcao = false;
+      this.botaoDeletarDisabled = true;
+    } else {
+      this.esconderOpcao = true;
+      this.botaoDeletarDisabled = false;
     }
   }
-  esconderOpcao = true
+  esconderOpcao = true;
   carregarDados() {
     this.array3 = [];
     this.siscrhService.getDadosProfissionaisList().subscribe((data: any) => {
@@ -153,33 +146,31 @@ export class DeleteVinculoDialog {
           });
         }
       }
-      
+
       this.teste = this.array3.filter(
         (el: any) => el.id_vinculo == this.data.id_docu
-        
       );
-      if(this.teste.length == 0){
-        this.botaoDeletarDisabled = false
+      if (this.teste.length == 0) {
+        this.botaoDeletarDisabled = false;
       }
-      this.esconder =true 
+      this.esconder = true;
     });
 
-    
     this.siscrhService.getVinculosList().subscribe((data: any) => {
       this.vinculos2 = data;
     });
   }
 
-  vinculo:any
-  definirSetor(){
-    this.disabledBotaoEBox = true
-    this.esconder = false
+  vinculo: any;
+  definirSetor() {
+    this.disabledBotaoEBox = true;
+    this.esconder = false;
     for (let i in this.teste) {
       this.siscrhService
         .getDadosProfissionaisByForeignKey(this.teste[i].idpessoa)
         .subscribe((data: any) => {
           this.dadosProfissionais2 = data;
-          this.dadosProfissionais2.vinculos = {id: this.vinculo};
+          this.dadosProfissionais2.vinculos = { id: this.vinculo };
           this.siscrhService
             .createDadosProfissionais(this.dadosProfissionais2)
             .subscribe(
@@ -201,16 +192,15 @@ export class DeleteVinculoDialog {
       if (count == 0) {
         this.teste = [];
         this.botaoDeletarDisabled = false;
-        this.esconder =true
+        this.esconder = true;
       }
     });
-
   }
-  disabledBotaoEBox= false
+  disabledBotaoEBox = false;
   array3: any = [];
   teste: any;
   vinculos: Vinculos = new Vinculos();
-  esconder = false
+  esconder = false;
   onNoClick(): void {
     this.dialogRef.close(this.data.reload);
   }
@@ -226,7 +216,6 @@ export class DeleteVinculoDialog {
           .createDadosProfissionais(this.dadosProfissionais2)
           .subscribe(
             (data: any) => {
-
               this.toastr.success(
                 'Perfil atualizado com sucesso!',
                 'Dados Atualizados'
@@ -250,11 +239,8 @@ export class DeleteVinculoDialog {
     }
     if (count == 0) {
       this.botaoDeletarDisabled = false;
-      this.toastr.warning(
-        "",
-        'Vínculo poderá ser deletado!'
-      );
-    }else{
+      this.toastr.warning('', 'Vínculo poderá ser deletado!');
+    } else {
       this.botaoDeletarDisabled = true;
     }
   }
@@ -283,23 +269,20 @@ export class DeleteVinculoDialog {
               }
             );
         });
+      this.disabledBotaoEBox = true;
     }
 
-    this.siscrhService.getDadosProfissionaisList().subscribe((data:any)=>{
-
+    this.siscrhService.getDadosProfissionaisList().subscribe((data: any) => {
       let count = 0;
-    for (let i in data) {
-      if (data[i].id_vinculo == this.data.id_docu) {
-        count++;
+      for (let i in data) {
+        if (data[i].id_vinculo == this.data.id_docu) {
+          count++;
+        }
       }
-    }
-    if (count == 0) {
-      this.teste = [];
-      this.botaoDeletarDisabled = false;
-    }
-    })
-   
-  
-    
+      if (count == 0) {
+        this.teste = [];
+        this.botaoDeletarDisabled = false;
+      }
+    });
   }
 }

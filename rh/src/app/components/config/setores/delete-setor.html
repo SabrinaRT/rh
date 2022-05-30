@@ -16,93 +16,98 @@
       >
     </button>
   </div>
-  <br /><br />
-  <mat-accordion [hidden]="esconderOpcao">
-    <mat-expansion-panel>
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          Definir ao todos colaboradores listados para um setor específico
-        </mat-panel-title>
-      </mat-expansion-panel-header>
-      <mat-form-field appearance="outline">
-        <mat-label>Setores</mat-label>
-        <mat-select [(ngModel)]="setor" [disabled]="disabledBotaoEBox">
-          <mat-option *ngFor="let setor of setores2" [value]="setor.id">
-            {{setor.setor}}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-      <button
-        mat-raised-button
-        color="primary"
-        style="margin-left: 15px"
-        (click)="definirSetor()"
-        [disabled]="disabledBotaoEBox"
-      >
-        Definir Setor
-      </button>
-      <div class="row" [hidden]="esconder">
-        <div class="col-5"></div>
-        <div class="col-3"><mat-spinner></mat-spinner></div>
-      </div>
-    </mat-expansion-panel>
-
-    <mat-expansion-panel>
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          Definir individualmente cada colaborador para um setor específico
-        </mat-panel-title>
-      </mat-expansion-panel-header>
-      <table class="styled-table">
-        <thead>
-          <tr>
-            <td>nome</td>
-            <td></td>
-          </tr>
-        </thead>
-        <tbody style="max-height: 250px">
-          <tr *ngFor="let i of teste">
-            <td>{{i.nome}}</td>
-            <td style="text-align: center;">
-              <mat-form-field appearance="outline">
-                <mat-label>Setores</mat-label>
-                <mat-select
-                  (selectionChange)="salvarStatus(i.idpessoa, i.id_setor)"
-                  [(ngModel)]="i.id_setor"
-                >
-                  <mat-option *ngFor="let setor of setores2" [value]="setor.id">
-                    {{setor.setor}}
-                  </mat-option>
-                </mat-select>
-              </mat-form-field>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <div class="row" [hidden]="esconder">
-        <div class="col-5"></div>
-        <div class="col-3"><mat-spinner></mat-spinner></div>
-      </div>
-    </mat-expansion-panel>
-    <mat-expansion-panel>
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          Definir ao todos colaboradores listados para "Não Definido"
-        </mat-panel-title>
-      </mat-expansion-panel-header>
-      <button
-        mat-raised-button
-        color="primary"
-        class="col-12"
-        (click)="statusNull()"
-      >
-        <span matTooltip="Está ação não poderá ser desfeita">
-          Definir ao todos colaboradores listados para "Não Definido"</span
+ <div [hidden]="esconderOpcao" >
+    <br /><br />
+    <mat-accordion >
+      <mat-expansion-panel [disabled]="disabledBotaoEBox">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Definir ao todos colaboradores listados para um setor específico
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <mat-form-field appearance="outline">
+          <mat-label>Setores</mat-label>
+          <mat-select [(ngModel)]="setor" [disabled]="disabledBotaoEBox">
+           <span *ngFor="let setor of setores2">
+              <mat-option  [value]="setor.id" *ngIf="setor.id != data.id_docu " >
+                {{setor.setor}}
+              </mat-option>
+           </span>
+          </mat-select>
+        </mat-form-field>
+        <button
+          mat-raised-button
+          color="primary"
+          style="margin-left: 15px"
+          (click)="definirSetor()"
+          [disabled]="disabledBotaoEBox"
         >
-      </button>
-    </mat-expansion-panel>
-  </mat-accordion>
+          Definir Setor
+        </button>
+        <div class="row" [hidden]="esconder">
+          <div class="col-5"></div>
+          <div class="col-3"><mat-spinner></mat-spinner></div>
+        </div>
+      </mat-expansion-panel>
+  
+      <mat-expansion-panel [disabled]="disabledBotaoEBox">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Definir individualmente cada colaborador para um setor específico
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <table class="styled-table">
+          <thead>
+            <tr>
+              <td>nome</td>
+              <td></td>
+            </tr>
+          </thead>
+          <tbody style="max-height: 250px">
+            <tr *ngFor="let i of teste">
+              <td>{{i.nome}}</td>
+              <td style="text-align: center;">
+                <mat-form-field appearance="outline">
+                  <mat-label>Setores</mat-label>
+                  <mat-select
+                    (selectionChange)="salvarStatus(i.idpessoa, i.id_setor)"
+                    [(ngModel)]="i.id_setor"
+                  >
+                    <mat-option *ngFor="let setor of setores2" [value]="setor.id">
+                      {{setor.setor}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="row" [hidden]="esconder">
+          <div class="col-5"></div>
+          <div class="col-3"><mat-spinner></mat-spinner></div>
+        </div>
+      </mat-expansion-panel>
+      <mat-expansion-panel [disabled]="disabledBotaoEBox">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Definir ao todos colaboradores listados para "Não Definido"
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <button
+          mat-raised-button
+          color="primary"
+          class="col-12"
+          (click)="statusNull()"
+          [disabled]="disabledBotaoEBox"
+        >
+          <span matTooltip="Está ação não poderá ser desfeita">
+            Definir ao todos colaboradores listados para "Não Definido"</span
+          >
+        </button>
+      </mat-expansion-panel>
+    </mat-accordion>
 
+ </div> 
   <div mat-dialog-actions>
     <button mat-raised-button color="warn" (click)="onNoClick()">
       Cancelar

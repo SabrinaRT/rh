@@ -1,13 +1,16 @@
 <div mat-dialog-content>
   <div class="col-12" [hidden]="esconderDiv1">
-    <h1 style="text-align: center">
-      Identificamos atividades registradas com o usuário: {{data.nome}}
+    <h1 class="fonte">
+    Atenção! 
     </h1>
-    <h3>
-      Para deletar, o usuário deve estar desvinculada com os registros. Escolha
-      um outro usuário para substituir as atividades registradas:
-
-      <mat-form-field appearance="outline" style="font-size: 13px">
+    <h2 class="fonte">
+     Identificamos atividades registradas do usuário: <span style="font-weight: bolder;">{{data.nome}}</span>
+      </h2>
+    <h4 class="fonte">
+      Para deletar, o usuário deve estar desvinculado dos registros. <br>Escolha
+      um outro usuário para o substituir no relatório de atividades:
+      <br>
+      <mat-form-field appearance="outline" style="font-size: 12px">
         <mat-label>Usuários</mat-label>
         <mat-select [(ngModel)]="usuario_novo">
           <span *ngFor="let users of data.users">
@@ -28,7 +31,7 @@
           >Fazer a alteração</span
         >
       </button>
-    </h3>
+    </h4>
     <div class="row" [hidden]="esconder">
       <div class="col-5"></div>
       <div class="col-3"><mat-spinner></mat-spinner></div>
@@ -39,19 +42,19 @@
   </div>
   <div class="col-12" [hidden]="esconderDiv3">
     <h3>
-      Deletar Perfil de Acesso: {{data.nome}}
+      Deletar Perfil de Acesso: <span style="font-weight: bolder;">{{data.nome}}</span>
       <button
         mat-raised-button
-        color="warn"
+        color="primary"
         style="margin-left: 5px"
         [disabled]="botaoOff"
         (click)="deleteUser()"
       >
-        Deletar
+        Deletar permanentemente
       </button>
     </h3>
   </div>
 </div>
 <div mat-dialog-actions>
-  <button mat-raised-button color="primary" (click)="onNoClick()" >Cancelar</button>
+  <button mat-raised-button color="warn" (click)="onNoClick()" >Cancelar</button>
 </div>

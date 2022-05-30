@@ -26,16 +26,15 @@ export class SetoresComponent implements OnInit {
 
   openDialog(id: any, setor: any): void {
     const dialogRef = this.dialog.open(EditSetorDialog, {
-      width: '900px',
       data: { id_docu: id, nome: setor },
     });
   }
 
-  openDialog2(id: any, setor: any, qtdTotal:any): void {
+  openDialog2(id: any, setor: any, qtdTotal: any): void {
     const dialogRef = this.dialog.open(DeleteSetorDialog, {
       width: '800px',
-      height:"50%",
-      data: { id_docu: id, nome: setor , qtdTotal:qtdTotal},
+      height: '25vw',
+      data: { id_docu: id, nome: setor, qtdTotal: qtdTotal },
     });
     dialogRef.afterClosed().subscribe((result) => {
       this.carregarDadosSetores();
@@ -119,18 +118,17 @@ export class DeleteSetorDialog {
     private siscrhService: SiscrhService,
     private toastr: ToastrService
   ) {
-    if( this.data.qtdTotal > 0){
-      
+    if (this.data.qtdTotal > 0) {
       this.carregarDados();
-      this.esconderOpcao = false
-      this.botaoDeletarDisabled = true
-    }else{
-      this.esconderOpcao = true
-      this.botaoDeletarDisabled = false
+      this.esconderOpcao = false;
+      this.botaoDeletarDisabled = true;
+    } else {
+      this.esconderOpcao = true;
+      this.botaoDeletarDisabled = false;
     }
   }
-  esconderOpcao = true
-esconder = true
+  esconderOpcao = true;
+  esconder = true;
   carregarDados() {
     this.array3 = [];
     this.siscrhService.getDadosProfissionaisList().subscribe((data: any) => {
@@ -160,7 +158,6 @@ esconder = true
   array3: any = [];
   teste: any;
   setores: Setores = new Setores();
-
 
   onNoClick(): void {
     this.dialogRef.close();
@@ -236,7 +233,7 @@ esconder = true
     }
     if (count == 0) {
       this.botaoDeletarDisabled = false;
-      this.toastr.warning('', 'Vínculo poderá ser deletado!');
+      this.toastr.warning('', 'Setor poderá ser deletado!');
     } else {
       this.botaoDeletarDisabled = true;
     }
@@ -250,6 +247,7 @@ esconder = true
   }
 
   statusNull() {
+    this.disabledBotaoEBox = true;
     for (let i in this.teste) {
       this.siscrhService
         .getDadosProfissionaisByForeignKey(this.teste[i].idpessoa)
