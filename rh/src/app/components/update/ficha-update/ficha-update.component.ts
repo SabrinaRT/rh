@@ -405,6 +405,8 @@ export class FichaUpdateComponent implements OnInit {
     }
   }
 
+  
+
   EditarApagarDep = false;
   EditarApagarMat = false;
   setor: any;
@@ -414,7 +416,7 @@ export class FichaUpdateComponent implements OnInit {
     
     this.dadosProfissionais.setores = { id: this.setor };
     this.dadosProfissionais.vinculos = { id: this.vinculo };
-    this.dadosProfissionais.dadosPessoais = { id: this.IDColab };
+    this.dadosProfissionais.dadosPessoais = { id: this.IDColab};
 
     this.siscrhService
       .createDadosProfissionais(this.dadosProfissionais)

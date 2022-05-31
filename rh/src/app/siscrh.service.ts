@@ -17,6 +17,7 @@ import {
   Usuarios,
   RegistroAtividade,
   RegistroAtividadeCadastro,
+  Email,
 } from './siscrh';
 
 @Injectable({
@@ -258,10 +259,26 @@ export class SiscrhService {
       this.url + `/v27/registrosC/${id}`
     );
   }
-  /* getUsuarioUList(id:number): Observable<RegistroAtividade[]> {
-    return this.httpClient.get<RegistroAtividade[]>(
-      this.url + `/v27/registrosU/${id}`
-    );
+  
+
+
+  enviarEmailRhAtivar(id: number): Observable<DadosProfissionais> {
+    return this.httpClient.get<DadosProfissionais>(this.url + `/v30/rhAtivar/${id}`);
+  }
+  enviarEmailRhDesativar(id: number): Observable<DadosProfissionais> {
+    return this.httpClient.get<DadosProfissionais>(this.url + `/v30/rhDesativar/${id}`);
+  }
+  enviarEmailInformaticaAtivo(id: number): Observable<DadosProfissionais> {
+    return this.httpClient.get<DadosProfissionais>(this.url + `/v30/informaticaAtivo/${id}`);
+  }
+  enviarEmailInformaticaDesativo(id: number): Observable<DadosProfissionais> {
+    return this.httpClient.get<DadosProfissionais>(this.url + `/v30/informaticaDesativo/${id}`);
+  }
+
+  /*  createRegistroAtividade(
+    colaborador: RegistroAtividadeCadastro
+  ): Observable<Object> {
+    return this.httpClient.post(this.url + `/v27/registros`, colaborador);
   } */
 }
 

@@ -31,9 +31,11 @@
               <mat-option [value]="false"> Desativo </mat-option>
             </mat-select>
           </mat-form-field>
+        
           <mat-form-field
             appearance="outline"
-            style="width: 100%; font-size: 12px"
+            style="width: 100%; font-size: 12px" 
+            
           >
             <mat-label>
               <mat-icon *ngIf="acessoRede == true" style="color: green"
@@ -48,12 +50,15 @@
               matNativeControl
               [(ngModel)]="acessoRede"
               (selectionChange)="salvarStatus()"
+              [disabled]="idUser == 2"
             >
               <mat-option [value]="true"> Ativo </mat-option>
               <mat-option [value]="false"> Desativo </mat-option>
             </mat-select>
           </mat-form-field>
+          
         </mat-card-content>
+        
       </mat-card>
     </div>
     <div class="col-8">
@@ -100,13 +105,30 @@
               verificacaoEmail == false
             "
               mat-raised-button color="accent" style="font-size: 12px; height:35px;" [cdkCopyToClipboard]="mensagemCodata">
-                Fazer Solicitação de um E-Mail Institucional na Codata
+                Fazer solicitação de um E-Mail Institucional na Codata
               </button>
             </a>
         </mat-card-subtitle>
 
         <button mat-raised-button color="edit" class="col-12"  [routerLink]="['',idUser,'pdf-perfil', this.IDColab]" >
           Baixar Perfil em PDF
+        </button>
+      </mat-card>
+      <br>
+      <mat-card *ngIf="idUser == 1 || idUser == 2" style="margin-bottom: 10px;">
+        <button mat-raised-button color="warn" class="col-12" *ngIf="acessoRede == true"  (click)="enviarEmailRhDesativar()">
+          Fazer uma solicitação para desabilitar o acesso à rede
+        </button>
+        <button mat-raised-button color="success" class="col-12"  *ngIf="acessoRede == false" (click)="enviarEmailRhAtivar()">
+          Fazer uma solicitação para habilitar o acesso à rede
+        </button>
+      </mat-card>
+      <mat-card *ngIf="idUser == 1 || idUser == 3">
+        <button mat-raised-button color="success" class="col-12" *ngIf="acessoRede == true" (click)="enviarEmailInformaticaAtivo()" >
+          Informar que o(a) colaborador(a) tem o acesso à rede
+        </button>
+        <button mat-raised-button color="warn" class="col-12"  *ngIf="acessoRede == false" (click)="enviarEmailInformaticaDesativo()">
+          Informar que o(a) colaborador(a) não tem o acesso à rede
         </button>
       </mat-card>
     </div>

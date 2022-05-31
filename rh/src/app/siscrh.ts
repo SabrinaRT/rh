@@ -41,35 +41,44 @@ export class Dados {
 
 export class RegistroAtividade {
   id: any;
-  usuarioC:{
-    usuario:any
+  usuarioC: {
+    usuario: any;
   };
-  usuarioU:{
-    usuario:any
+  usuarioU: {
+    usuario: any;
   };
   data_c: any;
   data_u: any;
   dadosPessoais: {
     id: any;
-    nome_completo:any
-    cpf:any
+    nome_completo: any;
+    cpf: any;
   };
 }
 
 export class RegistroAtividadeCadastro {
   id: any;
-  usuarioC:{
-    id:any
+  usuarioC: {
+    id: any;
   };
-  usuarioU:{
-    id:any
+  usuarioU: {
+    id: any;
   };
   data_c: any;
   data_u: any;
   dadosPessoais: {
     id: any;
-
   };
+}
+
+export class Email {
+/*   cargo: any; */
+  dadosPessoais: {
+    nome_completo: any;
+  };
+  /* setores: {
+    setor: any;
+  }; */
 }
 
 export class Usuarios {

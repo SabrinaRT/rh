@@ -421,6 +421,19 @@ idUser:any
   EditarApagarMat = false;
   mensagemFinal: any;
 
+
+  
+  enviarEmail(){
+    this.toastr.warning('Estamos enviando a solicitação para a equipe GINF...', 'Aguarde!');
+    this.siscrhService.enviarEmailRhAtivar(this.IDColab).subscribe((data:any)=>{
+    this.toastr.success('Solicitação enviada com sucesso!', 'Atenção!');
+    },
+    (error) => {
+      console.log('error', error);
+      this.showWarn();
+    })
+  }
+
   gerarMensagemFinal() {
     let NomeEsplitado = this.dadosPessoais.nome_completo.split(' ');
     let UltimoNome = NomeEsplitado[NomeEsplitado.length - 1];
@@ -433,7 +446,6 @@ idUser:any
     for (let index in this.setores) {
       if (this.setores[index].id == this.setor) {
         setorDefinido = this.setores[index].setor;
-        console.log(setorDefinido);
       }
     }
     this.mensagemFinal =
@@ -630,7 +642,7 @@ idUser:any
       this.dadosProfissionais.vinculos = { id: this.vinculo };
     }
 
-    this.dadosProfissionais.dadosPessoais = { id: this.IDColab };
+    this.dadosProfissionais.dadosPessoais = { id: this.IDColab};
 
     this.siscrhService
       .createDadosProfissionais(this.dadosProfissionais)

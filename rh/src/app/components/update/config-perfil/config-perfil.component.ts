@@ -87,4 +87,48 @@ salvarStatus(){
   })
 }
 
+enviarEmailRhDesativar(){
+  this.toastr.warning('Estamos enviando a solicitação para a equipe GINF...', 'Aguarde!');
+  this.siscrhService.enviarEmailRhDesativar(this.IDColab).subscribe((data:any)=>{
+  this.toastr.success('Solicitação enviada com sucesso!', 'Atenção!');
+  },
+  (error) => {
+    console.log('error', error);
+    this.toastr.error('Houve algum erro!', 'Erro!');
+  })
+}
+
+enviarEmailRhAtivar(){
+  this.toastr.warning('Estamos enviando a solicitação para a equipe GINF...', 'Aguarde!');
+  this.siscrhService.enviarEmailRhAtivar(this.IDColab).subscribe((data:any)=>{
+  this.toastr.success('Solicitação enviada com sucesso!', 'Atenção!');
+  },
+  (error) => {
+    console.log('error', error);
+    this.toastr.error('Houve algum erro!', 'Erro!');
+  })
+}
+
+enviarEmailInformaticaAtivo(){
+  this.toastr.warning('Estamos enviando enviando o e-mail...', 'Aguarde!');
+  this.siscrhService.enviarEmailInformaticaAtivo(this.IDColab).subscribe((data:any)=>{
+  this.toastr.success('E-Mail enviado com sucesso!', 'Atenção!');
+  },
+  (error) => {
+    console.log('error', error);
+    this.toastr.error('Houve algum erro!', 'Erro!');
+  })
+}
+
+enviarEmailInformaticaDesativo(){
+  this.toastr.warning('Estamos enviando o e-mail...', 'Aguarde!');
+  this.siscrhService.enviarEmailInformaticaDesativo(this.IDColab).subscribe((data:any)=>{
+  this.toastr.success('E-Mail enviado com sucesso!', 'Atenção!');
+  },
+  (error) => {
+    console.log('error', error);
+    this.toastr.error('Houve algum erro!', 'Erro!');
+  })
+}
+
 }

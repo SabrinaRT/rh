@@ -1,15 +1,16 @@
 package pb.prev.rhback.controller;
 
-import javax.mail.MessagingException;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.context.event.ApplicationReadyEvent;
-import org.springframework.context.event.EventListener;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import pb.prev.rhback.Service.EmailSenderService;
+import pb.prev.rhback.exception.ResourceNotFoundException;
+import pb.prev.rhback.model.DadosPessoais;
 import pb.prev.rhback.model.DadosProfissionais;
+import pb.prev.rhback.repository.DadosPessoaisRepository;
+import pb.prev.rhback.repository.DadosProfissionaisRepository;
 
 @CrossOrigin(origins = "${servidor-porta}")
 @RestController
@@ -17,61 +18,102 @@ import pb.prev.rhback.model.DadosProfissionais;
 public class EmailController {
 
     @Autowired
-	private EmailSenderService senderService;
+    private EmailSenderService senderService;
 
     @Value("${email.informatica}")
-	private String email_informatica;
+    private String email_informatica;
     @Value("${email.rh}")
-	private String rh;
+    private String rh;
 
-    @GetMapping("/rhAtivar")
-	public DadosProfissionais triggerMail(@RequestBody DadosProfissionais documentos)  {
-		senderService.sendSimpleEmail(email_informatica,
-        "Atenção! SISCOGEP Informa!",
-                "Por gentileza, criar conta no nosso sistema com as seguintes informações: \n"+
-				"Nome Completo: " + documentos.getDadosPessoais().getNome_completo().toString() +"\n"+
-                "Cargo: " + documentos.getCargo() +"\n"+
-                "Setor: " + documentos.getSetores().getSetor().toString()
-                );
-                return documentos;
+    @Autowired
+    private DadosProfissionaisRepository dadosProfissionaisRepository;
 
-	}
+    @Autowired
+    private DadosPessoaisRepository dadosPessoaisRepository;
 
-     @GetMapping("/rhDesativar")
-	public DadosProfissionais triggerMail2(@RequestBody DadosProfissionais documentos)  {
-		senderService.sendSimpleEmail(email_informatica,
-        "Atenção! SISCOGEP Informa!",
-                "Por gentileza, desativar a conta no nosso sistema do(a) colaborador(a): \n"+
-				"Nome Completo: " + documentos.getDadosPessoais().getNome_completo().toString() +"\n"+
-                "Cargo: " + documentos.getCargo() +"\n"+
-                "Setor: " + documentos.getSetores().getSetor().toString()
-                );
-                return documentos;
+    @GetMapping("/rhAtivar/{id}")
+    public ResponseEntity<DadosProfissionais> triggerMail(@PathVariable Long id) {
+        DadosProfissionais dadosProfissionais = dadosProfissionaisRepository.findByDadosPessoais_Id(id);
 
-	}
+        String cargo;
+        String setor;
 
-    @GetMapping("/informaticaAtivo")
-	public DadosProfissionais triggerMail3(@RequestBody DadosProfissionais documentos)  {
-		senderService.sendSimpleEmail(rh,
-        "Atenção! SISCOGEP Informa!",
-                "O usuário do(a) colaborador(a), "+documentos.getDadosPessoais().getNome_completo().toString()+", está disponível no sistema!"
-                );
-                return documentos;
+        if (dadosProfissionais.getCargo() == null) {
+            cargo = "Não Definido";
+            System.out.print("null");
+        } else {
+            cargo = dadosProfissionais.getCargo();
+        }
+        if (dadosProfissionais.getSetores() == null) {
+            setor = "Não Definido";
+            System.out.print("null");
+        } else {
+            setor = dadosProfissionais.getSetores().getSetor().toString();
+        }
+        senderService.sendSimpleEmail(email_informatica,
+                "Atenção! SISCOGEP Informa!",
+                "Por gentileza, criar conta no nosso sistema com as seguintes informações: \n" +
+                        "Nome Completo: " + dadosProfissionais.getDadosPessoais().getNome_completo().toString() + "\n" +
+                        "Cargo: " + cargo + "\n" +
+                        "Setor: " + setor);
+        return ResponseEntity.ok(dadosProfissionais);
+    }
 
-	}
+    @GetMapping("/rhDesativar/{id}")
+    public ResponseEntity<DadosProfissionais> triggerMail2(@PathVariable Long id) {
+        DadosProfissionais dadosProfissionais = dadosProfissionaisRepository.findByDadosPessoais_Id(id);
+        String cargo;
+        String setor;
+        if (dadosProfissionais.getCargo() == null) {
+            cargo = "Não Definido";
+            System.out.print("null");
+        } else {
+            cargo = dadosProfissionais.getCargo();
+        }
+        if (dadosProfissionais.getSetores() == null) {
+            setor = "Não Definido";
+            System.out.print("null");
+        } else {
+            setor = dadosProfissionais.getSetores().getSetor().toString();
+        }
+        senderService.sendSimpleEmail(email_informatica,
+                "Atenção! SISCOGEP Informa!",
+                "Por gentileza, desativar a conta no nosso sistema do(a) colaborador(a): \n" +
+                        "Nome Completo: " + dadosProfissionais.getDadosPessoais().getNome_completo().toString()
+                        + "\n" +
+                        "Cargo: " + dadosProfissionais.getCargo() + "\n" +
+                        "Setor: " + dadosProfissionais.getSetores().getSetor().toString());
 
-    @GetMapping("/informaticaDesativo")
-	public DadosProfissionais triggerMail4(@RequestBody DadosProfissionais documentos)  {
-		senderService.sendSimpleEmail(rh,
-        "Atenção! SISCOGEP Informa!",
-                "O usuário do(a) colaborador(a), "+documentos.getDadosPessoais().getNome_completo().toString()+", foi desativado!"
-                );
-                return documentos;
+        return ResponseEntity.ok(dadosProfissionais);
 
-	}
+    }
 
+    @GetMapping("/informaticaAtivo/{id}")
+    public ResponseEntity<DadosPessoais> triggerMail3(@PathVariable Long id) {
+        DadosPessoais dadosPessoais = dadosPessoaisRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("DadosPessoais not exist with id: " + id));
+        if (dadosPessoais.getNome_completo().toString() != null) {
+            senderService.sendSimpleEmail(email_informatica,
+                    "Atenção! SISCOGEP Informa!",
+                    "O usuário do(a) colaborador(a), "
+                            + dadosPessoais.getNome_completo().toString()
+                            + ", está disponível no sistema!");
+        }
+        return ResponseEntity.ok(dadosPessoais);
+    }
 
+    @GetMapping("/informaticaDesativo/{id}")
+    public ResponseEntity<DadosPessoais> triggerMail4(@PathVariable Long id) {
+        DadosPessoais dadosPessoais = dadosPessoaisRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("DadosPessoais not exist with id: " + id));
+        if (dadosPessoais.getNome_completo().toString() != null) {
+            senderService.sendSimpleEmail(email_informatica,
+                    "Atenção! SISCOGEP Informa!",
+                    "O usuário do(a) colaborador(a), "
+                            + dadosPessoais.getNome_completo().toString()
+                            + ", foi desativado!");
+        }
+        return ResponseEntity.ok(dadosPessoais);
+    }
 
-
-    
 }
