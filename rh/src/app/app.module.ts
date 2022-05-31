@@ -78,7 +78,7 @@ import { DeleteUsuarioDialog, EditUsuarioDialog, ListaUsuariosComponent } from '
     LoginComponent,
     ListaUsuariosComponent,
     DeleteUsuarioDialog,
-    EditUsuarioDialog
+    EditUsuarioDialog,
     
   ],
   imports: [
