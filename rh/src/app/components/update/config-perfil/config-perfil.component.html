@@ -125,10 +125,10 @@
       </mat-card>
       <mat-card *ngIf="idUser == 1 || idUser == 3">
         <button mat-raised-button color="success" class="col-12" *ngIf="acessoRede == true" (click)="enviarEmailInformaticaAtivo()" >
-          Informar que o(a) colaborador(a) tem o acesso à rede
+          Informar que o usuário do(a) colaborador(a) foi habilitado da rede interna
         </button>
         <button mat-raised-button color="warn" class="col-12"  *ngIf="acessoRede == false" (click)="enviarEmailInformaticaDesativo()">
-          Informar que o(a) colaborador(a) não tem o acesso à rede
+          Informar que o usuário do(a) colaborador(a) foi desabilitado da rede interna
         </button>
       </mat-card>
     </div>
