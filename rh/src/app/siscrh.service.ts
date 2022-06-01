@@ -27,15 +27,13 @@ import {
 export class SiscrhService {
   constructor(private httpClient: HttpClient) {}
 
-  
-
   url: any = 'http://localhost:8080/api';
+  url2: any = 'http://localhost:8080';
 
   getCEP(cep: String): Observable<CEP> {
     return this.httpClient.get<CEP>(`https://viacep.com.br/ws/${cep}/json`);
   }
-  /*   url:any = "http://10.83.1.2:8080/gprevback/api" */
- 
+
   getColaboradorList(): Observable<DadosPessoais[]> {
     return this.httpClient.get<DadosPessoais[]>(this.url + `/v1/dados`);
   }
@@ -73,12 +71,6 @@ export class SiscrhService {
     );
   }
 
-  /*  getDocumentosColaboradorByForeignKey(id: number): Observable<DocumentosColaboradores> {
-    return this.httpClient.get<DocumentosColaboradores>(
-      this.url + `/v27/dados/${id}`
-    );
-  } */
-
   getDocumentosColaboradorByForeignKey(
     id: number
   ): Observable<DocumentosColaboradores[]> {
@@ -100,23 +92,16 @@ export class SiscrhService {
   }
 
   createArquivo(formData: FormData, id: number): Observable<Object> {
-    return this.httpClient.post(`http://localhost:8080/fotos/${id}`, formData);
+    return this.httpClient.post(this.url + `/fotos/${id}`, formData);
   }
   downloadArquivo(id: any, nome: any) {
-    window.location.href = `http://localhost:8080/fotos/download/${id}/${nome}`;
+    window.location.href = this.url +`/fotos/download/${id}/${nome}`;
   }
 
- /*  deleteArquivo(id: any, idDocu: any) {
-    return this.httpClient
-      .get(`http://localhost:8080/fotos/delete/${id}/${idDocu}`)
-      .subscribe((resultado: any) => console.log(resultado));
-  } */
-
   deleteArquivo(id: any, idDocu: any) {
-   
-      return this.httpClient.get<DocumentosColaboradores[]>(
-       `http://localhost:8080/fotos/delete/${id}/${idDocu}`
-      );
+    return this.httpClient.get<DocumentosColaboradores[]>(
+      this.url +`/fotos/delete/${id}/${idDocu}`
+    );
   }
 
   getDependentesByForeignKey(id: number): Observable<Dependentes> {
@@ -144,15 +129,6 @@ export class SiscrhService {
       (error: any) => console.log(error)
     );
   }
-
- /*  deleteDocumentoColaborador(id: number, idDocu:number) {
-    this.httpClient.delete(this.url + `/v27/dados/${id}/${idDocu}`).subscribe(
-      (data) => {
-        console.log(data);
-      },
-      (error: any) => console.log(error)
-    );
-  } */
 
   deleteSetores(id: number) {
     this.httpClient.delete(this.url + `/v10/dados/${id}`).subscribe(
@@ -216,25 +192,20 @@ export class SiscrhService {
     return this.httpClient.post(this.url + `/v27/dados`, colaborador);
   }
 
-
-  createUsuario(
-    colaborador: Usuarios
-  ): Observable<Object> {
+  createUsuario(colaborador: Usuarios): Observable<Object> {
     return this.httpClient.post(this.url + `/v2/usuarios`, colaborador);
   }
 
   getUsuarioList(): Observable<Usuarios[]> {
-    return this.httpClient.get<Usuarios[]>(
-      this.url + `/v2/usuarios`
-    );
+    return this.httpClient.get<Usuarios[]>(this.url + `/v2/usuarios`);
   }
 
   deleteUsuario(id: number) {
-    return  this.httpClient.delete(this.url + `/v2/usuarios/${id}`).subscribe(
+    return this.httpClient.delete(this.url + `/v2/usuarios/${id}`).subscribe(
       (data) => {
         console.log(data);
       },
-      (error: any) =>  console.log(error)
+      (error: any) => console.log(error)
     );
   }
 
@@ -250,19 +221,27 @@ export class SiscrhService {
     return this.httpClient.post(this.url + `/v27/registros`, colaborador);
   }
 
-  getRegistroAtividadeByForeignKey(id: number): Observable<RegistroAtividadeCadastro> {
-    return this.httpClient.get<RegistroAtividadeCadastro>(this.url + `/v27/registros/${id}`);
+  getRegistroAtividadeByForeignKey(
+    id: number
+  ): Observable<RegistroAtividadeCadastro> {
+    return this.httpClient.get<RegistroAtividadeCadastro>(
+      this.url + `/v27/registros/${id}`
+    );
   }
 
-  verificarUser(usuario: any, senha:any): Observable<Usuarios> {
-    return this.httpClient.get<Usuarios>(this.url + `/v2/usuarios2/usuario=${usuario}&senha=${senha}`);
+  verificarUser(usuario: any, senha: any): Observable<Usuarios> {
+    return this.httpClient.get<Usuarios>(
+      this.url + `/v2/usuarios2/usuario=${usuario}&senha=${senha}`
+    );
   }
 
   getUsuarioById(id: number): Observable<Usuarios> {
     return this.httpClient.get<Usuarios>(this.url + `/v2/usuarios/${id}`);
   }
 
-  getUsuarioCAndUsuarioUListById(id:number): Observable<RegistroAtividadeCadastro[]> {
+  getUsuarioCAndUsuarioUListById(
+    id: number
+  ): Observable<RegistroAtividadeCadastro[]> {
     return this.httpClient.get<RegistroAtividadeCadastro[]>(
       this.url + `/v27/registrosC/${id}`
     );
@@ -280,48 +259,40 @@ export class SiscrhService {
     );
   }
 
- 
-
-
   uploadLogo(formData: FormData): Observable<Object> {
-    return this.httpClient.post(`http://localhost:8080/configuracao/upload`, formData);
+    return this.httpClient.post(this.url2 +
+      `/configuracao/upload`,
+      formData
+    );
   }
   downloadLogo() {
-    window.location.href = `http://localhost:8080/configuracao/download`;
+    window.location.href = this.url2 +`/configuracao/download`;
   }
 
   deleteLogo() {
-    /* return this.httpClient
-      .get<ConfiguracaoSistema[]>(`http://localhost:8080/configuracao/delete`)
-      .subscribe((resultado: any) => console.log(resultado)
-      
-      ); */
-
-      return this.httpClient.get<ConfiguracaoSistema[]>(
-       `http://localhost:8080/configuracao/delete`
-      );
+    return this.httpClient.get<ConfiguracaoSistema[]>(
+      this.url2 +`/configuracao/delete`
+    );
   }
-
-  
 
   enviarEmailRhAtivar(id: number): Observable<DadosProfissionais> {
-    return this.httpClient.get<DadosProfissionais>(this.url + `/v30/rhAtivar/${id}`);
+    return this.httpClient.get<DadosProfissionais>(
+      this.url + `/v30/rhAtivar/${id}`
+    );
   }
   enviarEmailRhDesativar(id: number): Observable<DadosProfissionais> {
-    return this.httpClient.get<DadosProfissionais>(this.url + `/v30/rhDesativar/${id}`);
+    return this.httpClient.get<DadosProfissionais>(
+      this.url + `/v30/rhDesativar/${id}`
+    );
   }
   enviarEmailInformaticaAtivo(id: number): Observable<DadosProfissionais> {
-    return this.httpClient.get<DadosProfissionais>(this.url + `/v30/informaticaAtivo/${id}`);
+    return this.httpClient.get<DadosProfissionais>(
+      this.url + `/v30/informaticaAtivo/${id}`
+    );
   }
   enviarEmailInformaticaDesativo(id: number): Observable<DadosProfissionais> {
-    return this.httpClient.get<DadosProfissionais>(this.url + `/v30/informaticaDesativo/${id}`);
+    return this.httpClient.get<DadosProfissionais>(
+      this.url + `/v30/informaticaDesativo/${id}`
+    );
   }
-
-
-  
- 
 }
-
-
-
-
