@@ -7,29 +7,57 @@
       </mat-form-field>
     </div>
     <div class="col-4">
-        <mat-form-field appearance="outline" class="col-12">
-          <mat-label>Logo da Instituição</mat-label>
-          <input matInput [(ngModel)]="configuracao.logo_instituicao"  />
-        </mat-form-field>
-      </div>
-      <div class="col-1" style="margin-top: 12px" *ngIf=" configuracao.logo_instituicao == null ">
-        <button mat-raised-button color="primary" class="col-12" (click)=" uploadLogo()">
-          <mat-icon>upload_file</mat-icon>
-        </button>
-      </div>
-      <div class="col-1" style="margin-top: 12px" *ngIf=" configuracao.logo_instituicao != null ">
-        <button mat-raised-button color="edit" class="col-12" >
-          <mat-icon>download_file</mat-icon>
-        </button>
-      </div>
-      <div class="col-1" style="margin-top: 12px" *ngIf=" configuracao.logo_instituicao != null ">
-        <button mat-raised-button color="warn" class="col-12" (click)="deletarLogo()">
-          <mat-icon>delete</mat-icon>
-        </button>
-      </div>
+      <mat-form-field appearance="outline" class="col-12">
+        <mat-label>Logo da Instituição</mat-label>
+        <input matInput [(ngModel)]="configuracao.logo_instituicao" disabled />
+      </mat-form-field>
+    </div>
+    <div
+      class="col-2"
+      style="margin-top: 12px"
+      *ngIf="configuracao.logo_instituicao == null"
+    >
+      <button
+        mat-raised-button
+        color="primary"
+        class="col-12"
+        (click)="fileUpload.click()"
+      >
+        <mat-icon>upload_file</mat-icon>
+      </button>
+
+      <input
+        #fileUpload
+        type="file"
+        (change)="upload($event)"
+        style="display: none"
+      />
+    </div>
+    <div
+      class="col-1"
+      style="margin-top: 12px"
+      *ngIf="configuracao.logo_instituicao != null"
+    >
+      <button mat-raised-button color="edit" class="col-12" (click)="downloadLogo()">
+        <mat-icon>download_file</mat-icon>
+      </button>
+    </div>
+    <div
+      class="col-1"
+      style="margin-top: 12px"
+      *ngIf="configuracao.logo_instituicao != null"
+    >
+      <button
+        mat-raised-button
+        color="warn"
+        class="col-12"
+        (click)="deletarLogo()"
+      >
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
   </div>
 
- 
   <div class="row">
     <div class="col-6">
       <mat-form-field appearance="outline" class="col-12">
@@ -40,19 +68,24 @@
     <div class="col-6">
       <mat-form-field appearance="outline" class="col-12">
         <mat-label>E-Mail do Recursos Humanos</mat-label>
-        <input matInput [(ngModel)]="configuracao.email_rh"/>
+        <input matInput [(ngModel)]="configuracao.email_rh" />
       </mat-form-field>
     </div>
   </div>
-  <div class="row">
-    
-  </div>
+  <div class="row"></div>
   <br />
 
   <div class="row">
     <div class="col-10"></div>
     <div class="col-2">
-      <button mat-raised-button color="primary" class="col-12" (click)="salvarConfiguracao()">Salvar</button>
+      <button
+        mat-raised-button
+        color="primary"
+        class="col-12"
+        (click)="salvarConfiguracao()"
+      >
+        Salvar
+      </button>
     </div>
     <br />
   </div>

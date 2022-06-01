@@ -9,6 +9,10 @@ import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import pb.prev.rhback.exception.ResourceNotFoundException;
+import pb.prev.rhback.model.ConfiguracaoSistema;
+import pb.prev.rhback.repository.ConfiguracaoSistemaRepository;
+
 @CrossOrigin(origins = "${servidor-porta}")
 @RestController
 @RequestMapping("/configuracao")
@@ -20,14 +24,23 @@ public class FotosResourceConfiguracao {
 	@Value("${contato.disco.raiz.logo}/${contato.disco.diretorio.logo}/")
 	private String diretorioFotos;
 
-	@PostMapping("/{id}")
-	public void upload(@RequestParam MultipartFile foto, @PathVariable Long id) {
-		disco.salvarFoto(foto, id);
+	@Autowired
+	private ConfiguracaoSistemaRepository configuracaoSistemaRepository;
+
+	@PostMapping("/upload")
+	public void upload(@RequestParam MultipartFile foto) {
+
+		disco.salvarFoto(foto, Long.valueOf(1));
 	}
 
-	@GetMapping("/download/{id}/{nome}")
-	public ResponseEntity<Object> downloadFile(@PathVariable Long id, @PathVariable String nome) throws IOException {
-		String filename = diretorioFotos + id + "/" + nome;
+	@GetMapping("/download")
+	public ResponseEntity<Object> downloadFile() throws IOException {
+
+		ConfiguracaoSistema configuracaoSistema = configuracaoSistemaRepository.findById(Long.valueOf(1))
+				.orElseThrow(() -> new ResourceNotFoundException("ConfiguracaoSistema not exist with id: " + 1));
+
+		String filename = diretorioFotos + configuracaoSistema.getId() + "/"
+				+ configuracaoSistema.getLogo_instituicao();
 		File file = new File(filename);
 		InputStreamResource resource = new InputStreamResource(new FileInputStream(file));
 
@@ -45,12 +58,22 @@ public class FotosResourceConfiguracao {
 		return responseEntity;
 	}
 
-	@GetMapping("/delete/{id}/{nome}")
-	private void deleteBook(@PathVariable Long id, @PathVariable String nome) {
-		String filename = diretorioFotos + id + "/" + nome;
+	@GetMapping("/delete")
+	private ResponseEntity<ConfiguracaoSistema> deleteBook() {
+
+		ConfiguracaoSistema configuracaoSistema = configuracaoSistemaRepository.findById(Long.valueOf(1))
+				.orElseThrow(() -> new ResourceNotFoundException("ConfiguracaoSistema not exist with id: " + 1));
+
+		String filename = diretorioFotos + configuracaoSistema.getId() + "/"
+				+ configuracaoSistema.getLogo_instituicao();
 		File file = new File(filename);
 		file.delete();
+		configuracaoSistema.setLogo_instituicao(null);
+		 configuracaoSistemaRepository.save(configuracaoSistema);
+		return ResponseEntity.ok(configuracaoSistema);
+		
 	}
+
 	
 
 }

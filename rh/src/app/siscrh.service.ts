@@ -273,7 +273,29 @@ export class SiscrhService {
     );
   }
 
+ 
 
+
+  uploadLogo(formData: FormData): Observable<Object> {
+    return this.httpClient.post(`http://localhost:8080/configuracao/upload`, formData);
+  }
+  downloadLogo() {
+    window.location.href = `http://localhost:8080/configuracao/download`;
+  }
+
+  deleteLogo() {
+    /* return this.httpClient
+      .get<ConfiguracaoSistema[]>(`http://localhost:8080/configuracao/delete`)
+      .subscribe((resultado: any) => console.log(resultado)
+      
+      ); */
+
+      return this.httpClient.get<ConfiguracaoSistema[]>(
+       `http://localhost:8080/configuracao/delete`
+      );
+  }
+
+  
 
   enviarEmailRhAtivar(id: number): Observable<DadosProfissionais> {
     return this.httpClient.get<DadosProfissionais>(this.url + `/v30/rhAtivar/${id}`);
