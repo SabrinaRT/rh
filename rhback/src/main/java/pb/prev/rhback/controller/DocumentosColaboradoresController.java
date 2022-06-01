@@ -34,11 +34,5 @@ public class DocumentosColaboradoresController {
 		return documentosColaboradoresRepository.findByDadosPessoais_Id(id);
 	}
 
-	@DeleteMapping("/dados/{id}")  
-	private void deleteBook(@PathVariable("id") Long id)   
-	{  
-		
-
-		documentosColaboradoresRepository.deleteById(id);
-	} 
+	
 }

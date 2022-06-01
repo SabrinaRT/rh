@@ -350,8 +350,6 @@ idUser:any
 
   deleteDocu(id: any, nome: any) {
     this.siscrhService.deleteArquivo(this.IDColab,id);
-   
-
   }
 
   deleteArquivo(id: any) {
@@ -365,10 +363,7 @@ idUser:any
   
   }
 
-  /* delete(idDocumento: any) {
-    this.siscrhService.deleteDocumentoColaborador(idDocumento);
-  }
- */
+ 
   datemask = [/\d/, /\d/, '/', /\d/, /\d/, '/', /\d/, /\d/, /\d/, /\d/];
   cpfmask = [
     /\d/,

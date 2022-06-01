@@ -49,7 +49,6 @@ public class FotosResource {
 		ResponseEntity<Object> responseEntity = ResponseEntity.ok().headers(headers)
 				.contentLength(file.length())
 				.contentType(MediaType.parseMediaType("application/txt")).body(resource);
-
 		return responseEntity;
 	}
 
