@@ -10,7 +10,7 @@ import pb.prev.rhback.exception.ResourceNotFoundException;
 import pb.prev.rhback.model.DadosPessoais;
 import pb.prev.rhback.model.DadosProfissionais;
 import pb.prev.rhback.repository.DadosPessoaisRepository;
-import pb.prev.rhback.repository.DadosProfissionaisRepository;  
+import pb.prev.rhback.repository.DadosProfissionaisRepository;
 
 @CrossOrigin(origins = "${servidor-porta}")
 @RestController
@@ -81,8 +81,8 @@ public class EmailController {
                 "Por gentileza, desativar a conta no nosso sistema do(a) colaborador(a): \n" +
                         "Nome Completo: " + dadosProfissionais.getDadosPessoais().getNome_completo().toString()
                         + "\n" +
-                        "Cargo: " + dadosProfissionais.getCargo() + "\n" +
-                        "Setor: " + dadosProfissionais.getSetores().getSetor().toString());
+                        "Cargo: " + cargo + "\n" +
+                        "Setor: " + setor);
 
         return ResponseEntity.ok(dadosProfissionais);
 
