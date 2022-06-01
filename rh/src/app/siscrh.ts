@@ -205,6 +205,13 @@ export class DadosProfissionais {
   };
 }
 
+export class ConfiguracaoSistema{
+   email_informatica:any;
+     email_rh:any;
+     nome_instituicao:any;
+     logo_instituicao:any;
+}
+
 export class DocumentosColaboradores {
   id: any;
   nome: any;

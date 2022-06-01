@@ -48,6 +48,7 @@ import { RegistroAtividadeComponent } from './components/config/registro-ativida
 import { LoginComponent } from './components/login/login.component';
 import { SearchfilterPipe2 } from './searchfilter2.pipe';
 import { DeleteUsuarioDialog, EditUsuarioDialog, ListaUsuariosComponent } from './components/config/lista-usuarios/lista-usuarios.component';
+import { ConfiguracaoSistemaComponent } from './components/config/configuracao-sistema/configuracao-sistema.component';
 
 @NgModule({
   declarations: [
@@ -79,6 +80,7 @@ import { DeleteUsuarioDialog, EditUsuarioDialog, ListaUsuariosComponent } from '
     ListaUsuariosComponent,
     DeleteUsuarioDialog,
     EditUsuarioDialog,
+    ConfiguracaoSistemaComponent,
     
   ],
   imports: [

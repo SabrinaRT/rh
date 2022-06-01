@@ -10,7 +10,7 @@ import pb.prev.rhback.exception.ResourceNotFoundException;
 import pb.prev.rhback.model.DadosPessoais;
 import pb.prev.rhback.model.DadosProfissionais;
 import pb.prev.rhback.repository.DadosPessoaisRepository;
-import pb.prev.rhback.repository.DadosProfissionaisRepository;
+import pb.prev.rhback.repository.DadosProfissionaisRepository;  
 
 @CrossOrigin(origins = "${servidor-porta}")
 @RestController

@@ -11,13 +11,13 @@ import org.springframework.web.multipart.MultipartFile;
 
 @CrossOrigin(origins = "${servidor-porta}")
 @RestController
-@RequestMapping("/fotos")
-public class FotosResource {
+@RequestMapping("/configuracao")
+public class FotosResourceConfiguracao {
 
 	@Autowired
-	private Disco disco;
+	private DiscoConfiguracao disco;
 
-	@Value("${contato.disco.raiz}/${contato.disco.diretorio-fotos}/")
+	@Value("${contato.disco.raiz.logo}/${contato.disco.diretorio.logo}/")
 	private String diretorioFotos;
 
 	@PostMapping("/{id}")

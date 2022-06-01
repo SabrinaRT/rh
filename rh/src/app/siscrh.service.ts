@@ -18,6 +18,7 @@ import {
   RegistroAtividade,
   RegistroAtividadeCadastro,
   Email,
+  ConfiguracaoSistema,
 } from './siscrh';
 
 @Injectable({
@@ -259,7 +260,19 @@ export class SiscrhService {
       this.url + `/v27/registrosC/${id}`
     );
   }
-  
+
+  salvarConfiguracaoSistema(
+    colaborador: ConfiguracaoSistema
+  ): Observable<Object> {
+    return this.httpClient.post(this.url + `/v31/configuracao`, colaborador);
+  }
+
+  getConfiguracaoSistema(): Observable<ConfiguracaoSistema[]> {
+    return this.httpClient.get<ConfiguracaoSistema[]>(
+      this.url + `/v31/configuracao`
+    );
+  }
+
 
 
   enviarEmailRhAtivar(id: number): Observable<DadosProfissionais> {
@@ -275,11 +288,9 @@ export class SiscrhService {
     return this.httpClient.get<DadosProfissionais>(this.url + `/v30/informaticaDesativo/${id}`);
   }
 
-  /*  createRegistroAtividade(
-    colaborador: RegistroAtividadeCadastro
-  ): Observable<Object> {
-    return this.httpClient.post(this.url + `/v27/registros`, colaborador);
-  } */
+
+  
+ 
 }
 
 

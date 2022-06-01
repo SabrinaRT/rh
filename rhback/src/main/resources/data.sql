@@ -1,3 +1,5 @@
+ INSERT IGNORE INTO `configuracao_sistema`(`id`) VALUES 
+ (1);
 INSERT IGNORE INTO `setores`(`id`, `setor`) VALUES 
 (1,'Arquivo Geral'),
 (2,'Atendimento'),

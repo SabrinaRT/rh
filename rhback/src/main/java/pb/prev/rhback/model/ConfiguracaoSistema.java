@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "configuracao_sistema")
-public class ConfiguraçaoSistema {
+public class ConfiguracaoSistema {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -13,7 +13,7 @@ public class ConfiguraçaoSistema {
     private String email_informatica;
     private String email_rh;
     private String nome_instituicao;
-    private String logo_instintuicao;
+    private String logo_instituicao;
 
     public String getEmail_informatica() {
         return this.email_informatica;
@@ -39,12 +39,12 @@ public class ConfiguraçaoSistema {
         this.nome_instituicao = nome_instituicao;
     }
 
-    public String getLogo_instintuicao() {
-        return this.logo_instintuicao;
+    public String getLogo_instituicao() {
+        return this.logo_instituicao;
     }
 
-    public void setLogo_instintuicao(String logo_instintuicao) {
-        this.logo_instintuicao = logo_instintuicao;
+    public void setLogo_instituicao(String logo_instituicao) {
+        this.logo_instituicao = logo_instituicao;
     }
 
     public long getId() {
@@ -55,15 +55,15 @@ public class ConfiguraçaoSistema {
         this.id = id;
     }
 
-    public ConfiguraçaoSistema(String email_informatica, String email_rh, String nome_instituicao,
-            String logo_instintuicao) {
+    public ConfiguracaoSistema(String email_informatica, String email_rh, String nome_instituicao,
+            String logo_instituicao) {
         this.email_informatica = email_informatica;
         this.email_rh = email_rh;
         this.nome_instituicao = nome_instituicao;
-        this.logo_instintuicao = logo_instintuicao;
+        this.logo_instituicao = logo_instituicao;
     }
 
-    public ConfiguraçaoSistema() {
+    public ConfiguracaoSistema() {
     }
 
 }
