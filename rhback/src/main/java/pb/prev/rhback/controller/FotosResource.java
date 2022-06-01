@@ -2,12 +2,17 @@ package pb.prev.rhback.controller;
 
 import java.io.*;
 import java.io.IOException;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+
+import pb.prev.rhback.exception.ResourceNotFoundException;
+import pb.prev.rhback.model.DocumentosColaboradores;
+import pb.prev.rhback.repository.DocumentosColaboradoresRepository;
 
 @CrossOrigin(origins = "${servidor-porta}")
 @RestController
@@ -19,6 +24,9 @@ public class FotosResource {
 
 	@Value("${contato.disco.raiz}/${contato.disco.diretorio-fotos}/")
 	private String diretorioFotos;
+
+	@Autowired
+	private DocumentosColaboradoresRepository documentosColaboradoresRepository;
 
 	@PostMapping("/{id}")
 	public void upload(@RequestParam MultipartFile foto, @PathVariable Long id) {
@@ -45,11 +53,18 @@ public class FotosResource {
 		return responseEntity;
 	}
 
-	@GetMapping("/delete/{id}/{nome}")
-	private void deleteBook(@PathVariable Long id, @PathVariable String nome) {
-		String filename = diretorioFotos + id + "/" + nome;
+	@GetMapping("/delete/{id}/{idDocu}")
+	private List<DocumentosColaboradores> deleteBook(@PathVariable Long id, @PathVariable Long idDocu) {
+
+		DocumentosColaboradores configuracaoSistema = documentosColaboradoresRepository.findById(idDocu)
+				.orElseThrow(() -> new ResourceNotFoundException("ConfiguracaoSistema not exist with id: " + idDocu));
+
+		String filename = diretorioFotos + id + "/" + configuracaoSistema.getNome_documento_upload();
 		File file = new File(filename);
 		file.delete();
+		documentosColaboradoresRepository.deleteById(idDocu);
+
+		return documentosColaboradoresRepository.findByDadosPessoais_Id(id);
 	}
 	
 

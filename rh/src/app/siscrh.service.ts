@@ -106,10 +106,17 @@ export class SiscrhService {
     window.location.href = `http://localhost:8080/fotos/download/${id}/${nome}`;
   }
 
-  deleteArquivo(id: any, nome: any) {
+ /*  deleteArquivo(id: any, idDocu: any) {
     return this.httpClient
-      .get(`http://localhost:8080/fotos/delete/${id}/${nome}`)
+      .get(`http://localhost:8080/fotos/delete/${id}/${idDocu}`)
       .subscribe((resultado: any) => console.log(resultado));
+  } */
+
+  deleteArquivo(id: any, idDocu: any) {
+   
+      return this.httpClient.get<DocumentosColaboradores[]>(
+       `http://localhost:8080/fotos/delete/${id}/${idDocu}`
+      );
   }
 
   getDependentesByForeignKey(id: number): Observable<Dependentes> {
@@ -138,14 +145,14 @@ export class SiscrhService {
     );
   }
 
-  deleteDocumentoColaborador(id: number) {
-    this.httpClient.delete(this.url + `/v27/dados/${id}`).subscribe(
+ /*  deleteDocumentoColaborador(id: number, idDocu:number) {
+    this.httpClient.delete(this.url + `/v27/dados/${id}/${idDocu}`).subscribe(
       (data) => {
         console.log(data);
       },
       (error: any) => console.log(error)
     );
-  }
+  } */
 
   deleteSetores(id: number) {
     this.httpClient.delete(this.url + `/v10/dados/${id}`).subscribe(

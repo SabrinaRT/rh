@@ -60,7 +60,7 @@
                         mat-raised-button
                         color="warn"
                         *ngIf="index.id != null"
-                        (click)="deleteDocu(index.id, index.nome_arquivo)"
+                        (click)="deleteArquivo(index.id)"
                       >
                         <mat-icon>cancel</mat-icon>
                       </button>
@@ -148,7 +148,7 @@
                         color="warn"
                      
                         *ngIf="index.id != null && ExcluirDocumentoOpcionais == true"
-                        (click)="deleteDocu(index.id, index.nome_arquivo)"
+                        (click)="deleteArquivo(index.id)"
                     
                       >
                         <mat-icon>cancel</mat-icon>

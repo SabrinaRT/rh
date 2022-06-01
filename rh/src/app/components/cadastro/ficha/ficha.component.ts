@@ -349,17 +349,26 @@ idUser:any
   }
 
   deleteDocu(id: any, nome: any) {
-    this.siscrhService.deleteDocumentoColaborador(id);
-    this.siscrhService.deleteArquivo(this.IDColab, nome);
-    this.atualizar();
-    this.atualizar();
-    this.atualizar();
+    this.siscrhService.deleteArquivo(this.IDColab,id);
+   
+
   }
 
-  delete(idDocumento: any) {
+  deleteArquivo(id: any) {
+    this.siscrhService.deleteArquivo(this.IDColab, id).subscribe((data:any)=>{
+      if(data.length == 0){
+        this.atualizar()
+      }else{
+        this.atualizar()
+      }
+    });
+  
+  }
+
+  /* delete(idDocumento: any) {
     this.siscrhService.deleteDocumentoColaborador(idDocumento);
   }
-
+ */
   datemask = [/\d/, /\d/, '/', /\d/, /\d/, '/', /\d/, /\d/, /\d/, /\d/];
   cpfmask = [
     /\d/,

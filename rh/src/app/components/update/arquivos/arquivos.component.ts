@@ -141,11 +141,15 @@ export class ArquivosComponent implements OnInit {
     this.siscrhService.downloadArquivo(this.IDColab, nome);
   }
 
-  deleteDocu(id: any, nome: any) {
-    this.siscrhService.deleteDocumentoColaborador(id);
-    this.siscrhService.deleteArquivo(this.IDColab, nome);
-    this.atualizar();
-    this.atualizar();
+  deleteArquivo(id: any) {
+    this.siscrhService.deleteArquivo(this.IDColab, id).subscribe((data:any)=>{
+      if(data.length == 0){
+        this.atualizar()
+      }else{
+        this.atualizar()
+      }
+    });
+  
   }
 
   TiposDocumentos: Documentos[];

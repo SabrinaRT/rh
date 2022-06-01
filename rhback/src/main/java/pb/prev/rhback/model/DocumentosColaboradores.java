@@ -18,8 +18,6 @@ public class DocumentosColaboradores {
 
     
     private int tipo;
-    private String nome;
-   
     private String nome_documento_upload;
     
 
@@ -28,9 +26,8 @@ public class DocumentosColaboradores {
 
 
 
-    public DocumentosColaboradores(DadosPessoais dadosPessoais, String nome, int tipo, String nome_documento_upload) {
+    public DocumentosColaboradores(DadosPessoais dadosPessoais, int tipo, String nome_documento_upload) {
         this.dadosPessoais = dadosPessoais;
-        this.nome = nome;
         this.tipo = tipo;
         this.nome_documento_upload = nome_documento_upload;
     }
@@ -52,14 +49,7 @@ public class DocumentosColaboradores {
         this.dadosPessoais = dadosPessoais;
     }
 
-    public String getNome() {
-        return this.nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
+    
     public int getTipo() {
         return this.tipo;
     }
