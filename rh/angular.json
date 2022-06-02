@@ -98,7 +98,14 @@
             "karmaConfig": "karma.conf.js",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              "src/app",
+              "src/app/components",
+              "src/app/components/config",
+              "src/app/components/config/configuracao-sistema",
+              "src/app/components/config/configuracao-sistema/logo"
+
+              
             ],
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",

@@ -17,8 +17,8 @@ public class DiscoConfiguracao {
 	@Value("${contato.disco.diretorio.logo}")
 	private String diretorioFotos;
 	
-	public void salvarFoto(MultipartFile foto, Long i) {
-		this.salvar(this.diretorioFotos+"/"+i, foto);
+	public void salvarFoto(MultipartFile foto) {
+		this.salvar(this.diretorioFotos+"/", foto);
 	}
 	
 	public void salvar(String diretorio, MultipartFile arquivo) {

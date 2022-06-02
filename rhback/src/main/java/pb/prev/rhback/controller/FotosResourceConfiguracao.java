@@ -30,7 +30,7 @@ public class FotosResourceConfiguracao {
 	@PostMapping("/upload")
 	public void upload(@RequestParam MultipartFile foto) {
 
-		disco.salvarFoto(foto, Long.valueOf(1));
+		disco.salvarFoto(foto);
 	}
 
 	@GetMapping("/download")
@@ -39,7 +39,7 @@ public class FotosResourceConfiguracao {
 		ConfiguracaoSistema configuracaoSistema = configuracaoSistemaRepository.findById(Long.valueOf(1))
 				.orElseThrow(() -> new ResourceNotFoundException("ConfiguracaoSistema not exist with id: " + 1));
 
-		String filename = diretorioFotos + configuracaoSistema.getId() + "/"
+		String filename = diretorioFotos + "/"
 				+ configuracaoSistema.getLogo_instituicao();
 		File file = new File(filename);
 		InputStreamResource resource = new InputStreamResource(new FileInputStream(file));
@@ -64,7 +64,7 @@ public class FotosResourceConfiguracao {
 		ConfiguracaoSistema configuracaoSistema = configuracaoSistemaRepository.findById(Long.valueOf(1))
 				.orElseThrow(() -> new ResourceNotFoundException("ConfiguracaoSistema not exist with id: " + 1));
 
-		String filename = diretorioFotos + configuracaoSistema.getId() + "/"
+		String filename = diretorioFotos + "/"
 				+ configuracaoSistema.getLogo_instituicao();
 		File file = new File(filename);
 		file.delete();
