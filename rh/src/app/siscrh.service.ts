@@ -295,4 +295,5 @@ export class SiscrhService {
       this.url + `/v30/informaticaDesativo/${id}`
     );
   }
+  
 }

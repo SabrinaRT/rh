@@ -2,12 +2,17 @@ package pb.prev.rhback.controller;
 
 import java.io.*;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import org.springframework.beans.factory.annotation.*;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistration;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 
 import pb.prev.rhback.exception.ResourceNotFoundException;
 import pb.prev.rhback.model.ConfiguracaoSistema;
@@ -73,6 +78,8 @@ public class FotosResourceConfiguracao {
 		return ResponseEntity.ok(configuracaoSistema);
 		
 	}
+
+
 
 	
 

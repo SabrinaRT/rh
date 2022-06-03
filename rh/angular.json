@@ -28,6 +28,7 @@
             "assets": [
               "src/favicon.ico",
               "src/assets"
+              
             ],
             "styles": [
               "node_modules/@costlydeveloper/ngx-awesome-popup/styles/theme.css",
