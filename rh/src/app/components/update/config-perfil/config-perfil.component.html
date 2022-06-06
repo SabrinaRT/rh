@@ -5,13 +5,41 @@
       <mat-card>
         <img
           mat-card-image
-          src="https://media.istockphoto.com/vectors/user-icon-flat-isolated-on-white-background-user-symbol-vector-vector-id1300845620?k=20&m=1300845620&s=612x612&w=0&h=f4XTZDAv7NPuZbG0habSpU0sNgECM0X7nbKzTUta3n8="
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQChBDtDqstMB0SDouMEzlGL8AJmAULEUbxBBJe9vYM3TxSVsmybYyHyFTteUZi-fkJOu0&usqp=CAU"
           alt="Photo of a Shiba Inu"
+          [hidden]="FotoPerfil"
         />
+
+ <div>
+  <div class="hovereffect" [hidden]="!FotoPerfil">
+     <!--  <img style="height: 320px; width: 250px" src="xx" alt="xxx"> -->
+      <img  mat-card-image src="http://localhost:8080/api/v305/get/image/152">
+      <div class="overlay">
+          <h2>Foto de Perfil</h2>
+          <a class="info" (click)="teste()">Baixar</a>
+          <br>
+          <a class="info" href="http://localhost:8080/api/v305/get/image/152">Mudar</a>
+          <br> 
+          <a class="info" href="">Deletar</a>
+      </div>
+      
+  </div>
+</div>
+
+ <!-- <div class="small-4 columns">
+  <img  src="http://localhost:8080/api/v305/get/image/152">
+  <a class="button" href="/jane/">View Jane's Profile</a>
+</div>
+        <img
+          mat-card-image
+          src="http://localhost:8080/api/v305/get/image/152"
+          alt="Photo of a Shiba Inu"
+        /> -->
         <mat-card-content>
+  
           <mat-form-field
             appearance="outline"
-            style="width: 100%; font-size: 12px"
+            style="width: 100%; font-size: 12px; margin-top: 10px;"
           >
             <mat-label>
               <mat-icon *ngIf="status == true" style="color: green"

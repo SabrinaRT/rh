@@ -19,6 +19,7 @@ import {
   RegistroAtividadeCadastro,
   Email,
   ConfiguracaoSistema,
+  FotoColaborador,
 } from './siscrh';
 
 @Injectable({
@@ -294,6 +295,18 @@ export class SiscrhService {
     return this.httpClient.get<DadosProfissionais>(
       this.url + `/v30/informaticaDesativo/${id}`
     );
+  }
+
+ 
+
+  uploadFotoColaborador(colaborador: FotoColaborador, idColab:any): Observable<Object> {
+    return this.httpClient.post(this.url + `/v305/upload/image/${idColab}`, colaborador);
+  }
+  getFotoInfo(idColab:any): Observable<FotoColaborador[]>{
+    return this.httpClient.get<FotoColaborador[]>(
+      this.url + `/v305/get/image/info/${idColab}`
+    );
+
   }
   
 }

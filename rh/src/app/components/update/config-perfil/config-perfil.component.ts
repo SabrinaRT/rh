@@ -30,7 +30,19 @@ export class ConfigPerfilComponent implements OnInit {
   id:any
   mensagemCodata:any
   mensagemCodataResetSenha:any 
+
+  FotoPerfil=true
+  IdFoto:any
+  UrlFoto:any
   ngOnInit(): void {
+
+    this.siscrhService.getFotoInfo(153).subscribe((data:any)=>{
+      this.IdFoto =data.id
+     
+    },(error) => {
+      this.FotoPerfil = false
+      
+    })
   
     this.siscrhService
       .getColaboradorById(this.IDColab)
@@ -129,6 +141,21 @@ enviarEmailInformaticaDesativo(){
     console.log('error', error);
     this.toastr.error('Houve algum erro!', 'Erro!');
   })
+}
+
+teste(){
+
+  
+  this.siscrhService.getFotoInfo(152).subscribe((data:any)=>{
+    console.log(data)
+    var gh  = "data:image/png;base64,"+ data.image
+    var a  = document.createElement('a');
+    a.href = gh;
+    a.download = 'fotoPerfil - ' + this.dadosPessoais.nome_completo +".png";
+
+    a.click()
+  })
+  
 }
 
 }

@@ -205,6 +205,16 @@ export class DadosProfissionais {
   };
 }
 
+export class FotoColaborador{
+  id:any;
+  name:any
+  type:any
+  image:any
+  dadosPessoais: {
+    id: any;
+  };
+}
+
 export class ConfiguracaoSistema{
    email_informatica:any;
      email_rh:any;
