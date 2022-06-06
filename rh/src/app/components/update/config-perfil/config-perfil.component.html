@@ -3,28 +3,42 @@
   <div class="row">
     <div class="col-3">
       <mat-card>
-        <img
+
+        <input
+        #fileUpload
+        type="file"
+        (change)="upload($event)"
+        style="display: none"
+      />
+      
+
+
+        <div class="hovereffect" [hidden]="FotoPerfil">
+          <!--  <img style="height: 320px; width: 250px" src="xx" alt="xxx"> -->
+          <img
           mat-card-image
           src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQChBDtDqstMB0SDouMEzlGL8AJmAULEUbxBBJe9vYM3TxSVsmybYyHyFTteUZi-fkJOu0&usqp=CAU"
-          alt="Photo of a Shiba Inu"
+          alt="Sem Foto"
           [hidden]="FotoPerfil"
         />
-
- <div>
+           <div class="overlay">
+               <h2>Foto de Perfil</h2>
+               <a class="info"  (click)="fileUpload.click()">Upload</a>
+            
+           </div>
+           
+       </div>
   <div class="hovereffect" [hidden]="!FotoPerfil">
      <!--  <img style="height: 320px; width: 250px" src="xx" alt="xxx"> -->
-      <img  mat-card-image src="http://localhost:8080/api/v305/get/image/152">
+      <img  mat-card-image [src]="UrlFoto" alt="dadosPessoais.nome_completo">
       <div class="overlay">
           <h2>Foto de Perfil</h2>
-          <a class="info" (click)="teste()">Baixar</a>
+          <a class="info" (click)="downloadFoto()" >Baixar</a>
           <br>
-          <a class="info" href="http://localhost:8080/api/v305/get/image/152">Mudar</a>
-          <br> 
           <a class="info" href="">Deletar</a>
       </div>
       
   </div>
-</div>
 
  <!-- <div class="small-4 columns">
   <img  src="http://localhost:8080/api/v305/get/image/152">

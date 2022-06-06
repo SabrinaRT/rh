@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { DadosPessoais, DadosProfissionais, SituacaoColaborador } from 'src/app/siscrh';
+import { DadosPessoais, DadosProfissionais, FotoColaborador, SituacaoColaborador } from 'src/app/siscrh';
 import { SiscrhService } from 'src/app/siscrh.service';
 
 @Component({
@@ -36,8 +36,9 @@ export class ConfigPerfilComponent implements OnInit {
   UrlFoto:any
   ngOnInit(): void {
 
-    this.siscrhService.getFotoInfo(153).subscribe((data:any)=>{
+    this.siscrhService.getFotoInfo(this.IDColab).subscribe((data:any)=>{
       this.IdFoto =data.id
+      this.UrlFoto = "http://localhost:8080/api/v305/get/image/"+this.IDColab
      
     },(error) => {
       this.FotoPerfil = false
@@ -143,10 +144,10 @@ enviarEmailInformaticaDesativo(){
   })
 }
 
-teste(){
+downloadFoto(){
 
   
-  this.siscrhService.getFotoInfo(152).subscribe((data:any)=>{
+  this.siscrhService.getFotoInfo(this.IDColab).subscribe((data:any)=>{
     console.log(data)
     var gh  = "data:image/png;base64,"+ data.image
     var a  = document.createElement('a');
@@ -158,4 +159,26 @@ teste(){
   
 }
 
+fotoColaborador: FotoColaborador = new FotoColaborador();
+upload(event: any) {
+  if (event.target.files && event.target.files[0]) {
+    
+    const image = event.target.files[0];
+    const formData = new FormData();
+    formData.append('image', image, event.target.files[0].name);
+    this.fotoColaborador.image = formData
+    this.fotoColaborador.dadosPessoais = { id: this.IDColab };
+    this.siscrhService.uploadFotoColaborador(formData, this.IDColab).subscribe(
+      (data: any) => {
+        console.log(data);
+        this.fotoColaborador.id = data.id
+        this.UrlFoto = "http://localhost:8080/api/v305/get/image/"+this.IDColab
+        this.FotoPerfil = true
+      },
+      (error) => {
+        console.log('error', error);
+      }
+    );
+  }
+}
 }

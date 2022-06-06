@@ -299,9 +299,16 @@ export class SiscrhService {
 
  
 
-  uploadFotoColaborador(colaborador: FotoColaborador, idColab:any): Observable<Object> {
-    return this.httpClient.post(this.url + `/v305/upload/image/${idColab}`, colaborador);
+  uploadFotoColaborador(image: FormData, idColab:any): Observable<Object> {
+    return this.httpClient.post(this.url + `/v305/upload/image/${idColab}`, image);
   }
+
+  /*  uploadLogo(formData: FormData): Observable<Object> {
+    return this.httpClient.post(this.url2 +
+      `/configuracao/upload`,
+      formData
+    );
+  } */
   getFotoInfo(idColab:any): Observable<FotoColaborador[]>{
     return this.httpClient.get<FotoColaborador[]>(
       this.url + `/v305/get/image/info/${idColab}`
