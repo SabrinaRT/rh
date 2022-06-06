@@ -94,11 +94,9 @@ export class ConfiguracaoSistemaComponent implements OnInit {
     var MyBlob = new Blob(['test text'], {type : "image/jpeg"},);
     console.log(MyBlob instanceof Blob) // true
 
-    const file = new File([MyBlob], "download.jpg");
-    let fileList: Blob = event.target.files;
    
 		var reader = new FileReader();
-		reader.readAsDataURL(fileList);
+		reader.readAsDataURL(event.target.files[0]);
 		reader.onload = (_event) => {
 			this.url = reader.result;
       console.log(this.url) 

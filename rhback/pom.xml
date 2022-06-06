@@ -16,6 +16,9 @@
 	<properties>
 		<java.version>11</java.version>
 	</properties>
+	<configuration>
+	<addResources>true</addResources>
+    </configuration>
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -55,6 +58,13 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-mail</artifactId>
 		</dependency>
+		<dependency>
+    <groupId>org.projectlombok</groupId>
+    <artifactId>lombok</artifactId>
+    <optional>true</optional>
+    <version>1.18.20</version>
+    <scope>provided</scope>
+</dependency>
  
  </dependencies>
 
@@ -63,6 +73,7 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				
 			</plugin>
 			
 		</plugins>

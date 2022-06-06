@@ -16,7 +16,7 @@ import pb.prev.rhback.repository.DocumentosColaboradoresRepository;
 
 @CrossOrigin(origins = "${servidor-porta}")
 @RestController
-@RequestMapping("/fotos")
+@RequestMapping("/api/fotos")
 public class FotosResource {
 
 	@Autowired

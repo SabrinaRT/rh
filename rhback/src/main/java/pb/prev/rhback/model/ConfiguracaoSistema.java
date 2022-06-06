@@ -13,7 +13,6 @@ public class ConfiguracaoSistema {
     private String email_informatica;
     private String email_rh;
     private String nome_instituicao;
-    private String logo_instituicao;
 
     public String getEmail_informatica() {
         return this.email_informatica;
@@ -39,13 +38,6 @@ public class ConfiguracaoSistema {
         this.nome_instituicao = nome_instituicao;
     }
 
-    public String getLogo_instituicao() {
-        return this.logo_instituicao;
-    }
-
-    public void setLogo_instituicao(String logo_instituicao) {
-        this.logo_instituicao = logo_instituicao;
-    }
 
     public long getId() {
         return this.id;
@@ -55,12 +47,11 @@ public class ConfiguracaoSistema {
         this.id = id;
     }
 
-    public ConfiguracaoSistema(String email_informatica, String email_rh, String nome_instituicao,
-            String logo_instituicao) {
+    public ConfiguracaoSistema(String email_informatica, String email_rh, String nome_instituicao
+         ) {
         this.email_informatica = email_informatica;
         this.email_rh = email_rh;
         this.nome_instituicao = nome_instituicao;
-        this.logo_instituicao = logo_instituicao;
     }
 
     public ConfiguracaoSistema() {
