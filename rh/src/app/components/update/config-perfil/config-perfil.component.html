@@ -3,57 +3,43 @@
   <div class="row">
     <div class="col-3">
       <mat-card>
-
         <input
-        #fileUpload
-        type="file"
-        (change)="upload($event)"
-        style="display: none"
-      />
-      
-
+          #fileUpload
+          type="file"
+          (change)="upload($event)"
+          style="display: none"
+        />
 
         <div class="hovereffect" [hidden]="FotoPerfil">
-          <!--  <img style="height: 320px; width: 250px" src="xx" alt="xxx"> -->
           <img
-          mat-card-image
-          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQChBDtDqstMB0SDouMEzlGL8AJmAULEUbxBBJe9vYM3TxSVsmybYyHyFTteUZi-fkJOu0&usqp=CAU"
-          alt="Sem Foto"
-          [hidden]="FotoPerfil"
-        />
-           <div class="overlay">
-               <h2>Foto de Perfil</h2>
-               <a class="info"  (click)="fileUpload.click()">Upload</a>
-            
-           </div>
-           
-       </div>
-  <div class="hovereffect" [hidden]="!FotoPerfil">
-     <!--  <img style="height: 320px; width: 250px" src="xx" alt="xxx"> -->
-      <img  mat-card-image [src]="UrlFoto" alt="dadosPessoais.nome_completo">
-      <div class="overlay">
-          <h2>Foto de Perfil</h2>
-          <a class="info" (click)="downloadFoto()" >Baixar</a>
-          <br>
-          <a class="info" href="">Deletar</a>
-      </div>
-      
-  </div>
+            mat-card-image
+            src="http://localhost:8080/get/semimage"
+            alt="Sem Foto"
+            [hidden]="FotoPerfil"
+          />
+          <div class="overlay">
+            <h2>Foto de Perfil</h2>
 
- <!-- <div class="small-4 columns">
-  <img  src="http://localhost:8080/api/v305/get/image/152">
-  <a class="button" href="/jane/">View Jane's Profile</a>
-</div>
-        <img
-          mat-card-image
-          src="http://localhost:8080/api/v305/get/image/152"
-          alt="Photo of a Shiba Inu"
-        /> -->
+            <a class="info" (click)="fileUpload.click()">Upload</a>
+          </div>
+        </div>
+        <div class="hovereffect" [hidden]="!FotoPerfil">
+          <img
+            mat-card-image
+            [src]="UrlFoto"
+            alt="dadosPessoais.nome_completo"
+          />
+          <div class="overlay">
+            <h2>Foto de Perfil</h2>
+            <a class="info" (click)="downloadFoto()">Baixar Foto</a>
+            <br />
+            <a class="info" href="">Apagar Foto</a>
+          </div>
+        </div>
         <mat-card-content>
-  
           <mat-form-field
             appearance="outline"
-            style="width: 100%; font-size: 12px; margin-top: 10px;"
+            style="width: 100%; font-size: 12px; margin-top: 10px"
           >
             <mat-label>
               <mat-icon *ngIf="status == true" style="color: green"
@@ -73,11 +59,10 @@
               <mat-option [value]="false"> Desativo </mat-option>
             </mat-select>
           </mat-form-field>
-        
+
           <mat-form-field
             appearance="outline"
-            style="width: 100%; font-size: 12px" 
-            
+            style="width: 100%; font-size: 12px"
           >
             <mat-label>
               <mat-icon *ngIf="acessoRede == true" style="color: green"
@@ -98,9 +83,7 @@
               <mat-option [value]="false"> Desativo </mat-option>
             </mat-select>
           </mat-form-field>
-          
         </mat-card-content>
-        
       </mat-card>
     </div>
     <div class="col-8">
@@ -123,54 +106,89 @@
           >Data de Exoneração: {{ dadosProfissionais.data_exoneracao }}
         </mat-card-subtitle>
         <mat-card-subtitle
-          >E-Mail Institucional: {{ dadosProfissionais.email_institucional }} 
+          >E-Mail Institucional: {{ dadosProfissionais.email_institucional }}
 
-            <a
-              href="https://suporte.codata.pb.gov.br/suporte/default/suporte"
-              target="_blank"
+          <a
+            href="https://suporte.codata.pb.gov.br/suporte/default/suporte"
+            target="_blank"
+          >
+            <button
+              *ngIf="verificacaoEmail == true"
+              mat-raised-button
+              color="accent"
+              style="font-size: 12px; height: 35px"
+              [cdkCopyToClipboard]="mensagemCodataResetSenha"
             >
-              <button
-              *ngIf="
-              verificacaoEmail == true 
-            "
-              mat-raised-button color="accent" style="font-size: 12px; height:35px;" [cdkCopyToClipboard]="mensagemCodataResetSenha">
               Resetar Senha
-              </button>
-            </a>
-         
-            <a
-              href="https://suporte.codata.pb.gov.br/suporte/default/suporte"
-              target="_blank"
+            </button>
+          </a>
+
+          <a
+            href="https://suporte.codata.pb.gov.br/suporte/default/suporte"
+            target="_blank"
+          >
+            <button
+              *ngIf="verificacaoEmail == false"
+              mat-raised-button
+              color="accent"
+              style="font-size: 12px; height: 35px"
+              [cdkCopyToClipboard]="mensagemCodata"
             >
-              <button
-              *ngIf="
-              verificacaoEmail == false
-            "
-              mat-raised-button color="accent" style="font-size: 12px; height:35px;" [cdkCopyToClipboard]="mensagemCodata">
-                Fazer solicitação de um E-Mail Institucional na Codata
-              </button>
-            </a>
+              Fazer solicitação de um E-Mail Institucional na Codata
+            </button>
+          </a>
         </mat-card-subtitle>
 
-        <button mat-raised-button color="edit" class="col-12"  [routerLink]="['',idUser,'pdf-perfil', IDColab]" >
+        <button
+          mat-raised-button
+          color="edit"
+          class="col-12"
+          [routerLink]="['', idUser, 'pdf-perfil', IDColab]"
+        >
           Baixar Perfil em PDF
         </button>
       </mat-card>
-      <br>
-      <mat-card *ngIf="idUser == 1 || idUser == 2" style="margin-bottom: 10px;">
-        <button mat-raised-button color="warn" class="col-12" *ngIf="acessoRede == true"  (click)="enviarEmailRhDesativar()">
+      <br />
+      <mat-card *ngIf="idUser == 1 || idUser == 2" style="margin-bottom: 10px">
+        <button
+          mat-raised-button
+          color="warn"
+          class="col-12"
+          *ngIf="acessoRede == true"
+          (click)="enviarEmailRhDesativar()"
+        >
           Fazer uma solicitação para desabilitar o acesso à rede
         </button>
-        <button mat-raised-button color="success" class="col-12"  *ngIf="acessoRede == false" (click)="enviarEmailRhAtivar()">
+        <button
+          mat-raised-button
+          color="success"
+          class="col-12"
+          *ngIf="acessoRede == false"
+          (click)="enviarEmailRhAtivar()"
+        >
           Fazer uma solicitação para habilitar o acesso à rede
         </button>
       </mat-card>
       <mat-card *ngIf="idUser == 1 || idUser == 3">
-        <button mat-raised-button color="success" class="col-12" *ngIf="acessoRede == true" (click)="enviarEmailInformaticaAtivo()" >
-          Informar que o usuário do(a) colaborador(a) foi habilitado da rede interna
+        <button
+          mat-raised-button
+          color="success"
+          class="col-12"
+          *ngIf="acessoRede == true"
+          (click)="enviarEmailInformaticaAtivo()"
+        >
+          Informar que o usuário do(a) colaborador(a) foi habilitado da rede
+          interna
         </button>
-        <button mat-raised-button color="warn" class="col-12"  *ngIf="acessoRede == false" (click)="enviarEmailInformaticaDesativo()">
-          Informar que o usuário do(a) colaborador(a) foi desabilitado da rede interna
+        <button
+          mat-raised-button
+          color="warn"
+          class="col-12"
+          *ngIf="acessoRede == false"
+          (click)="enviarEmailInformaticaDesativo()"
+        >
+          Informar que o usuário do(a) colaborador(a) foi desabilitado da rede
+          interna
         </button>
       </mat-card>
     </div>

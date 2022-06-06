@@ -1,69 +1,27 @@
 <mat-card class="col-12 box-shadow">
   <div class="row">
-    <div class="col-6">
-      <mat-form-field appearance="outline" class="col-12">
-        <mat-label>Instituição</mat-label>
-        <input matInput [(ngModel)]="configuracao.nome_instituicao" />
-      </mat-form-field>
-    </div>
+    
     <div class="col-2">
-<img src="http://localhost:8080/get/image/" alt="">
+<img [src]="UrlLogo" alt="">
    
     </div> 
-    <div
-      class="col-2"
-      style="margin-top: 12px"
-      *ngIf="configuracao.logo_instituicao == null"
-    >
-      <button
-        mat-raised-button
-        color="primary"
-        class="col-12"
-        (click)="fileUpload.click()"
-      >
-        <mat-icon>upload_file</mat-icon>
-      </button>
+   
+   
 
-      <input
-        #fileUpload
-        type="file"
-        (change)="upload($event)"
-        style="display: none"
-      />
-    </div>
-    <div
-      class="col-1"
-      style="margin-top: 12px"
-      *ngIf="configuracao.logo_instituicao != null"
-    >
-      <button mat-raised-button color="edit" class="col-12" (click)="downloadLogo()">
-        <mat-icon>download_file</mat-icon>
-      </button>
-    </div>
-    <div
-      class="col-1"
-      style="margin-top: 12px"
-      *ngIf="configuracao.logo_instituicao != null"
-    >
-      <button
-        mat-raised-button
-        color="warn"
-        class="col-12"
-        (click)="deletarLogo()"
-      >
-        <mat-icon>delete</mat-icon>
-      </button>
-    </div>
+  <div class="col-4">
+    <mat-form-field appearance="outline" class="col-12">
+      <mat-label>Instituição</mat-label>
+      <input matInput [(ngModel)]="configuracao.nome_instituicao" />
+    </mat-form-field>
   </div>
 
-  <div class="row">
-    <div class="col-6">
+    <div class="col-4">
       <mat-form-field appearance="outline" class="col-12">
         <mat-label>E-Mail da Informática</mat-label>
         <input matInput [(ngModel)]="configuracao.email_informatica" />
       </mat-form-field>
     </div>
-    <div class="col-6">
+    <div class="col-4">
       <mat-form-field appearance="outline" class="col-12">
         <mat-label>E-Mail do Recursos Humanos</mat-label>
         <input matInput [(ngModel)]="configuracao.email_rh" />
@@ -87,13 +45,5 @@
     </div>
     <br />
   </div>
-  <div style="text-align:center">
-	<div [innerHtml]='msg' *ngIf="msg" style="color: red;"></div>
-	<div><img [src]="url" *ngIf="url"></div>
-	<p>
-		<input type="file"  (change)="selectFile($event)">
-	</p>
 
-
-</div>
 </mat-card>

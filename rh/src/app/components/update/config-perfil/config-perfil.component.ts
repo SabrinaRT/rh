@@ -144,16 +144,13 @@ enviarEmailInformaticaDesativo(){
   })
 }
 
-downloadFoto(){
-
-  
+downloadFoto(){  
   this.siscrhService.getFotoInfo(this.IDColab).subscribe((data:any)=>{
     console.log(data)
     var gh  = "data:image/png;base64,"+ data.image
     var a  = document.createElement('a');
     a.href = gh;
-    a.download = 'fotoPerfil - ' + this.dadosPessoais.nome_completo +".png";
-
+    a.download = "fotoPerfil.png" ;
     a.click()
   })
   

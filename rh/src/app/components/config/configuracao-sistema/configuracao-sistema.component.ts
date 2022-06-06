@@ -20,10 +20,13 @@ export class ConfiguracaoSistemaComponent implements OnInit {
       this.configuracao = data;
       this.configuracao2 = data;
       
-
+      this.UrlLogo ="http://localhost:8080/get/semimage"
      
     });
   }
+
+  UrlLogo:any
+  DisplayLogo:any
 
 
   salvarConfiguracao() {
