@@ -8,8 +8,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import pb.prev.rhback.model.ImageColaborador;
-import pb.prev.rhback.repository.ImageColaboradorRepository;
+import pb.prev.rhback.exception.UploadResponse;
+import pb.prev.rhback.model.DadosPessoais;
+import pb.prev.rhback.model.FotoColaborador;
+import pb.prev.rhback.repository.DadosPessoaisRepository;
+import pb.prev.rhback.repository.FotoColaboradorRepository;
 import pb.prev.rhback.util.ImageColaboradorUtility;
 import java.io.IOException;
 import java.util.Optional;
@@ -17,41 +20,42 @@ import java.util.Optional;
 @RestController
 @CrossOrigin(origins = "${servidor-porta}")
 @RequestMapping("/api/v305/")
-public class ImageColaboradorController {
+public class FotoColaboradorController {
 
     @Autowired
-    ImageColaboradorRepository imageColaboradorRepository;
+    FotoColaboradorRepository fotoColaboradorRepository;
 
-
+ /*    @Autowired
+    DadosPessoaisRepository dadosPessoaisColaboradorRepository; */
 
     @PostMapping("/upload/image")
-    public ResponseEntity<ImageUploadResponse> uplaodImageColaborador(@RequestParam("image") MultipartFile file)
+    public ResponseEntity<UploadResponse> uplaodImageColaborador(@RequestParam("image") MultipartFile file)
             throws IOException {
 
-        imageColaboradorRepository.save(ImageColaborador.builder()
+        fotoColaboradorRepository.save(FotoColaborador.builder()
                 .name(file.getOriginalFilename())
                 .type(file.getContentType())
                 .image(ImageColaboradorUtility.decompressImage(file.getBytes())).build());
         return ResponseEntity.status(HttpStatus.OK)
-                .body(new ImageUploadResponse("ImageColaborador uploaded successfully: " +
+                .body(new UploadResponse("ImageColaborador uploaded successfully: " +
                         file.getOriginalFilename()));
     }
 
-    @GetMapping(path = {"/get/foto3x4/info/{id}"})
-    public ImageColaborador getImageColaboradorDetails(@PathVariable Long id) throws IOException {
+    @GetMapping(path = {"/get/foto/info/{id}"})
+    public FotoColaborador getImageColaboradorDetails(@PathVariable Long id) throws IOException {
 
-        final Optional<ImageColaborador> dbImageColaborador = imageColaboradorRepository.findById(id);
+        final Optional<FotoColaborador> dbImageColaborador = fotoColaboradorRepository.findById(id);
 
-        return ImageColaborador.builder()
+        return FotoColaborador.builder()
                 .name(dbImageColaborador.get().getName())
                 .type(dbImageColaborador.get().getType())
                 .image(ImageColaboradorUtility.decompressImage(dbImageColaborador.get().getImage())).build();
     }
   
-    @GetMapping(path = {"/get/foto3x4/{id}"})
+    @GetMapping(path = {"/get/foto/{id}"})
     public ResponseEntity<byte[]> getImageColaborador(@PathVariable Long id) throws IOException {
 
-        final Optional<ImageColaborador> dbImageColaborador = imageColaboradorRepository.findById(id);
+        final Optional<FotoColaborador> dbImageColaborador = fotoColaboradorRepository.findById(id);
 
         return ResponseEntity
                 .ok()

@@ -13,11 +13,12 @@ import org.springframework.web.multipart.MultipartFile;
 import pb.prev.rhback.exception.ResourceNotFoundException;
 import pb.prev.rhback.model.DocumentosColaboradores;
 import pb.prev.rhback.repository.DocumentosColaboradoresRepository;
+import pb.prev.rhback.upload.Disco;
 
 @CrossOrigin(origins = "${servidor-porta}")
 @RestController
 @RequestMapping("/api/fotos")
-public class FotosResource {
+public class DocumentosColaboradorController {
 
 	@Autowired
 	private Disco disco;

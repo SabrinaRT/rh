@@ -4,10 +4,10 @@ import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import pb.prev.rhback.model.Image;
+import pb.prev.rhback.model.Logo;
 
 
 
-public interface ImageRepository extends JpaRepository<Image, Long> {
+public interface LogoRepository extends JpaRepository<Logo, Long> {
 /* 	Optional<Image> findByName(String name); */
 }

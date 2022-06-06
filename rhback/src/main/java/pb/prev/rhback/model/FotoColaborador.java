@@ -13,7 +13,7 @@ import javax.persistence.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ImageColaborador {
+public class FotoColaborador {
 	@Id
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,9 +28,9 @@ public class ImageColaborador {
 	@Column(name = "image", unique = false, nullable = false, length = 100000)
 	private byte[] image;
 
-	@OneToOne(cascade = CascadeType.DETACH)
+	/* @OneToOne(cascade = CascadeType.DETACH)
     @JoinColumn(name="dadosPessoaisId", referencedColumnName = "id")
-    private DadosPessoais dadosPessoais;
+    private DadosPessoais dadosPessoais; */
 
-	
+
 }

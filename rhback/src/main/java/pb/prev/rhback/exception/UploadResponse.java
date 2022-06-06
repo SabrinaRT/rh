@@ -1,9 +1,9 @@
-package pb.prev.rhback.controller;
+package pb.prev.rhback.exception;
 
-public class ImageUploadResponse {
+public class UploadResponse {
     private String message;
 
-    public ImageUploadResponse(String message) {
+    public UploadResponse(String message) {
         this.message = message;
     }
 
