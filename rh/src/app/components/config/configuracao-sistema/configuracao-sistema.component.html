@@ -1,36 +1,105 @@
-<mat-card class="col-12 box-shadow">
-  <div class="row">
-    
-    <div class="col-2">
-<img [src]="UrlLogo" alt="">
-   
-    </div> 
-   
-   
-
+<!-- <div class="row">
+  <div class="col-3 ">
+    <div class="hovereffect" >
+      <img mat-card-image  [src]="UrlLogo">
+      <div class="overlay">
+        <h2>Foto de Perfil</h2>
+        <a class="info" >Baixar Foto</a>
+        <br />
+        <a class="info" href="">Apagar Foto</a>
+      </div>
+    </div>
+  
+  </div>
   <div class="col-4">
-    <mat-form-field appearance="outline" class="col-12">
-      <mat-label>Instituição</mat-label>
-      <input matInput [(ngModel)]="configuracao.nome_instituicao" />
-    </mat-form-field>
+    p
+  </div>
+</div> -->
+
+  <div class="container">
+    
+    <div class="row">
+      
+        <div class="col-3">
+      
+            <div class="hovereffect" >
+              <img
+                mat-card-image
+                alt="Sem Foto"
+                src="assets/sem foto.png"
+              />
+              <div class="overlay">
+                <h2>Foto de Perfil</h2>
+          
+                <a class="info" >Upload</a>
+              </div>
+            </div>
+        </div>
+        <div  class="col-6">
+         
+          <div class="col-12">
+            <mat-form-field appearance="outline" class="col-12">
+              <mat-label>Instituição</mat-label>
+              <input matInput [(ngModel)]="configuracao.nome_instituicao" />
+            </mat-form-field>
+          </div>
+          
+            <div class="col-12">
+              <mat-form-field appearance="outline" class="col-12">
+                <mat-label>E-Mail da Informática</mat-label>
+                <input matInput [(ngModel)]="configuracao.email_informatica" />
+              </mat-form-field>
+            </div>
+            <div class="col-12">
+              <mat-form-field appearance="outline" class="col-12">
+                <mat-label>E-Mail do Recursos Humanos</mat-label>
+                <input matInput [(ngModel)]="configuracao.email_rh" />
+              </mat-form-field>
+            </div>
+            
+            <div class="col-2">
+              <button
+                mat-raised-button
+                color="primary"
+                class="col-12"
+                (click)="salvarConfiguracao()"
+              >
+                Salvar
+              </button>
+            </div>
+        </div>
+       
+    
+    </div>
+   
+      
+     
   </div>
 
-    <div class="col-4">
-      <mat-form-field appearance="outline" class="col-12">
-        <mat-label>E-Mail da Informática</mat-label>
-        <input matInput [(ngModel)]="configuracao.email_informatica" />
-      </mat-form-field>
-    </div>
-    <div class="col-4">
-      <mat-form-field appearance="outline" class="col-12">
-        <mat-label>E-Mail do Recursos Humanos</mat-label>
-        <input matInput [(ngModel)]="configuracao.email_rh" />
-      </mat-form-field>
+
+<!-- 
+<div class="container">
+<div class="row">
+  <div class="box-shadow">
+    <div class="col-3">
+     
+  
+        <div class="row">
+          <div class="col-12">
+            
+          </div>
+       
+          
+        </div>
+  
     </div>
   </div>
-  <div class="row"></div>
+  <div class="col-6">
+    <mat-card>
+      
+ 
   <br />
-
+  
   <div class="row">
     <div class="col-10"></div>
     <div class="col-2">
@@ -43,7 +112,21 @@
         Salvar
       </button>
     </div>
-    <br />
+    
+  <br />
+</div>
+</mat-card>
   </div>
 
-</mat-card>
+
+</div>
+</div>
+
+
+
+
+
+
+
+
+ -->

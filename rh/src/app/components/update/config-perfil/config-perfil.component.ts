@@ -36,6 +36,8 @@ export class ConfigPerfilComponent implements OnInit {
   UrlFoto:any
   ngOnInit(): void {
 
+
+
     this.siscrhService.getFotoInfo(this.IDColab).subscribe((data:any)=>{
       this.IdFoto =data.id
       this.UrlFoto = "http://localhost:8080/api/v305/get/image/"+this.IDColab

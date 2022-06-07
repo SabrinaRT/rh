@@ -11,14 +11,6 @@ import { PainelComponent } from './components/update/painel/painel.component';
 
 
 const routes: Routes = [
- /*  {path:"update/:id", component: FichaUpdateComponent},
-  {path:"", component:  TabelaColaboradoresComponent},
-  {path:"add", component:  FichaComponent},
-  {path:"painel/:id", component:  PainelComponent},
-  {path:"pdf/:id", component:  GerarPdfPerfilComponent},
-  {path:"config", component: PainelConfigComponent},
-  {path:"pdf-perfil/:id", component: GerarPdfPerfilComponent},
-  {path:"gerador", component: TotalComponent}, */
 
   {path:"", component:  LoginComponent},
   {path:":idUser/home", component:  TabelaColaboradoresComponent},

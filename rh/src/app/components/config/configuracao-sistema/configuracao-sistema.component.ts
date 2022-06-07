@@ -24,7 +24,7 @@ export class ConfiguracaoSistemaComponent implements OnInit {
      
     });
   }
-
+  FotoPerfil = false
   UrlLogo:any
   DisplayLogo:any
 
