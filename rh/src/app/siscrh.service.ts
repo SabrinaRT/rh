@@ -1,6 +1,6 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import {  throwError } from 'rxjs';
 import {
   DadosBancarios,
   DadosPessoais,
@@ -20,7 +20,10 @@ import {
   Email,
   ConfiguracaoSistema,
   FotoColaborador,
+  Logo,
 } from './siscrh';
+import { Observable } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -315,5 +318,11 @@ export class SiscrhService {
     );
 
   }
+  getColaboradorById2(id: number): Observable<Logo> {
+    return this.httpClient.get<Logo>(this.url + `/dados/${id}`);
+  }
+
+ 
+  
   
 }

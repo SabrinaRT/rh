@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
-import { ConfiguracaoSistema } from 'src/app/siscrh';
+import { ConfiguracaoSistema, Logo } from 'src/app/siscrh';
 import { SiscrhService } from 'src/app/siscrh.service';
 
 @Component({
@@ -19,15 +19,22 @@ export class ConfiguracaoSistemaComponent implements OnInit {
       console.log(data);
       this.configuracao = data;
       this.configuracao2 = data;
-      
-      this.UrlLogo ="http://localhost:8080/get/semimage"
-     
     });
+this.siscrhService.getColaboradorById2(1).subscribe((data:any)=>{
+  console.log(data)
+  if(data.image != null){
+    this.UrlLogo =  "http://localhost:8080/api/get/image"
+    this.LogoShow = false
+  }else{
+    this.UrlLogo = 'assets/sem foto.png'
+    this.LogoShow = true
   }
-  FotoPerfil = false
-  UrlLogo:any
-  DisplayLogo:any
-
+})
+ /*     */
+  }
+  LogoShow = false
+  UrlLogo = 'assets/sem foto.png';
+  DisplayLogo: any;
 
   salvarConfiguracao() {
     this.siscrhService.salvarConfiguracaoSistema(this.configuracao).subscribe(
@@ -45,11 +52,9 @@ export class ConfiguracaoSistemaComponent implements OnInit {
     this.siscrhService.downloadLogo();
   }
   deletarLogo() {
-    this.siscrhService.deleteLogo().subscribe((data:any)=>
-    this.configuracao = data
-    );
-    
-    
+    this.siscrhService
+      .deleteLogo()
+      .subscribe((data: any) => (this.configuracao = data));
   }
   uploadLogo() {
     this.configuracao2.logo_instituicao = this.configuracao.logo_instituicao;
@@ -77,7 +82,6 @@ export class ConfiguracaoSistemaComponent implements OnInit {
         (data: any) => {
           console.log(data);
           this.uploadLogo();
-          
         },
         (error) => {
           console.log('error', error);
@@ -86,25 +90,20 @@ export class ConfiguracaoSistemaComponent implements OnInit {
     }
   }
 
-  ngOnInit(): void {
-    
-  }
+  ngOnInit(): void {}
   //url; //Angular 8
-	url: any; //Angular 11, for stricter type
-	msg = "";
-	
-	selectFile(event: any) {
-    var MyBlob = new Blob(['test text'], {type : "image/jpeg"},);
-    console.log(MyBlob instanceof Blob) // true
+  url: any; //Angular 11, for stricter type
+  msg = '';
 
-   
-		var reader = new FileReader();
-		reader.readAsDataURL(event.target.files[0]);
-		reader.onload = (_event) => {
-			this.url = reader.result;
-      console.log(this.url) 
-		}
-	}
- 
+  selectFile(event: any) {
+    var MyBlob = new Blob(['test text'], { type: 'image/jpeg' });
+    console.log(MyBlob instanceof Blob); // true
 
+    var reader = new FileReader();
+    reader.readAsDataURL(event.target.files[0]);
+    reader.onload = (_event) => {
+      this.url = reader.result;
+      console.log(this.url);
+    };
+  }
 }

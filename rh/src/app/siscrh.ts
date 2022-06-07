@@ -215,6 +215,11 @@ export class FotoColaborador{
   };
 }
 
+export class Logo{
+  id:any
+  image:any
+
+}
 export class ConfiguracaoSistema{
    email_informatica:any;
      email_rh:any;

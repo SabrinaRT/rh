@@ -34,6 +34,7 @@ export class ConfigPerfilComponent implements OnInit {
   FotoPerfil=true
   IdFoto:any
   UrlFoto:any
+  UrlSemFoto = "http://localhost:8080/get/semimage"
   ngOnInit(): void {
 
 
