@@ -24,7 +24,7 @@ import java.util.Optional;
 public class LogoController {
 
     @Autowired
-    LogoRepository imageRepository;
+    LogoRepository logoRepository;
 
    
 
@@ -32,8 +32,8 @@ public class LogoController {
     public ResponseEntity<UploadResponse> uplaodImage(@RequestParam("image") MultipartFile file)
             throws IOException {
 
-        imageRepository.save(Logo.builder()
-                .id(Long.valueOf(1))
+        logoRepository.save(Logo.builder()
+                .id(Long.valueOf(2))
                 .name(file.getOriginalFilename())
                 .type(file.getContentType())
 
@@ -46,7 +46,7 @@ public class LogoController {
     @GetMapping(path = {"/get/image/info"})
     public Logo getImageDetails() throws IOException {
 
-        final Optional<Logo> dbImage = imageRepository.findById(Long.valueOf(1));
+        final Optional<Logo> dbImage = logoRepository.findById(Long.valueOf(2));
 
         return Logo.builder()
                 .name(dbImage.get().getName())
@@ -57,7 +57,7 @@ public class LogoController {
     @GetMapping(path = {"/get/image"})
     public ResponseEntity<byte[]> getImage() throws IOException {
 
-        final Optional<Logo> dbImage = imageRepository.findById(Long.valueOf(1));
+        final Optional<Logo> dbImage = logoRepository.findById(Long.valueOf(2));
 
         return ResponseEntity
                 .ok()
@@ -65,5 +65,16 @@ public class LogoController {
                 .body(ImageUtility.decompressImage(dbImage.get().getImage()));
     }
 
+    
+    @GetMapping(path = {"/get/semimage"})
+    public ResponseEntity<byte[]> getSemImage() throws IOException {
+
+        final Optional<Logo> dbImage = logoRepository.findById(Long.valueOf(1));
+
+        return ResponseEntity
+                .ok()
+                .contentType(MediaType.valueOf(dbImage.get().getType()))
+                .body(ImageUtility.decompressImage(dbImage.get().getImage()));
+    }
 
 }

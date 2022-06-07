@@ -10,5 +10,5 @@ import pb.prev.rhback.model.FotoColaborador;
 
 public interface FotoColaboradorRepository extends JpaRepository<FotoColaborador, Long> {
 	/* Optional<ImageColaborador> findByName(String name); */
-/* 	Optional<ImageColaborador>  findByDadosPessoais_Id(Long id); */
+	Optional<FotoColaborador>  findByDadosPessoais_Id(Long id);
 }

@@ -8,12 +8,13 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "image_colaborador")
+@Table(name = "foto_colaborador")
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class FotoColaborador {
+	
 	@Id
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,9 +29,7 @@ public class FotoColaborador {
 	@Column(name = "image", unique = false, nullable = false, length = 100000)
 	private byte[] image;
 
-	/* @OneToOne(cascade = CascadeType.DETACH)
+	@OneToOne(cascade = CascadeType.DETACH)
     @JoinColumn(name="dadosPessoaisId", referencedColumnName = "id")
-    private DadosPessoais dadosPessoais; */
-
-
+    private DadosPessoais dadosPessoais;
 }
