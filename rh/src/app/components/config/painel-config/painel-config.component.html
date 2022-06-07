@@ -7,7 +7,11 @@
   <span>SISCOGEP</span>
 </mat-toolbar>
 <mat-tab-group>
-  <mat-tab label="Configuração">
+  <mat-tab >
+    <ng-template mat-tab-label>
+      <mat-icon>settings</mat-icon>
+      <span>Configurações</span>
+  </ng-template>
     <div class="container">
       <br />
       <div class="row">
@@ -18,7 +22,11 @@
       </div>
     </div>
   </mat-tab>
-  <mat-tab label="Usuários">
+  <mat-tab >
+    <ng-template mat-tab-label>
+      <mat-icon> people </mat-icon>
+      <span>Usuários</span>
+  </ng-template>
     <div class="container">
       <br />
       <div class="row">
@@ -28,7 +36,11 @@
       </div>
     </div>
   </mat-tab>
-  <mat-tab label="Documentos">
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon> attach_file </mat-icon>
+      <span>Documentos</span>
+  </ng-template>
     <div class="container">
       <br />
       <div class="row">
@@ -40,7 +52,11 @@
   </mat-tab>
 
  
-  <mat-tab label="Setores">
+  <mat-tab >
+    <ng-template mat-tab-label>
+      <mat-icon> recent_actors  </mat-icon>
+      <span>Setores</span>
+  </ng-template>
     <div class="container">
       <br />
       <div class="row">
@@ -49,7 +65,11 @@
     </div>
   </mat-tab>
 
-  <mat-tab label="Vínculos">
+  <mat-tab >
+    <ng-template mat-tab-label>
+      <mat-icon> folder_shared </mat-icon>
+      <span>Vínculos</span>
+  </ng-template>
     <div class="container">
       <br />
       <div class="row">
