@@ -9,15 +9,15 @@ import org.springframework.web.bind.annotation.*;
 import   pb.prev.rhback.exception.ResourceNotFoundException;
 
 import  pb.prev.rhback.model.TiposDocumentos;
-import  pb.prev.rhback.repository.DocumentosRepository;
+import  pb.prev.rhback.repository.TiposDocumentosRepository;
 
 @CrossOrigin(origins = "${servidor-porta}")
 @RestController
 @RequestMapping("/api/v26/")
-public class  DocumentosController {
+public class  TiposDocumentosController {
 
 	@Autowired
-	private DocumentosRepository documentosRepository;
+	private TiposDocumentosRepository documentosRepository;
     
 
 	@GetMapping("/dados")

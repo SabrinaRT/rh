@@ -9,5 +9,4 @@ import pb.prev.rhback.model.Logo;
 
 
 public interface LogoRepository extends JpaRepository<Logo, Long> {
-/* 	Optional<Image> findByName(String name); */
 }

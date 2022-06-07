@@ -9,18 +9,12 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import pb.prev.rhback.model.FotoColaborador;
-import pb.prev.rhback.exception.ResourceNotFoundException;
 import pb.prev.rhback.exception.UploadResponse;
 import pb.prev.rhback.repository.DadosPessoaisRepository;
 import pb.prev.rhback.repository.FotoColaboradorRepository;
-import pb.prev.rhback.repository.FotoColaboradorRepository;
 import pb.prev.rhback.util.ImageUtility;
-import pb.prev.rhback.util.ImageColaboradorUtility;
 import java.io.IOException;
-import java.net.http.HttpHeaders;
 import java.util.Optional;
-
-import javax.transaction.Transactional;
 
 @RestController
 @CrossOrigin(origins = "${servidor-porta}")
@@ -31,7 +25,7 @@ public class FotoColaboradorController {
     FotoColaboradorRepository fotoColaboradorRepository;
 
     @Autowired
-   DadosPessoaisRepository dadosPessoaisRepository;
+    DadosPessoaisRepository dadosPessoaisRepository;
 
     @PostMapping("/upload/image/{idColab}")
     public ResponseEntity<UploadResponse> uplaodImage(@RequestParam("image") MultipartFile file,@PathVariable Long idColab)
@@ -54,7 +48,6 @@ public class FotoColaboradorController {
         final Optional<FotoColaborador> dbImage = fotoColaboradorRepository.findByDadosPessoais_Id(id);
 
         return FotoColaborador.builder()
-               
                 .name(dbImage.get().getName())
                 .type(dbImage.get().getType())
                 .image(ImageUtility.decompressImage(dbImage.get().getImage())).build();

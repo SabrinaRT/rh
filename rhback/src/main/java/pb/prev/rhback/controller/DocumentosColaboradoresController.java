@@ -25,7 +25,6 @@ public class DocumentosColaboradoresController {
 
 	@PostMapping("/dados")
 	public DocumentosColaboradores createDocumentosColaboradores(@RequestBody DocumentosColaboradores documentos) {
-		
 		return documentosColaboradoresRepository.save(documentos);
 	}
 

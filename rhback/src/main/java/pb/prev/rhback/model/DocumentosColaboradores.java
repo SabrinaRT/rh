@@ -8,30 +8,25 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 public class DocumentosColaboradores {
 
     @Id
-    @GeneratedValue(strategy  = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
-    @ManyToOne
-	@JoinColumn(name = "dadosPessoaisId")
-    @JsonBackReference
-    private DadosPessoais dadosPessoais;
 
+    @ManyToOne
+    @JoinColumn(name = "dadosPessoaisId")
+    @JsonBackReference
     
+    private DadosPessoais dadosPessoais;
     private int tipo;
     private String nome_documento_upload;
-    
 
     public DocumentosColaboradores() {
     }
-
-
 
     public DocumentosColaboradores(DadosPessoais dadosPessoais, int tipo, String nome_documento_upload) {
         this.dadosPessoais = dadosPessoais;
         this.tipo = tipo;
         this.nome_documento_upload = nome_documento_upload;
     }
-   
 
     public Long getId() {
         return this.id;
@@ -49,7 +44,6 @@ public class DocumentosColaboradores {
         this.dadosPessoais = dadosPessoais;
     }
 
-    
     public int getTipo() {
         return this.tipo;
     }
@@ -58,8 +52,6 @@ public class DocumentosColaboradores {
         this.tipo = tipo;
     }
 
-   
-
     public String getNome_documento_upload() {
         return this.nome_documento_upload;
     }
@@ -67,6 +59,5 @@ public class DocumentosColaboradores {
     public void setNome_documento_upload(String nome_documento_upload) {
         this.nome_documento_upload = nome_documento_upload;
     }
-
 
 }

@@ -18,7 +18,7 @@ import pb.prev.rhback.upload.Disco;
 @CrossOrigin(origins = "${servidor-porta}")
 @RestController
 @RequestMapping("/api/fotos")
-public class DocumentosColaboradorController {
+public class UploadDocumentosController {
 
 	@Autowired
 	private Disco disco;
@@ -33,6 +33,7 @@ public class DocumentosColaboradorController {
 	public void upload(@RequestParam MultipartFile foto, @PathVariable Long id) {
 		disco.salvarFoto(foto, id);
 	}
+	
 
 	@GetMapping("/download/{id}/{nome}")
 	public ResponseEntity<Object> downloadFile(@PathVariable Long id, @PathVariable String nome) throws IOException {

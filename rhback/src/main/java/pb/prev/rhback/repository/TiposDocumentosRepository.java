@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import pb.prev.rhback.model.TiposDocumentos;
 
 @Repository
-public interface DocumentosRepository extends JpaRepository<TiposDocumentos,Long> {
+public interface TiposDocumentosRepository extends JpaRepository<TiposDocumentos,Long> {
     
 }
