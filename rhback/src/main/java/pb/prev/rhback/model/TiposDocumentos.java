@@ -5,7 +5,7 @@ import javax.persistence.*;
 
 
 @Entity
-public class Documentos {
+public class TiposDocumentos {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,12 +29,12 @@ public class Documentos {
         this.tipo = tipo;
     }
  
-    public Documentos(String tipo) {
+    public TiposDocumentos(String tipo) {
         this.tipo = tipo;
     }
     
 
-    public Documentos() {
+    public TiposDocumentos() {
     }
 
 }

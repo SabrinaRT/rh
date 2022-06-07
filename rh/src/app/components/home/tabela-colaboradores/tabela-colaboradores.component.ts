@@ -11,7 +11,7 @@ import { ToastrService } from 'ngx-toastr';
 import {
   DadosPessoais,
   DadosProfissionais,
-  Documentos,
+  TiposDocumentos,
   DocumentosColaboradores,
   SituacaoColaborador,
   TabelaInicial,
@@ -39,7 +39,7 @@ idUser:any
   DocumentosColaboradores: DocumentosColaboradores =
     new DocumentosColaboradores();
 
-  TiposDocumentos: Documentos[];
+  TiposDocumentos: TiposDocumentos[];
   TabelaInicial: TabelaInicial[];
   array: any = [];
   ngOnInit(): void {

@@ -7,7 +7,7 @@ import {
 import { ToastrService } from 'ngx-toastr';
 import {
   DadosPessoais,
-  Documentos,
+  TiposDocumentos,
   DocumentosColaboradores,
   Vinculos,
 } from 'src/app/siscrh';
@@ -20,10 +20,10 @@ import { DialogData } from '../vinculos/vinculos.component';
   styleUrls: ['./arquivos-config.component.css'],
 })
 export class ArquivosConfigComponent implements OnInit {
-  Documentos: Documentos[];
+  Documentos: TiposDocumentos[];
   DadosPessoais: DadosPessoais[];
   esconder = false;
-  documentos: Documentos = new Documentos();
+  documentos: TiposDocumentos = new TiposDocumentos();
   DocumentosAtualizados: any = [];
   constructor(private siscrhService: SiscrhService, public dialog: MatDialog) {}
 
@@ -184,7 +184,7 @@ export class EditArquivoDialog {
     this.dialogRef.close();
   }
 
-  documentos: Documentos = new Documentos();
+  documentos: TiposDocumentos = new TiposDocumentos();
 
  
 

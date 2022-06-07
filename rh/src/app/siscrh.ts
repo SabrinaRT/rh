@@ -231,7 +231,7 @@ export class DocumentosColaboradores {
   };
   tipo: any;
 }
-export class Documentos {
+export class TiposDocumentos {
   id: any;
   tipo: any;
 }

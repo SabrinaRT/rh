@@ -21,7 +21,7 @@ import {
   Vinculos,
   Matriculas,
   SituacaoColaborador,
-  Documentos,
+  TiposDocumentos,
   DocumentosColaboradores,
   CEP,
   RegistroAtividade,
@@ -68,7 +68,7 @@ export class FichaComponent implements OnInit {
   Dependentes: Dependentes[];
   DadosPessoais: DadosPessoais[];
   DadosEstadoCivil: DadosEstadoCivil[];
-  TiposDocumentos: Documentos[];
+  TiposDocumentos: TiposDocumentos[];
 
   cep: CEP = new CEP();
   CPFValido: any;

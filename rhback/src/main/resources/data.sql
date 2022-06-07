@@ -44,7 +44,7 @@ INSERT IGNORE INTO `vinculos`(`id`, `vinculo`) VALUES
 (6,'Membro Titular'),
 (7,'Membro Suplente')
 ;
-INSERT IGNORE INTO `documentos`(`id`, `tipo`) VALUES
+INSERT IGNORE INTO `tipos_documentos`(`id`, `tipo`) VALUES
   (1,"Opcional"),
   (2,"Identidade"),
   (3,"CPF"),

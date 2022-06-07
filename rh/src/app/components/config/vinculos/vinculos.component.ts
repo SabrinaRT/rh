@@ -6,7 +6,7 @@ import {
   MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
-import { DadosProfissionais, Documentos, Vinculos } from 'src/app/siscrh';
+import { DadosProfissionais, Vinculos } from 'src/app/siscrh';
 import { SiscrhService } from 'src/app/siscrh.service';
 
 export interface DialogData {

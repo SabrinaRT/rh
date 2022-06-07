@@ -11,7 +11,7 @@ import {
   Vinculos,
   Matriculas,
   SituacaoColaborador,
-  Documentos,
+  TiposDocumentos,
   DocumentosColaboradores,
   CEP,
   Usuarios,
@@ -164,12 +164,12 @@ export class SiscrhService {
     return this.httpClient.post(this.url + `/v20/dados`, colaborador);
   }
 
-  createDocumento(colaborador: Documentos): Observable<Object> {
+  createDocumento(colaborador: TiposDocumentos): Observable<Object> {
     return this.httpClient.post(this.url + `/v26/dados`, colaborador);
   }
 
-  getDocumentosList(): Observable<Documentos[]> {
-    return this.httpClient.get<Documentos[]>(this.url + `/v26/dados`);
+  getDocumentosList(): Observable<TiposDocumentos[]> {
+    return this.httpClient.get<TiposDocumentos[]>(this.url + `/v26/dados`);
   }
 
   deleteDocumento(id: number) {

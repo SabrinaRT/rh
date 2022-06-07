@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { DadosPessoais, Documentos, DocumentosColaboradores } from 'src/app/siscrh';
+import { DadosPessoais, TiposDocumentos, DocumentosColaboradores } from 'src/app/siscrh';
 import { SiscrhService } from 'src/app/siscrh.service';
 import { FichaComponent } from '../../cadastro/ficha/ficha.component';
 
@@ -152,7 +152,7 @@ export class ArquivosComponent implements OnInit {
   
   }
 
-  TiposDocumentos: Documentos[];
+  TiposDocumentos: TiposDocumentos[];
   
   dadosPessoais: DadosPessoais = new DadosPessoais();
   documentos:DocumentosColaboradores = new DocumentosColaboradores();
