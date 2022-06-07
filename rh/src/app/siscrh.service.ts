@@ -263,21 +263,7 @@ export class SiscrhService {
     );
   }
 
-  uploadLogo(formData: FormData): Observable<Object> {
-    return this.httpClient.post(this.url2 +
-      `/configuracao/upload`,
-      formData
-    );
-  }
-  downloadLogo() {
-    window.location.href = this.url2 +`/configuracao/download`;
-  }
-
-  deleteLogo() {
-    return this.httpClient.get<ConfiguracaoSistema[]>(
-      this.url2 +`/configuracao/delete`
-    );
-  }
+ 
 
   enviarEmailRhAtivar(id: number): Observable<DadosProfissionais> {
     return this.httpClient.get<DadosProfissionais>(
@@ -306,23 +292,30 @@ export class SiscrhService {
     return this.httpClient.post(this.url + `/v305/upload/image/${idColab}`, image);
   }
 
-  /*  uploadLogo(formData: FormData): Observable<Object> {
-    return this.httpClient.post(this.url2 +
-      `/configuracao/upload`,
-      formData
-    );
-  } */
+
   getFotoInfo(idColab:any): Observable<FotoColaborador[]>{
     return this.httpClient.get<FotoColaborador[]>(
       this.url + `/v305/get/image/info/${idColab}`
     );
 
   }
-  getColaboradorById2(id: number): Observable<Logo> {
-    return this.httpClient.get<Logo>(this.url + `/dados/${id}`);
+  getLogo(): Observable<Logo> {
+    return this.httpClient.get<Logo>(this.url + `/logo`);
   }
 
- 
+  getLogoInfo(): Observable<Logo[]>{
+    return this.httpClient.get<Logo[]>(
+      this.url + `/get/image/info`
+    );
+
+  }
   
-  
+  deleteLogo(): Observable<Object> {
+    return this.httpClient.post(`http://localhost:8080/delete/image`, null);
+  }
+
+
+  uploadLogo(formData: FormData): Observable<Object> {
+    return this.httpClient.post(this.url + `/upload/image`, formData);
+  }
 }

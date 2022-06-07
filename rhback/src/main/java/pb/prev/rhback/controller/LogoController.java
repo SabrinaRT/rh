@@ -25,7 +25,7 @@ public class LogoController {
 
    
 
-    @PostMapping("/upload/image")
+    @PostMapping("api/upload/image")
     public ResponseEntity<UploadResponse> uploadImage(@RequestParam("image") MultipartFile file)
             throws IOException {
 
@@ -68,11 +68,22 @@ public class LogoController {
                 .body(ImageUtility.decompressImage(dbImage.get().getImage()));
     }
 
+    @GetMapping(path = {"api/get/image/info"})
+    public Logo getImageDetails() throws IOException {
+
+        final Optional<Logo> dbImage = logoRepository.findById(Long.valueOf(1));
+
+        return Logo.builder()
+                .name(dbImage.get().getName())
+                .type(dbImage.get().getType())
+                .image(ImageUtility.decompressImage(dbImage.get().getImage())).build();
+    }
+
     
-    @GetMapping(value="api/dados/{id}")
-    public ResponseEntity<Logo> getAllLogo(@PathVariable Long id) {
-            Logo processo = logoRepository.findById(id)
-                            .orElseThrow(() -> new ResourceNotFoundException("Logo not exist with id: " + id));
+    @GetMapping(value="api/logo")
+    public ResponseEntity<Logo> getAllLogo() {
+            Logo processo = logoRepository.findById(Long.valueOf(1))
+                            .orElseThrow(() -> new ResourceNotFoundException("Logo not exist with id: "));
 
             return ResponseEntity.ok(processo);
     }

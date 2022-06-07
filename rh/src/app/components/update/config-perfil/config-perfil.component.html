@@ -10,26 +10,19 @@
           style="display: none"
         />
 
-        <div class="hovereffect" [hidden]="FotoPerfil">
+        <div class="hovereffect">
           <img
             mat-card-image
-            src="assets/sem foto.png"
+            [src]="UrlFoto"
             alt="Sem Foto"
             [hidden]="FotoPerfil"
           />
-          <div class="overlay">
+          <div class="overlay"  [hidden]="FotoPerfil">
             <h2>Foto de Perfil</h2>
 
             <a class="info" (click)="fileUpload.click()">Upload</a>
           </div>
-        </div>
-        <div class="hovereffect" [hidden]="!FotoPerfil">
-          <img
-            mat-card-image
-            [src]="UrlFoto"
-            alt="dadosPessoais.nome_completo"
-          />
-          <div class="overlay">
+          <div class="overlay" [hidden]="!FotoPerfil">
             <h2>Foto de Perfil</h2>
             <a class="info" (click)="downloadFoto()">Baixar Foto</a>
             <br />

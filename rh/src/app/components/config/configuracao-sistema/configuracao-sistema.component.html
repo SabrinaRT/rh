@@ -1,37 +1,25 @@
-<!-- <div class="row">
-  <div class="col-3 ">
-    <div class="hovereffect" >
-      <img mat-card-image  [src]="UrlLogo">
-      <div class="overlay">
-        <h2>Foto de Perfil</h2>
-        <a class="info" >Baixar Foto</a>
-        <br />
-        <a class="info" href="">Apagar Foto</a>
-      </div>
-    </div>
-  
-  </div>
-  <div class="col-4">
-    p
-  </div>
-</div> -->
-
 <div class="container">
   <div class="row">
     <div class="col-4">
+      <input
+      #fileUpload
+      type="file"
+      (change)="upload($event)"
+      style="display: none"
+    />
       <div class="hovereffect ">
         <img [src]="UrlLogo"  />
         <div class="overlay" [hidden]="LogoShow">
           <h2>Logo da Instituição</h2>
 
-          <a class="info">Baixar Logo</a>
+          <a class="info" (click)=" downloadFoto()">Baixar Logo</a>
           <br>
-          <a class="info">Apagar Logo</a>
+          <a class="info" (click)="delete()">Apagar Logo</a>
         </div>
         <div class="overlay" [hidden]="!LogoShow">
           <h2>Logo da Instituição</h2>
 
-          <a class="info">Upload</a>
+          <a class="info"  (click)="fileUpload.click()">Upload</a>
         </div>
       </div>
     </div>
@@ -71,57 +59,3 @@
     </div>
   </div>
 </div>
-
-<!-- 
-<div class="container">
-<div class="row">
-  <div class="box-shadow">
-    <div class="col-3">
-     
-  
-        <div class="row">
-          <div class="col-12">
-            
-          </div>
-       
-          
-        </div>
-  
-    </div>
-  </div>
-  <div class="col-6">
-    <mat-card>
-      
- 
-  <br />
-  
-  <div class="row">
-    <div class="col-10"></div>
-    <div class="col-2">
-      <button
-        mat-raised-button
-        color="primary"
-        class="col-12"
-        (click)="salvarConfiguracao()"
-      >
-        Salvar
-      </button>
-    </div>
-    
-  <br />
-</div>
-</mat-card>
-  </div>
-
-
-</div>
-</div>
-
-
-
-
-
-
-
-
- -->

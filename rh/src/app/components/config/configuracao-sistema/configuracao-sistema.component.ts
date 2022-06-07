@@ -11,6 +11,7 @@ import { SiscrhService } from 'src/app/siscrh.service';
 export class ConfiguracaoSistemaComponent implements OnInit {
   configuracao: ConfiguracaoSistema = new ConfiguracaoSistema();
   configuracao2: ConfiguracaoSistema = new ConfiguracaoSistema();
+  logo: Logo = new Logo();
   constructor(
     private toastr: ToastrService,
     private siscrhService: SiscrhService
@@ -20,19 +21,19 @@ export class ConfiguracaoSistemaComponent implements OnInit {
       this.configuracao = data;
       this.configuracao2 = data;
     });
-this.siscrhService.getColaboradorById2(1).subscribe((data:any)=>{
-  console.log(data)
-  if(data.image != null){
-    this.UrlLogo =  "http://localhost:8080/api/get/image"
-    this.LogoShow = false
-  }else{
-    this.UrlLogo = 'assets/sem foto.png'
-    this.LogoShow = true
+    this.siscrhService.getLogo().subscribe((data: any) => {
+      console.log(data);
+      if (data.image != null) {
+        this.UrlLogo = 'http://localhost:8080/api/get/image';
+        this.LogoShow = false;
+      } else {
+        this.UrlLogo = 'assets/sem foto.png';
+        this.LogoShow = true;
+      }
+    });
+    /*     */
   }
-})
- /*     */
-  }
-  LogoShow = false
+  LogoShow = false;
   UrlLogo = 'assets/sem foto.png';
   DisplayLogo: any;
 
@@ -48,62 +49,45 @@ this.siscrhService.getColaboradorById2(1).subscribe((data:any)=>{
       }
     );
   }
-  downloadLogo() {
-    this.siscrhService.downloadLogo();
+
+  ngOnInit(): void {}
+
+  delete() {
+    this.siscrhService.deleteLogo().subscribe((data: any) => {
+      console.log(data);
+      this.UrlLogo = 'assets/sem foto.png';
+      this.LogoShow = true;
+    });
   }
-  deletarLogo() {
-    this.siscrhService
-      .deleteLogo()
-      .subscribe((data: any) => (this.configuracao = data));
+
+  downloadFoto() {
+    this.siscrhService.getLogoInfo().subscribe((data: any) => {
+      console.log(data);
+      var gh = 'data:image/png;base64,' + data.image;
+      var a = document.createElement('a');
+      a.href = gh;
+      a.download = 'Logo.png';
+      a.click();
+    });
   }
-  uploadLogo() {
-    this.configuracao2.logo_instituicao = this.configuracao.logo_instituicao;
-    this.siscrhService.salvarConfiguracaoSistema(this.configuracao2).subscribe(
-      (data: any) => {
-        console.log(data);
-        this.toastr.success('Dados foram atualizados com sucesso!', 'Atenção!');
-      },
-      (error) => {
-        console.log('error', error);
-        this.toastr.error('Houve algum erro!', 'Erro!');
-      }
-    );
-  }
+
 
   upload(event: any) {
     if (event.target.files && event.target.files[0]) {
-      this.configuracao.logo_instituicao = event.target.files[0].name;
-      var nome_upload = event.target.files[0].name;
-      const foto = event.target.files[0];
+      const image = event.target.files[0];
       const formData = new FormData();
-      formData.append('foto', foto, nome_upload);
+      formData.append('image', image, event.target.files[0].name);
+      this.logo.image = formData;
 
       this.siscrhService.uploadLogo(formData).subscribe(
         (data: any) => {
-          console.log(data);
-          this.uploadLogo();
+          this.UrlLogo = 'http://localhost:8080/api/get/image';
+          this.LogoShow = false;
         },
         (error) => {
           console.log('error', error);
         }
       );
     }
-  }
-
-  ngOnInit(): void {}
-  //url; //Angular 8
-  url: any; //Angular 11, for stricter type
-  msg = '';
-
-  selectFile(event: any) {
-    var MyBlob = new Blob(['test text'], { type: 'image/jpeg' });
-    console.log(MyBlob instanceof Blob); // true
-
-    var reader = new FileReader();
-    reader.readAsDataURL(event.target.files[0]);
-    reader.onload = (_event) => {
-      this.url = reader.result;
-      console.log(this.url);
-    };
   }
 }
