@@ -15,6 +15,8 @@ import {
   DocumentosColaboradores,
   SituacaoColaborador,
   TabelaInicial,
+  Setores,
+  Vinculos,
 } from 'src/app/siscrh';
 import { SiscrhService } from 'src/app/siscrh.service';
 import { FichaComponent } from '../../cadastro/ficha/ficha.component';
@@ -36,22 +38,21 @@ export class TabelaColaboradoresComponent implements OnInit {
 idUser:any
   filtro = new FormControl();
   searchValue: any;
+  setor: any;
+  vinculo:any
   DocumentosColaboradores: DocumentosColaboradores =
     new DocumentosColaboradores();
 
-  TiposDocumentos: TiposDocumentos[];
   TabelaInicial: TabelaInicial[];
   array: any = [];
-  ngOnInit(): void {
-    this.siscrhService.getDocumentosList().subscribe(
-      (data: any) => {
-        this.TiposDocumentos = data;
-      },
-      (error) => {
-        console.log('error', error);
-      }
-    );
 
+  setores: Setores[]
+  vinculos:Vinculos []
+situacao  = [{status:"Ativo", value:true}, {status:"Desativo", value:false}]
+situacaoValue:any
+  ngOnInit(): void {
+ this.siscrhService.getSetoresList().subscribe((data:any)=>{this.setores = data})
+ this.siscrhService.getVinculosList().subscribe((data:any)=>{this.vinculos = data})
 
 
 

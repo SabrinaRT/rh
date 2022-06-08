@@ -6,9 +6,21 @@ import { RegistroAtividade, TabelaInicial } from './siscrh';
 })
 export class SearchfilterPipe implements PipeTransform {
 
-  transform(tabelaInicial: TabelaInicial[], searchValue:string) {
+  
+
+  transform(tabelaInicial: TabelaInicial[], searchValue:any) {
+
    
-    if(!tabelaInicial|| !tabelaInicial){
+
+    if (searchValue) {
+      searchValue = searchValue.toLocaleLowerCase();
+      return tabelaInicial.filter((tabelaInicial) =>
+      tabelaInicial.nome.toLocaleLowerCase().indexOf(searchValue) !== -1);
+  } else {
+      return tabelaInicial;
+  }
+  
+    /* if(!tabelaInicial|| !tabelaInicial){
       return tabelaInicial;
     }
     return tabelaInicial.filter(
@@ -18,7 +30,7 @@ export class SearchfilterPipe implements PipeTransform {
       tabelaInicial.nome.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase())  ||
       tabelaInicial.setor.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase())
       
-      );
+      ); */
   }
   
 

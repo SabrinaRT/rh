@@ -42,22 +42,25 @@
 <br />
 <mat-form-field appearance="outline" class="col-11" style="margin-left: 3%">
   <mat-label><mat-icon>search</mat-icon>Pesquisar...</mat-label>
-  <input matInput [(ngModel)]="searchValue" />
+  <input matInput  [(ngModel)]="searchValue"/>
 </mat-form-field>
-<mat-form-field appearance="fill">
-  <mat-label>Toppings</mat-label>
-  <mat-select [formControl]="toppings" [(ngModel)]="searchValue" multiple>
-{{toppings.value}}    <mat-select-trigger>
-      {{toppings.value?.[0] || ''}}
-      <span *ngIf="(toppings.value?.length || 0) > 1" class="example-additional-selection">
-        (+{{(toppings.value?.length || 0) - 1}} {{toppings.value?.length === 2 ? 'other' : 'others'}})
-      </span>
-    </mat-select-trigger>
-    <mat-option *ngFor="let topping of toppingList" [value]="topping">{{topping}}</mat-option>
+<mat-form-field appearance="outline" style="margin-left: 3%">
+  <mat-label>Setores</mat-label>
+  <mat-select  [(ngModel)]="setor"  >
+    <mat-option value="Todos" selected>Todos</mat-option>
+    <mat-option *ngFor="let setores of setores" [value]="setores.setor">{{setores.setor}}</mat-option>
+  
   </mat-select>
 </mat-form-field>
 
+<mat-form-field appearance="outline" style="margin-left: 3%">
+  <mat-label>Situação</mat-label>
+  <mat-select  [(ngModel)]="situacaoValue"  >
+    <mat-option *ngFor="let situacao of situacao" [value]="situacao.value">{{situacao.status}}</mat-option>
 
+  
+  </mat-select>
+</mat-form-field>
 
 <div class="col-11" style="margin-left: 3%">
   <table matSort (matSortChange)="sortData($event)" class="box-shadow">
@@ -70,57 +73,57 @@
         <th style="text-align: center">Serviços</th>
       </tr>
     </thead>
-    <tbody>
+    <tbody >
       <div class="row" [hidden]="esconder">
         <div class="col-5"></div>
         <div class="col-3"><mat-spinner></mat-spinner></div>
       </div>
 
-      <tr
-        *ngFor="let TabelaInicial of TabelaInicial | searchfilter: searchValue"
-      >
-        <td colspan="2">{{ TabelaInicial.nome }}<br /></td>
-        <td>{{ TabelaInicial.setor }}</td>
-        <td style="text-align: center">
-          <mat-icon *ngIf="TabelaInicial.status == true" style="color: green"
-            >check_circle</mat-icon
-          >
-          <mat-icon *ngIf="TabelaInicial.status == false" style="color: red"
-            >cancel</mat-icon
-          >
-        </td>
-        <td style="text-align: center">
-          <mat-icon
-            *ngIf="TabelaInicial.acessoRede == true"
-            style="color: green"
-            >check_circle</mat-icon
-          >
-          <mat-icon *ngIf="TabelaInicial.acessoRede == false" style="color: red"
-            >cancel</mat-icon
-          >
-        </td>
-
-        <td style="text-align: center">
-          <button
-            mat-raised-button
-            color="files"
-            [routerLink]="['painel', TabelaInicial.id]"
-            [routerLink]="['',idUser,'painel', TabelaInicial.id]"
-            style="margin-right: 10px"
-          >
-            <mat-icon>edit</mat-icon>
-          </button>
-
-          <button
-            mat-raised-button
-            color="edit"
-            [routerLink]="['',idUser,'pdf-perfil', TabelaInicial.id]"
-           
-          >
-            <mat-icon>picture_as_pdf</mat-icon>
-          </button>
-        </td>
+      <ng-container *ngFor="let TabelaInicial of TabelaInicial | searchfilter: searchValue" >  
+        <tr  *ngIf=" TabelaInicial.status  == situacaoValue||TabelaInicial.setor  == setor || setor == null || setor == 'Todos' " >
+          <td colspan="2">{{ TabelaInicial.nome }}<br /></td>
+          <td>{{ TabelaInicial.setor }}</td>
+          <td style="text-align: center">
+            <mat-icon *ngIf="TabelaInicial.status == true" style="color: green"
+              >check_circle</mat-icon
+            >
+            <mat-icon *ngIf="TabelaInicial.status == false" style="color: red"
+              >cancel</mat-icon
+            >
+          </td>
+          <td style="text-align: center">
+            <mat-icon
+              *ngIf="TabelaInicial.acessoRede == true"
+              style="color: green"
+              >check_circle</mat-icon
+            >
+            <mat-icon *ngIf="TabelaInicial.acessoRede == false" style="color: red"
+              >cancel</mat-icon
+            >
+          </td>
+  
+          <td style="text-align: center">
+            <button
+              mat-raised-button
+              color="files"
+              [routerLink]="['painel', TabelaInicial.id]"
+              [routerLink]="['',idUser,'painel', TabelaInicial.id]"
+              style="margin-right: 10px"
+            >
+              <mat-icon>edit</mat-icon>
+            </button>
+  
+            <button
+              mat-raised-button
+              color="edit"
+              [routerLink]="['',idUser,'pdf-perfil', TabelaInicial.id]"
+             
+            >
+              <mat-icon>picture_as_pdf</mat-icon>
+            </button>
+          </td>
       </tr>
+      </ng-container>
     </tbody>
   </table>
 </div>

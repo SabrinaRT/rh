@@ -49,6 +49,7 @@ import { LoginComponent } from './components/login/login.component';
 import { SearchfilterPipe2 } from './searchfilter2.pipe';
 import { DeleteUsuarioDialog, EditUsuarioDialog, ListaUsuariosComponent } from './components/config/lista-usuarios/lista-usuarios.component';
 import { ConfiguracaoSistemaComponent } from './components/config/configuracao-sistema/configuracao-sistema.component';
+import { CommonModule } from '@angular/common';
 @NgModule({
   declarations: [
     AppComponent,
@@ -82,6 +83,7 @@ import { ConfiguracaoSistemaComponent } from './components/config/configuracao-s
     ConfiguracaoSistemaComponent,
   ],
   imports: [
+    CommonModule,
     MatTooltipModule,
     ScrollingModule,
     MatProgressSpinnerModule,
