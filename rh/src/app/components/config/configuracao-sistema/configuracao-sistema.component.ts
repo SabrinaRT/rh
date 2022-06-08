@@ -10,19 +10,15 @@ import { SiscrhService } from 'src/app/siscrh.service';
 })
 export class ConfiguracaoSistemaComponent implements OnInit {
   configuracao: ConfiguracaoSistema = new ConfiguracaoSistema();
-  configuracao2: ConfiguracaoSistema = new ConfiguracaoSistema();
   logo: Logo = new Logo();
   constructor(
     private toastr: ToastrService,
     private siscrhService: SiscrhService
   ) {
     this.siscrhService.getConfiguracaoSistema().subscribe((data: any) => {
-      console.log(data);
       this.configuracao = data;
-      this.configuracao2 = data;
     });
     this.siscrhService.getLogo().subscribe((data: any) => {
-      console.log(data);
       if (data.image != null) {
         this.UrlLogo = 'http://localhost:8080/api/get/image';
         this.LogoShow = false;
@@ -31,7 +27,6 @@ export class ConfiguracaoSistemaComponent implements OnInit {
         this.LogoShow = true;
       }
     });
-    /*     */
   }
   LogoShow = false;
   UrlLogo = 'assets/sem foto.png';

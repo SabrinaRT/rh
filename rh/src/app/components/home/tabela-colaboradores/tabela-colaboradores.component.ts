@@ -51,6 +51,10 @@ idUser:any
         console.log('error', error);
       }
     );
+
+
+
+
     this.siscrhService.getDadosProfissionaisList().subscribe(
       (data: any) => {
         for (let i in data) {
@@ -109,6 +113,12 @@ idUser:any
   editContact(id: number) {
     /* console.log(id); */
   }
+
+
+  toppings = new FormControl('');
+
+  toppingList: string[] = ['Gerência de Informática', 'Mushroom', 'Onion', 'Pepperoni', 'Sausage', 'Tomato'];
+
 }
 function compare2(a: number | string, b: number | string, isAsc: boolean) {
   return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
