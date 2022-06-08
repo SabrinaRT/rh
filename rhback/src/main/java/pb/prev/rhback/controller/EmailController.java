@@ -7,8 +7,10 @@ import org.springframework.web.bind.annotation.*;
 
 import pb.prev.rhback.Service.EmailSenderService;
 import pb.prev.rhback.exception.ResourceNotFoundException;
+import pb.prev.rhback.model.ConfiguracaoSistema;
 import pb.prev.rhback.model.DadosPessoais;
 import pb.prev.rhback.model.DadosProfissionais;
+import pb.prev.rhback.repository.ConfiguracaoSistemaRepository;
 import pb.prev.rhback.repository.DadosPessoaisRepository;
 import pb.prev.rhback.repository.DadosProfissionaisRepository;
 
@@ -27,6 +29,9 @@ public class EmailController {
 
     @Autowired
     private DadosProfissionaisRepository dadosProfissionaisRepository;
+
+    @Autowired
+    private ConfiguracaoSistemaRepository configuracaoSistemaRepository;
 
     @Autowired
     private DadosPessoaisRepository dadosPessoaisRepository;
@@ -50,7 +55,9 @@ public class EmailController {
         } else {
             setor = dadosProfissionais.getSetores().getSetor().toString();
         }
-        senderService.sendSimpleEmail(email_informatica,
+
+        ConfiguracaoSistema processo = configuracaoSistemaRepository.findById(Long.valueOf(1)).orElseThrow(() -> new ResourceNotFoundException("Configuracao Sistema not exist with id: " + 1));
+        senderService.sendSimpleEmail(processo.getEmail_informatica(),
                 "Atenção! SISCOGEP Informa!",
                 "Por gentileza, criar conta no nosso sistema com as seguintes informações: \n" +
                         "Nome Completo: " + dadosProfissionais.getDadosPessoais().getNome_completo().toString() + "\n" +
@@ -76,7 +83,9 @@ public class EmailController {
         } else {
             setor = dadosProfissionais.getSetores().getSetor().toString();
         }
-        senderService.sendSimpleEmail(email_informatica,
+
+        ConfiguracaoSistema processo = configuracaoSistemaRepository.findById(Long.valueOf(1)).orElseThrow(() -> new ResourceNotFoundException("Configuracao Sistema not exist with id: " + 1));
+        senderService.sendSimpleEmail(processo.getEmail_informatica(),
                 "Atenção! SISCOGEP Informa!",
                 "Por gentileza, desativar a conta no nosso sistema do(a) colaborador(a): \n" +
                         "Nome Completo: " + dadosProfissionais.getDadosPessoais().getNome_completo().toString()
@@ -93,7 +102,8 @@ public class EmailController {
         DadosPessoais dadosPessoais = dadosPessoaisRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("DadosPessoais not exist with id: " + id));
         if (dadosPessoais.getNome_completo().toString() != null) {
-            senderService.sendSimpleEmail(email_informatica,
+            ConfiguracaoSistema processo = configuracaoSistemaRepository.findById(Long.valueOf(1)).orElseThrow(() -> new ResourceNotFoundException("Configuracao Sistema not exist with id: " + 1));
+            senderService.sendSimpleEmail(processo.getEmail_rh(),
                     "Atenção! SISCOGEP Informa!",
                     "O usuário do(a) colaborador(a), "
                             + dadosPessoais.getNome_completo().toString()
@@ -107,7 +117,8 @@ public class EmailController {
         DadosPessoais dadosPessoais = dadosPessoaisRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("DadosPessoais not exist with id: " + id));
         if (dadosPessoais.getNome_completo().toString() != null) {
-            senderService.sendSimpleEmail(email_informatica,
+            ConfiguracaoSistema processo = configuracaoSistemaRepository.findById(Long.valueOf(1)).orElseThrow(() -> new ResourceNotFoundException("Configuracao Sistema not exist with id: " + 1));
+            senderService.sendSimpleEmail(processo.getEmail_rh(),
                     "Atenção! SISCOGEP Informa!",
                     "O usuário do(a) colaborador(a), "
                             + dadosPessoais.getNome_completo().toString()
