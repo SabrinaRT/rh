@@ -39,12 +39,9 @@ export class TabelaColaboradoresComponent implements OnInit {
   searchValue: any;
   setor: any;
   vinculo: any;
-  DocumentosColaboradores: DocumentosColaboradores =
-    new DocumentosColaboradores();
-
+  DocumentosColaboradores: DocumentosColaboradores = new DocumentosColaboradores();
   TabelaInicial: TabelaInicial[];
   array: any = [];
-
   setores: Setores[];
   vinculos: Vinculos[];
   situacao = [

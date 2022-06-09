@@ -102,21 +102,21 @@
           <td colspan="2">{{ TabelaInicial.nome }}<br /></td>
           <td>{{ TabelaInicial.setor }}</td>
           <td style="text-align: center">
-            <mat-icon *ngIf="TabelaInicial.status == true" style="color: green"
+            <mat-icon [hidden]="!TabelaInicial.status" style="color: green"
               >check_circle</mat-icon
             >
-            <mat-icon *ngIf="TabelaInicial.status == false" style="color: red"
+            <mat-icon [hidden]="TabelaInicial.status" style="color: red"
               >cancel</mat-icon
             >
           </td>
           <td style="text-align: center">
             <mat-icon
-              *ngIf="TabelaInicial.acessoRede == true"
+            [hidden]="TabelaInicial.status"
               style="color: green"
               >check_circle</mat-icon
             >
             <mat-icon
-              *ngIf="TabelaInicial.acessoRede == false"
+            [hidden]="!TabelaInicial.status"
               style="color: red"
               >cancel</mat-icon
             >
