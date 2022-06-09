@@ -74,7 +74,7 @@ INSERT IGNORE INTO `tipos_documentos`(`id`, `tipo`) VALUES
  
 
 
- INSERT IGNORE INTO `dados_pessoais`(`id`, `cpf`,`nome_completo`,`data_nascimento`,  `nacionalidade`,`naturalidade`, `uf_naturalidade`,`identidade`, `uf_identidade`, `titulo_eleitor`,`pis_pasep`,`telefone`, `celular`,`email`, `endereco`, `numero`,`complemento`,`bairro`,`cep`, `cidade`, `uf_cidade`,  `nome_mae`, `nome_pai`   )
+ INSERT IGNORE INTO `dados_pessoais`(`id`, `cpf`,`nome_completo`,`data_nascimento`,  `nacionalidade`,`naturalidade`, `uf_naturalidade`,`identidade`, `uf_identidade`, `titulo_eleitor`,`pis_pasep`,`telefone`, `celular`,`email`, `endereco`, `numero`,`complemento`,`bairro`,`cep`, `cidade`, `uf_cidade`,   `nome_pai` , `nome_mae`  )
 VALUES 
 (51,'103.494.974-86','JHEFFREY ITTLER LEITE CARVALHO','1999-04-30','BRASILEIRO','JOÃO PESSOA','PB','4331411','PB','047388441279','20677773441',NULL,'(83) 9 8718-0434','jheffreyitller2013@gmail.com','Rua das Cerejas','56','casa','Mangabeira','58059774','João Pessoa','PB','EVANILDO DO NASCIMENTO TRABALHO','AMALIA LEITE PEREIRA'),
 (52,'069.753.154-69','FREDERICO AUGUSTO CAVALCANTI BERNARDO','1987-02-22','BRASILEIRO','JOÃO PESSOA','PB','2680717','PB','036480111287','19053971109',NULL,NULL,NULL,'Rua Norberto de Castro Nogueira','169',NULL,'Jardim Oceania','58037603','JOÃO PESSOA','PB','BERNADETE DE JESUS ARAÚJO CAVALCANTI','LUIZ AUGUSTO BERNARDO '),

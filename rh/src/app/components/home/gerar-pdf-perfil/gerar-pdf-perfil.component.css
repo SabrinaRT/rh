@@ -22,3 +22,48 @@ mat-form-field{
 	  display: none;
 	}
   }
+
+  mat-grid-tile {
+	background: lightblue;
+  }
+
+  .form-label2{
+	font-size: 20px;
+	margin-bottom: -10px;
+}
+
+.topo {
+	position: relative;
+
+  }
+ 
+  .img {
+	position: absolute;
+	max-width: 25%;
+	top: 50%;
+	left: 30px;
+  }
+  
+  .titulo-principal,
+  p {
+	font-size: "Open Sans Condensed", "Arial", sans-serif;
+	text-align: center;
+	margin: 0 auto;
+	max-width: 50%;
+	
+  }
+
+
+  .container img {
+    max-width: 200px;
+    max-height:250px;
+    width: auto;
+    height: auto;
+}
+.container {
+    clear: both;
+    margin-bottom: -20px;
+}
+img {
+    vertical-align: top
+}

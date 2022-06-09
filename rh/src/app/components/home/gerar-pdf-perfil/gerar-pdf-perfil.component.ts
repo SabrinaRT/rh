@@ -25,7 +25,22 @@ export class GerarPdfPerfilComponent implements OnInit {
    
 idUser:any
 IDColab:any
+FotoPerfil = true;
+IdFoto: any;
+UrlFoto = "assets/sem foto.png"
   ngOnInit(): void {
+
+    
+    this.siscrhService.getFotoInfo(this.IDColab).subscribe(
+      (data: any) => {
+        this.IdFoto = data.id;
+        this.UrlFoto =
+          'http://localhost:8080/api/v305/get/image/' + this.IDColab;
+      },
+      (error) => {
+        this.FotoPerfil = false;
+      }
+    );
    
     this.siscrhService.getColaboradorById(this.IDColab).subscribe((data:any)=>{
       this.dadosPessoais = data

@@ -111,12 +111,12 @@
           </td>
           <td style="text-align: center">
             <mat-icon
-            [hidden]="TabelaInicial.status"
+            [hidden]="!TabelaInicial.acessoRede"
               style="color: green"
               >check_circle</mat-icon
             >
             <mat-icon
-            [hidden]="!TabelaInicial.status"
+            [hidden]="TabelaInicial.acessoRede"
               style="color: red"
               >cancel</mat-icon
             >

@@ -1,25 +1,15 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import {
-  MatDialog,
-  MatDialogRef,
-  MAT_DIALOG_DATA,
-} from '@angular/material/dialog';
 import { Sort } from '@angular/material/sort';
 import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import {
-  DadosPessoais,
-  DadosProfissionais,
-  TiposDocumentos,
   DocumentosColaboradores,
-  SituacaoColaborador,
   TabelaInicial,
   Setores,
   Vinculos,
 } from 'src/app/siscrh';
 import { SiscrhService } from 'src/app/siscrh.service';
-import { FichaComponent } from '../../cadastro/ficha/ficha.component';
 
 @Component({
   selector: 'app-tabela-colaboradores',
@@ -33,17 +23,22 @@ export class TabelaColaboradoresComponent implements OnInit {
     private route: ActivatedRoute
   ) {
     this.idUser = this.route.snapshot.params['idUser'];
+    
+    
   }
-  idUser: any;
-  filtro = new FormControl();
-  searchValue: any;
-  setor: any;
-  vinculo: any;
-  DocumentosColaboradores: DocumentosColaboradores = new DocumentosColaboradores();
+  DocumentosColaboradores: DocumentosColaboradores =
+    new DocumentosColaboradores();
   TabelaInicial: TabelaInicial[];
   array: any = [];
   setores: Setores[];
   vinculos: Vinculos[];
+  acessoValue: any;
+  situacaoValue: any;
+  idUser: any;
+  searchValue: any;
+  setor: any;
+  vinculo: any;
+  esconder = false;
   situacao = [
     { status: 'Todos', value: 'Todos' },
     { status: 'Ativo', value: true },
@@ -54,9 +49,9 @@ export class TabelaColaboradoresComponent implements OnInit {
     { status: 'Ativo', value: true },
     { status: 'Desativo', value: false },
   ];
-  acessoValue: any;
-  situacaoValue: any;
+
   ngOnInit(): void {
+    
     this.siscrhService.getSetoresList().subscribe((data: any) => {
       this.setores = data;
     });
@@ -118,21 +113,6 @@ export class TabelaColaboradoresComponent implements OnInit {
       }
     });
   }
-  esconder = false;
-  editContact(id: number) {
-    /* console.log(id); */
-  }
-
-  toppings = new FormControl('');
-
-  toppingList: string[] = [
-    'Gerência de Informática',
-    'Mushroom',
-    'Onion',
-    'Pepperoni',
-    'Sausage',
-    'Tomato',
-  ];
 }
 function compare2(a: number | string, b: number | string, isAsc: boolean) {
   return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
