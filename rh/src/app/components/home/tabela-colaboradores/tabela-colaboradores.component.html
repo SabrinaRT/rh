@@ -2,8 +2,7 @@
   <button
     mat-raised-button
     color="config"
-    [routerLink]="['',idUser, 'config']"
-   
+    [routerLink]="['', idUser, 'config']"
     style="margin-right: 1%"
   >
     <mat-icon>settings</mat-icon>
@@ -11,7 +10,7 @@
   <button
     mat-raised-button
     color="edit"
-    [routerLink]="['',idUser, 'gerador']"
+    [routerLink]="['', idUser, 'gerador']"
     style="margin-right: 1%"
   >
     <mat-icon>picture_as_pdf</mat-icon>
@@ -19,8 +18,7 @@
   <button
     mat-raised-button
     color="accent"
-    [routerLink]="['',idUser, 'add']"
-   
+    [routerLink]="['', idUser, 'add']"
     style="margin-right: 1%"
   >
     <mat-icon>person_add</mat-icon>
@@ -31,34 +29,42 @@
     mat-raised-button
     color="warn"
     [routerLink]="['']"
-   
     style="margin-right: 1%"
   >
     <mat-icon>logout</mat-icon>
   </button>
   <span>SISCOGEP</span>
- 
 </mat-toolbar>
 <br />
 <mat-form-field appearance="outline" class="col-11" style="margin-left: 3%">
   <mat-label><mat-icon>search</mat-icon>Pesquisar...</mat-label>
-  <input matInput  [(ngModel)]="searchValue"/>
+  <input matInput [(ngModel)]="searchValue" />
 </mat-form-field>
 <mat-form-field appearance="outline" style="margin-left: 3%">
   <mat-label>Setores</mat-label>
-  <mat-select  [(ngModel)]="setor"  >
+  <mat-select [(ngModel)]="setor">
     <mat-option value="Todos" selected>Todos</mat-option>
-    <mat-option *ngFor="let setores of setores" [value]="setores.setor">{{setores.setor}}</mat-option>
-  
+    <mat-option *ngFor="let setores of setores" [value]="setores.setor">{{
+      setores.setor
+    }}</mat-option>
   </mat-select>
 </mat-form-field>
 
 <mat-form-field appearance="outline" style="margin-left: 3%">
   <mat-label>Situação</mat-label>
-  <mat-select  [(ngModel)]="situacaoValue"  >
-    <mat-option *ngFor="let situacao of situacao" [value]="situacao.value">{{situacao.status}}</mat-option>
+  <mat-select [(ngModel)]="situacaoValue">
+    <mat-option *ngFor="let situacao of situacao" [value]="situacao.value">{{
+      situacao.status
+    }}</mat-option>
+  </mat-select>
+</mat-form-field>
 
-  
+<mat-form-field appearance="outline" style="margin-left: 3%">
+  <mat-label>Acesso à Rede Corporativa</mat-label>
+  <mat-select [(ngModel)]="acessoValue">
+    <mat-option *ngFor="let acesso of acesso" [value]="acesso.value">{{
+      acesso.status
+    }}</mat-option>
   </mat-select>
 </mat-form-field>
 
@@ -73,14 +79,26 @@
         <th style="text-align: center">Serviços</th>
       </tr>
     </thead>
-    <tbody >
+    <tbody>
       <div class="row" [hidden]="esconder">
         <div class="col-5"></div>
         <div class="col-3"><mat-spinner></mat-spinner></div>
       </div>
 
-      <ng-container *ngFor="let TabelaInicial of TabelaInicial | searchfilter: searchValue" >  
-        <tr  *ngIf=" TabelaInicial.status  == situacaoValue||TabelaInicial.setor  == setor || setor == null || setor == 'Todos' " >
+      <ng-container
+        *ngFor="let TabelaInicial of TabelaInicial | searchfilter: searchValue"
+      >
+        <tr
+          *ngIf="
+            (acessoValue == null ||
+              acessoValue == 'Todos' ||
+              TabelaInicial.acessoRede == acessoValue) &&
+            (situacaoValue == null ||
+              situacaoValue == 'Todos' ||
+              TabelaInicial.status == situacaoValue) &&
+            (TabelaInicial.setor == setor || setor == null || setor == 'Todos')
+          "
+        >
           <td colspan="2">{{ TabelaInicial.nome }}<br /></td>
           <td>{{ TabelaInicial.setor }}</td>
           <td style="text-align: center">
@@ -97,32 +115,33 @@
               style="color: green"
               >check_circle</mat-icon
             >
-            <mat-icon *ngIf="TabelaInicial.acessoRede == false" style="color: red"
+            <mat-icon
+              *ngIf="TabelaInicial.acessoRede == false"
+              style="color: red"
               >cancel</mat-icon
             >
           </td>
-  
+
           <td style="text-align: center">
             <button
               mat-raised-button
               color="files"
               [routerLink]="['painel', TabelaInicial.id]"
-              [routerLink]="['',idUser,'painel', TabelaInicial.id]"
+              [routerLink]="['', idUser, 'painel', TabelaInicial.id]"
               style="margin-right: 10px"
             >
               <mat-icon>edit</mat-icon>
             </button>
-  
+
             <button
               mat-raised-button
               color="edit"
-              [routerLink]="['',idUser,'pdf-perfil', TabelaInicial.id]"
-             
+              [routerLink]="['', idUser, 'pdf-perfil', TabelaInicial.id]"
             >
               <mat-icon>picture_as_pdf</mat-icon>
             </button>
           </td>
-      </tr>
+        </tr>
       </ng-container>
     </tbody>
   </table>

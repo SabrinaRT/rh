@@ -147,7 +147,7 @@
           mat-raised-button
           color="warn"
           class="col-12"
-          *ngIf="acessoRede == true"
+          [hidden]="!status"
           (click)="enviarEmailRhDesativar()"
         >
           Fazer uma solicitação para desabilitar o acesso à rede
@@ -156,7 +156,7 @@
           mat-raised-button
           color="success"
           class="col-12"
-          *ngIf="acessoRede == false"
+          [hidden]="status"
           (click)="enviarEmailRhAtivar()"
         >
           Fazer uma solicitação para habilitar o acesso à rede
@@ -167,7 +167,7 @@
           mat-raised-button
           color="success"
           class="col-12"
-          *ngIf="acessoRede == true"
+          [hidden]="!acessoRede"
           (click)="enviarEmailInformaticaAtivo()"
         >
           Informar que o usuário do(a) colaborador(a) foi habilitado da rede
@@ -177,7 +177,7 @@
           mat-raised-button
           color="warn"
           class="col-12"
-          *ngIf="acessoRede == false"
+          [hidden]="acessoRede"
           (click)="enviarEmailInformaticaDesativo()"
         >
           Informar que o usuário do(a) colaborador(a) foi desabilitado da rede

@@ -30,31 +30,42 @@ export class TabelaColaboradoresComponent implements OnInit {
   constructor(
     private siscrhService: SiscrhService,
     private toastr: ToastrService,
-    private route:ActivatedRoute
+    private route: ActivatedRoute
   ) {
-
-    this.idUser = this.route.snapshot.params["idUser"];
+    this.idUser = this.route.snapshot.params['idUser'];
   }
-idUser:any
+  idUser: any;
   filtro = new FormControl();
   searchValue: any;
   setor: any;
-  vinculo:any
+  vinculo: any;
   DocumentosColaboradores: DocumentosColaboradores =
     new DocumentosColaboradores();
 
   TabelaInicial: TabelaInicial[];
   array: any = [];
 
-  setores: Setores[]
-  vinculos:Vinculos []
-situacao  = [{status:"Ativo", value:true}, {status:"Desativo", value:false}]
-situacaoValue:any
+  setores: Setores[];
+  vinculos: Vinculos[];
+  situacao = [
+    { status: 'Todos', value: 'Todos' },
+    { status: 'Ativo', value: true },
+    { status: 'Desativo', value: false },
+  ];
+  acesso = [
+    { status: 'Todos', value: 'Todos' },
+    { status: 'Ativo', value: true },
+    { status: 'Desativo', value: false },
+  ];
+  acessoValue: any;
+  situacaoValue: any;
   ngOnInit(): void {
- this.siscrhService.getSetoresList().subscribe((data:any)=>{this.setores = data})
- this.siscrhService.getVinculosList().subscribe((data:any)=>{this.vinculos = data})
-
-
+    this.siscrhService.getSetoresList().subscribe((data: any) => {
+      this.setores = data;
+    });
+    this.siscrhService.getVinculosList().subscribe((data: any) => {
+      this.vinculos = data;
+    });
 
     this.siscrhService.getDadosProfissionaisList().subscribe(
       (data: any) => {
@@ -79,7 +90,7 @@ situacaoValue:any
         }
 
         this.TabelaInicial = this.array;
-        this.esconder =true 
+        this.esconder = true;
       },
       (error) => {
         console.log('error', error);
@@ -110,16 +121,21 @@ situacaoValue:any
       }
     });
   }
-  esconder = false
+  esconder = false;
   editContact(id: number) {
     /* console.log(id); */
   }
 
-
   toppings = new FormControl('');
 
-  toppingList: string[] = ['Gerência de Informática', 'Mushroom', 'Onion', 'Pepperoni', 'Sausage', 'Tomato'];
-
+  toppingList: string[] = [
+    'Gerência de Informática',
+    'Mushroom',
+    'Onion',
+    'Pepperoni',
+    'Sausage',
+    'Tomato',
+  ];
 }
 function compare2(a: number | string, b: number | string, isAsc: boolean) {
   return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
