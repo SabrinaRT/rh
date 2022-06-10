@@ -34,7 +34,7 @@ esconderDepen = true
 esconderLogo = true
   ngOnInit(): void {
 
-    window.print();
+   
     this.siscrhService.getFotoInfo(this.IDColab).subscribe(
       (data: any) => {
         this.IdFoto = data.id;

@@ -1,18 +1,33 @@
+<button
+  mat-raised-button
+  color="accent"
+  [routerLink]="['', idUser, 'home']"
+  id="printPageButton"
+>
+  <mat-icon>arrow_back</mat-icon>
+</button>
+
+<button
+  mat-raised-button
+  color="primary"
+  style="margin-top: 15px; margin-left: 15px;"
+  id="printPageButton"
+  onClick="window.print();"
+>
+  Imprimir
+</button>
 <div class="main-page">
-  
   <div class="sub-page">
-    <div class="row" >
+    <div class="row">
       <div class="col">
-        <div align="center" >
-          <img src="http://localhost:8080/api/get/image" width="130" />
+        <div align="center">
+          <img src="http://localhost:8080/api/get/image" width="160" />
         </div>
       </div>
-     
+
       <div class="col-10">
-        
         <div class="col"><h2>Dados Pessoais</h2></div>
-        
-        
+
         <div class="col-12">
           <label class="form-label">Nome Completo</label>
           <input
@@ -96,7 +111,9 @@
         <br />
       </div>
       <br />
-      <div class="col-1" style="margin-left: -15px;margin-top: 50px"><img [src]="UrlFoto" width="130"  /></div>
+      <div class="col-1" style="margin-left: -15px; margin-top: 50px">
+        <img [src]="UrlFoto" width="130" />
+      </div>
     </div>
     <br />
     <div class="row" st>
@@ -427,7 +444,6 @@
 
         <div class="pagebreak" [hidden]="esconderLogo"></div>
 
-       
         <div align="center" [hidden]="esconderLogo">
           <br />
           <img src="http://localhost:8080/api/get/image" width="150" />
@@ -514,7 +530,7 @@
             </div>
           </div>
         </span>
-        <br  [hidden]="esconderDepen" />
+        <br [hidden]="esconderDepen" />
         <div class="row" [hidden]="esconderDepen">
           <div class="col">
             <h2>Dependentes</h2>
@@ -539,9 +555,7 @@
           </div>
         </div>
 
-        <div>
-
-        </div>
+        <div></div>
       </div>
     </div>
   </div>
