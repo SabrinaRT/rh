@@ -23,9 +23,7 @@ mat-form-field{
 	}
   }
 
-  mat-grid-tile {
-	background: lightblue;
-  }
+ 
 
   .form-label2{
 	font-size: 20px;
@@ -115,3 +113,87 @@ img {
         max-width: 32rem;
     }
 }
+
+/* mat-grid-tile {
+    background: lightblue;
+  } */
+  
+
+  .total{
+      height: 100%;
+      width: 100%;
+  }
+
+  body {
+    width: 230mm;
+    height: 100%;
+    margin: 0 auto;
+    padding: 0;
+    font-size: 12pt;
+    background: rgb(204,204,204); 
+  }
+  * {
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+  }
+  .main-page {
+    width: 210mm;
+    min-height: 297mm;
+    margin: 10mm auto;
+    background: white;
+    box-shadow: 0 0 0.5cm rgba(0,0,0,0.5);
+  }
+  .sub-page {
+    padding: 1cm;
+    height: 290mm;
+  }
+  @page {
+    size: A4;
+    margin: 0;
+  }
+  @media print {
+    html, body {
+      width: 210mm;
+      height: 297mm;        
+    }
+    .main-page {
+      margin: 0;
+      border: initial;
+      border-radius: initial;
+      width: initial;
+      min-height: initial;
+      box-shadow: initial;
+      background: initial;
+     /*  page-break-after: always; */
+    }
+    .pagebreak { page-break-before: always; } /* page-break-after works, as well */
+  }
+
+
+  table.minimalistBlack {
+    width: 100%;
+    text-align: left;
+  }
+  table.minimalistBlack td, table.minimalistBlack th {
+    border: 1px solid #000000;
+    padding: 5px 4px;
+  }
+  table.minimalistBlack tbody td {
+    font-size: 13px;
+  }
+  table.minimalistBlack thead {
+    background: #CFCFCF;
+    background: -moz-linear-gradient(top, #dbdbdb 0%, #d3d3d3 66%, #CFCFCF 100%);
+    background: -webkit-linear-gradient(top, #dbdbdb 0%, #d3d3d3 66%, #CFCFCF 100%);
+    background: linear-gradient(to bottom, #dbdbdb 0%, #d3d3d3 66%, #CFCFCF 100%);
+    border-bottom: 3px solid #000000;
+  }
+  table.minimalistBlack thead th {
+    font-size: 15px;
+    font-weight: bold;
+    color: #000000;
+    text-align: left;
+  }
+  table.minimalistBlack tfoot td {
+    font-size: 14px;
+  }

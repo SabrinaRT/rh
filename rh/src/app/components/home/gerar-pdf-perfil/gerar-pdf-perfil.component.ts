@@ -28,9 +28,13 @@ IDColab:any
 FotoPerfil = true;
 IdFoto: any;
 UrlFoto = "assets/sem foto.png"
+
+esconderEstado = true
+esconderDepen = true
+esconderLogo = true
   ngOnInit(): void {
 
-    
+    window.print();
     this.siscrhService.getFotoInfo(this.IDColab).subscribe(
       (data: any) => {
         this.IdFoto = data.id;
@@ -45,6 +49,11 @@ UrlFoto = "assets/sem foto.png"
     this.siscrhService.getColaboradorById(this.IDColab).subscribe((data:any)=>{
       this.dadosPessoais = data
       console.log(data)
+      if(this.dadosPessoais.dependentes.length > 0){
+        this.esconderDepen = false
+        this.esconderLogo = false
+      }
+      
 
     })
 
@@ -65,7 +74,10 @@ UrlFoto = "assets/sem foto.png"
     .subscribe((data: any) => {
       if (data != null) {
         this.dadosEstadoCivil = data;
-
+        if(this.dadosEstadoCivil.estado_civil  != "Solteiro(a)" && this.dadosEstadoCivil.estado_civil  != null && this.dadosEstadoCivil.estado_civil  != undefined){
+          this.esconderEstado = false
+          this.esconderLogo = false
+        }
         
       }
     });
