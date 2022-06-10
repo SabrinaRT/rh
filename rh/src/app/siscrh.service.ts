@@ -318,4 +318,15 @@ export class SiscrhService {
   uploadLogo(formData: FormData): Observable<Object> {
     return this.httpClient.post(this.url + `/upload/image`, formData);
   }
+
+
+ 
+  deleteFotoColab(id: number) {
+    return this.httpClient.delete(this.url + `/v305/delete/${id}`).subscribe(
+      (data) => {
+        console.log(data);
+      },
+      (error: any) => console.log(error)
+    );
+  }
 }

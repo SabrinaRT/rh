@@ -48,6 +48,7 @@ public class FotoColaboradorController {
         final Optional<FotoColaborador> dbImage = fotoColaboradorRepository.findByDadosPessoais_Id(id);
 
         return FotoColaborador.builder()
+                .id(dbImage.get().getId())
                 .name(dbImage.get().getName())
                 .type(dbImage.get().getType())
                 .image(ImageUtility.decompressImage(dbImage.get().getImage())).build();
@@ -63,6 +64,13 @@ public class FotoColaboradorController {
                 .contentType(MediaType.valueOf(dbImage.get().getType()))
                 .body(ImageUtility.decompressImage(dbImage.get().getImage()));
     }
+
+    @DeleteMapping("/delete/{id}")  
+	private void deleteBook(@PathVariable("id") Long id)   
+	{ 
+                final Optional<FotoColaborador> dbImage = fotoColaboradorRepository.findByDadosPessoais_Id(id);
+		fotoColaboradorRepository.deleteById(dbImage.get().getId());
+	} 
 
   
 

@@ -44,7 +44,6 @@ public class LogoController {
 
     @PostMapping(value="/delete/image")
 	public Logo createLogo() { 
-                System.out.println("teste");
                 Logo processo = logoRepository.findById(Long.valueOf(1))
 				.orElseThrow(() -> new ResourceNotFoundException("Logo not exist with id: " + 1));
                                 processo.setId(Long.valueOf(1));

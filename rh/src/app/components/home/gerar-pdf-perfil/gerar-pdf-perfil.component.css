@@ -138,14 +138,14 @@ img {
   }
   .main-page {
     width: 210mm;
-    min-height: 297mm;
+ /*    min-height: 297mm; */
     margin: 10mm auto;
     background: white;
     box-shadow: 0 0 0.5cm rgba(0,0,0,0.5);
   }
   .sub-page {
-    padding: 1cm;
-    height: 290mm;
+    padding: 1cm; 
+ /*    height: 290mm; */
   }
   @page {
     size: A4;

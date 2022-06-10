@@ -43,6 +43,12 @@ export class ConfigPerfilComponent implements OnInit {
   FotoPerfil = true;
   IdFoto: any;
   UrlFoto = "assets/sem foto.png"
+
+  deletarFoto(){
+    this.siscrhService.deleteFotoColab(this.IDColab);
+    this.UrlFoto = "assets/sem foto.png"
+    this.FotoPerfil = false;
+  }
   ngOnInit(): void {
     this.siscrhService.getFotoInfo(this.IDColab).subscribe(
       (data: any) => {
