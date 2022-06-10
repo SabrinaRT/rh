@@ -20,7 +20,10 @@
 
 <header class="topo">
   <div class="col-3 titulo-principal">
-    <div class="container"> <img src="http://localhost:8080/api/get/image"  /></div>
+    <div class="container2" > <img src="http://localhost:8080/api/get/image"  />
+    
+      
+    </div>
   </div>
 </header>
 
@@ -42,36 +45,40 @@
             readonly
           />
         </div>
-        <div class="col-1" >
-          <img mat-card-image [src]="UrlFoto" alt="Sem Foto"  style="height:213px  ; width: 160px" />
+        <div class="col" >
+
+          <article class="mw5 mw6-ns center pt4">
+            <div class="aspect-ratio aspect-ratio--3x4 mb4">
+              <div class="aspect-ratio--object cover" style="background:url({{UrlFoto}}) center;"></div>
+            </div>
+          </article>
         </div>
-    </div>
-      
-        <div class="row" style="margin-top: -90px;">
-          <div class="col-3">
-            <label class="form-label">CPF</label>
-            <input
-              class="form-control form-control-sm"
-              type="text"
-              [(ngModel)]="dadosPessoais.cpf"
-              disabled
-              readonly
-            />
-          </div>
-         
-          <div class="col-3">
-            <label class="form-label">Identidade - UF</label>
-            <input
-              class="form-control form-control-sm"
-              type="text"
-              value="{{ dadosPessoais.identidade }} - {{
-                dadosPessoais.uf_identidade
-              }}"
-              disabled
-              readonly
-            />
-          </div>
-          <div class="col-3">
+        <span >
+          <div class="row">
+            <div class="col-3">
+              <label class="form-label">CPF</label>
+              <input
+                class="form-control form-control-sm"
+                type="text"
+                [(ngModel)]="dadosPessoais.cpf"
+                disabled
+                readonly
+              />
+            </div>
+    
+            <div class="col-3">
+              <label class="form-label">Identidade - UF</label>
+              <input
+                class="form-control form-control-sm"
+                type="text"
+                value="{{ dadosPessoais.identidade }} - {{
+                  dadosPessoais.uf_identidade
+                }}"
+                disabled
+                readonly
+              />
+            </div>
+            <div class="col-3">
             <label class="form-label">PIS / PASEP</label>
             <input
               class="form-control form-control-sm"
@@ -81,44 +88,55 @@
               readonly
             />
           </div>
-        </div>
-        <br>
+          </div>
+          <br>
           <div class="row">
        
-          <div class="col-3">
-            <label class="form-label">Titulo de Eleitor</label>
-            <input
-              class="form-control form-control-sm"
-              type="text"
-              [(ngModel)]="dadosPessoais.titulo_eleitor"
-              disabled
-              readonly
-            />
-          </div>
-         
-        
-          <div class="col-3">
-            <label class="form-label">Data de Nascimento</label>
-            <input
-              class="form-control form-control-sm"
-              type="text"
-              [(ngModel)]="dadosPessoais.data_nascimento"
-              disabled
-              readonly
-            />
-          </div>
+            <div class="col-3">
+              <label class="form-label">Titulo de Eleitor</label>
+              <input
+                class="form-control form-control-sm"
+                type="text"
+                [(ngModel)]="dadosPessoais.titulo_eleitor"
+                disabled
+                readonly
+              />
+            </div>
            
-          <div class="col-3">
-            <label class="form-label">Nacionalidade</label>
-            <input
-              class="form-control form-control-sm"
-              type="text"
-              [(ngModel)]="dadosPessoais.nacionalidade"
-              disabled
-              readonly
-            />
+          
+            <div class="col-3">
+              <label class="form-label">Data de Nascimento</label>
+              <input
+                class="form-control form-control-sm"
+                type="text"
+                [(ngModel)]="dadosPessoais.data_nascimento"
+                disabled
+                readonly
+              />
+            </div>
+             
+            <div class="col-3">
+              <label class="form-label">Nacionalidade</label>
+              <input
+                class="form-control form-control-sm"
+                type="text"
+                [(ngModel)]="dadosPessoais.nacionalidade"
+                disabled
+                readonly
+              />
+            </div>
           </div>
+        </span>
+    </div>
+</div><div class="container" > 
+        <div class="row" >
+         
+         
+          
+          
         </div>
+        <br>
+          
         <br>
           <div class="row">
           <div class="col-3">
@@ -176,6 +194,16 @@
         class="form-control form-control-sm"
         type="text"
         [(ngModel)]="dadosPessoais.email"
+        disabled
+        readonly
+      />
+    </div>
+    <div class="col-6">
+      <label class="form-label">E-Mail Institucional</label>
+      <input
+        class="form-control form-control-sm"
+        type="text"
+        [(ngModel)]="dadosProfissionais.email_institucional"
         disabled
         readonly
       />
@@ -271,7 +299,7 @@
       />
     </div>
   </div>
-  <br />  <br />
+  <br /> 
   <div class="row">
     <div class="col-12"><h2>Dados Profissionais</h2></div>
     <div class="col-6">
@@ -365,37 +393,21 @@
     </div>
     
   </div> <br>
-  <div class="row">
-    <div class="col-12">
-      <label class="form-label">E-Mail Institucional</label>
+  
+  <div class="row"  >
+    <div class="col-6" *ngFor="let i of dadosPessoais.matriculas">
+      <label class="form-label">Matrícula {{i.observacao}}</label>
       <input
         class="form-control form-control-sm"
         type="text"
-        [(ngModel)]="dadosProfissionais.email_institucional"
+        
+        value="{{i.matricula}}"
         disabled
         readonly
       />
     </div>
   </div>
   <br>
-  <div class="row" *ngIf="dadosPessoais.matriculas.length > 0">
-    <div class="col-12">
-      <table class="table table-hover">
-        <thead>
-          <tr>
-            <th>Matrícula</th>
-            <th>Observação</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let i of dadosPessoais.matriculas">
-            <td>{{ i.matricula }}</td>
-            <td>{{ i.observacao }}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
   <div class="row">
     <div class="col-6"><h2>Dados Bancários</h2></div>
   </div>
@@ -538,7 +550,7 @@
         </span>
 </div>
 
-<br /><br />
+
 
 <div>
   <div class="container px-4">
@@ -550,7 +562,7 @@
         
 
         <div *ngIf="dadosPessoais.dependentes.length >= 1">
-          <br />
+          <br /><br /><br />
         </div>
 
         <div class="row" *ngIf="dadosPessoais.dependentes.length > 0">
