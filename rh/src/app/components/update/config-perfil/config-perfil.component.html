@@ -147,7 +147,7 @@
           mat-raised-button
           color="warn"
           class="col-12"
-          [hidden]="!status"
+          [hidden]="status "
           (click)="enviarEmailRhDesativar()"
         >
           Fazer uma solicitação para desabilitar o acesso à rede
@@ -156,7 +156,7 @@
           mat-raised-button
           color="success"
           class="col-12"
-          [hidden]="status"
+          [hidden]="!status  "
           (click)="enviarEmailRhAtivar()"
         >
           Fazer uma solicitação para habilitar o acesso à rede
