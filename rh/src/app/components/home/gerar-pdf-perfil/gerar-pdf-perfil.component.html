@@ -16,7 +16,7 @@
 >
   Imprimir
 </button>
-<div class="main-page">
+<div class="main-page" style="background-image: url('assets/a4.jpg');" >
   <div class="sub-page">
     <div class="row">
       <div class="col">
@@ -24,7 +24,9 @@
           <img src="http://localhost:8080/api/get/image" width="200" />
         </div>
       </div>
-
+    
+     
+      <div class="col-12"></div>
       <div class="col-10">
         <div class="col"><h2>Dados Pessoais</h2></div>
 
@@ -444,9 +446,9 @@
 
         <div class="pagebreak" [hidden]="esconderLogo"></div>
 
-        <div align="center" [hidden]="esconderLogo">
+        <div [hidden]="esconderLogo" align="center">
           <br />
-          <img src="http://localhost:8080/api/get/image" width="150" />
+          <img src="http://localhost:8080/api/get/image" width="200"  />
         </div>
 
         <span [hidden]="esconderEstado">
