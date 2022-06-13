@@ -4,6 +4,7 @@ import { FichaComponent } from './components/cadastro/ficha/ficha.component';
 import { PainelConfigComponent } from './components/config/painel-config/painel-config.component';
 import { TotalComponent } from './components/gerador-pdf/total/total.component';
 import { GerarPdfPerfilComponent } from './components/home/gerar-pdf-perfil/gerar-pdf-perfil.component';
+import { GerarPdfTotalComponent } from './components/home/gerar-pdf-total/gerar-pdf-total.component';
 import { TabelaColaboradoresComponent } from './components/home/tabela-colaboradores/tabela-colaboradores.component';
 import { LoginComponent } from './components/login/login.component';
 import { FichaUpdateComponent } from './components/update/ficha-update/ficha-update.component';
@@ -23,6 +24,7 @@ const routes: Routes = [
   {path:":idUser/config", component: PainelConfigComponent},
   {path:":idUser/pdf-perfil/:id", component: GerarPdfPerfilComponent},
   {path:":idUser/gerador", component: TotalComponent},
+  {path:":idUser/total", component: GerarPdfTotalComponent},
  
 
 

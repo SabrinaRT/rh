@@ -50,6 +50,7 @@ import { SearchfilterPipe2 } from './searchfilter2.pipe';
 import { DeleteUsuarioDialog, EditUsuarioDialog, ListaUsuariosComponent } from './components/config/lista-usuarios/lista-usuarios.component';
 import { ConfiguracaoSistemaComponent } from './components/config/configuracao-sistema/configuracao-sistema.component';
 import { CommonModule } from '@angular/common';
+import { GerarPdfTotalComponent } from './components/home/gerar-pdf-total/gerar-pdf-total.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -81,6 +82,7 @@ import { CommonModule } from '@angular/common';
     DeleteUsuarioDialog,
     EditUsuarioDialog,
     ConfiguracaoSistemaComponent,
+    GerarPdfTotalComponent,
   ],
   imports: [
     CommonModule,

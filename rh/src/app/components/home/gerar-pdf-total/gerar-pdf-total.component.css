@@ -1,0 +1,250 @@
+mat-label,  .mat-form-field-disabled .mat-form-field-underline{
+	color:black
+}
+mat-form-field{
+	font-size: 12px;
+}
+
+.form-control , .form-control-sm{
+	background-color: white;
+}
+
+.form-label{
+	font-size: 13px;
+	margin-bottom: -12px;
+}
+.col-1, .col-2, .col-3, .col-4, .col-5, .col-6, .col-7, .col-8, .col-9, .col-10, .col-11, .col-12{
+	margin-bottom: -10px;
+}
+
+@media print {
+	#printPageButton {
+	  display: none;
+	}
+  }
+
+ 
+
+  .form-label2{
+	font-size: 20px;
+	margin-bottom: -10px;
+}
+
+.topo {
+	position: relative;
+
+  }
+ 
+  .img {
+	position: absolute;
+	max-width: 25%;
+	top: 50%;
+	left: 30px;
+  }
+  
+  .titulo-principal,
+  p {
+	font-size: "Open Sans Condensed", "Arial", sans-serif;
+	text-align: center;
+	margin: 0 auto;
+	max-width: 50%;
+	margin-bottom: -32px;
+  }
+
+
+  .container2 img {
+    max-width: 200px;
+    max-height:250px;
+    width: auto;
+    height: auto;
+}
+.container2 {
+    clear: both;
+   
+}
+img {
+    vertical-align: top
+}
+
+
+.aspect-ratio {
+    height: 0;
+    position: relative;
+}
+
+.aspect-ratio--3x4 {
+    padding-bottom: 133.33%;
+}
+
+.aspect-ratio--object {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 100;
+}
+
+.cover {
+    background-size: cover !important;
+}
+
+.mw5 {
+    max-width: 16rem;
+}
+
+.pt4 {
+    padding-top: 2rem;
+}
+
+.mb4 {
+    margin-bottom: 2rem;
+}
+
+.center {
+    margin-right: auto;
+    margin-left: auto;
+}
+
+@media screen and (min-width: 30em) {
+    .mw6-ns {
+        max-width: 32rem;
+    }
+}
+
+
+  
+
+  .total{
+      height: 100%;
+      width: 100%;
+  }
+
+  body {
+    width: 230mm;
+    height: 100%;
+    margin: 0 auto;
+    padding: 0;
+    font-size: 12pt;
+    background: rgb(204,204,204); 
+  }
+  * {
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+  }
+  .main-page {
+    width: 210mm;
+    margin: 10mm auto;
+    background: white;
+    box-shadow: 0 0 0.5cm rgba(0,0,0,0.5);
+  
+  }
+  .sub-page {
+    padding: 1cm; 
+  }
+  @page {
+    size: A4;
+    margin: 0;
+  }
+  @media print {
+    html, body {
+      width: 210mm;
+      height: 297mm;        
+    }
+    .main-page {
+      margin: 0;
+      border: initial;
+      border-radius: initial;
+      width: initial;
+      min-height: initial;
+      box-shadow: initial;
+      background: initial;
+   
+
+    }
+    .pagebreak { page-break-before: always; } 
+  }
+
+
+
+ /* Styles go here */
+
+.page-header,
+.page-header-space {
+  height: 100px;
+}
+
+.page-footer,
+.page-footer-space {
+  height: 50px;
+}
+
+.page-footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+ 
+}
+
+.page-header {
+  position: fixed;
+  top: 0mm;
+  width: 100%;
+
+}
+
+.page {
+  page-break-after: always;
+}
+
+@page {
+  margin: 0;
+}
+
+@media print {
+  thead {
+    display: table-header-group;
+  }
+  tfoot {
+    display: table-footer-group;
+  }
+
+  button {
+    display: none;
+  }
+
+  body {
+    margin: 0;
+  }
+}
+
+
+  table.minimalistBlack {
+    width: 100%;
+    text-align: left;
+  }
+  table.minimalistBlack td, table.minimalistBlack th {
+    border: 1px solid #000000;
+    padding: 5px 4px;
+  }
+  table.minimalistBlack tbody td {
+    font-size: 13px;
+  }
+  table.minimalistBlack thead {
+    background: #CFCFCF;
+    background: -moz-linear-gradient(top, #dbdbdb 0%, #d3d3d3 66%, #CFCFCF 100%);
+    background: -webkit-linear-gradient(top, #dbdbdb 0%, #d3d3d3 66%, #CFCFCF 100%);
+    background: linear-gradient(to bottom, #dbdbdb 0%, #d3d3d3 66%, #CFCFCF 100%);
+    border-bottom: 3px solid #000000;
+  }
+  table.minimalistBlack thead th {
+    font-size: 15px;
+    font-weight: bold;
+    color: #000000;
+    text-align: left;
+  }
+  table.minimalistBlack tfoot td {
+    font-size: 14px;
+  }
