@@ -40,7 +40,7 @@ import { ToastrModule } from 'ngx-toastr';
 import {ClipboardModule} from '@angular/cdk/clipboard';
 import {MatRadioModule} from '@angular/material/radio';
 import { SearchfilterPipe } from './searchfilter.pipe';
-import { TotalComponent } from './components/gerador-pdf/total/total.component';
+
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {  UsuariosComponent } from './components/config/usuarios/usuarios.component';
@@ -68,7 +68,6 @@ import { GerarPdfTotalComponent } from './components/home/gerar-pdf-total/gerar-
     SetoresComponent,
     SearchfilterPipe,
     SearchfilterPipe2,
-    TotalComponent,
     EditVinculoDialog,
     DeleteVinculoDialog,
     DeleteSetorDialog,
