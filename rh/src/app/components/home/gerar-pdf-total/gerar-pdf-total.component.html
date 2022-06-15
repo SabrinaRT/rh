@@ -1,121 +1,122 @@
-<mat-toolbar color="primary"  id="printPageButton">
+<mat-toolbar color="primary" id="printPageButton">
+  <button mat-raised-button color="accent" [routerLink]="['', idUser, 'home']">
+    <mat-icon>arrow_back</mat-icon>
+  </button>
   <button
   mat-raised-button
-  color="accent"
-  [routerLink]="['', idUser, 'home']"
- 
+  color="pdf"
+  style="margin-left: 15px;"
+  id="printPageButton"
+  onClick="window.print();"
 >
-  <mat-icon>arrow_back</mat-icon>
+  Imprimir
 </button>
-
-
 
   <span class="example-spacer"></span>
   <button
     mat-raised-button
     color="warn"
     [routerLink]="['']"
-    style="margin-right: 1%;"
+    style="margin-right: 1%"
   >
     <mat-icon>logout</mat-icon>
   </button>
   <span>SISCOGEP</span>
 </mat-toolbar>
 
-
-
-
-<br>
+<br />
 
 <div class="container" id="printPageButton">
-<div class="row">
-  <mat-card class="col-6" style="margin: auto;" >
-    <div
-   
-    class="row"
-    (mouseenter)="mouseEnter('div a')"
-    (mouseleave)="mouseLeave('div A')"
-  >
-    <div class="col-12">
-      <mat-form-field appearance="outline" class="col-12">
-        <mat-label>Setor</mat-label>
-        <mat-select [(ngModel)]="setor" [ngModelOptions]="{ standalone: true }">
-          <mat-option value="Todos"> Todos </mat-option>
-          <mat-option value="Não Definido"> Não Definido </mat-option>
-          <mat-option *ngFor="let setores of setores" [value]="setores.setor">
-            {{ setores.setor }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-    </div>
-  </div>
-
-  <div
-    class="row"
-    (mouseenter)="mouseEnter('div a')"
-    (mouseleave)="mouseLeave('div A')"
-  >
-    <div class="col-12">
-      <mat-form-field appearance="outline" class="col-12">
-        <mat-label>Vínculo</mat-label>
-        <mat-select
-          [(ngModel)]="vinculo"
-          [ngModelOptions]="{ standalone: true }"
-        >
-          <mat-option value="Todos"> Todos </mat-option>
-          <mat-option value="Não Definido"> Não Definido </mat-option>
-          <mat-option
-            *ngFor="let vinculos of vinculos"
-            [value]="vinculos.vinculo"
-          >
-            {{ vinculos.vinculo }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-    </div>
-  </div>
-  
-  <div
-    class="row"
-    (mouseenter)="mouseEnter('div a')"
-    (mouseleave)="mouseLeave('div A')"
-  >
-    <div class="col-6">
-      <mat-form-field appearance="outline" class="col-12">
-        <mat-label>Sítuação</mat-label>
-        <mat-select
-          [(ngModel)]="status"
-          [ngModelOptions]="{ standalone: true }"
-        >
-          <mat-option value="Todos"> Todos </mat-option>
-          <mat-option value="true">Ativos </mat-option>
-          <mat-option value="false">Desativo</mat-option>
-        </mat-select>
-      </mat-form-field>
-    </div>
-    
-    <div class="col-3">
-      <button
-        mat-raised-button
-        color="primary"
-        style="margin-top: 15px"
-        id="printPageButton"
-        onClick="window.print();"
+  <div class="row">
+    <mat-card class="col-6" style="margin: auto">
+      <div
+        class="row"
+        (mouseenter)="mouseEnter('div a')"
+        (mouseleave)="mouseLeave('div A')"
       >
-        Imprimir
-      </button>
-    </div>
+        <div class="col-12">
+          <mat-form-field appearance="outline" class="col-12">
+            <mat-label>Setor</mat-label>
+            <mat-select
+              [(ngModel)]="setor"
+              [ngModelOptions]="{ standalone: true }"
+            >
+              <mat-option value="Todos"> Todos </mat-option>
+              <mat-option value="Não Definido"> Não Definido </mat-option>
+              <mat-option
+                *ngFor="let setores of setores"
+                [value]="setores.setor"
+              >
+                {{ setores.setor }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div
+        class="row"
+        (mouseenter)="mouseEnter('div a')"
+        (mouseleave)="mouseLeave('div A')"
+      >
+        <div class="col-12">
+          <mat-form-field appearance="outline" class="col-12">
+            <mat-label>Vínculo</mat-label>
+            <mat-select
+              [(ngModel)]="vinculo"
+              [ngModelOptions]="{ standalone: true }"
+            >
+              <mat-option value="Todos"> Todos </mat-option>
+              <mat-option value="Não Definido"> Não Definido </mat-option>
+              <mat-option
+                *ngFor="let vinculos of vinculos"
+                [value]="vinculos.vinculo"
+              >
+                {{ vinculos.vinculo }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div
+        class="row"
+        (mouseenter)="mouseEnter('div a')"
+        (mouseleave)="mouseLeave('div A')"
+      >
+        <div class="col-6">
+          <mat-form-field appearance="outline" class="col-12">
+            <mat-label>Sítuação</mat-label>
+            <mat-select
+              [(ngModel)]="status"
+              [ngModelOptions]="{ standalone: true }"
+            >
+              <mat-option value="Todos"> Todos </mat-option>
+              <mat-option value="true">Ativos </mat-option>
+              <mat-option value="false">Desativo</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div class="col-3">
+          <button
+            mat-raised-button
+            color="primary"
+            style="margin-top: 15px"
+            id="printPageButton"
+            onClick="window.print();"
+          >
+            Imprimir
+          </button>
+        </div>
+      </div>
+    </mat-card>
   </div>
-  </mat-card>
-</div>
 </div>
 
-
-
-
-<div class="main-page" >
+<div class="main-page">
   <div class="sub-page">
-    <div class="row" >
+    <div class="row">
       <div class="col-12">
         <div align="center">
           <img src="http://localhost:8080/api/get/image" width="200" />
@@ -137,17 +138,15 @@
           ><span *ngIf="status == 'false'"> Desativo</span>
         </h4>
       </div>
-      
-      
-     
     </div>
     <div class="row">
       <div class="col-1"></div>
-      <div class="col-4"><h4>Total de Colaboradores: {{print}}</h4></div> 
+      <div class="col-4">
+        <h4>Total de Colaboradores: {{ print }}</h4>
+      </div>
     </div>
-    
+
     <div class="row">
-      
       <div class="col-11" style="margin: auto">
         <table class="minimalistBlack">
           <thead>
@@ -159,23 +158,27 @@
             </tr>
           </thead>
           <tbody *ngFor="let i of array; count as c">
-           
-            <tr #myVar
+            <tr
+              #myVar
               *ngIf="
                 (i.setor == setor || setor == null || setor == 'Todos') &&
-                (i.vinculo == vinculo || vinculo == null || vinculo == 'Todos') &&
+                (i.vinculo == vinculo ||
+                  vinculo == null ||
+                  vinculo == 'Todos') &&
                 (i.status == status || status == null || status == 'Todos')
               "
             >
               <td>{{ i.nome }}</td>
               <td>{{ i.setor }}</td>
               <td>{{ i.vinculo }}</td>
-              <td style="text-align: center;"> <mat-icon *ngIf="i.status == 'true'" style="color: green"
-                >check_circle</mat-icon
-              >
-              <mat-icon *ngIf="i.status == 'false'" style="color: red"
-                >cancel</mat-icon
-              ></td>
+              <td style="text-align: center">
+                <mat-icon *ngIf="i.status == 'true'" style="color: green"
+                  >check_circle</mat-icon
+                >
+                <mat-icon *ngIf="i.status == 'false'" style="color: red"
+                  >cancel</mat-icon
+                >
+              </td>
             </tr>
           </tbody>
         </table>
@@ -183,446 +186,3 @@
     </div>
   </div>
 </div>
-
-<!-- <div class="container "> -->
-
-<!--   <div class="row" (mouseenter) ="mouseEnter('div a') "  (mouseleave) ="mouseLeave('div A')">
-        <div class="col-6">
-          <mat-form-field appearance="outline" class="col-12">
-            <mat-label>Setor</mat-label>
-            <mat-select [(ngModel)]="setor" [ngModelOptions]="{ standalone: true }" >
-              <mat-option value="Todos"> Todos </mat-option>
-              <mat-option value="Não Definido"> Não Definido </mat-option>
-              <mat-option *ngFor="let setores of setores" [value]="setores.setor">
-                {{ setores.setor }}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-        </div>
-        <div class="col-6">
-          <mat-form-field appearance="outline" class="col-12">
-            <mat-label>Vínculo</mat-label>
-            <mat-select
-              [(ngModel)]="vinculo"
-              [ngModelOptions]="{ standalone: true }"
-            >
-              <mat-option value="Todos"> Todos </mat-option>
-              <mat-option value="Não Definido"> Não Definido </mat-option>
-              <mat-option
-                *ngFor="let vinculos of vinculos"
-                [value]="vinculos.vinculo"
-              >
-                {{ vinculos.vinculo }}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-        </div>
-        <div class="col-2">
-          <mat-form-field appearance="outline" class="col-12">
-            <mat-label>Sítuação</mat-label>
-            <mat-select
-              [(ngModel)]="status"
-              [ngModelOptions]="{ standalone: true }"
-            >
-              <mat-option value="Todos"> Todos </mat-option>
-              <mat-option value="true">Ativos </mat-option>
-              <mat-option value="false">Desativo</mat-option>
-            </mat-select>
-          </mat-form-field>
-        </div>
-        <div class="col-2">
-          <mat-form-field appearance="outline" class="col-12">
-            <mat-label>Acesso à Rede Corporativa</mat-label>
-            <mat-select
-              [(ngModel)]="acessoRede"
-              [ngModelOptions]="{ standalone: true }"
-            >
-              <mat-option value="Todos"> Todos </mat-option>
-              <mat-option value="true">Ativos </mat-option>
-              <mat-option value="false">Desativos</mat-option>
-            </mat-select>
-          </mat-form-field>
-        </div>
-        <div class="col-3">
-          <button
-            mat-raised-button
-            color="primary"
-            style="margin-top: 15px"
-            id="printPageButton" 
-            
-            onClick="window.print();"
-            
-          >
-            Imprimir
-          </button>
-        </div>
-        
-      </div>
-    <br>
-    <mat-card-title>Total de Colaboradores: {{print}}</mat-card-title>
-    <br>
-    <div class="row" id="component1">
-      <div class="col-12">
-        <table class="table table-hover" matSort (matSortChange)="sortData($event)">
-          <thead>
-            <tr>
-              <th mat-sort-header="nome">Colaboradores</th>
-              <th mat-sort-header="setor">Setor</th>
-              <th mat-sort-header="vinculo">Vínculo</th>
-              <th>Status</th>
-              <th>Acesso à Rede</th>
-            </tr>
-          </thead>
-          <tbody *ngFor="let i of array; count as c">
-          
-              <tr #myVar 
-                *ngIf="
-                  setor == 'Todos' &&
-                  vinculo == 'Todos' &&
-                  status == 'Todos' &&
-                  acessoRede == 'Todos'
-                "
-              >
-                <td>{{ i.nome }}</td>
-                <td>{{ i.setor }}</td>
-                <td>{{ i.vinculo }}</td>
-                <td>
-                  <mat-icon *ngIf="i.status == 'true'" style="color: green"
-                    >check_circle</mat-icon
-                  >
-                  <mat-icon *ngIf="i.status == 'false'" style="color: red"
-                    >cancel</mat-icon
-                  >
-                </td>
-                <td>
-                  <mat-icon *ngIf="i.acessoRede == 'true'" style="color: green"
-                    >check_circle</mat-icon
-                  >
-                  <mat-icon *ngIf="i.acessoRede == 'false'" style="color: red"
-                    >cancel</mat-icon
-                  >
-                </td>
-              </tr>
-            <tr #myVar *ngIf="i.setor == setor && i.vinculo == vinculo && i.status == status && i.acessoRede == acessoRede" >
-              <td>{{ i.nome }}</td>
-              <td>{{ i.setor }}</td>
-              <td>{{ i.vinculo }}</td>
-              <td>
-                <mat-icon *ngIf="i.status == 'true'" style="color: green"
-                  >check_circle</mat-icon
-                >
-                <mat-icon *ngIf="i.status == 'false'" style="color: red"
-                  >cancel</mat-icon
-                >
-              </td>
-              <td>
-                <mat-icon *ngIf="i.acessoRede == 'true'" style="color: green"
-                  >check_circle</mat-icon
-                >
-                <mat-icon *ngIf="i.acessoRede == 'false'" style="color: red"
-                  >cancel</mat-icon
-                >
-              </td>
-            </tr>
-    
-            <tr #myVar *ngIf="setor == 'Todos' && i.vinculo == vinculo && i.status == status && i.acessoRede == acessoRede" >
-              <td>{{ i.nome }}</td>
-              <td>{{ i.setor }}</td>
-              <td>{{ i.vinculo }}</td>
-              <td>
-                <mat-icon *ngIf="i.status == 'true'" style="color: green"
-                  >check_circle</mat-icon
-                >
-                <mat-icon *ngIf="i.status == 'false'" style="color: red"
-                  >cancel</mat-icon
-                >
-              </td>
-              <td>
-                <mat-icon *ngIf="i.acessoRede == 'true'" style="color: green"
-                  >check_circle</mat-icon
-                >
-                <mat-icon *ngIf="i.acessoRede == 'false'" style="color: red"
-                  >cancel</mat-icon
-                >
-              </td>
-              
-            </tr>
-            <tr #myVar *ngIf="i.setor == setor && vinculo == 'Todos' && i.status == status && i.acessoRede == acessoRede" >
-              <td>{{ i.nome }}</td>
-              <td>{{ i.setor }}</td>
-              <td>{{ i.vinculo }}</td>
-              <td>
-                <mat-icon *ngIf="i.status == 'true'" style="color: green"
-                  >check_circle</mat-icon
-                >
-                <mat-icon *ngIf="i.status == 'false'" style="color: red"
-                  >cancel</mat-icon
-                >
-              </td>
-              <td>
-                <mat-icon *ngIf="i.acessoRede == 'true'" style="color: green"
-                  >check_circle</mat-icon
-                >
-                <mat-icon *ngIf="i.acessoRede == 'false'" style="color: red"
-                  >cancel</mat-icon
-                >
-              </td>
-            </tr>
-            <tr #myVar *ngIf="i.setor == setor && vinculo == 'Todos' && status == 'Todos' && acessoRede == 'Todos'" >
-              <td>{{ i.nome }}</td>
-              <td>{{ i.setor }}</td>
-              <td>{{ i.vinculo }}</td>
-              <td>
-                <mat-icon *ngIf="i.status == 'true'" style="color: green"
-                  >check_circle</mat-icon
-                >
-                <mat-icon *ngIf="i.status == 'false'" style="color: red"
-                  >cancel</mat-icon
-                >
-              </td>
-              <td>
-                <mat-icon *ngIf="i.acessoRede == 'true'" style="color: green"
-                  >check_circle</mat-icon
-                >
-                <mat-icon *ngIf="i.acessoRede == 'false'" style="color: red"
-                  >cancel</mat-icon
-                >
-              </td>
-            </tr>
-            <tr #myVar *ngIf="setor == 'Todos' && i.vinculo == vinculo && status == 'Todos' && acessoRede == 'Todos'" >
-              <td>{{ i.nome }}</td>
-              <td>{{ i.setor }}</td>
-              <td>{{ i.vinculo }}</td>
-              <td>
-                <mat-icon *ngIf="i.status == 'true'" style="color: green"
-                  >check_circle</mat-icon
-                >
-                <mat-icon *ngIf="i.status == 'false'" style="color: red"
-                  >cancel</mat-icon
-                >
-              </td>
-              <td>
-                <mat-icon *ngIf="i.acessoRede == 'true'" style="color: green"
-                  >check_circle</mat-icon
-                >
-                <mat-icon *ngIf="i.acessoRede == 'false'" style="color: red"
-                  >cancel</mat-icon
-                >
-              </td>
-            </tr>
-            <tr #myVar *ngIf="setor == 'Todos' && vinculo == 'Todos' && status == 'Todos' && i.acessoRede == acessoRede" >
-              <td>{{ i.nome }}</td>
-              <td>{{ i.setor }}</td>
-              <td>{{ i.vinculo }}</td>
-              <td>
-                <mat-icon *ngIf="i.status == 'true'" style="color: green"
-                  >check_circle</mat-icon
-                >
-                <mat-icon *ngIf="i.status == 'false'" style="color: red"
-                  >cancel</mat-icon
-                >
-              </td>
-              <td>
-                <mat-icon *ngIf="i.acessoRede == 'true'" style="color: green"
-                  >check_circle</mat-icon
-                >
-                <mat-icon *ngIf="i.acessoRede == 'false'" style="color: red"
-                  >cancel</mat-icon
-                >
-              </td>
-            </tr>
-            <tr #myVar *ngIf="setor == 'Todos' && vinculo == 'Todos' && i.status == status  && acessoRede == 'Todos'" >
-              <td>{{ i.nome }}</td>
-              <td>{{ i.setor }}</td>
-              <td>{{ i.vinculo }}</td>
-              <td>
-                <mat-icon *ngIf="i.status == 'true'" style="color: green"
-                  >check_circle</mat-icon
-                >
-                <mat-icon *ngIf="i.status == 'false'" style="color: red"
-                  >cancel</mat-icon
-                >
-              </td>
-              <td>
-                <mat-icon *ngIf="i.acessoRede == 'true'" style="color: green"
-                  >check_circle</mat-icon
-                >
-                <mat-icon *ngIf="i.acessoRede == 'false'" style="color: red"
-                  >cancel</mat-icon
-                >
-              </td>
-            </tr>
-    
-            <tr #myVar *ngIf="setor == 'Todos' && vinculo == 'Todos' && i.status == status  && i.acessoRede == acessoRede" >
-              <td>{{ i.nome }}</td>
-              <td>{{ i.setor }}</td>
-              <td>{{ i.vinculo }}</td>
-              <td>
-                <mat-icon *ngIf="i.status == 'true'" style="color: green"
-                  >check_circle</mat-icon
-                >
-                <mat-icon *ngIf="i.status == 'false'" style="color: red"
-                  >cancel</mat-icon
-                >
-              </td>
-              <td>
-                <mat-icon *ngIf="i.acessoRede == 'true'" style="color: green"
-                  >check_circle</mat-icon
-                >
-                <mat-icon *ngIf="i.acessoRede == 'false'" style="color: red"
-                  >cancel</mat-icon
-                >
-              </td>
-            </tr>
-            <tr #myVar *ngIf="i.setor == setor && i.vinculo == vinculo && status == 'Todos'  && acessoRede == 'Todos'" >
-              <td>{{ i.nome }}</td>
-              <td>{{ i.setor }}</td>
-              <td>{{ i.vinculo }}</td>
-              <td>
-                <mat-icon *ngIf="i.status == 'true'" style="color: green"
-                  >check_circle</mat-icon
-                >
-                <mat-icon *ngIf="i.status == 'false'" style="color: red"
-                  >cancel</mat-icon
-                >
-              </td>
-              <td>
-                <mat-icon *ngIf="i.acessoRede == 'true'" style="color: green"
-                  >check_circle</mat-icon
-                >
-                <mat-icon *ngIf="i.acessoRede == 'false'" style="color: red"
-                  >cancel</mat-icon
-                >
-              </td>
-            </tr>
-            <tr #myVar *ngIf="i.setor == setor && vinculo == 'Todos' && status == 'Todos'  && i.acessoRede == acessoRede" >
-              <td>{{ i.nome }}</td>
-              <td>{{ i.setor }}</td>
-              <td>{{ i.vinculo }}</td>
-              <td>
-                <mat-icon *ngIf="i.status == 'true'" style="color: green"
-                  >check_circle</mat-icon
-                >
-                <mat-icon *ngIf="i.status == 'false'" style="color: red"
-                  >cancel</mat-icon
-                >
-              </td>
-              <td>
-                <mat-icon *ngIf="i.acessoRede == 'true'" style="color: green"
-                  >check_circle</mat-icon
-                >
-                <mat-icon *ngIf="i.acessoRede == 'false'" style="color: red"
-                  >cancel</mat-icon
-                >
-              </td>
-            </tr>
-            <tr #myVar *ngIf="i.setor == setor && vinculo == 'Todos' && i.status == status  && acessoRede == 'Todos'" >
-              <td>{{ i.nome }}</td>
-              <td>{{ i.setor }}</td>
-              <td>{{ i.vinculo }}</td>
-              <td>
-                <mat-icon *ngIf="i.status == 'true'" style="color: green"
-                  >check_circle</mat-icon
-                >
-                <mat-icon *ngIf="i.status == 'false'" style="color: red"
-                  >cancel</mat-icon
-                >
-              </td>
-              <td>
-                <mat-icon *ngIf="i.acessoRede == 'true'" style="color: green"
-                  >check_circle</mat-icon
-                >
-                <mat-icon *ngIf="i.acessoRede == 'false'" style="color: red"
-                  >cancel</mat-icon
-                >
-              </td>
-            </tr>
-            <tr #myVar *ngIf="setor == 'Todos' && i.vinculo == vinculo && i.status == status  && acessoRede == 'Todos'" >
-              <td>{{ i.nome }}</td>
-              <td>{{ i.setor }}</td>
-              <td>{{ i.vinculo }}</td>
-              <td>
-                <mat-icon *ngIf="i.status == 'true'" style="color: green"
-                  >check_circle</mat-icon
-                >
-                <mat-icon *ngIf="i.status == 'false'" style="color: red"
-                  >cancel</mat-icon
-                >
-              </td>
-              <td>
-                <mat-icon *ngIf="i.acessoRede == 'true'" style="color: green"
-                  >check_circle</mat-icon
-                >
-                <mat-icon *ngIf="i.acessoRede == 'false'" style="color: red"
-                  >cancel</mat-icon
-                >
-              </td>
-            </tr>
-            <tr #myVar *ngIf="setor == 'Todos' && i.vinculo == vinculo && status == 'Todos'  && i.acessoRede == acessoRede" >
-              <td>{{ i.nome }}</td>
-              <td>{{ i.setor }}</td>
-              <td>{{ i.vinculo }}</td>
-              <td>
-                <mat-icon *ngIf="i.status == 'true'" style="color: green"
-                  >check_circle</mat-icon
-                >
-                <mat-icon *ngIf="i.status == 'false'" style="color: red"
-                  >cancel</mat-icon
-                >
-              </td>
-              <td>
-                <mat-icon *ngIf="i.acessoRede == 'true'" style="color: green"
-                  >check_circle</mat-icon
-                >
-                <mat-icon *ngIf="i.acessoRede == 'false'" style="color: red"
-                  >cancel</mat-icon
-                >
-              </td>
-            </tr>
-            <tr #myVar *ngIf="i.setor == setor && i.vinculo == vinculo && status == 'Todos'  && i.acessoRede == acessoRede" >
-              <td>{{ i.nome }}</td>
-              <td>{{ i.setor }}</td>
-              <td>{{ i.vinculo }}</td>
-              <td>
-                <mat-icon *ngIf="i.status == 'true'" style="color: green"
-                  >check_circle</mat-icon
-                >
-                <mat-icon *ngIf="i.status == 'false'" style="color: red"
-                  >cancel</mat-icon
-                >
-              </td>
-              <td>
-                <mat-icon *ngIf="i.acessoRede == 'true'" style="color: green"
-                  >check_circle</mat-icon
-                >
-                <mat-icon *ngIf="i.acessoRede == 'false'" style="color: red"
-                  >cancel</mat-icon
-                >
-              </td>
-            </tr>
-            <tr #myVar *ngIf="i.setor == setor && i.vinculo == vinculo && i.status == status  && acessoRede == 'Todos'" >
-              <td>{{ i.nome }}</td>
-              <td>{{ i.setor }}</td>
-              <td>{{ i.vinculo }}</td>
-              <td>
-                <mat-icon *ngIf="i.status == 'true'" style="color: green"
-                  >check_circle</mat-icon
-                >
-                <mat-icon *ngIf="i.status == 'false'" style="color: red"
-                  >cancel</mat-icon
-                >
-              </td>
-              <td>
-                <mat-icon *ngIf="i.acessoRede == 'true'" style="color: green"
-                  >check_circle</mat-icon
-                >
-                <mat-icon *ngIf="i.acessoRede == 'false'" style="color: red"
-                  >cancel</mat-icon
-                >
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div> -->
-<!-- </div> -->

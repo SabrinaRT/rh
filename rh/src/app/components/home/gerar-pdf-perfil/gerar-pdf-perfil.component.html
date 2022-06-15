@@ -1,21 +1,31 @@
-<button
+<mat-toolbar color="primary" id="printPageButton">
+  <button mat-raised-button color="accent" [routerLink]="['', idUser, 'home']">
+    <mat-icon>arrow_back</mat-icon>
+  </button>
+  <button
   mat-raised-button
-  color="accent"
-  [routerLink]="['', idUser, 'home']"
-  id="printPageButton"
->
-  <mat-icon>arrow_back</mat-icon>
-</button>
-
-<button
-  mat-raised-button
-  color="primary"
-  style="margin-top: 15px; margin-left: 15px;"
+  color="pdf"
+  style="margin-left: 15px;"
   id="printPageButton"
   onClick="window.print();"
 >
   Imprimir
 </button>
+  <span class="example-spacer"></span>
+  <button
+    mat-raised-button
+    color="warn"
+    [routerLink]="['']"
+    style="margin-right: 1%"
+  >
+    <mat-icon>logout</mat-icon>
+  </button>
+  <span>SISCOGEP</span>
+</mat-toolbar>
+ 
+
+
+
 <div class="main-page" style="background-image: url('assets/a4.jpg');" >
   <div class="sub-page">
     <div class="row">

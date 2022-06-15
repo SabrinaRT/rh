@@ -23,8 +23,8 @@ const routes: Routes = [
   {path:":idUser/pdf/:id", component:  GerarPdfPerfilComponent},
   {path:":idUser/config", component: PainelConfigComponent},
   {path:":idUser/pdf-perfil/:id", component: GerarPdfPerfilComponent},
-  {path:":idUser/gerador", component: TotalComponent},
-  {path:":idUser/total", component: GerarPdfTotalComponent},
+  {path:":idUser/gerador", component: GerarPdfTotalComponent},
+/*   {path:":idUser/total", component: }, */
  
 
 
