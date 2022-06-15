@@ -75,6 +75,7 @@ IDColab:any
     });
   }
   ngOnInit(): void {
+
     var randomnumber = Math.floor(Math.random() * (1000 - 5000 + 1)) + 1000;
     this.siscrhService.getSetoresList().subscribe((data: any) => {
       this.setores = data;
@@ -137,6 +138,7 @@ IDColab:any
         }
       }
       console.log(this.array)
+      this.print = this.array.length 
     });
   }
 }

@@ -135,23 +135,34 @@ img {
     -moz-box-sizing: border-box;
   }
   .main-page {
+    
     width: 210mm;
     margin: 10mm auto;
-    background: white;
     box-shadow: 0 0 0.5cm rgba(0,0,0,0.5);
+     background-image: url('/assets/a4.jpg');    
+      background-repeat: repeat;  
   
   }
   .sub-page {
     padding: 1cm; 
+    background-image: url('/assets/a4.jpg');    
+    background-repeat: repeat;  
   }
   @page {
     size: A4;
-    margin: 0;
+    margin: 1;
+  /*   margin-top: -50px; */
+    background-image: url('/assets/a4.jpg');    
+    background-repeat: repeat;  
+    
   }
   @media print {
     html, body {
       width: 210mm;
-      height: 297mm;        
+      height: 297mm; 
+      background-image: url('/assets/a4.jpg');    
+      background-repeat: repeat;  
+      
     }
     .main-page {
       margin: 0;
@@ -161,64 +172,14 @@ img {
       min-height: initial;
       box-shadow: initial;
       background: initial;
+      background-image: url('/assets/a4.jpg');    
+      background-repeat: repeat;  
+      
    
 
     }
     .pagebreak { page-break-before: always; } 
   }
-
-
-
- /* Styles go here */
-
-.page-header,
-.page-header-space {
-  height: 100px;
-}
-
-.page-footer,
-.page-footer-space {
-  height: 50px;
-}
-
-.page-footer {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
- 
-}
-
-.page-header {
-  position: fixed;
-  top: 0mm;
-  width: 100%;
-
-}
-
-.page {
-  page-break-after: always;
-}
-
-@page {
-  margin: 0;
-}
-
-@media print {
-  thead {
-    display: table-header-group;
-  }
-  tfoot {
-    display: table-footer-group;
-  }
-
-  button {
-    display: none;
-  }
-
-  body {
-    margin: 0;
-  }
-}
 
 
   table.minimalistBlack {
