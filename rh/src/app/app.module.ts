@@ -52,6 +52,8 @@ import { ConfiguracaoSistemaComponent } from './components/config/configuracao-s
 import { CommonModule } from '@angular/common';
 import { GerarPdfTotalComponent } from './components/home/gerar-pdf-total/gerar-pdf-total.component';
 import { GraficosComponent } from './components/home/graficos/graficos.component';
+import { NgApexchartsModule } from 'ng-apexcharts';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -84,8 +86,10 @@ import { GraficosComponent } from './components/home/graficos/graficos.component
     ConfiguracaoSistemaComponent,
     GerarPdfTotalComponent,
     GraficosComponent,
+
   ],
   imports: [
+    NgApexchartsModule,
     CommonModule,
     MatTooltipModule,
     ScrollingModule,
