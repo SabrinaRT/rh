@@ -51,6 +51,7 @@ import { DeleteUsuarioDialog, EditUsuarioDialog, ListaUsuariosComponent } from '
 import { ConfiguracaoSistemaComponent } from './components/config/configuracao-sistema/configuracao-sistema.component';
 import { CommonModule } from '@angular/common';
 import { GerarPdfTotalComponent } from './components/home/gerar-pdf-total/gerar-pdf-total.component';
+import { GraficosComponent } from './components/home/graficos/graficos.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -82,6 +83,7 @@ import { GerarPdfTotalComponent } from './components/home/gerar-pdf-total/gerar-
     EditUsuarioDialog,
     ConfiguracaoSistemaComponent,
     GerarPdfTotalComponent,
+    GraficosComponent,
   ],
   imports: [
     CommonModule,
